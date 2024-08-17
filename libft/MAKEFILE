@@ -1,0 +1,26 @@
+SRC = ft_bzero.c\
+		ft_memset.c\
+		ft_strnstr.c\
+		ft_strrchr.c
+
+OBJ = ${SRC:.c=.o}
+
+GCCW = gccc -Wall -Wextra -Werror -I libft.h
+
+NAME = libft.a
+
+%.o: %.c
+	${GCCW} -c -o $@ $<
+
+${NAME}: ${OBJ}
+
+all: ${NAME}
+	ar rcs ${NAME} ${OBJ}
+
+clean:
+	rm -f *.o
+
+fclean: clean
+	rm -f *.a
+
+re: fclean all
