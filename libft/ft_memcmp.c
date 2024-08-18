@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 12:39:25 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/17 12:39:25 by marvin           ###   ########.fr       */
+/*   Created: 2024/08/17 19:55:20 by marvin            #+#    #+#             */
+/*   Updated: 2024/08/17 19:55:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "libft.h"
+
+int	ft_memcmp(const void *add1, const void *add2, size_t n)
 {
-	int	i;
-	int	nb;
-	int	sign;
+	size_t	i;
 
 	i = 0;
-	nb = 0;
-	sign = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i ++;
-	if (str[i] == '+' || str[i] == '-')
+	while (i < n)
 	{
-		if (str[i] == '-')
-			sign = -1;
+		if (((unsigned char *) add1)[i] != ((unsigned char *) add2)[i])
+			return (((unsigned char *) add1)[i] - ((unsigned char *) add2)[i]);
 		i ++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - 48);
-		i ++;
-	}
-	return (nb * sign);
+	return (0);
 }

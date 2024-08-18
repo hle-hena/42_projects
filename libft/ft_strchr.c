@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 12:39:25 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/17 12:39:25 by marvin           ###   ########.fr       */
+/*   Created: 2024/08/17 20:28:12 by marvin            #+#    #+#             */
+/*   Updated: 2024/08/17 20:28:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+char	*ft_strchr(const char *str, int c)
 {
-	int	i;
-	int	nb;
-	int	sign;
-
-	i = 0;
-	nb = 0;
-	sign = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i ++;
-	if (str[i] == '+' || str[i] == '-')
+	while (*str)
 	{
-		if (str[i] == '-')
-			sign = -1;
-		i ++;
+		if (*str == (char)c)
+			return ((char *) str);
+		str ++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - 48);
-		i ++;
-	}
-	return (nb * sign);
+	if ('\0' == (char)c)
+		return ((char *) str);
+	return (0);
 }

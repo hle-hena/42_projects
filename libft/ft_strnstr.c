@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strnstr(char *str, char *to_find, size_t len)
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
 	size_t	i;
 	size_t	j;
@@ -24,7 +24,7 @@ char	*ft_strnstr(char *str, char *to_find, size_t len)
 		while (j < len && str[i + j] == to_find[j] && to_find[j])
 			j ++;
 		if (to_find[j] == '\0')
-			return (&str[i]);
+			return ((char *) &str[i]);
 		i ++;
 	}
 	return (0);

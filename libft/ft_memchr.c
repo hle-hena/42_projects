@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 12:39:25 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/17 12:39:25 by marvin           ###   ########.fr       */
+/*   Created: 2024/08/17 19:49:41 by marvin            #+#    #+#             */
+/*   Updated: 2024/08/17 19:49:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "libft.h"
+
+void	*ft_memchr(const void *add, int c, size_t n)
 {
-	int	i;
-	int	nb;
-	int	sign;
+	size_t	i;
 
 	i = 0;
-	nb = 0;
-	sign = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i ++;
-	if (str[i] == '+' || str[i] == '-')
+	while (i < n)
 	{
-		if (str[i] == '-')
-			sign = -1;
+		if (((unsigned char *) add)[i] == (unsigned char) c)
+			return (&((unsigned char *) add)[i]);
 		i ++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - 48);
-		i ++;
-	}
-	return (nb * sign);
+	return (0);
 }

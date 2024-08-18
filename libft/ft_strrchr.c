@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strrchr(char *str, int c)
+char	*ft_strrchr(const char *str, int c)
 {
 	char	*last;
 
 	last = 0;
 	while (*str)
 	{
-		if (*str == (char)c)
-			last = str;
+		if (*str == (char) c)
+			last = (char *) str;
 		str ++;
 	}
-	if (*str == (char)c)
-		last = str;
+	if (*str == (char) c)
+		last = (char *) str;
 	return (last);
 }

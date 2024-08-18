@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	bzero(void *add, size_t n)
+void	ft_bzero(void *add, size_t n)
 {
 	size_t	i;
 
