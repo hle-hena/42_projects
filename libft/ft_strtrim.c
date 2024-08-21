@@ -39,7 +39,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 		s ++;
 	while (e >= 0 && is_instr(set, s1[e]))
 		e --;
-	if (s < e)
+	if (s <= e)
 		ret = ft_strdup_se(s1, s, e);
 	else
 		ret = ft_calloc(1, sizeof(char));
