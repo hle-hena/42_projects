@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:15:12 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/22 19:15:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/03 20:21:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_calloc(size_t n, size_t size)
 	return (dest);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, const char *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
@@ -41,7 +41,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	i = 0;
 	while (s1[++s1_len]);
 	while (s2[++s2_len]);
-	ret = malloc((s1_len + s2_len + 1) * sizeof(char));
+	ret = ft_calloc((s1_len + s2_len + 1), sizeof(char));
 	if (!ret)
 		return (0);
 	ret[0] = 0;
@@ -105,7 +105,7 @@ char	*ft_trimstart(const char *str)
 	while (str[strlen++]);
 	result = ft_calloc((strlen - start + 1), sizeof(char));
 	if (!result)
-		return NULL;
+		return (NULL);
 	i = 0;
 	while (str[start + i] != '\0')
 	{
@@ -113,5 +113,5 @@ char	*ft_trimstart(const char *str)
 		i++;
 	}
 	result[i] = '\0';
-	return result;
+	return (result);
 }
