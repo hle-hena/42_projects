@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:15:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/03 20:09:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:04:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 #include <stdio.h>
 
-char	*ft_strjoin(char *s1, const char *s2);
-int		ft_strchr(const char *str, int c);
-char	*ft_trimend(const char *str);
-char	*ft_trimstart(const char *str);
+void	freeing(char **pt);
+char	*ft_recat(char *s1, char *s2);
 void	*ft_calloc(size_t n, size_t size);
+int		ft_strchr(const char *str, int c);
+char	*ft_strdup_se(const char *src, int s, int e);
 
 #endif
