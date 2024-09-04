@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:14:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/04 19:25:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:38:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	ft_trim(char **res, char **mem, int rv)
 	sep_pos = ft_strchr(*res, '\n');
 	if (sep_pos == -1)
 	{
-		temp = ft_strdup_se(*res, 1, str_len);
+		temp = ft_strdup_se(*res, 0, str_len - 1);
 		free(*res);
 		*res = temp;
-		//free(*mem);
+		return (freeing(mem));
 	}
-	temp = ft_strdup_se(*res, 1, sep_pos - 1);
+	temp = ft_strdup_se(*res, 0, sep_pos - 1);
 	free(*mem);
-	*mem = ft_strdup_se(*res, sep_pos, str_len -1);
+	*mem = ft_strdup_se(*res, sep_pos + 1, str_len -1);
 	free(*res);
 	*res = temp;
 	if (!*res)
@@ -64,12 +64,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	res = ft_calloc(1, sizeof(char));
 	if (!mem)
-	{
 		mem = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-		mem[0] = '\n';
-	}
-	if (mem[0] == '\123')
-		return (NULL);
 	if (!res || !mem)
 		return (NULL);
 	res = ft_recat(res, mem);

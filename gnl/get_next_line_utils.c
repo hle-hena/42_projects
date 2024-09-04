@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:15:12 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/04 19:30:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:40:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ char	*ft_recat(char *s1, char *s2)
 	res[i] = 0;
 	return (res);
 }
+
 int	ft_strchr(const char *str, int c)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == (char) c)
