@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:14:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/04 19:38:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:56:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_trim(char **res, char **mem, int rv)
 		*res = temp;
 		return (freeing(mem));
 	}
-	temp = ft_strdup_se(*res, 0, sep_pos - 1);
+	temp = ft_strdup_se(*res, 0, sep_pos);
 	free(*mem);
 	*mem = ft_strdup_se(*res, sep_pos + 1, str_len -1);
 	free(*res);
@@ -75,16 +75,13 @@ char	*get_next_line(int fd)
 int main()
 {
 	char	*test;
-	int		i;
 
-	i = 0;
 	while (1)
 	{
 		test = get_next_line(0);
 		if (!test)
 			break ;
-		printf("result of line %d is : '%s'\n", i, test);
-		i ++;
+		printf("%s", test);
 		free(test);
 	}
 	return (0);
