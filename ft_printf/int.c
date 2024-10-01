@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 14:54:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/09/30 18:49:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:47:17 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	handle_int(t_param args, va_list ap)
 		else if (args.flags & 4)
 			len += ft_putchar_fd(' ', 1);
 		change_args(&args, nb);
-		return (handle_unsigned(args, (nb < 0) * -nb + (nb > 0) * nb));
+		return (len + handle_unsigned(args, (nb < 0) * -nb + (nb > 0) * nb));
 	}
 	return (handle_signed(args, nb));
 }
