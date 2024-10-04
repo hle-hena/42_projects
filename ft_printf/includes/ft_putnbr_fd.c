@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:24:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/29 15:39:17 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:16:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_numlen(int num)
+int	ft_numlen(long int num)
 {
 	int	len;
 
@@ -43,14 +43,13 @@ int	ft_putnbr_fd(int n, int fd)
 	return (ft_numlen(nb));
 }
 
-int	ft_numlen_base(int nb, char *base)
+int	ft_numlen_base(unsigned long nb, char *base)
 {
-	int	len;
-	int	baselen;
+	int				len;
+	unsigned int	baselen;
 
 	len = 0;
 	baselen = ft_strlen(base);
-	nb = (nb > 0) * nb + (nb < 0) * (-nb);
 	while (nb > baselen - 1)
 	{
 		len ++;
@@ -60,21 +59,15 @@ int	ft_numlen_base(int nb, char *base)
 	return (len);
 }
 
-int	ft_putnbr_base(long int nb, char *base)
+int	ft_putnbr_base(unsigned long nb, char *base)
 {
-	int	len;
-	int	baselen;
+	int				len;
+	unsigned long	baselen;
 
 	len = 0;
 	baselen = ft_strlen(base);
-	if (nb < 0)
-	{
-		len += ft_putchar_fd('-', 1);
-		nb = -nb;
-	}
-	if (nb < baselen)
-		return (ft_putchar_fd(base[nb], 1));
-	len += ft_putnbr_base(nb / baselen, base);
+	if (nb > baselen - 1)
+		len += ft_putnbr_base(nb / baselen, base);
 	len += ft_putchar_fd(base[nb % baselen], 1);
 	return (len);
 }

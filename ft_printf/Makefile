@@ -1,12 +1,11 @@
-NAME = libft.a
+NAME = ft_printf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRC = ft_printf.c\
-		handle_args.c\
-		str.c\
-		int.c\
-		hex.c\
-		ft_ternary.c\
+SRC = src/ft_printf.c\
+		src/handle_args.c\
+		src/str.c\
+		src/digits.c\
+		src/ft_ternary.c\
 		$(wildcard includes/*.c)
 OBJ = $(SRC:.c=.o)
 
@@ -34,5 +33,8 @@ re: fclean all
 binary: $(SRC)
 	@$(CC) $(CFLAGS) $(SRC) -o $(EXEC) -g
 	@echo "Executable $(EXEC) created. GDB can be used"
+
+test: ${NAME}
+	@$(CC) $(CFLAGS) full_test.c $(NAME) -o ${EXEC}
 
 .PHONY: all clean fclean re binary

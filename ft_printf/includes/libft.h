@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/29 15:20:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:16:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char	*ft_strdup_se(const char *src, int s, int e);
-int		ft_numlen(int num);
-int		ft_putnbr_base(long int nb, char *base);
-int	ft_numlen_base(int nb, char *base);
+int		ft_numlen(long int num);
+int		ft_putnbr_base(unsigned long nb, char *base);
+int		ft_numlen_base(unsigned long nb, char *base);
 
 #endif
