@@ -1,6 +1,6 @@
-NAME = ft_printf.a
+NAME = libftprintf.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 SRC = src/ft_printf.c\
 		src/handle_args.c\
 		src/str.c\
@@ -10,6 +10,8 @@ SRC = src/ft_printf.c\
 OBJ = $(SRC:.c=.o)
 
 EXEC = ft_program
+
+bonus: ${NAME}
 
 all: $(NAME)
 

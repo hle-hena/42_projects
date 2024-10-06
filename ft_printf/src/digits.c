@@ -6,52 +6,67 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 17:19:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/10/04 19:52:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:34:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	print_sign(t_param args, t_nb nb)
+{
+	if (nb.sign)
+		return (ft_putchar_fd('-', 1));
+	else if (!nb.sign && args.flags & 2)
+		return (ft_putchar_fd('+', 1));
+	else if (!nb.sign && args.flags & 4)
+		return (ft_putchar_fd(' ', 1));
+	else if ((args.flags & 1 && args.placeholder == 'x' && nb.nb != 0)
+		|| args.placeholder == 'p')
+		return (ft_putstr_fd("0x", 1));
+	else if (args.flags & 1 && args.placeholder == 'X' && nb.nb != 0)
+		return (ft_putstr_fd("0X", 1));
+	return (0);
+}
 
 int	print_digits(t_param args, t_nb nb)
 {
 	t_count	c;
 
 	c.len = 0;
-	c.temp = 0;
-	if (nb.sign)
-		c.temp += ft_putchar_fd('-', 1);
-	else if (!nb.sign && args.flags & 2)
-		c.temp += ft_putchar_fd('+', 1);
-	else if (!nb.sign && args.flags & 4)
-		c.temp += ft_putchar_fd(' ', 1);
-	else if ((args.flags & 1 && args.placeholder == 'x')
-		|| args.placeholder == 'p')
-		c.temp += ft_putstr_fd("0x", 1);
-	else if (args.flags & 1 && args.placeholder == 'X')
-		c.temp += ft_putstr_fd("0X", 1);
 	while (c.len < args.precision - nb.nblen)
 		c.len += ft_putchar_fd('0', 1);
 	if ((nb.nb == 0 && args.precision == 0)
 		&& ft_strchr("uid", args.placeholder))
-		return (c.len + c.temp);
+		return (c.len);
 	c.len += ft_putnbr_base(nb.nb, nb.base);
-	return (c.len + c.temp);
+	return (c.len);
+}
+
+void	get_nb(t_param args, va_list ap, t_nb *nb)
+{
+	int	temp_nb;
+
+	if (ft_strchr("uxX", args.placeholder))
+		nb->nb = va_arg(ap, unsigned int);
+	else if (args.placeholder == 'p')
+		nb->nb = va_arg(ap, unsigned long int);
+	else
+	{
+		temp_nb = va_arg(ap, int);
+		nb->sign = temp_nb < 0;
+		if (nb->sign)
+			nb->nb = -(long)temp_nb;
+		else
+			nb->nb = temp_nb;
+	}
 }
 
 t_nb	create_nb(t_param args, va_list ap)
 {
 	t_nb	nb;
-	long	nb_i;
 
 	nb.sign = 0;
-	if (ft_strchr("upxX", args.placeholder))
-		nb.nb = va_arg(ap, unsigned long);
-	else
-	{
-		nb_i = va_arg(ap, int);
-		nb.sign = nb_i < 0;
-		nb.nb = ft_tern_int(nb_i < 0, -nb_i, nb_i);
-	}
+	get_nb(args, ap, &nb);
 	nb.pad = ft_tern_int(args.flags & 8, '0', ' ');
 	nb.base = "0123456789";
 	if (ft_strchr("px", args.placeholder))
@@ -69,25 +84,29 @@ t_nb	create_nb(t_param args, va_list ap)
 
 int	handle_digits(t_param args, va_list ap)
 {
-	int		len;
+	t_count	c;
 	t_nb	nb;
 
-	if ((args.flags & 1 || (args.placeholder == 'u' && args.flags & 6))
-		&& ft_strchr("uid", args.placeholder))
+	if (((args.flags & 1 || (args.placeholder == 'u' && args.flags & 6))
+			&& ft_strchr("uid", args.placeholder))
+		|| (((args.flags & 6 || (args.placeholder == 'p' && (args.flags & 1
+							|| args.precision != -2)))
+				&& ft_strchr("pxX", args.placeholder))))
 		return (-1);
-	if ((args.flags & 6 || (args.placeholder == 'p' && (args.flags & 1
-					|| args.precision != -2)))
-		&& ft_strchr("pxX", args.placeholder))
-		return (-1);
-	len = 0;
+	c.len = 0;
+	c.temp = 0;
 	nb = create_nb(args, ap);
 	if (nb.nb == 0 && args.placeholder == 'p')
 		return (print_null(args, "(nil)"));
 	if (args.flags & 16)
-		len += print_digits(args, nb);
-	while (len < args.width - (nb.print * (!(args.flags & 16))))
-		len += ft_putchar_fd(nb.pad, 1);
+		c.len += print_sign(args, nb) + print_digits(args, nb);
+	if (nb.pad == '0' && !(args.flags & 16))
+		c.temp += print_sign(args, nb);
+	while (c.len < args.width - (nb.print * (!(args.flags & 16))))
+		c.len += ft_putchar_fd(nb.pad, 1);
+	if (nb.pad == ' ' && !(args.flags & 16))
+		c.temp += print_sign(args, nb);
 	if (!(args.flags & 16))
-		len += print_digits(args, nb);
-	return (len);
+		c.len += print_digits(args, nb);
+	return (c.len + c.temp);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 20:50:37 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/10/04 19:51:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:33:59 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	print_null(t_param args, char *str)
 
 	len = 0;
 	strlen = ft_strlen(str);
-	shouldprint = args.placeholder == 's' && (args.precision >= strlen
-			|| args.precision == -2);
+	shouldprint = (args.placeholder == 's' && (args.precision >= strlen
+				|| args.precision == -2)) || args.placeholder == 'p';
 	if (args.flags & 16 && shouldprint)
 		len += ft_putstr_fd(str, 1);
 	while (len < args.width - strlen * (!(args.flags & 16)) * shouldprint)

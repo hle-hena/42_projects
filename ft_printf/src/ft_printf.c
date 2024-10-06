@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 22:11:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/10/04 18:22:19 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:43:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	parse(t_param *args, char *str)
 	{
 		i ++;
 		(*args).precision = ft_atoi(&str[i]) + (str[i] == '*') * (-1);
-		i += ft_numlen((*args).precision) * ((*args).precision != -1);
+		i += ft_numlen((*args).precision) * ((*args).precision != -1)
+			- !(str[i] >= '0' && str[i] <= '9');
 		i += (str[i] == '*');
 	}
-	if (ft_strchr("cspdiuxX%", str[i]))
-		(*args).placeholder = str[i];
+	(*args).placeholder = str[i];
 	return (i);
 }
 
@@ -76,6 +76,7 @@ int	ft_printf(const char *str, ...)
 			if (temp == -1)
 				return (stop_everything());
 			written += temp;
+			init_args(&args);
 		}
 		else
 			written += ft_putchar_fd(str[i], 1);
@@ -84,17 +85,16 @@ int	ft_printf(const char *str, ...)
 }
 
 //Should a .* with only one value after give out an output ?
-//ft_printf("Test 30: |%.0u|\n", 0);
-//Does str have no failstop for every unallowed flags ??????
-//---- Should be fixed
-//char *str = NULL
-//char *str = NULL with all kind of flags
-//------ Probably just check if the string is null
-//(nil) for pointer
-/* int main()
-{
-	char *pointer_test = "test";
+/* args:      [" %-0s ", ""]
+printf:    [  ] = 2
+ft_printf: [ 
 
-    ft_printf("[%12p]\n", &pointer_test);
-}
- */
+
+Program has stopped due to wrong placeholder/flags
+] = 0 */
+/* #include <limits.h>
+int main()
+{
+	ft_printf(" %-9d %-10d %-11d %-12d %-13d %-14d %-15d\n", INT_MAX,
+			INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+} */
