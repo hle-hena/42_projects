@@ -1,15 +1,22 @@
 NAME = libftprintf.a
+EXEC = printf.out
+
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
+
 SRC = src/ft_printf.c\
 		src/handle_args.c\
 		src/str.c\
 		src/digits.c\
 		src/ft_ternary.c\
-		$(wildcard includes/*.c)
-OBJ = $(SRC:.c=.o)
+		includes/ft_atoi.c\
+		includes/ft_putchar_fd.c\
+		includes/ft_putstr_fd.c\
+		includes/ft_putnbr_fd.c\
+		includes/ft_strchr.c\
+		includes/ft_strlen.c
 
-EXEC = ft_program
+OBJ = $(SRC:.c=.o)
 
 bonus: ${NAME}
 
@@ -22,6 +29,16 @@ $(NAME): $(OBJ)
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+binary: $(SRC)
+	@$(CC) $(CFLAGS) $(SRC) -o $(EXEC) -g
+	@echo "Executable $(EXEC) created. GDB can be used"
+
+test: ${NAME}
+	@$(CC) $(CFLAGS) full_test.c $(NAME) -o ${EXEC}
+
+norminette:
+	@-norminette src/ includes | grep -E --color=always "Error" || echo "Norminette: Everything is fine!"
+
 clean:
 	@rm -f $(OBJ)
 	@echo "Object files cleaned."
@@ -31,12 +48,5 @@ fclean: clean
 	@echo "Library $(NAME) and binary $(EXEC) cleaned."
 
 re: fclean all
-
-binary: $(SRC)
-	@$(CC) $(CFLAGS) $(SRC) -o $(EXEC) -g
-	@echo "Executable $(EXEC) created. GDB can be used"
-
-test: ${NAME}
-	@$(CC) $(CFLAGS) full_test.c $(NAME) -o ${EXEC}
 
 .PHONY: all clean fclean re binary
