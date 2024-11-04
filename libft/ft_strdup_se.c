@@ -1,53 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strdup_se.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 13:04:01 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 11:48:26 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/08/19 13:22:51 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/04 12:36:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_strlen(long long int n)
+char	*ft_strdup_se(const char *src, int s, int e)
 {
-	int	len;
+	char	*dest;
+	int		i;
 
-	len = 1;
-	if (n < 0)
-		n = -n;
-	while (n > 9)
-	{
-		n /= 10;
-		len ++;
-	}
-	return (len);
-}
-
-char	*ft_itoa(int n)
-{
-	char			*dest;
-	long long int	nb;
-	int				len;
-
-	nb = n;
-	len = get_strlen(nb) + (nb < 0);
-	dest = ft_calloc(len + 1, sizeof(char));
+	if (e - s < 0)
+		return (0);
+	dest = ft_calloc(e - s + 2, sizeof(char));
 	if (!dest)
 		return (0);
-	dest[len] = 0;
-	if (nb < 0)
+	i = 0;
+	while (i < e - s + 1)
 	{
-		dest[0] = '-';
-		nb = -nb;
+		dest[i] = src[s + i];
+		i ++;
 	}
-	while (len -- > (dest[0] == '-'))
-	{
-		dest[len] = (nb % 10) + '0';
-		nb /= 10;
-	}
+	dest[i] = 0;
 	return (dest);
 }

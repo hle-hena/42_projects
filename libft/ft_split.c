@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 13:57:16 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/19 13:57:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/04 12:44:28 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_words(const char *str, char c)
+static int	count_words(const char *str, char c)
 {
 	int		s;
 	int		e;
@@ -31,10 +31,10 @@ int	count_words(const char *str, char c)
 		if (s < e)
 			i ++;
 	}
-	return(i);
+	return (i);
 }
 
-void	freeing_splited(char **splited, int i)
+static void	freeing_splited(char **splited, int i)
 {
 	while (i >= 0)
 	{
@@ -54,21 +54,20 @@ char	**ft_split(const char *str, char c)
 	i = 0;
 	s = 0;
 	e = 0;
-	if (!(splited = ft_calloc(count_words(str, c) + 1, sizeof(char *))))
-		return (0);
-	while (str[e])
+	splited = ft_calloc(count_words(str, c) + 1, sizeof(char *));
+	while (str[e] && splited)
 	{
 		while (str[e] && str[e] == c)
-			e ++;
+			e++;
 		s = e;
 		while (str[e] && str[e] != c)
-			e ++;
-		if (s < e)
+			e++;
+		if (s <= e)
 		{
-			if (!(splited[i ++] = ft_strdup_se(str, s, e - 1)))
+			splited[i++] = ft_strdup_se(str, s, e - 1);
+			if (!splited[i - 1])
 				return (freeing_splited(splited, i), NULL);
 		}
 	}
-	splited[i] = 0;
 	return (splited);
 }

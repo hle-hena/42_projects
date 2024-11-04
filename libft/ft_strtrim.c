@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:30:25 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/19 12:30:25 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/04 12:36:28 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	is_instr(const char *str, int c)
+static int	is_instr(const char *str, int c)
 {
 	int	i;
 
@@ -28,8 +28,8 @@ int	is_instr(const char *str, int c)
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	int	s;
-	int	e;
+	int		s;
+	int		e;
 	char	*ret;
 
 	e = ft_strlen(s1) - 1;
