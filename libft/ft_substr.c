@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 22:35:25 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 14:41:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:21:48 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	dest_i = 0;
 	tot_i = start;
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
 	dest = ft_calloc(len + 1, sizeof(char));
 	if (!dest || !s)
 		return (0);

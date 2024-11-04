@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 22:16:38 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/18 22:16:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/04 17:14:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	*ft_calloc(size_t n, size_t size)
 	void	*dest;
 	size_t	i;
 
+	if (size != 0)
 	dest = malloc(n * size);
 	if (!dest)
 		return (0);
