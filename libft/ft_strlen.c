@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 20:04:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 14:25:37 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 09:39:33 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/05 09:40:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	if (!str)
-		return (i);
 	while (str[i])
-		i ++;
+		i++;
 	return (i);
 }

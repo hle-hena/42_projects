@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 19:15:14 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 11:48:06 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 08:48:52 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/05 09:48:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	ft_bzero(void *add, size_t n)
 	size_t	i;
 
 	i = -1;
-	while (++ i < n)
-		((unsigned char *) add)[i] = 0;
+	while (++i < n)
+		((unsigned char *)add)[i] = 0;
 }

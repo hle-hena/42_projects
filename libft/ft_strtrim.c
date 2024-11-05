@@ -5,43 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 12:30:25 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 12:36:28 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 11:35:04 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/05 14:51:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_instr(const char *str, int c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		i ++;
-	}
-	return (0);
-}
-
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	int		s;
-	int		e;
-	char	*ret;
+	int		start;
+	int		len;
 
-	e = ft_strlen(s1) - 1;
-	s = 0;
-	ret = 0;
-	while (s <= e && is_instr(set, s1[s]))
-		s ++;
-	while (e >= 0 && is_instr(set, s1[e]))
-		e --;
-	if (s <= e)
-		ret = ft_strdup_se(s1, s, e);
-	else
-		ret = ft_calloc(1, sizeof(char));
-	return (ret);
+	len = ft_strlen(s1) - 1;
+	start = 0;
+	while (start <= len && ft_strchr(set, s1[start]))
+		start ++;
+	while (len >= 0 && ft_strchr(set, s1[len]))
+		len --;
+	if (start <= len)
+		return (ft_substr(s1, start, len - start + 1));
+	return (ft_calloc(1, sizeof(char)));
 }

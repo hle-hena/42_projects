@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 13:57:16 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 16:57:16 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 11:49:27 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/05 15:39:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,10 @@ char	**ft_split(const char *str, char c)
 			e++;
 		if (s < e)
 		{
-			splited[i++] = ft_strdup_se(str, s, e - 1);
+			splited[i++] = ft_substr(str, s, e - s);
 			if (!splited[i - 1])
-				return (freeing_splited(splited, i), NULL);
+				return (freeing_splited(splited, i - 1), NULL);
 		}
 	}
-	splited[i] = NULL;
 	return (splited);
 }
-
-/* #include <stdio.h>
-
-int	main()
-{
-	char **test;
-	int	i;
-
-	i = 0;
-	test = ft_split("  tripouille  42  ", ' ');
-	while (test[i])
-	{
-		printf("%s\n", test[i]);
-		free(test[i]);
-		i++;
-	}
-	free(test[i]);
-	free(test);
-} */

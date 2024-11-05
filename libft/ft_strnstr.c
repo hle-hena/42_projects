@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 19:25:59 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/16 19:25:59 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/05 09:54:50 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/05 14:56:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 
 	i = 0;
 	if (to_find[0] == '\0')
-		return ((char *)str);
+		return ((char *) str);
 	while (i < len && str[i])
 	{
 		j = 0;
 		while (i + j < len && str[i + j] == to_find[j] && to_find[j])
 			j ++;
 		if (to_find[j] == '\0')
-			return ((char *) &str[i]);
+			return ((char *)&str[i]);
 		i ++;
 	}
-	return (0);
+	return (NULL);
 }
