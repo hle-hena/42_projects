@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 11:43:22 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/21 11:43:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/06 07:44:28 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_list	*ft_lstnew(void *content)
 
 	head = ft_calloc(1, sizeof(t_list));
 	if (!head)
-		return (0);
+		return (NULL);
 	head->content = content;
-	head->next = 0;
+	head->next = NULL;
 	return (head);
 }

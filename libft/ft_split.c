@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:49:27 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/05 15:39:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:28:17 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ char	**ft_split(const char *str, char c)
 	int		i;
 
 	i = 0;
-	s = 0;
 	e = 0;
 	splited = ft_calloc(count_words(str, c) + 1, sizeof(char *));
-	while (str[e] && splited)
+	if (!splited)
+		return (NULL);
+	while (str[e])
 	{
 		while (str[e] && str[e] == c)
 			e++;
