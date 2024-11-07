@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_test.c                                   :+:      :+:    :+:   */
+/*   ft_memset_test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 14:18:52 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/07 16:24:07 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/07 16:22:28 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/07 16:24:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tester.h"
+#incude "tester.h"
 
 void	ft_strlen_test(int index, char *arg, size_t expected)
 {
 	size_t	res;
 
-	res = ft_strlen(arg);
+	res = ft_memset(arg);
 	if (res == expected)
 		printf("\033[32m%d : OK\n\033[0m", index);
 	else

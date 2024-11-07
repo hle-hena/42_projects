@@ -1,4 +1,4 @@
-SRC = ft_strlen_test.c ft_is_test.c
+SRC = main.c ft_strlen_test.c ft_is_test.c
 
 CHILD = -C libft/
 
@@ -16,7 +16,7 @@ all: ${NAME}
 ${NAME}: ${OBJ}
 	@${MAKE} ${CHILD}
 	@${CC} ${CFLAGS} ${OBJ} -L libft -lft -o ${NAME}
-	./${NAME}
+	@./${NAME}
 	@${MAKE} fclean
 
 %.o: %.c

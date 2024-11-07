@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   tester.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 09:05:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/07 17:27:28 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/07 15:37:20 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/07 15:47:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef TESTER_H
+# define TESTER_H
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	size_t	i;
+#include "libft/libft.h"
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-	i = 0;
-	if (!dest && !src)
-		return (dest);
-	while (n > i)
-	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
-		i++;
-	}
-	return (dest);
-}
+int	main_is();
+int	main_strlen();
+
+#endif
