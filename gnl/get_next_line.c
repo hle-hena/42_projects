@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:45:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/10/16 19:38:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:24:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	*get_next_line(int fd)
 	int			rv;
 	char		*buffer;
 
+	if (fd < 0 || fd > 1024)
+		return (NULL);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	res = ft_calloc(1, sizeof(char));
 	if (!mem[fd])

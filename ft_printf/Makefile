@@ -30,7 +30,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 binary: $(SRC)
-	@$(CC) $(CFLAGS) $(SRC) -o $(EXEC) -g
+	@$(CC) $(SRC) -o $(EXEC) -g
 	@echo "Executable $(EXEC) created. GDB can be used"
 
 test: ${NAME}

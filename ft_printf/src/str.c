@@ -3,12 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   str.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:47:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/04 13:47:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:47:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+'#' : 1
+'+' : 2
+' ' : 4
+'0' : 8
+'-' : 16
+*/
 
 #include "ft_printf.h"
 
@@ -53,7 +61,7 @@ int	handle_str(t_param args, va_list ap)
 	int		len;
 	t_str	str;
 
-	if (args.flags & ~16 || (args.precision != -2 && args.placeholder == 'c'))
+	if (args.flags & ~16)
 		return (-1);
 	len = 0;
 	str = create_str(args, ap);
@@ -68,9 +76,7 @@ int	handle_str(t_param args, va_list ap)
 	return (len);
 }
 
-int	handle_percent(t_param args)
+int	handle_percent(void)
 {
-	if (args.precision != -2 || args.width != 0 || args.flags != 0)
-		return (-1);
 	return (ft_putchar_fd('%', 1));
 }

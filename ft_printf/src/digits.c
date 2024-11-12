@@ -3,12 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   digits.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:48:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/04 13:48:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:18:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+'#' : 1
+'+' : 2
+' ' : 4
+'0' : 8
+'-' : 16
+*/
 
 #include "ft_printf.h"
 
@@ -36,7 +44,7 @@ int	print_digits(t_param args, t_nb nb)
 	while (c.len < args.precision - nb.nblen)
 		c.len += ft_putchar_fd('0', 1);
 	if ((nb.nb == 0 && args.precision == 0)
-		&& ft_strchr("uid", args.placeholder))
+		&& ft_strchr("uidxX", args.placeholder))
 		return (c.len);
 	c.len += ft_putnbr_base(nb.nb, nb.base);
 	return (c.len);
@@ -73,7 +81,12 @@ t_nb	create_nb(t_param args, va_list ap)
 		nb.base = HEX_MIN;
 	else if (args.placeholder == 'X')
 		nb.base = HEX_MAJ;
-	nb.nblen = ft_numlen_base(nb.nb, nb.base) + (args.placeholder == 'p') * 2;
+	if ((nb.nb == 0 && args.precision == 0)
+		&& ft_strchr("uidxX", args.placeholder))
+		nb.nblen = 0;
+	else
+		nb.nblen = ft_numlen_base(nb.nb, nb.base)
+			+ (args.placeholder == 'p') * 2;
 	nb.print = ft_tern_int(nb.nblen > args.precision, nb.nblen, args.precision);
 	if (ft_strchr("xX", args.placeholder))
 		nb.print += (args.flags) & 1 * 2;
@@ -87,12 +100,6 @@ int	handle_digits(t_param args, va_list ap)
 	t_count	c;
 	t_nb	nb;
 
-	if (((args.flags & 1 || (args.placeholder == 'u' && args.flags & 6))
-			&& ft_strchr("uid", args.placeholder))
-		|| (((args.flags & 6 || (args.placeholder == 'p' && (args.flags & 1
-							|| args.precision != -2)))
-				&& ft_strchr("pxX", args.placeholder))))
-		return (-1);
 	c.len = 0;
 	c.temp = 0;
 	nb = create_nb(args, ap);

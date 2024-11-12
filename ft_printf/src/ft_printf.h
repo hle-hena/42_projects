@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:48:04 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/04 13:48:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:39:49 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_str
 int				ft_printf(const char *str, ...);
 int				handle_args(t_param args, va_list ap);
 int				handle_str(t_param args, va_list ap);
-int				handle_percent(t_param args);
+int				handle_percent(void);
 char			*ft_tern_str(int cnd, char *ret1, char *ret2);
 int				handle_digits(t_param, va_list ap);
 int				print_null(t_param args, char *str);

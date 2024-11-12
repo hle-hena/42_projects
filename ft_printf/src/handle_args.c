@@ -3,12 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   handle_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:47:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/04 13:47:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:43:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+'#' : 1
+'+' : 2
+' ' : 4
+'0' : 8
+'-' : 16
+*/
 
 #include "ft_printf.h"
 
@@ -32,28 +40,26 @@ int	print_null(t_param args, char *str)
 	return (len);
 }
 
-int	check_invalid_args(t_param args)
+void	check_invalid_args(t_param *args)
 {
-	if (args.precision != -2 && args.flags & 8)
-		return (1);
-	if (args.flags & 16 && args.flags & 8)
-		return (1);
-	if (args.flags & 4 && args.flags & 2)
-		return (1);
-	return (0);
+	if (args->precision != -2 && args->flags & 8)
+		args->flags -= 8;
+	if (args->flags & 16 && args->flags & 8)
+		args->flags -= 8;
+	if (args->flags & 4 && args->flags & 2)
+		args->flags -= 4;
 }
 
 int	handle_args(t_param args, va_list ap)
 {
 	if (args.precision == -1)
 		args.precision = va_arg(ap, int);
-	if (check_invalid_args(args))
-		return (-1);
+	check_invalid_args(&args);
 	if (args.placeholder == '%')
-		return (handle_percent(args));
+		return (handle_percent());
 	else if (ft_strchr("cs", args.placeholder))
 		return (handle_str(args, ap));
 	else if (ft_strchr("uidpxX", args.placeholder))
 		return (handle_digits(args, ap));
-	return (-1);
+	return (0);
 }
