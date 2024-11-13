@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:45:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/12 12:25:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:26:37 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,27 @@ char	*error_output(char *res, char *buffer, char **mem)
 
 char	*format_output(char *res, char **mem, int rv)
 {
-	int	i;
+	int		i;
+	char	*line;
 
 	free(*mem);
 	*mem = NULL;
 	if (ft_strchr(res, '\n'))
 		*mem = ft_strdup(ft_strchr(res, '\n') + 1);
 	i = 0;
-	while (res[i])
+	while (res[i] && res[i] != '\n')
+		i++;
+	if (!res[i])
+		i--;
+	line = ft_calloc(i + 2, sizeof(char));
+	while (i >= 0)
 	{
-		if (res[i] == '\n')
-			res[i + 1] = 0;
-		i ++;
+		line[i] = res[i];
+		i--;
 	}
 	if (*res == 0 && rv == 0)
-		return (free(res), NULL);
-	return (res);
+		return (free(res), free(line), NULL);
+	return (free(res), line);
 }
 
 int	read_next_line(int fd, char **res, char **buffer)
@@ -104,7 +109,7 @@ int	main(void)
 	int		fd1;
 	int		fd2;
 
-	fd1 = open("test.txt", O_RDONLY);
+	fd1 = open("test1.txt", O_RDONLY);
 	fd2 = open("test2.txt", O_RDONLY);
 	while (1)
 	{

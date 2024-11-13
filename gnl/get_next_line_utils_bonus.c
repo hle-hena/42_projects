@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:46:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/10/12 12:51:36 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:23:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	s1_len = -1;
 	while (s1[++ s1_len])
 		;
-	s2_len = -1;
-	while (s2[++ s2_len])
-		;
+	s2_len = 1;
+	while (s2[s2_len])
+		s2_len++;
 	ret = ft_calloc(s1_len + s2_len + 1, sizeof(char));
 	if (!ret)
 		return (0);
