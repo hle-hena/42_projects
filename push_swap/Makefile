@@ -3,7 +3,8 @@ CC = cc
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror -g
 
-PS_SRC = SRCS/push_swap_command_1.c SRCS/main.c
+PS_SRC =	SRCS/ps_cmd_a.c	SRCS/ps_cmd_ab.c	SRCS/ps_cmd_b.c		\
+			SRCS/main.c		SRCS/tests.c		SRCS/tests_utils.c
 
 BONUS_SRC =
 
@@ -25,12 +26,16 @@ all: ${NAME}
 
 clean:
 	@make -C libft clean
-	@${RM} ${OBJ_1} ${BONUS_OBJ}
+	@${RM} ${OBJ} ${BONUS_OBJ}
 
 fclean: clean
 	@${RM} ${NAME} checker
 	@make -C libft fclean
 
 re: fclean all
+
+norminette:
+	@make -C libft norminette
+	@-norminette SRCS/ | grep -E --color=always "Error" || echo "Norminette: Everything is fine!"
 
 .PHONY: all clean fclean re bonus

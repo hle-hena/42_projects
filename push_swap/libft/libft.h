@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 12:36:59 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:00:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef long long int lli;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *add, size_t n);
@@ -70,5 +72,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char	*ft_strdup_se(const char *src, int s, int e);
+lli		ft_tern_int(int cnd, lli val1, lli val2);
+char	*ft_tern_str(int cnd, char *ret1, char *ret2);
 
 #endif

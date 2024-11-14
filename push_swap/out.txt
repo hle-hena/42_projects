@@ -1,0 +1,12 @@
+Ok so I think I will create test like this :
+
+int	test(char **instruction)
+{
+	[code that mimics the action of the instruction given]
+	return (result)
+}
+
+
+where the instructions would be an array of string, such as :
+{"sa", "pa", ...}
+and result would be something like the difference between the values of the list, or how much the list has been sorted

@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ternary.c                                       :+:      :+:    :+:   */
+/*   ps_cmd_ab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 18:12:45 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/14 19:01:29 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/14 09:51:02 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/14 18:29:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-long long int	ft_tern_int(int cnd, long long int val1, long long int val2)
+t_list	**get_stack(int opt)
 {
-	if (cnd)
-		return (val1);
-	return (val2);
+	static t_list	*stack_a;
+	static t_list	*stack_b;
+
+	if (!opt)
+		return (&stack_a);
+	return (&stack_b);
 }
 
-char	*ft_tern_str(int cnd, char *ret1, char *ret2)
+void	ft_ss(t_list **stack_a, t_list **stack_b)
 {
-	if (cnd)
-		return (ret1);
-	return (ret2);
+	ft_sa(stack_a);
+	ft_sb(stack_b);
+}
+
+void	ft_rr(t_list **stack_a, t_list **stack_b)
+{
+	ft_ra(stack_a);
+	ft_rb(stack_b);
+}
+
+void	ft_rrr(t_list **stack_a, t_list **stack_b)
+{
+	ft_rra(stack_a);
+	ft_rrb(stack_b);
 }
