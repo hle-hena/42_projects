@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/15 15:42:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:25:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*init_tests(void)
 	while (*cmds)
 	{
 		temp_res = test(*cmds);
-		printf("Trying [%s]-[%s] and the result is %d\n", (*cmds)[0], (*cmds)[1], temp_res);
 		if (temp_res > best_res_val)
 		{
 			best_res_val = temp_res;
