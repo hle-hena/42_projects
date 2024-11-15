@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 19:00:45 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:05:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-typedef long long int lli;
+typedef long long int	t_lli;
+typedef long int		t_li;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *add, size_t n);
@@ -72,7 +73,8 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char	*ft_strdup_se(const char *src, int s, int e);
-lli		ft_tern_int(int cnd, lli val1, lli val2);
+t_lli	ft_tern_int(int cnd, t_lli val1, t_lli val2);
 char	*ft_tern_str(int cnd, char *ret1, char *ret2);
+t_li	ft_pow(long int nb, int pow);
 
 #endif

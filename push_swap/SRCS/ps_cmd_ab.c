@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_cmd_ab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 09:51:02 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/14 18:29:07 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:18:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ t_list	**get_stack(int opt)
 	return (&stack_b);
 }
 
-void	ft_ss(t_list **stack_a, t_list **stack_b)
+void	ft_sab(t_list **stack_a, t_list **stack_b, int witch)
 {
-	ft_sa(stack_a);
-	ft_sb(stack_b);
+	ft_s(stack_a, witch);
+	ft_s(stack_b, witch);
 }
 
-void	ft_rr(t_list **stack_a, t_list **stack_b)
+void	ft_rab(t_list **stack_a, t_list **stack_b, int witch)
 {
-	ft_ra(stack_a);
-	ft_rb(stack_b);
+	ft_r(stack_a, stack_b, witch);
+	ft_r(stack_b, stack_a, witch);
 }
 
-void	ft_rrr(t_list **stack_a, t_list **stack_b)
+void	ft_rrab(t_list **stack_a, t_list **stack_b, int witch)
 {
-	ft_rra(stack_a);
-	ft_rrb(stack_b);
+	ft_rr(stack_a, stack_b, witch);
+	ft_rr(stack_b, stack_a, witch);
 }

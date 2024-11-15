@@ -3,8 +3,9 @@ CC = cc
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror -g
 
-PS_SRC =	SRCS/ps_cmd_a.c	SRCS/ps_cmd_ab.c	SRCS/ps_cmd_b.c		\
-			SRCS/main.c		SRCS/tests.c		SRCS/tests_utils.c
+PS_SRC =	SRCS/ps_cmd.c		SRCS/ps_cmd_ab.c	SRCS/main.c		\
+			SRCS/tests.c		SRCS/tests_utils.c	SRCS/do_func.c	\
+			SRCS/sample_utils.c										\
 
 BONUS_SRC =
 

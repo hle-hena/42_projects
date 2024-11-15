@@ -3,61 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/14 19:43:58 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:42:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*get_nlast_element(t_list *stack, size_t n)
-{
-	size_t	stack_size;
-	size_t	i;
-	
-	stack_size = ft_lstsize(stack);
-	if (n + 1 >= stack_size)
-		return (stack);
-	i = 0;
-	while (i < stack_size - n - 1 && stack)
-	{
-		stack = stack->next;
-		i++;
-	}
-	return (stack);
-}
-
-t_list	*get_sample(t_list *o_stack)
-{
-	t_list	*new_stack;
-	t_list	*temp;
-	size_t	i;
-
-	i = -1;
-	new_stack = NULL;
-	while (++i < FUTUR_SIGHT + 1 && o_stack)
-	{
-		temp = ft_lstnew(o_stack->content);
-		//check if !temp
-		//return ft_lstclear
-		ft_lstadd_back(&new_stack, temp);
-		o_stack = o_stack->next;
-	}
-	o_stack = get_nlast_element(o_stack, FUTUR_SIGHT);
-	while (o_stack && i == FUTUR_SIGHT + 1)
-	{
-		temp = ft_lstnew(o_stack->content);
-		//check if !temp
-		//return ft_lstclear
-		ft_lstadd_back(&new_stack, temp);
-		o_stack = o_stack->next;
-	}
-	return (new_stack);
-}
-
-/* int	test(char **instructions)
+int	test(char **cmds)
 {
 	t_list	*sample_a;
 	t_list	*sample_b;
@@ -66,19 +21,37 @@ t_list	*get_sample(t_list *o_stack)
 	result = 0;
 	sample_a = get_sample(*get_stack(0));
 	sample_b = get_sample(*get_stack(1));
-	while (*instructions)
+	while (*cmds)
 	{
-		result += 
+		result += do_func(*cmds, &sample_a, &sample_b);
+		cmds++;
 	}
+	ft_lstclear(&sample_a, NULL);
+	ft_lstclear(&sample_b, NULL);
+	return (result);
 }
 
-char	**init_tests()
+char	*init_tests(void)
 {
-	size_t	i;
+	char	***cmds;
+	char	**best_res;
+	char	*res;
+	int		best_res_val;
+	int		temp_res;
 
-	i = 0;
-	while (i < FUTUR_SIGHT)
+	best_res_val = -2147483648;
+	cmds = get_cmds();
+	while (*cmds)
 	{
-		
+		temp_res = test(*cmds);
+		printf("Trying [%s]-[%s] and the result is %d\n", (*cmds)[0], (*cmds)[1], temp_res);
+		if (temp_res > best_res_val)
+		{
+			best_res_val = temp_res;
+			best_res = *cmds;
+		}
+		cmds++;
 	}
-} */
+	res = ft_strdup(best_res[0]);
+	return (res);
+}

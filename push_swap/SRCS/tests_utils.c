@@ -3,104 +3,136 @@
 /*                                                        :::      ::::::::   */
 /*   tests_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 19:03:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/14 19:39:39 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/15 15:42:53 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/15 17:01:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	do_op(t_list *node1, t_list *node2)
+void print_cmds(char ***cmds)
 {
-	if (node1 && node2)
-		return (*(int *)node1->content - *(int *)node2->content);
-	else if (node1)
-		return (*(int *)node1->content);
-	else
-		return (-*(int *)node2->content);
+    if (!cmds) // Check if cmds is NULL
+    {
+        printf("cmds is NULL.\n");
+        return;
+    }
+
+    int i = 0; // Index for the outer array
+    while (cmds[i]) // Iterate through the array of char**
+    {
+        printf("cmds[%d]:\n", i);
+        int j = 0; // Index for the inner array
+        while (cmds[i][j]) // Iterate through the char* (strings) in the current char**
+        {
+            printf("  cmds[%d][%d]: %s\n", i, j, cmds[i][j]); // Print the string
+            j++;
+        }
+        printf("  cmds[%d][%d]: NULL\n", i, j); // Print the NULL terminator
+        i++;
+    }
+    printf("cmds[%d]: NULL\n", i); // Print the NULL terminator for the outer array
 }
 
-t_list	*get_closest(t_list *node, t_list *stack)
+
+void	free_tests(char ***tests)
 {
-	t_list	*last;
-	int		res_f;
-	int		res_l;
+	char	***temp;
 
-	last = ft_lstlast(stack);
-	res_f = do_op(node, stack);
-	if (res_f < 0)
-		res_f = -res_f;
-	res_l = do_op(node, last);
-	if (res_l < 0)
-		res_l = -res_l;
-	if (res_l < res_f)
-		return (last);
-	return (stack);
-}
-
-int	do_func_rr(char *cmd, t_list **s_a, t_list **s_b)
-{
-	t_list	*closest_prev;
-	t_list	*closest_actu;
-
-	if (!ft_strncmp(cmd, "rra", 4))
+	temp = tests;
+	while (*tests)
 	{
-		ft_ra(s_a);
-		closest_prev = get_closest((*s_a)->next, *s_b);
-		closest_actu = get_closest(*s_a, *s_b);
-		return (do_op((*s_a)->next, closest_prev) - do_op(*s_a, closest_actu));
+		free(*tests);
+		tests++;
 	}
-	else if (!ft_strncmp(cmd, "rrb", 4))
-	{
-		ft_rb(s_b);
-		closest_prev = get_closest((*s_b)->next, *s_a);
-		closest_actu = get_closest(*s_b, *s_a);
-		return (do_op((*s_b)->next, closest_prev) - do_op(*s_b, closest_actu));
-	}
-	return (-1);
+	free(temp);
 }
 
-int	do_func_r(char *cmd, t_list **s_a, t_list **s_b)
+size_t	get_test_i(void)
 {
-	t_list	*closest_prev;
-	t_list	*closest_actu;
-	t_list	*l_a;
-	t_list	*l_b;
-
-	l_a = ft_lstlast(*s_a);
-	l_b = ft_lstlast(*s_b);
-	if (!ft_strncmp(cmd, "ra", 4))
-	{
-		ft_ra(s_a);
-		closest_prev = get_closest(l_a, *s_b);
-		closest_actu = get_closest(*s_a, *s_b);
-		return (do_op(l_a, closest_prev) - do_op(*s_a, closest_actu));
-	}
-	else if (!ft_strncmp(cmd, "rb", 4))
-	{
-		ft_rb(s_b);
-		closest_prev = get_closest(l_b, *s_a);
-		closest_actu = get_closest(*s_b, *s_a);
-		return (do_op(l_b, closest_prev) - do_op(*s_b, closest_actu));
-	}
-	return (-1);
+	static size_t	i = -1;
+	
+	i++;
+	return (i);
 }
-
-int	do_func(char *cmd, t_list **s_a, t_list **s_b)
+void	generate_tests(char ****tests, char **cmds, size_t cmd_i, size_t start)
 {
-	if (!ft_strncmp(cmd, "sa", 4))
-		return (ft_sa(s_a), do_op((*s_a)->next, *s_a));
-	else if (!ft_strncmp(cmd, "sb", 4))
-		return (ft_sb(s_b), do_op(*s_b, (*s_b)->next));
-	else if (!ft_strncmp(cmd, "pa", 4))
-		return (ft_pa(s_a, s_b), do_op((*s_a)->next, *s_a));
-	else if (!ft_strncmp(cmd, "pb", 4))
-		return (ft_pb(s_b, s_a), do_op(*s_b, (*s_b)->next));
-	else if (cmd[1] == 'r')
-		return (do_func_rr(cmd, s_a, s_b));
-	else if (cmd[0] == 'r')
-		return (do_func_r(cmd, s_a, s_b));
-	return (-1);
+	size_t	i;
+	size_t	j;
+	size_t	nb_cmd;
+
+	if (cmd_i == FUTUR_SIGHT)
+		return ;
+	nb_cmd = ft_pow(8, (FUTUR_SIGHT - 1) - cmd_i);
+	j = -1;
+	while (++j < 8)
+	{
+		i = -1;
+		while (++i < nb_cmd)
+			(*tests)[i + j * nb_cmd + start][cmd_i] = cmds[j];
+		generate_tests(tests, cmds, cmd_i + 1, j * nb_cmd);
+	}
 }
+
+//calloc is not protected
+char	***create_tests(char **cmds)
+{
+	char	***tests;
+	size_t	pow_val;
+	size_t	i;
+
+	pow_val = ft_pow(8, FUTUR_SIGHT);
+	tests = ft_calloc(pow_val + 1, sizeof(char **));
+	i = -1;
+	while (++i < pow_val)
+	{
+		tests[i] = ft_calloc(FUTUR_SIGHT + 1, sizeof(char *));
+	}
+	tests[i] = NULL;
+	generate_tests(&tests, cmds, 0, 0);
+	// print_cmds(tests);
+	return (tests);
+}
+
+char	***get_cmds(void)
+{
+	static char	*funcs[9] = {"sa", "sb", "pb", "pa", "ra", "rb", "rra", "rrb",
+		/* "ss", "rr", "rrr", */ NULL};
+	static char	***tests;
+
+	if (!tests)
+		tests = create_tests(funcs);
+	return (tests);
+}
+
+// tests[test_index] is not protected
+//shit its recursive ... gl
+/* char	***create_tests(char **cmds)
+{
+	char	***tests;
+	size_t	i;
+	size_t	j;
+	size_t	test_index;
+
+	tests = ft_calloc(ft_pow(8, FUTUR_SIGHT) + 1, sizeof(char **));
+	if (!tests)
+		return (NULL);
+	test_index = 0;
+	i = -1;
+	while (++i < 8)
+	{
+		j = -1;
+		while (++j < 8)
+		{
+			tests[test_index] = ft_calloc(FUTUR_SIGHT + 1, sizeof(char *));
+			tests[test_index][0] = cmds[i];
+			tests[test_index][1] = cmds[j];
+			tests[test_index][2] = NULL;
+			test_index++;
+		}
+	}
+	tests[test_index] = NULL;
+	return (tests);
+} */

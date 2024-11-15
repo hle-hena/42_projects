@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 12:32:10 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/15 14:53:56 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/15 11:10:51 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/15 12:04:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+long int	ft_pow(long int nb, int pow)
 {
-	t_list	*temp;
-
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		if (del)
-			del((*lst)->content);
-		free(*lst);
-		*lst = temp;
-	}
-	*lst = 0;
+	if (pow <= 0)
+		return (1);
+	return (nb * ft_pow(nb, pow - 1));
 }

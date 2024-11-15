@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/14 19:44:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:04:06 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,53 @@ void	print(void *content)
 	printf("[%d] --> ", *(int *)content);
 }
 
+int	is_increasing(t_list *lst)
+{
+	return (do_op(lst, lst->next) > 0);
+}
+
+int	is_decreasing(t_list *lst)
+{
+	return (do_op(lst, lst->next) < 0);
+}
+
+int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+{
+	if (!lst)
+		return (0);
+	while (lst && lst->next)
+	{
+		if (f(lst))
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
+
+/*
+printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
+printf("\nExecuting sa, result is '%d'\n", do_func("sa", stack_a, stack_b));
+printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
+printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+printf("\nExecuting pb, result is '%d'\n", do_func("pb", stack_a, stack_b));
+printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
+printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+printf("\nExecuting pa, result is '%d'\n", do_func("pa", stack_a, stack_b));
+printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
+printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+printf("\nExecuting ra, result is '%d'\n", do_func("ra", stack_a, stack_b));
+printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
+printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+printf("\nExecuting rra, result is '%d'\n", do_func("rra", stack_a, stack_b));
+printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
+printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+printf("\nExecuting rra, result is '%d'\n", do_func("rra", stack_a, stack_b));
+*/
 int	main(int ac, char **av)
 {
 	t_list	**stack_a;
 	t_list	**stack_b;
+	char	*func;
 	int		*values;
 	size_t	i;
 
@@ -34,22 +77,22 @@ int	main(int ac, char **av)
 		ft_lstadd_back(stack_a, ft_lstnew(&values[i - 1]));
 	}
 	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("\nExecuting sa, result is '%d'\n", do_func("sa", stack_a, stack_b));
-	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
-	printf("\nExecuting pb, result is '%d'\n", do_func("pb", stack_a, stack_b));
-	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
-	printf("\nExecuting pa, result is '%d'\n", do_func("pa", stack_a, stack_b));
-	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
-	printf("\nExecuting ra, result is '%d'\n", do_func("ra", stack_a, stack_b));
-	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
-	printf("\nExecuting rra, result is '%d'\n", do_func("rra", stack_a, stack_b));
-	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
-	printf("\nExecuting rra, result is '%d'\n", do_func("rra", stack_a, stack_b));
-	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n\n");
+	i = 0;
+	while (!ft_lstsorted(*stack_a, &is_increasing) && i < 2)
+	{
+		func = init_tests();
+		printf("\n\n\nExecuting the function [%s]\n", func);
+		do_func(func, stack_a, stack_b);
+		free(func);
+		printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
+		printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+		// sleep(5);
+		i++;
+	}
+	free_tests(get_cmds());
+	free(values);
+	ft_lstclear(stack_a, NULL);
+	ft_lstclear(stack_b, NULL);
+	return (0);
 }
