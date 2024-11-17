@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/17 17:50:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:15:01 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ int	test(char **cmds)
 	t_list	*sample_a;
 	t_list	*sample_b;
 	int		result;
-	int		temp;
-	// int		a_sorted;
-	// int		b_sorted;
 
 	result = 0;
 	sample_a = get_sample(*get_stack(0));
@@ -42,12 +39,13 @@ int	test(char **cmds)
 	printf("%s]", cmds[FUTUR_SIGHT - 1]); */
 	while (*cmds)
 	{
-		// a_sorted = ft_lstsorted(sample_a, &is_increasing);
-		// b_sorted = ft_lstsorted(sample_b, &is_decreasing);
-		temp = do_func(*cmds, &sample_a, &sample_b);
-		if (temp)
-			result += temp;
-		//result += add_result(a_sorted, b_sorted, sample_a, sample_b);
+/* 		if (cmds[1])
+		{
+			if (ft_strchr(cmds[0], 'p') && ft_strchr(cmds[1], 'p')
+					&& cmds[0][1] != cmds[1][1])
+				result += (-2147483647 / FUTUR_SIGHT + 1) / 10;
+		} */
+		result += do_func(*cmds, &sample_a, &sample_b);
 		cmds++;
 	}
 	ft_lstclear(&sample_a, NULL);
