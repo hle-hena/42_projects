@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 19:03:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/15 12:19:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:14:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	do_op(t_list *node1, t_list *node2)
 		return (-*(int *)node2->content);
 }
 
-t_list	*get_closest(t_list *node, t_list *stack)
+/* t_list	*get_closest(t_list *node, t_list *stack)
 {
 	t_list	*last;
 	int		res_f;
@@ -38,54 +38,6 @@ t_list	*get_closest(t_list *node, t_list *stack)
 	if (res_l < res_f)
 		return (last);
 	return (stack);
-}
-
-/* int	do_func_rr(char *cmd, t_list **s_a, t_list **s_b)
-{
-	t_list	*closest_prev;
-	t_list	*closest_actu;
-
-	if (!ft_strncmp(cmd, "rra", 4))
-	{
-		ft_r(s_a);
-		closest_prev = get_closest((*s_a)->next, *s_b);
-		closest_actu = get_closest(*s_a, *s_b);
-		return (do_op((*s_a)->next, closest_prev) - do_op(*s_a, closest_actu));
-	}
-	else if (!ft_strncmp(cmd, "rrb", 4))
-	{
-		ft_r(s_b);
-		closest_prev = get_closest((*s_b)->next, *s_a);
-		closest_actu = get_closest(*s_b, *s_a);
-		return (do_op((*s_b)->next, closest_prev) - do_op(*s_b, closest_actu));
-	}
-	return (-1);
-}
-
-int	do_func_r(char *cmd, t_list **s_a, t_list **s_b)
-{
-	t_list	*closest_prev;
-	t_list	*closest_actu;
-	t_list	*l_a;
-	t_list	*l_b;
-
-	l_a = ft_lstlast(*s_a);
-	l_b = ft_lstlast(*s_b);
-	if (!ft_strncmp(cmd, "ra", 4))
-	{
-		ft_r(s_a);
-		closest_prev = get_closest(l_a, *s_b);
-		closest_actu = get_closest(*s_a, *s_b);
-		return (do_op(l_a, closest_prev) - do_op(*s_a, closest_actu));
-	}
-	else if (!ft_strncmp(cmd, "rb", 4))
-	{
-		ft_r(s_b);
-		closest_prev = get_closest(l_b, *s_a);
-		closest_actu = get_closest(*s_b, *s_a);
-		return (do_op(l_b, closest_prev) - do_op(*s_b, closest_actu));
-	}
-	return (-1);
 } */
 
 int	do_func(char *cmd, t_list **s_a, t_list **s_b)

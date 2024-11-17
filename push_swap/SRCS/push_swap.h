@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/15 17:33:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:51:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 #include <stdio.h>
 
 # define FUTUR_SIGHT 3
+
+/*		main.c			*/
+/************************/
+int	is_decreasing(t_list *lst);
+int	is_increasing(t_list *lst);
+
 
 /*		ps_cmd_a.c		*/
 /************************/

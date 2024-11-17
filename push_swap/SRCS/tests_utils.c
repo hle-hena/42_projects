@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tests_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:42:53 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/15 17:01:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:33:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void print_cmds(char ***cmds)
-{
-    if (!cmds) // Check if cmds is NULL
-    {
-        printf("cmds is NULL.\n");
-        return;
-    }
-
-    int i = 0; // Index for the outer array
-    while (cmds[i]) // Iterate through the array of char**
-    {
-        printf("cmds[%d]:\n", i);
-        int j = 0; // Index for the inner array
-        while (cmds[i][j]) // Iterate through the char* (strings) in the current char**
-        {
-            printf("  cmds[%d][%d]: %s\n", i, j, cmds[i][j]); // Print the string
-            j++;
-        }
-        printf("  cmds[%d][%d]: NULL\n", i, j); // Print the NULL terminator
-        i++;
-    }
-    printf("cmds[%d]: NULL\n", i); // Print the NULL terminator for the outer array
-}
-
 
 void	free_tests(char ***tests)
 {
@@ -50,13 +25,6 @@ void	free_tests(char ***tests)
 	free(temp);
 }
 
-size_t	get_test_i(void)
-{
-	static size_t	i = -1;
-	
-	i++;
-	return (i);
-}
 void	generate_tests(char ****tests, char **cmds, size_t cmd_i, size_t start)
 {
 	size_t	i;
@@ -72,7 +40,7 @@ void	generate_tests(char ****tests, char **cmds, size_t cmd_i, size_t start)
 		i = -1;
 		while (++i < nb_cmd)
 			(*tests)[i + j * nb_cmd + start][cmd_i] = cmds[j];
-		generate_tests(tests, cmds, cmd_i + 1, j * nb_cmd);
+		generate_tests(tests, cmds, cmd_i + 1, start + j * nb_cmd);
 	}
 }
 
@@ -92,7 +60,6 @@ char	***create_tests(char **cmds)
 	}
 	tests[i] = NULL;
 	generate_tests(&tests, cmds, 0, 0);
-	// print_cmds(tests);
 	return (tests);
 }
 

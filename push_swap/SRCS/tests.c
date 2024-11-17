@@ -3,31 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/15 17:25:19 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:50:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/* int	add_result(int a_sorted, int b_sorted, t_list *sample_a, t_list *sample_b)
+{
+	int	final_result;
+	int	a_after_sorted;
+	int	b_after_sorted;
+
+	final_result = 0;
+	a_after_sorted = ft_lstsorted(sample_a, &is_increasing);
+	b_after_sorted = ft_lstsorted(sample_b, &is_decreasing);
+	if ()
+} */
 
 int	test(char **cmds)
 {
 	t_list	*sample_a;
 	t_list	*sample_b;
 	int		result;
+	int		temp;
+	// int		a_sorted;
+	// int		b_sorted;
 
 	result = 0;
 	sample_a = get_sample(*get_stack(0));
 	sample_b = get_sample(*get_stack(1));
+	/* printf("Trying [");
+	for (int i = 0; i < FUTUR_SIGHT - 1; i++)
+		printf("%s]-[", cmds[i]);
+	printf("%s]", cmds[FUTUR_SIGHT - 1]); */
 	while (*cmds)
 	{
-		result += do_func(*cmds, &sample_a, &sample_b);
+		// a_sorted = ft_lstsorted(sample_a, &is_increasing);
+		// b_sorted = ft_lstsorted(sample_b, &is_decreasing);
+		temp = do_func(*cmds, &sample_a, &sample_b);
+		if (temp)
+			result += temp;
+		//result += add_result(a_sorted, b_sorted, sample_a, sample_b);
 		cmds++;
 	}
 	ft_lstclear(&sample_a, NULL);
 	ft_lstclear(&sample_b, NULL);
+	// printf(" and the result is %d\n", result);
 	return (result);
 }
 

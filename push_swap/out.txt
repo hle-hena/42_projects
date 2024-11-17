@@ -1,455 +1,305 @@
-Stack a : [2] --> [1] --> [3] --> [4] --> [5] --> [6] --> [7] --> 
+
+
+
+Stack a : [3] --> [2] --> [1] --> [4] --> [5] --> [6] --> [7] --> 
 Stack b : 
 
-Trying [sa]-[sa] and the result is 0
-Trying [sa]-[sb] and the result is 1
-Trying [sa]-[pb] and the result is 2
-Trying [sa]-[pa] and the result is 1
-Trying [sa]-[ra] and the result is 1
-Trying [sa]-[rb] and the result is 1
-Trying [sa]-[rra] and the result is 1
-Trying [sa]-[rrb] and the result is 1
-Trying [sb]-[sa] and the result is 1
-Trying [sb]-[sb] and the result is 0
-Trying [sb]-[pb] and the result is 2
-Trying [sb]-[pa] and the result is 0
-Trying [sb]-[ra] and the result is 0
-Trying [sb]-[rb] and the result is 0
-Trying [sb]-[rra] and the result is 0
-Trying [sb]-[rrb] and the result is 0
-Trying [pb]-[sa] and the result is 0
-Trying [pb]-[sb] and the result is 2
-Trying [pb]-[pb] and the result is 1
-Trying [pb]-[pa] and the result is 1
-Trying [pb]-[ra] and the result is 2
-Trying [pb]-[rb] and the result is 2
-Trying [pb]-[rra] and the result is 2
-Trying [pb]-[rrb] and the result is 2
-Trying [pa]-[sa] and the result is 1
-Trying [pa]-[sb] and the result is 0
-Trying [pa]-[pb] and the result is 2
-Trying [pa]-[pa] and the result is 0
-Trying [pa]-[ra] and the result is 0
-Trying [pa]-[rb] and the result is 0
-Trying [pa]-[rra] and the result is 0
-Trying [pa]-[rrb] and the result is 0
-Trying [ra]-[sa] and the result is -2
-Trying [ra]-[sb] and the result is 0
-Trying [ra]-[pb] and the result is 1
-Trying [ra]-[pa] and the result is 0
-Trying [ra]-[ra] and the result is 0
-Trying [ra]-[rb] and the result is 0
-Trying [ra]-[rra] and the result is 0
-Trying [ra]-[rrb] and the result is 0
-Trying [rb]-[sa] and the result is 1
-Trying [rb]-[sb] and the result is 0
-Trying [rb]-[pb] and the result is 2
-Trying [rb]-[pa] and the result is 0
-Trying [rb]-[ra] and the result is 0
-Trying [rb]-[rb] and the result is 0
-Trying [rb]-[rra] and the result is 0
-Trying [rb]-[rrb] and the result is 0
-Trying [rra]-[sa] and the result is 5
-Trying [rra]-[sb] and the result is 0
-Trying [rra]-[pb] and the result is 7
-Trying [rra]-[pa] and the result is 0
-Trying [rra]-[ra] and the result is 0
-Trying [rra]-[rb] and the result is 0
-Trying [rra]-[rra] and the result is 0
-Trying [rra]-[rrb] and the result is 0
-Trying [rrb]-[sa] and the result is 1
-Trying [rrb]-[sb] and the result is 0
-Trying [rrb]-[pb] and the result is 2
-Trying [rrb]-[pa] and the result is 0
-Trying [rrb]-[ra] and the result is 0
-Trying [rrb]-[rb] and the result is 0
-Trying [rrb]-[rra] and the result is 0
-Trying [rrb]-[rrb] and the result is 0
+Executing the function [sa]
 
-
-
-Executing the function [rra]
-Stack a : [7] --> [2] --> [1] --> [3] --> [4] --> [5] --> [6] --> 
+Stack a : [2] --> [3] --> [1] --> [4] --> [5] --> [6] --> [7] --> 
 Stack b : 
-Trying [sa]-[sa] and the result is 0
-Trying [sa]-[sb] and the result is 5
-Trying [sa]-[pb] and the result is 7
-Trying [sa]-[pa] and the result is 5
-Trying [sa]-[ra] and the result is 5
-Trying [sa]-[rb] and the result is 5
-Trying [sa]-[rra] and the result is 5
-Trying [sa]-[rrb] and the result is 5
-Trying [sb]-[sa] and the result is 5
-Trying [sb]-[sb] and the result is 0
-Trying [sb]-[pb] and the result is 7
-Trying [sb]-[pa] and the result is 0
-Trying [sb]-[ra] and the result is 0
-Trying [sb]-[rb] and the result is 0
-Trying [sb]-[rra] and the result is 0
-Trying [sb]-[rrb] and the result is 0
-Trying [pb]-[sa] and the result is 8
-Trying [pb]-[sb] and the result is 7
-Trying [pb]-[pb] and the result is 2
-Trying [pb]-[pa] and the result is 2
-Trying [pb]-[ra] and the result is 7
-Trying [pb]-[rb] and the result is 7
-Trying [pb]-[rra] and the result is 7
-Trying [pb]-[rrb] and the result is 7
-Trying [pa]-[sa] and the result is 5
-Trying [pa]-[sb] and the result is 0
-Trying [pa]-[pb] and the result is 7
-Trying [pa]-[pa] and the result is 0
-Trying [pa]-[ra] and the result is 0
-Trying [pa]-[rb] and the result is 0
-Trying [pa]-[rra] and the result is 0
-Trying [pa]-[rrb] and the result is 0
-Trying [ra]-[sa] and the result is 1
-Trying [ra]-[sb] and the result is 0
-Trying [ra]-[pb] and the result is 2
-Trying [ra]-[pa] and the result is 0
-Trying [ra]-[ra] and the result is 0
-Trying [ra]-[rb] and the result is 0
-Trying [ra]-[rra] and the result is 0
-Trying [ra]-[rrb] and the result is 0
-Trying [rb]-[sa] and the result is 5
-Trying [rb]-[sb] and the result is 0
-Trying [rb]-[pb] and the result is 7
-Trying [rb]-[pa] and the result is 0
-Trying [rb]-[ra] and the result is 0
-Trying [rb]-[rb] and the result is 0
-Trying [rb]-[rra] and the result is 0
-Trying [rb]-[rrb] and the result is 0
-Trying [rra]-[sa] and the result is -1
-Trying [rra]-[sb] and the result is 0
-Trying [rra]-[pb] and the result is 6
-Trying [rra]-[pa] and the result is 0
-Trying [rra]-[ra] and the result is 0
-Trying [rra]-[rb] and the result is 0
-Trying [rra]-[rra] and the result is 0
-Trying [rra]-[rrb] and the result is 0
-Trying [rrb]-[sa] and the result is 5
-Trying [rrb]-[sb] and the result is 0
-Trying [rrb]-[pb] and the result is 7
-Trying [rrb]-[pa] and the result is 0
-Trying [rrb]-[ra] and the result is 0
-Trying [rrb]-[rb] and the result is 0
-Trying [rrb]-[rra] and the result is 0
-Trying [rrb]-[rrb] and the result is 0
-
-
 
 Executing the function [pb]
-Stack a : [2] --> [1] --> [3] --> [4] --> [5] --> [6] --> 
-Stack b : [7] --> 
-Trying [sa]-[sa] and the result is 0
-Trying [sa]-[sb] and the result is 1
-Trying [sa]-[pb] and the result is -5
-Trying [sa]-[pa] and the result is -5
-Trying [sa]-[ra] and the result is 1
-Trying [sa]-[rb] and the result is 1
-Trying [sa]-[rra] and the result is 1
-Trying [sa]-[rrb] and the result is 1
-Trying [sb]-[sa] and the result is 1
-Trying [sb]-[sb] and the result is 0
-Trying [sb]-[pb] and the result is -5
-Trying [sb]-[pa] and the result is -5
-Trying [sb]-[ra] and the result is 0
-Trying [sb]-[rb] and the result is 0
-Trying [sb]-[rra] and the result is 0
-Trying [sb]-[rrb] and the result is 0
-Trying [pb]-[sa] and the result is -7
-Trying [pb]-[sb] and the result is 0
-Trying [pb]-[pb] and the result is -6
-Trying [pb]-[pa] and the result is -6
-Trying [pb]-[ra] and the result is -5
-Trying [pb]-[rb] and the result is -5
-Trying [pb]-[rra] and the result is -5
-Trying [pb]-[rrb] and the result is -5
-Trying [pa]-[sa] and the result is 0
-Trying [pa]-[sb] and the result is -5
-Trying [pa]-[pb] and the result is 2
-Trying [pa]-[pa] and the result is -5
-Trying [pa]-[ra] and the result is -5
-Trying [pa]-[rb] and the result is -5
-Trying [pa]-[rra] and the result is -5
-Trying [pa]-[rrb] and the result is -5
-Trying [ra]-[sa] and the result is -2
-Trying [ra]-[sb] and the result is 0
-Trying [ra]-[pb] and the result is -6
-Trying [ra]-[pa] and the result is -6
-Trying [ra]-[ra] and the result is 0
-Trying [ra]-[rb] and the result is 0
-Trying [ra]-[rra] and the result is 0
-Trying [ra]-[rrb] and the result is 0
-Trying [rb]-[sa] and the result is 1
-Trying [rb]-[sb] and the result is 0
-Trying [rb]-[pb] and the result is -5
-Trying [rb]-[pa] and the result is -5
-Trying [rb]-[ra] and the result is 0
-Trying [rb]-[rb] and the result is 0
-Trying [rb]-[rra] and the result is 0
-Trying [rb]-[rrb] and the result is 0
-Trying [rra]-[sa] and the result is 4
-Trying [rra]-[sb] and the result is 0
-Trying [rra]-[pb] and the result is -1
-Trying [rra]-[pa] and the result is -1
-Trying [rra]-[ra] and the result is 0
-Trying [rra]-[rb] and the result is 0
-Trying [rra]-[rra] and the result is 0
-Trying [rra]-[rrb] and the result is 0
-Trying [rrb]-[sa] and the result is 1
-Trying [rrb]-[sb] and the result is 0
-Trying [rrb]-[pb] and the result is -5
-Trying [rrb]-[pa] and the result is -5
-Trying [rrb]-[ra] and the result is 0
-Trying [rrb]-[rb] and the result is 0
-Trying [rrb]-[rra] and the result is 0
-Trying [rrb]-[rrb] and the result is 0
 
-
-
-Executing the function [rra]
-Stack a : [6] --> [2] --> [1] --> [3] --> [4] --> [5] --> 
-Stack b : [7] --> 
-Trying [sa]-[sa] and the result is 0
-Trying [sa]-[sb] and the result is 4
-Trying [sa]-[pb] and the result is -1
-Trying [sa]-[pa] and the result is -1
-Trying [sa]-[ra] and the result is 4
-Trying [sa]-[rb] and the result is 4
-Trying [sa]-[rra] and the result is 4
-Trying [sa]-[rrb] and the result is 4
-Trying [sb]-[sa] and the result is 4
-Trying [sb]-[sb] and the result is 0
-Trying [sb]-[pb] and the result is -1
-Trying [sb]-[pa] and the result is -1
-Trying [sb]-[ra] and the result is 0
-Trying [sb]-[rb] and the result is 0
-Trying [sb]-[rra] and the result is 0
-Trying [sb]-[rrb] and the result is 0
-Trying [pb]-[sa] and the result is 0
-Trying [pb]-[sb] and the result is 0
-Trying [pb]-[pb] and the result is -5
-Trying [pb]-[pa] and the result is -5
-Trying [pb]-[ra] and the result is -1
-Trying [pb]-[rb] and the result is -1
-Trying [pb]-[rra] and the result is -1
-Trying [pb]-[rrb] and the result is -1
-Trying [pa]-[sa] and the result is 0
-Trying [pa]-[sb] and the result is -1
-Trying [pa]-[pb] and the result is 6
-Trying [pa]-[pa] and the result is -1
-Trying [pa]-[ra] and the result is -1
-Trying [pa]-[rb] and the result is -1
-Trying [pa]-[rra] and the result is -1
-Trying [pa]-[rrb] and the result is -1
-Trying [ra]-[sa] and the result is 1
-Trying [ra]-[sb] and the result is 0
-Trying [ra]-[pb] and the result is -5
-Trying [ra]-[pa] and the result is -5
-Trying [ra]-[ra] and the result is 0
-Trying [ra]-[rb] and the result is 0
-Trying [ra]-[rra] and the result is 0
-Trying [ra]-[rrb] and the result is 0
-Trying [rb]-[sa] and the result is 4
-Trying [rb]-[sb] and the result is 0
-Trying [rb]-[pb] and the result is -1
-Trying [rb]-[pa] and the result is -1
-Trying [rb]-[ra] and the result is 0
-Trying [rb]-[rb] and the result is 0
-Trying [rb]-[rra] and the result is 0
-Trying [rb]-[rrb] and the result is 0
-Trying [rra]-[sa] and the result is -1
-Trying [rra]-[sb] and the result is 0
-Trying [rra]-[pb] and the result is -2
-Trying [rra]-[pa] and the result is -2
-Trying [rra]-[ra] and the result is 0
-Trying [rra]-[rb] and the result is 0
-Trying [rra]-[rra] and the result is 0
-Trying [rra]-[rrb] and the result is 0
-Trying [rrb]-[sa] and the result is 4
-Trying [rrb]-[sb] and the result is 0
-Trying [rrb]-[pb] and the result is -1
-Trying [rrb]-[pa] and the result is -1
-Trying [rrb]-[ra] and the result is 0
-Trying [rrb]-[rb] and the result is 0
-Trying [rrb]-[rra] and the result is 0
-Trying [rrb]-[rrb] and the result is 0
-
-
-
-Executing the function [pa]
-Stack a : [7] --> [6] --> [2] --> [1] --> [3] --> [4] --> [5] --> 
-Stack b : 
-Trying [sa]-[sa] and the result is 0
-Trying [sa]-[sb] and the result is 1
-Trying [sa]-[pb] and the result is 7
-Trying [sa]-[pa] and the result is 1
-Trying [sa]-[ra] and the result is 1
-Trying [sa]-[rb] and the result is 1
-Trying [sa]-[rra] and the result is 1
-Trying [sa]-[rrb] and the result is 1
-Trying [sb]-[sa] and the result is 1
-Trying [sb]-[sb] and the result is 0
-Trying [sb]-[pb] and the result is 7
-Trying [sb]-[pa] and the result is 0
-Trying [sb]-[ra] and the result is 0
-Trying [sb]-[rb] and the result is 0
-Trying [sb]-[rra] and the result is 0
-Trying [sb]-[rrb] and the result is 0
-Trying [pb]-[sa] and the result is 11
-Trying [pb]-[sb] and the result is 7
-Trying [pb]-[pb] and the result is 6
-Trying [pb]-[pa] and the result is 6
-Trying [pb]-[ra] and the result is 7
-Trying [pb]-[rb] and the result is 7
-Trying [pb]-[rra] and the result is 7
-Trying [pb]-[rrb] and the result is 7
-Trying [pa]-[sa] and the result is 1
-Trying [pa]-[sb] and the result is 0
-Trying [pa]-[pb] and the result is 7
-Trying [pa]-[pa] and the result is 0
-Trying [pa]-[ra] and the result is 0
-Trying [pa]-[rb] and the result is 0
-Trying [pa]-[rra] and the result is 0
-Trying [pa]-[rrb] and the result is 0
-Trying [ra]-[sa] and the result is 4
-Trying [ra]-[sb] and the result is 0
-Trying [ra]-[pb] and the result is 6
-Trying [ra]-[pa] and the result is 0
-Trying [ra]-[ra] and the result is 0
-Trying [ra]-[rb] and the result is 0
-Trying [ra]-[rra] and the result is 0
-Trying [ra]-[rrb] and the result is 0
-Trying [rb]-[sa] and the result is 1
-Trying [rb]-[sb] and the result is 0
-Trying [rb]-[pb] and the result is 7
-Trying [rb]-[pa] and the result is 0
-Trying [rb]-[ra] and the result is 0
-Trying [rb]-[rb] and the result is 0
-Trying [rb]-[rra] and the result is 0
-Trying [rb]-[rrb] and the result is 0
-Trying [rra]-[sa] and the result is -2
-Trying [rra]-[sb] and the result is 0
-Trying [rra]-[pb] and the result is 5
-Trying [rra]-[pa] and the result is 0
-Trying [rra]-[ra] and the result is 0
-Trying [rra]-[rb] and the result is 0
-Trying [rra]-[rra] and the result is 0
-Trying [rra]-[rrb] and the result is 0
-Trying [rrb]-[sa] and the result is 1
-Trying [rrb]-[sb] and the result is 0
-Trying [rrb]-[pb] and the result is 7
-Trying [rrb]-[pa] and the result is 0
-Trying [rrb]-[ra] and the result is 0
-Trying [rrb]-[rb] and the result is 0
-Trying [rrb]-[rra] and the result is 0
-Trying [rrb]-[rrb] and the result is 0
-
-
+Stack a : [3] --> [1] --> [4] --> [5] --> [6] --> [7] --> 
+Stack b : [2] --> 
 
 Executing the function [pb]
-Stack a : [6] --> [2] --> [1] --> [3] --> [4] --> [5] --> 
-Stack b : [7] --> 
-Trying [sa]-[sa] and the result is 0
-Trying [sa]-[sb] and the result is 4
-Trying [sa]-[pb] and the result is -1
-Trying [sa]-[pa] and the result is -1
-Trying [sa]-[ra] and the result is 4
-Trying [sa]-[rb] and the result is 4
-Trying [sa]-[rra] and the result is 4
-Trying [sa]-[rrb] and the result is 4
-Trying [sb]-[sa] and the result is 4
-Trying [sb]-[sb] and the result is 0
-Trying [sb]-[pb] and the result is -1
-Trying [sb]-[pa] and the result is -1
-Trying [sb]-[ra] and the result is 0
-Trying [sb]-[rb] and the result is 0
-Trying [sb]-[rra] and the result is 0
-Trying [sb]-[rrb] and the result is 0
-Trying [pb]-[sa] and the result is 0
-Trying [pb]-[sb] and the result is 0
-Trying [pb]-[pb] and the result is -5
-Trying [pb]-[pa] and the result is -5
-Trying [pb]-[ra] and the result is -1
-Trying [pb]-[rb] and the result is -1
-Trying [pb]-[rra] and the result is -1
-Trying [pb]-[rrb] and the result is -1
-Trying [pa]-[sa] and the result is 0
-Trying [pa]-[sb] and the result is -1
-Trying [pa]-[pb] and the result is 6
-Trying [pa]-[pa] and the result is -1
-Trying [pa]-[ra] and the result is -1
-Trying [pa]-[rb] and the result is -1
-Trying [pa]-[rra] and the result is -1
-Trying [pa]-[rrb] and the result is -1
-Trying [ra]-[sa] and the result is 1
-Trying [ra]-[sb] and the result is 0
-Trying [ra]-[pb] and the result is -5
-Trying [ra]-[pa] and the result is -5
-Trying [ra]-[ra] and the result is 0
-Trying [ra]-[rb] and the result is 0
-Trying [ra]-[rra] and the result is 0
-Trying [ra]-[rrb] and the result is 0
-Trying [rb]-[sa] and the result is 4
-Trying [rb]-[sb] and the result is 0
-Trying [rb]-[pb] and the result is -1
-Trying [rb]-[pa] and the result is -1
-Trying [rb]-[ra] and the result is 0
-Trying [rb]-[rb] and the result is 0
-Trying [rb]-[rra] and the result is 0
-Trying [rb]-[rrb] and the result is 0
-Trying [rra]-[sa] and the result is -1
-Trying [rra]-[sb] and the result is 0
-Trying [rra]-[pb] and the result is -2
-Trying [rra]-[pa] and the result is -2
-Trying [rra]-[ra] and the result is 0
-Trying [rra]-[rb] and the result is 0
-Trying [rra]-[rra] and the result is 0
-Trying [rra]-[rrb] and the result is 0
-Trying [rrb]-[sa] and the result is 4
-Trying [rrb]-[sb] and the result is 0
-Trying [rrb]-[pb] and the result is -1
-Trying [rrb]-[pa] and the result is -1
-Trying [rrb]-[ra] and the result is 0
-Trying [rrb]-[rb] and the result is 0
-Trying [rrb]-[rra] and the result is 0
-Trying [rrb]-[rrb] and the result is 0
 
+Stack a : [1] --> [4] --> [5] --> [6] --> [7] --> 
+Stack b : [3] --> [2] --> 
 
+Executing the function [ra]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
 
 Executing the function [pa]
-Stack a : [7] --> [6] --> [2] --> [1] --> [3] --> [4] --> [5] --> 
-Stack b : 
-Trying [sa]-[sa] and the result is 0
-Trying [sa]-[sb] and the result is 1
-Trying [sa]-[pb] and the result is 7
-Trying [sa]-[pa] and the result is 1
-Trying [sa]-[ra] and the result is 1
-Trying [sa]-[rb] and the result is 1
-Trying [sa]-[rra] and the result is 1
-Trying [sa]-[rrb] and the result is 1
-Trying [sb]-[sa] and the result is 1
-Trying [sb]-[sb] and the result is 0
-Trying [sb]-[pb] and the result is 7
-Trying [sb]-[pa] and the result is 0
-Trying [sb]-[ra] and the result is 0
-Trying [sb]-[rb] and the result is 0
-Trying [sb]-[rra] and the result is 0
-Trying [sb]-[rrb] and the result is 0
-Trying [pb]-[sa] and the result is 11
-Trying [pb]-[sb] and the result is 7
-Trying [pb]-[pb] and the result is 6
-Trying [pb]-[pa] and the result is 6
-Trying [pb]-[ra] and the result is 7
-Trying [pb]-[rb] and the result is 7
-Trying [pb]-[rra] and the result is 7
-Trying [pb]-[rrb] and the result is 7
-Trying [pa]-[sa] and the result is 1
-Trying [pa]-[sb] and the result is 0
-Trying [pa]-[pb] and the result is 7
-Trying [pa]-[pa] and the result is 0
-Trying [pa]-[ra] and the result is 0
-Trying [pa]-[rb] and the result is 0
-Trying [pa]-[rra] and the result is 0
-Trying [pa]-[r
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
+
+Executing the function [pb]
+
+Stack a : [5] --> [6] --> [7] --> [1] --> 
+Stack b : [4] --> [3] --> [2] --> 
+
+Executing the function [pa]
+
+Stack a : [4] --> [5] --> [6] --> [7] --> [1] --> 
+Stack b : [3] --> [2] --> 
