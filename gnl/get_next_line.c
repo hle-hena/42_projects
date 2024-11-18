@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:45:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/13 13:47:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:48:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ char	*format_output(char *res, char **mem, int rv)
 	int		i;
 	char	*line;
 
-	free(*mem);
-	*mem = NULL;
+	del(mem);
 	if (ft_strchr(res, '\n'))
 		*mem = ft_strdup(ft_strchr(res, '\n') + 1);
 	if (ft_strchr(res, '\n') && !*mem)
-		return (del(&res), NULL);
+		return (del(&res), del(mem), NULL);
 	i = 0;
 	while (res[i] && res[i] != '\n')
 		i++;
@@ -46,8 +45,8 @@ char	*format_output(char *res, char **mem, int rv)
 		i--;
 	}
 	if (*res == 0 && rv == 0)
-		return (free(res), free(line), NULL);
-	return (free(res), line);
+		return (del(&res), del(&line), NULL);
+	return (del(&res), line);
 }
 
 int	read_next_line(int fd, char **res, char **buffer)
@@ -62,7 +61,7 @@ int	read_next_line(int fd, char **res, char **buffer)
 		temp = ft_strjoin(*res, *buffer);
 		if (!temp)
 			return (del(res), -1);
-		free(*res);
+		del(res);
 		*res = temp;
 		if (ft_strchr(*res, '\n') || rv != BUFFER_SIZE)
 			break ;
@@ -85,17 +84,17 @@ char	*get_next_line(int fd)
 	if (!mem[fd])
 		mem[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!mem[fd] || !buffer || !res || read(fd, buffer, 0) < 0
-			|| BUFFER_SIZE <= 0)
+		|| BUFFER_SIZE <= 0)
 		return (del(&res), del(&buffer), del(&mem[fd]), NULL);
 	temp = ft_strjoin(mem[fd], res);
 	if (!temp)
 		return (del(&res), del(&buffer), del(&mem[fd]), NULL);
-	free(res);
+	del(&res);
 	res = temp;
 	rv = read_next_line(fd, &res, &buffer);
-	free(buffer);
+	del(&buffer);
 	if (rv == -1)
-		return (del(&mem[fd]), NULL);
+		return (del(&mem[fd]), del(&res), NULL);
 	return (format_output(res, &mem[fd], rv));
 }
 

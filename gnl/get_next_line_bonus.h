@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 19:15:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 12:26:43 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/08/22 19:15:32 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 11:15:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

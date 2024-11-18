@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 19:15:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 12:28:20 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/18 11:14:41 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 11:15:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 

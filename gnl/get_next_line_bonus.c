@@ -3,33 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:45:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/13 12:26:37 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:16:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*error_output(char *res, char *buffer, char **mem)
+void	del(char **content)
 {
-	if (res)
+	if (*content)
 	{
-		free(res);
-		res = NULL;
+		free(*content);
+		*content = NULL;
 	}
-	if (*mem)
-	{
-		free(*mem);
-		*mem = NULL;
-	}
-	if (buffer)
-	{
-		free(buffer);
-		buffer = NULL;
-	}
-	return (NULL);
 }
 
 char	*format_output(char *res, char **mem, int rv)
@@ -41,12 +30,16 @@ char	*format_output(char *res, char **mem, int rv)
 	*mem = NULL;
 	if (ft_strchr(res, '\n'))
 		*mem = ft_strdup(ft_strchr(res, '\n') + 1);
+	if (ft_strchr(res, '\n') && !*mem)
+		return (del(&res), NULL);
 	i = 0;
 	while (res[i] && res[i] != '\n')
 		i++;
 	if (!res[i])
 		i--;
 	line = ft_calloc(i + 2, sizeof(char));
+	if (!line)
+		return (del(&res), NULL);
 	while (i >= 0)
 	{
 		line[i] = res[i];
@@ -67,6 +60,8 @@ int	read_next_line(int fd, char **res, char **buffer)
 		rv = read(fd, *buffer, BUFFER_SIZE);
 		(*buffer)[rv] = 0;
 		temp = ft_strjoin(*res, *buffer);
+		if (!temp)
+			return (del(res), -1);
 		free(*res);
 		*res = temp;
 		if (ft_strchr(*res, '\n') || rv != BUFFER_SIZE)
@@ -89,13 +84,18 @@ char	*get_next_line(int fd)
 	res = ft_calloc(1, sizeof(char));
 	if (!mem[fd])
 		mem[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!mem[fd] || !res || read(fd, buffer, 0) < 0 || BUFFER_SIZE <= 0)
-		return (error_output(res, buffer, &mem[fd]));
+	if (!mem[fd] || !buffer || !res || read(fd, buffer, 0) < 0
+		|| BUFFER_SIZE <= 0)
+		return (del(&res), del(&buffer), del(&mem[fd]), NULL);
 	temp = ft_strjoin(mem[fd], res);
+	if (!temp)
+		return (del(&res), del(&buffer), del(&mem[fd]), NULL);
 	free(res);
 	res = temp;
 	rv = read_next_line(fd, &res, &buffer);
 	free(buffer);
+	if (rv == -1)
+		return (del(&mem[fd]), NULL);
 	return (format_output(res, &mem[fd], rv));
 }
 
