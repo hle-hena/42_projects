@@ -3,12 +3,11 @@ CC = cc
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror -g
 
-PS_SRC =	SRCS/ps_cmd.c		SRCS/ps_cmd_ab.c	SRCS/main.c		\
-			SRCS/tests.c		SRCS/tests_utils.c	SRCS/do_func.c	\
-			SRCS/sample_utils.c										\
+PS =	ps_cmd.c		ps_cmd_ab.c		main.c		\
+			tests.c			tests_utils.c	do_func.c	\
+			sample_utils.c
 
-BONUS_SRC =
-
+PS_SRC = ${addprefix SRCS/, ${PS}}
 OBJ = ${PS_SRC:.c=.o}
 BONUS_OBJ = ${BONUS_SRC:.c=.o}
 
@@ -37,6 +36,6 @@ re: fclean all
 
 norminette:
 	@make -C libft norminette
-	@-norminette SRCS/ | grep -E --color=always "Error" || echo "Norminette: Everything is fine!"
+	@-norminette  | grep -E --color=always "Error" || echo "Norminette: Everything is fine!"
 
 .PHONY: all clean fclean re bonus

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 19:03:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/16 12:14:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:30:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,6 @@ int	do_op(t_list *node1, t_list *node2)
 	else
 		return (-*(int *)node2->content);
 }
-
-/* t_list	*get_closest(t_list *node, t_list *stack)
-{
-	t_list	*last;
-	int		res_f;
-	int		res_l;
-
-	last = ft_lstlast(stack);
-	res_f = do_op(node, stack);
-	if (res_f < 0)
-		res_f = -res_f;
-	res_l = do_op(node, last);
-	if (res_l < 0)
-		res_l = -res_l;
-	if (res_l < res_f)
-		return (last);
-	return (stack);
-} */
 
 int	do_func(char *cmd, t_list **s_a, t_list **s_b)
 {

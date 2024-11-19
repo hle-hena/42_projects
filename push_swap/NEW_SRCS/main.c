@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/19 14:58:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:50:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ int	is_decreasing(t_list *lst)
 
 int	main(int ac, char **av)
 {
+	
+}
+
+int	main(int ac, char **av)
+{
 	t_list	**stack_a;
 	t_list	**stack_b;
 	char	*func;
 	int		*values;
 	size_t	i;
-	int		temp;
 
 	i = 0;
 	stack_a = get_stack(0);
@@ -42,7 +46,7 @@ int	main(int ac, char **av)
 	values = ft_calloc(ac, sizeof(int));
 	while (++i <= (size_t)ac - 1)
 	{
-		values[i - 1] = &ft_atoi(av[i]);
+		values[i - 1] = av[i][0] - '0';
 		ft_lstadd_back(stack_a, ft_lstnew(&values[i - 1]));
 	}
 	printf("\n\n\n");

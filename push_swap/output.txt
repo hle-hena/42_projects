@@ -42,3 +42,11 @@ Steps
 --->pb		: ajouter (element push - element top)
 
 -->possibilite de finir avec tout dans b, et ce n'est pas worth de push vers a. rajouter un +1 ?
+
+
+
+
+
+
+
+---> avoir une seule copie des deux stacks, et revert les changements fait dans les tests
