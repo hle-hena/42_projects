@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:45:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/18 11:48:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:02:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	*format_output(char *res, char **mem, int rv)
 	int		i;
 	char	*line;
 
-	del(mem);
 	if (ft_strchr(res, '\n'))
 		*mem = ft_strdup(ft_strchr(res, '\n') + 1);
 	if (ft_strchr(res, '\n') && !*mem)
@@ -38,14 +37,14 @@ char	*format_output(char *res, char **mem, int rv)
 		i--;
 	line = ft_calloc(i + 2, sizeof(char));
 	if (!line)
-		return (del(&res), NULL);
+		return (del(&res), del(mem), NULL);
 	while (i >= 0)
 	{
 		line[i] = res[i];
 		i--;
 	}
 	if (*res == 0 && rv == 0)
-		return (del(&res), del(&line), NULL);
+		return (del(&res), del(&line), del(mem), NULL);
 	return (del(&res), line);
 }
 
@@ -60,7 +59,7 @@ int	read_next_line(int fd, char **res, char **buffer)
 		(*buffer)[rv] = 0;
 		temp = ft_strjoin(*res, *buffer);
 		if (!temp)
-			return (del(res), -1);
+			return (del(res), del(buffer), -1);
 		del(res);
 		*res = temp;
 		if (ft_strchr(*res, '\n') || rv != BUFFER_SIZE)
@@ -90,12 +89,12 @@ char	*get_next_line(int fd)
 	if (!temp)
 		return (del(&res), del(&buffer), del(&mem[fd]), NULL);
 	del(&res);
+	del(&mem[fd]);
 	res = temp;
 	rv = read_next_line(fd, &res, &buffer);
-	del(&buffer);
 	if (rv == -1)
-		return (del(&mem[fd]), del(&res), NULL);
-	return (format_output(res, &mem[fd], rv));
+		return (del(&res), del(&buffer), NULL);
+	return (del(&buffer), format_output(res, &mem[fd], rv));
 }
 
 /* #include <stdio.h>
