@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:47:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/12 16:47:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/19 11:12:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	handle_str(t_param args, va_list ap)
 	int		len;
 	t_str	str;
 
-	if (args.flags & ~16)
-		return (-1);
 	len = 0;
 	str = create_str(args, ap);
 	if (args.placeholder == 's' && !str.str)
