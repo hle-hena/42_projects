@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:56:44 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 16:19:23 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/20 16:15:37 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/20 16:50:50 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_free_tab(void **tab, size_t size)
+void	fall_back(void)
 {
-	void	**temp;
-	size_t	i;
-
-	i = -1;
-	temp = tab;
-	while (++i < size)
-		ft_del(*tab++);
-	ft_del(temp);
+	ft_lstclear(get_stack(0), &ft_del)
+	ft_lstclear(get_stack(1), &ft_del)
+	ft_lstclear(get_cpy(0), &ft_del)
+	ft_lstclear(get_cpy(1), &ft_del)
+	ft_del(get_values(0, NULL));
+	free_tests(get_cmds());
+	ft_putendl_fd("Error", 2);
+	exit(1);
 }

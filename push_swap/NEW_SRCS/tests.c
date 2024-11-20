@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 14:11:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:54:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*init_tests(void)
 {
 	char	***cmds;
 	char	**best_res;
-	char	*res;
 	int		best_res_val;
 	int		temp_res;
 
@@ -74,6 +73,11 @@ char	*init_tests(void)
 		}
 		cmds++;
 	}
-	res = ft_strdup(best_res[0]);
-	return (res);
+	do_func(best_res[0], get_sample(0), get_sample(1));
+	return (best_res[0]);
+}
+
+char	*init_tests_temp(int pos)
+{
+	
 }

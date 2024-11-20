@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 12:26:59 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:55:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,3 +114,5 @@ int	*parse_imput(size_t ac, char **av)
 	}
 	return (values);
 }
+
+//split the "1 2 3"

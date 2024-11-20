@@ -6,21 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 09:51:02 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/15 12:18:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:23:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_list	**get_stack(int opt)
-{
-	static t_list	*stack_a;
-	static t_list	*stack_b;
-
-	if (!opt)
-		return (&stack_a);
-	return (&stack_b);
-}
 
 void	ft_sab(t_list **stack_a, t_list **stack_b, int witch)
 {

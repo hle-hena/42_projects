@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/19 14:50:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:25:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,15 @@ int	is_decreasing(t_list *lst)
 
 int	main(int ac, char **av)
 {
-	
-}
-
-int	main(int ac, char **av)
-{
 	t_list	**stack_a;
 	t_list	**stack_b;
 	char	*func;
 	int		*values;
 	size_t	i;
 
-	i = 0;
+	values = get_values(ac, av);
 	stack_a = get_stack(0);
 	stack_b = get_stack(1);
-	values = ft_calloc(ac, sizeof(int));
-	while (++i <= (size_t)ac - 1)
-	{
-		values[i - 1] = av[i][0] - '0';
-		ft_lstadd_back(stack_a, ft_lstnew(&values[i - 1]));
-	}
 	printf("\n\n\n");
 	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
 	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
@@ -60,7 +49,6 @@ int	main(int ac, char **av)
 		func = init_tests();
 		printf("\nExecuting the function [%s]\n\n", func);
 		do_func(func, stack_a, stack_b);
-		free(func);
 		printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
 		printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
 	}

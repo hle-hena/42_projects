@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:01:35 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:24:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	is_increasing(t_list *lst);
 /************************/
 void	parse_imput(int ac, char **av);
 
+/*		get_global.c	*/
+/************************/
+t_list	**get_stack(int opt);
+char	***get_cmds(void);
+
 /*		ps_cmd_a.c		*/
 /************************/
 int		ft_s(t_list **stack, int witch);
@@ -36,7 +41,6 @@ int		ft_rr(t_list **stack, t_list **chk, int witch);
 
 /*		ps_cmd_ab.c		*/
 /************************/
-t_list	**get_stack(int opt);
 void	ft_sab(t_list **stack_b, t_list **stack_a, int witch);
 void	ft_rrab(t_list **stack_b, t_list **stack_a, int witch);
 void	ft_rrab(t_list **stack_b, t_list **stack_a, int witch);
@@ -52,13 +56,11 @@ t_list	*get_sample(t_list *o_stack);
 
 /*		tests_utils.c	*/
 /************************/
-char	***get_cmds(void);
 void	free_tests(char ***tests);
 
 /*		do_func.c		*/
 /************************/
 int		do_op(t_list *node1, t_list *node2);
-t_list	*get_closest(t_list *node, t_list *stack);
 int		do_func(char *cmd, t_list **s_a, t_list **s_b);
 
 #endif
