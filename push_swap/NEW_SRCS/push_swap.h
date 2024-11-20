@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/17 17:51:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:01:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 int	is_decreasing(t_list *lst);
 int	is_increasing(t_list *lst);
 
+/*		parser.c		*/
+/************************/
+void	parse_imput(int ac, char **av);
 
 /*		ps_cmd_a.c		*/
 /************************/

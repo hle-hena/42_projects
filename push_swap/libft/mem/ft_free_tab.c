@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_del.c                                           :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 16:23:08 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:15:41 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/20 10:56:44 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/20 10:56:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-void	ft_del(void *add)
+void	ft_free_tab(void *tab, size_t size)
 {
-	if (add)
-	{
-		free(add);
-		add = NULL;
-	}
+	size_t	i;
+
+	i = -1;
+	while (++i < size)
+		ft_del(*tab++);
 }

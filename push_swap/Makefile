@@ -4,8 +4,8 @@ RM = rm -f
 FLAGS = -Wall -Wextra -Werror -g
 
 PS =	ps_cmd.c		ps_cmd_ab.c		main.c		\
-			tests.c			tests_utils.c	do_func.c	\
-			sample_utils.c
+		tests.c			tests_utils.c	do_func.c	\
+		sample_utils.c	parser.c
 
 PS_SRC = ${addprefix SRCS/, ${PS}}
 OBJ = ${PS_SRC:.c=.o}

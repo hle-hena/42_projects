@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/19 14:58:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:42:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,10 @@ int	main(int ac, char **av)
 	char	*func;
 	int		*values;
 	size_t	i;
-	int		temp;
 
-	i = 0;
+	values = parse_imput(ac, av);
 	stack_a = get_stack(0);
 	stack_b = get_stack(1);
-	values = ft_calloc(ac, sizeof(int));
-	while (++i <= (size_t)ac - 1)
-	{
-		values[i - 1] = &ft_atoi(av[i]);
-		ft_lstadd_back(stack_a, ft_lstnew(&values[i - 1]));
-	}
 	printf("\n\n\n");
 	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
 	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
@@ -61,7 +54,7 @@ int	main(int ac, char **av)
 		printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
 	}
 	free_tests(get_cmds());
-	free(values);
+	ft_del((void *)values);
 	ft_lstclear(stack_a, NULL);
 	ft_lstclear(stack_b, NULL);
 	return (0);
