@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 16:01:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:57:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 #include <stdio.h>
 
-# define FUTUR_SIGHT 5
+# define FUTUR_SIGHT 3
 
 /*		main.c			*/
 /************************/
@@ -26,7 +26,7 @@ int		is_increasing(t_list *lst);
 
 /*		parser.c		*/
 /************************/
-int	*parse_imput(size_t ac, char **av);
+int		*parse_imput(size_t ac, char **av);
 
 /*		get_global.c	*/
 /************************/
@@ -35,12 +35,19 @@ t_list	**get_cpy(int opt);
 char	**get_cmds(void);
 int		*get_values(int ac, char **av);
 
-/*		ps_cmd_a.c		*/
+/*		ps_cmd.c		*/
 /************************/
 int		ft_s(t_list **stack, int witch);
 int		ft_p(t_list **stack_to, t_list **stack_from, int witch);
 int		ft_r(t_list **stack, t_list **chk, int witch);
 int		ft_rr(t_list **stack, t_list **chk, int witch);
+
+/*		ps_cmd.c		*/
+/************************/
+int		ft_s_res(t_list **stack, int witch);
+int		ft_p_res(t_list **stack_to, t_list **stack_from, int witch);
+int		ft_r_res(t_list **stack, t_list **chk, int witch);
+int		ft_rr_res(t_list **stack, t_list **chk, int witch);
 
 /*		ps_cmd_ab.c		*/
 /************************/

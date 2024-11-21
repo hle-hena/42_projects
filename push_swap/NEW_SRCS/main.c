@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 15:58:20 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:06:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ int	main(int ac, char **av)
 	get_values(ac, av);
 	stack_a = get_stack(0);
 	stack_b = get_stack(1);
-	// printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
-	// printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
 	i = -1;
+	printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
+	printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
 	while (++i < 30)
 	{
 		if (ft_lstsorted(*stack_a, &is_increasing) && !(*stack_b))
 			break ;
 		func = get_cmds()[do_tests(0)];
-		printf("Executing the function [%s]\n\n", func);
+		printf("%s\n", func);
 		do_func(func, stack_a, stack_b);
-		// printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
-		// printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
+		printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
+		printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
 	}
 	free_all();
 }

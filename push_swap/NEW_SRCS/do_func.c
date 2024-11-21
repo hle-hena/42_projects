@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 19:03:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 13:34:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:58:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	do_rev_func(char *cmd, t_list **s_a, t_list **s_b)
 		return (ft_r(s_b, s_a, 0));
 	return (0);
 }
+
 int	do_func(char *cmd, t_list **s_a, t_list **s_b)
 {
 	if (!cmd)

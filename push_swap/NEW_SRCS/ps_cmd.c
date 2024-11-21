@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:30 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/17 17:52:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:49:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,7 @@ int	ft_s(t_list **stack, int witch)
 	*stack = (*stack)->next;
 	temp->next = (*stack)->next;
 	(*stack)->next = temp;
-	if (!witch)
-	{
-		if (do_op((*stack)->next, *stack) > 0)
-			return (1);
-		return (-1);
-	}
-	if (do_op(*stack, (*stack)->next) > 0)
-		return (1);
-	return (-1);
+	return (ft_s_res(stack, witch));
 }
 
 int	ft_p(t_list **stack_to, t_list **stack_from, int witch)
@@ -45,9 +37,7 @@ int	ft_p(t_list **stack_to, t_list **stack_from, int witch)
 	(*stack_from)->next = *stack_to;
 	*stack_to = *stack_from;
 	*stack_from = temp;
-	if (!witch)
-		return (1 / do_op((*stack_to)->next, *stack_to) + 1);
-	return (1 / do_op(*stack_to, (*stack_to)->next));
+	return (ft_p_res(stack_to, stack_from, witch));
 }
 
 int	ft_r(t_list **stack, t_list **chk, int witch)

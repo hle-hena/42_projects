@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:23:05 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 15:18:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:56:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	**get_stack(int opt)
 int	*get_values(int ac, char **av)
 {
 	static int	*values;
-	
+
 	if (!values)
 		values = parse_imput(ac, av);
 	if (!values)
