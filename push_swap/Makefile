@@ -7,8 +7,13 @@ PS =	ps_cmd.c		ps_cmd_ab.c		main.c		\
 		tests.c			tests_utils.c	do_func.c	\
 		sample_utils.c	parser.c
 
+PS_NEW	=	do_func.c	ends.c		get_global.c	\
+			main.c		parser.c	ps_cmd_ab.c		\
+			ps_cmd.c	tests.c
+
 PS_SRC = ${addprefix SRCS/, ${PS}}
-OBJ = ${PS_SRC:.c=.o}
+PS_NEW_SRC = ${addprefix NEW_SRCS/, ${PS_NEW}}
+OBJ = ${PS_NEW_SRC:.c=.o}
 BONUS_OBJ = ${BONUS_SRC:.c=.o}
 
 .c.o:

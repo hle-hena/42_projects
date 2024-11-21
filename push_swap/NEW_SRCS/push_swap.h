@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 14:24:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:43:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,22 @@
 # include "../libft/libft.h"
 #include <stdio.h>
 
-# define FUTUR_SIGHT 3
-
-/*		main.c			*/
-/************************/
-int	is_decreasing(t_list *lst);
-int	is_increasing(t_list *lst);
+# define FUTUR_SIGHT 7
 
 /*		parser.c		*/
 /************************/
-void	parse_imput(int ac, char **av);
+void	print(void *content);
+
+/*		parser.c		*/
+/************************/
+int	*parse_imput(size_t ac, char **av);
 
 /*		get_global.c	*/
 /************************/
 t_list	**get_stack(int opt);
-char	***get_cmds(void);
+t_list	**get_cpy(int opt);
+char	**get_cmds(void);
+int		*get_values(int ac, char **av);
 
 /*		ps_cmd_a.c		*/
 /************************/
@@ -47,20 +48,17 @@ void	ft_rrab(t_list **stack_b, t_list **stack_a, int witch);
 
 /*		tests.c			*/
 /************************/
-char	*init_tests(void);
-
-/*		sample_utils.c	*/
-/************************/
-t_list	*get_nlast_element(t_list *stack, size_t n);
-t_list	*get_sample(t_list *o_stack);
-
-/*		tests_utils.c	*/
-/************************/
-void	free_tests(char ***tests);
+int		do_tests(int pos);
 
 /*		do_func.c		*/
 /************************/
 int		do_op(t_list *node1, t_list *node2);
 int		do_func(char *cmd, t_list **s_a, t_list **s_b);
+int		do_rev_func(char *cmd, t_list **s_a, t_list **s_b);
+
+/*		ends.c			*/
+/************************/
+void	fall_back(void);
+void	free_all(void);
 
 #endif

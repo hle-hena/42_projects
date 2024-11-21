@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 16:25:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:39:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,21 @@ int	main(int ac, char **av)
 	t_list	**stack_a;
 	t_list	**stack_b;
 	char	*func;
-	int		*values;
 	size_t	i;
 
-	values = get_values(ac, av);
+	get_values(ac, av);
 	stack_a = get_stack(0);
 	stack_b = get_stack(1);
-	printf("\n\n\n");
-	printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
+	// printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
+	// printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
 	i = -1;
-	while (++i < 60)
+	while (++i < 1)
 	{
 		if (ft_lstsorted(*stack_a, &is_increasing) && !(*stack_b))
 			break ;
-		func = init_tests();
+		func = get_cmds()[do_tests(0)];
 		printf("\nExecuting the function [%s]\n\n", func);
 		do_func(func, stack_a, stack_b);
-		printf("Stack a : "); ft_lstiter(*stack_a, &print); printf("\n");
-		printf("Stack b : "); ft_lstiter(*stack_b, &print); printf("\n");
 	}
-	free_tests(get_cmds());
-	free(values);
-	ft_lstclear(stack_a, NULL);
-	ft_lstclear(stack_b, NULL);
-	return (0);
+	free_all();
 }

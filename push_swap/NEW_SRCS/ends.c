@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ends.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:15:37 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 16:50:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:37:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	fall_back(void)
 {
-	ft_lstclear(get_stack(0), &ft_del)
-	ft_lstclear(get_stack(1), &ft_del)
-	ft_lstclear(get_cpy(0), &ft_del)
-	ft_lstclear(get_cpy(1), &ft_del)
+	ft_lstclear(get_stack(0), NULL);
+	ft_lstclear(get_stack(1), NULL);
 	ft_del(get_values(0, NULL));
-	free_tests(get_cmds());
 	ft_putendl_fd("Error", 2);
 	exit(1);
+}
+
+void	free_all(void)
+{
+	ft_lstclear(get_stack(0), NULL);
+	ft_lstclear(get_stack(1), NULL);
+	ft_del(get_values(0, NULL));
+	exit(0);
 }

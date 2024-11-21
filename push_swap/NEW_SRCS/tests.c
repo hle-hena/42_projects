@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 16:54:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:39:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,60 +24,40 @@
 	if ()
 } */
 
-int	test(char **cmds)
+int	do_tests(int pos)
 {
-	t_list	*sample_a;
-	t_list	*sample_b;
-	int		result;
-
-	result = 0;
-	sample_a = get_sample(*get_stack(0));
-	sample_b = get_sample(*get_stack(1));
-	/* printf("Trying [");
-	for (int i = 0; i < FUTUR_SIGHT - 1; i++)
-		printf("%s]-[", cmds[i]);
-	printf("%s]", cmds[FUTUR_SIGHT - 1]); */
-	while (*cmds)
-	{
-		if (cmds[1])
-		{
-			if (ft_strchr(cmds[0], 'p') && ft_strchr(cmds[1], 'p')
-					&& cmds[0][1] != cmds[1][1])
-				result += (-2147483647 / FUTUR_SIGHT + 1) / 10;
-		}
-		result += do_func(*cmds, &sample_a, &sample_b);
-		cmds++;
-	}
-	ft_lstclear(&sample_a, NULL);
-	ft_lstclear(&sample_b, NULL);
-	// printf(" and the result is %d\n", result);
-	return (result);
-}
-
-char	*init_tests(void)
-{
-	char	***cmds;
-	char	**best_res;
-	int		best_res_val;
+	char	**cmds;
+	size_t	best_res_i;
+	int		best_res;
 	int		temp_res;
+	size_t	i;
 
-	best_res_val = -2147483648;
+	if (pos == FUTUR_SIGHT)
+		return (0);
+	i = -1;
 	cmds = get_cmds();
-	while (*cmds)
+	best_res_i = -1;
+	best_res = -2147483648;
+	while (++i < 8)
 	{
-		temp_res = test(*cmds);
-		if (temp_res > best_res_val)
+		// printf("\n%*sDoing [%s]\n", pos * 3, "", cmds[i]);
+		temp_res = do_func(cmds[i], get_stack(0), get_stack(1));
+		if (temp_res == (-2147483647 / FUTUR_SIGHT + 1) / 10)
+			continue ;
+		// printf("%*sStack after\n", pos * 3, "");
+		// printf("%*sStack a : ", pos * 3, ""); ft_lstiter(*get_stack(0), &print); printf("\n");
+		// printf("%*sStack b : ", pos * 3, ""); ft_lstiter(*get_stack(1), &print); printf("\n");
+		temp_res += do_tests(pos + 1);
+		// printf("%*sResult is %d\n", pos * 3, "", temp_res);
+		do_rev_func(cmds[i], get_stack(0), get_stack(1));
+		if (temp_res > best_res)
 		{
-			best_res_val = temp_res;
-			best_res = *cmds;
+			best_res = temp_res;
+			best_res_i = i;
 		}
-		cmds++;
 	}
-	do_func(best_res[0], get_sample(0), get_sample(1));
-	return (best_res[0]);
-}
-
-char	*init_tests_temp(int pos)
-{
-	
+	// printf("%*sBest option is [%s]\n", pos * 3, "", get_cmds()[best_res_i]);
+	if (pos == 0)
+		return (best_res_i);
+	return (best_res);
 }
