@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 13:55:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:19:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	*parse_values(size_t ac, char **av)
 	if (ac == 1 || !values)
 	{
 		ft_del(values);
-		exit(1);
+		fall_back(NULL);
 	}
 	i = -1;
 	while (++i < ac - 1)
@@ -81,13 +81,13 @@ int	*parse_values(size_t ac, char **av)
 		if (!is_valid_arg(av[i + 1]))
 		{
 			ft_del(values);
-			exit(1);
+			fall_back(NULL);
 		}
 		values[i] = ft_atoi(av[i + 1]);
 	}
 	values = load_index(values, ac - 1);
 	if (!values)
-		exit(1);
+		fall_back(NULL);
 	return (values);
 }
 
@@ -108,7 +108,7 @@ int	*parse_imput(size_t ac, char **av)
 		{
 			ft_del(values);
 			ft_lstclear(stack_a, &ft_del);
-			exit(1);
+			fall_back(NULL);
 		}
 		ft_lstadd_back(stack_a, new_node);
 	}

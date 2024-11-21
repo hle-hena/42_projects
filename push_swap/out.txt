@@ -1,0 +1,308 @@
+
+Doing [sa]
+Stack after
+Stack a : [3] --> [1] --> [2] --> 
+Stack b : 
+
+    Doing [sa]
+    Stack after
+    Stack a : [1] --> [3] --> [2] --> 
+    Stack b : 
+
+        Doing [sa]
+        Stack after
+        Stack a : [3] --> [1] --> [2] --> 
+        Stack b : 
+        Result is -1
+
+        Doing [sb]
+
+        Doing [pb]
+        Stack after
+        Stack a : [3] --> [2] --> 
+        Stack b : [1] --> 
+        Result is 1
+
+        Doing [pa]
+
+        Doing [ra]
+        Stack after
+        Stack a : [3] --> [2] --> [1] --> 
+        Stack b : 
+        Result is 0
+
+        Doing [rb]
+
+        Doing [rra]
+        Stack after
+        Stack a : [2] --> [1] --> [3] --> 
+        Stack b : 
+        Result is 0
+
+        Doing [rrb]
+        Best option is [pb]
+    Result is 2
+
+    Doing [sb]
+
+    Doing [pb]
+    Stack after
+    Stack a : [1] --> [2] --> 
+    Stack b : [3] --> 
+
+        Doing [sa]
+        Stack after
+        Stack a : [2] --> [1] --> 
+        Stack b : [3] --> 
+        Result is -1
+
+        Doing [sb]
+
+        Doing [pb]
+        Stack after
+        Stack a : [2] --> 
+        Stack b : [1] --> [3] --> 
+        Result is 0
+
+        Doing [pa]
+        Stack after
+        Stack a : [3] --> [1] --> [2] --> 
+        Stack b : 
+        Result is 1
+
+        Doing [ra]
+        Stack after
+        Stack a : [2] --> [1] --> 
+        Stack b : [3] --> 
+        Result is 0
+
+        Doing [rb]
+        Stack after
+        Stack a : [1] --> [2] --> 
+        Stack b : [3] --> 
+        Result is 0
+
+        Doing [rra]
+        Stack after
+        Stack a : [2] --> [1] --> 
+        Stack b : [3] --> 
+        Result is 0
+
+        Doing [rrb]
+        Stack after
+        Stack a : [1] --> [2] --> 
+        Stack b : [3] --> 
+        Result is 0
+        Best option is [pa]
+    Result is 1
+
+    Doing [pa]
+
+    Doing [ra]
+    Stack after
+    Stack a : [1] --> [2] --> [3] --> 
+    Stack b : 
+Result is 71582787
+
+Doing [sb]
+
+Doing [pb]
+Stack after
+Stack a : [1] --> [3] --> 
+Stack b : [2] --> 
+
+    Doing [sa]
+    Stack after
+    Stack a : [3] --> [1] --> 
+    Stack b : [2] --> 
+
+        Doing [sa]
+        Stack after
+        Stack a : [1] --> [3] --> 
+        Stack b : [2] --> 
+        Result is 1
+
+        Doing [sb]
+
+        Doing [pb]
+        Stack after
+        Stack a : [1] --> 
+        Stack b : [3] --> [2] --> 
+        Result is 1
+
+        Doing [pa]
+        Stack after
+        Stack a : [2] --> [3] --> [1] --> 
+        Stack b : 
+        Result is 2
+
+        Doing [ra]
+        Stack after
+        Stack a : [1] --> [3] --> 
+        Stack b : [2] --> 
+        Result is 0
+
+        Doing [rb]
+        Stack after
+        Stack a : [3] --> [1] --> 
+        Stack b : [2] --> 
+        Result is 0
+
+        Doing [rra]
+        Stack after
+        Stack a : [1] --> [3] --> 
+        Stack b : [2] --> 
+        Result is 0
+
+        Doing [rrb]
+        Stack after
+        Stack a : [3] --> [1] --> 
+        Stack b : [2] --> 
+        Result is 0
+        Best option is [pa]
+    Result is 1
+
+    Doing [sb]
+
+    Doing [pb]
+    Stack after
+    Stack a : [3] --> 
+    Stack b : [1] --> [2] --> 
+
+        Doing [sa]
+
+        Doing [sb]
+        Stack after
+        Stack a : [3] --> 
+        Stack b : [2] --> [1] --> 
+        Result is 1
+
+        Doing [pb]
+        Stack after
+        Stack a : 
+        Stack b : [3] --> [1] --> [2] --> 
+        Result is 0
+
+        Doing [pa]
+        Stack after
+        Stack a : [1] --> [3] --> 
+        Stack b : [2] --> 
+        Result is 1
+
+        Doing [ra]
+        Stack after
+        Stack a : [3] --> 
+        Stack b : [1] --> [2] --> 
+        Result is 0
+
+        Doing [rb]
+        Stack after
+        Stack a : [3] --> 
+        Stack b : [2] --> [1] --> 
+        Result is 0
+
+        Doing [rra]
+        Stack after
+        Stack a : [3] --> 
+        Stack b : [1] --> [2] --> 
+        Result is 0
+
+        Doing [rrb]
+        Stack after
+        Stack a : [3] --> 
+        Stack b : [2] --> [1] --> 
+        Result is 0
+        Best option is [sb]
+    Result is 0
+
+    Doing [pa]
+    Stack after
+    Stack a : [2] --> [1] --> [3] --> 
+    Stack b : 
+
+        Doing [sa]
+        Stack after
+        Stack a : [1] --> [2] --> [3] --> 
+        Stack b : 
+    Result is 2
+
+    Doing [ra]
+    Stack after
+    Stack a : [3] --> [2] --> 
+    Stack b : [1] --> 
+
+        Doing [sa]
+        Stack after
+        Stack a : [2] --> [3] --> 
+        Stack b : [1] --> 
+        Result is 1
+
+        Doing [sb]
+
+        Doing [pb]
+        Stack after
+        Stack a : [2] --> 
+        Stack b : [3] --> [1] --> 
+        Result is 0
+
+        Doing [pa]
+        Stack after
+        Stack a : [1] --> [3] --> [2] --> 
+        Stack b : 
+        Result is 1
+
+        Doing [ra]
+        Stack after
+        Stack a : [2] --> [3] --> 
+        Stack b : [1] --> 
+        Result is 0
+
+        Doing [rb]
+        Stack after
+        Stack a : [3] --> [2] --> 
+        Stack b : [1] --> 
+        Result is 0
+
+        Doing [rra]
+        Stack after
+        Stack a : [2] --> [3] --> 
+        Stack b : [1] --> 
+        Result is 0
+
+        Doing [rrb]
+        Stack after
+        Stack a : [3] --> [2] --> 
+        Stack b : [1] --> 
+        Result is 0
+        Best option is [sa]
+    Result is 1
+
+    Doing [rb]
+    Stack after
+    Stack a : [2] --> [3] --> 
+    Stack b : [1] --> 
+
+        Doing [sa]
+        Stack after
+        Stack a : [3] --> [2] --> 
+        Stack b : [1] --> 
+        Result is -1
+
+        Doing [sb]
+
+        Doing [pb]
+        Stack after
+        Stack a : [3] --> 
+        Stack b : [2] --> [1] --> 
+        Result is 1
+
+        Doing [pa]
+        Stack after
+        Stack a : [1] --> [2] --> [3] --> 
+        Stack b : 
+    Result is 71582788
+    Best option is [rb]
+Result is 71582788
+Best option is [pb]
+Executing the function [pb]
+

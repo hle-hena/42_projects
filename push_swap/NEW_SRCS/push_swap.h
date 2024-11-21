@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 14:43:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:01:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 # include "../libft/libft.h"
 #include <stdio.h>
 
-# define FUTUR_SIGHT 7
+# define FUTUR_SIGHT 5
 
-/*		parser.c		*/
+/*		main.c			*/
 /************************/
 void	print(void *content);
+int		is_decreasing(t_list *lst);
+int		is_increasing(t_list *lst);
 
 /*		parser.c		*/
 /************************/
@@ -58,7 +60,7 @@ int		do_rev_func(char *cmd, t_list **s_a, t_list **s_b);
 
 /*		ends.c			*/
 /************************/
-void	fall_back(void);
+void	fall_back(int *values);
 void	free_all(void);
 
 #endif
