@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 15:19:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:11:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,12 @@ int	*parse_values(size_t ac, char **av)
 
 	values = ft_calloc(ac, sizeof(int));
 	if (ac == 1 || !values)
-	{
-		ft_del(values);
-		fall_back(NULL);
-	}
+		fall_back(values);
 	i = -1;
 	while (++i < ac - 1)
 	{
 		if (!is_valid_arg(av[i + 1]))
-		{
-			ft_del(values);
-			fall_back(NULL);
-		}
+			fall_back(values);
 		values[i] = ft_atoi(av[i + 1]);
 	}
 	values = load_index(values, ac - 1);
@@ -113,6 +107,5 @@ int	*parse_imput(size_t ac, char **av)
 		ft_lstadd_back(stack_a, new_node);
 	}
 	return (values);
-}
-
 //split the "1 2 3"
+}

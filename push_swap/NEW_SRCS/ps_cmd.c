@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:30 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 18:49:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:21:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,19 @@ int	ft_s(t_list **stack, int witch)
 int	ft_p(t_list **stack_to, t_list **stack_from, int witch)
 {
 	t_list	*temp;
+	int		res;
 
+	if (!witch)
+		res = ft_p_res(*stack_to, ft_lstlast(*stack_to), *stack_from, witch);
 	if (!(*stack_from))
 		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
 	temp = (*stack_from)->next;
 	(*stack_from)->next = *stack_to;
 	*stack_to = *stack_from;
 	*stack_from = temp;
-	return (ft_p_res(stack_to, stack_from, witch));
+	if (witch)
+		res = ft_p_res(*stack_from, ft_lstlast(*stack_from), *stack_to, witch);
+	return (res);
 }
 
 int	ft_r(t_list **stack, t_list **chk, int witch)
@@ -53,6 +58,7 @@ int	ft_r(t_list **stack, t_list **chk, int witch)
 	temp->next = NULL;
 	if (witch)
 	{
+		return (0);
 		chk_last_stk = ft_lstlast(*stack);
 		if (*stack == chk_last_stk)
 			return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
@@ -78,6 +84,7 @@ int	ft_rr(t_list **stack, t_list **chk, int witch)
 	*stack = temp;
 	if (witch)
 	{
+		return (0);
 		if (*stack == (*stack)->next)
 			return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
 		return (do_op((*stack)->next, *chk)

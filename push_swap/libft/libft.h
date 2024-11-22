@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/20 11:15:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:21:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ int		ft_lstsorted(t_list *lst, int (*f)(t_list *));
 
 /*			math_func			*/
 /********************************/
+int		ft_abs(int nb);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
+int		ft_max(int a, int b);
 t_li	ft_pow(long int nb, int pow);
 
 

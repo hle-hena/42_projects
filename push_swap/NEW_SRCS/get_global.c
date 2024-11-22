@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_global.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:23:05 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:12:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	*get_values(int ac, char **av)
 
 char	**get_cmds(void)
 {
-	static char	*funcs[9] = {"sa", "sb", "pb", "pa", "ra", "rb", "rra", "rrb",
+	static char	*funcs[9] = {"sa", "sb", "pa", "pb", "ra", "rb", "rra", "rrb",
 		/* "ss", "rr", "rrr", */ NULL};
 
 	return (funcs);

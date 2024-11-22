@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/20 14:00:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/22 10:25:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 #include <stdio.h>
 
-# define FUTUR_SIGHT 3
+# define FUTUR_SIGHT 5
 
 typedef void **	t_vd;
 

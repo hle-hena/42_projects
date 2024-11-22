@@ -23,7 +23,8 @@ MEM =		ft_bzero.c			ft_calloc.c			ft_del.c			\
 PRINT = 	ft_putchar_fd.c		ft_putendl_fd.c		ft_putnbr_fd.c		\
 			ft_putstr_fd.c
 
-MATH =		ft_atoi.c			ft_itoa.c			ft_power.c
+MATH =		ft_abs.c			ft_atoi.c			ft_itoa.c			\
+			ft_max.c			ft_power.c
 
 F =			ft_ternary.c
 

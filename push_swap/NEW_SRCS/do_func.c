@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 19:03:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 17:58:45 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:29:28 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,33 @@ int	do_op(t_list *node1, t_list *node2)
 		return (-*(int *)node2->content);
 }
 
-int	do_rev_func(char *cmd, t_list **s_a, t_list **s_b)
+/* void	do_block_func(char *cmd, t_list **s_a, t_list **s_b)
 {
 	if (!cmd)
-		return (0);
+		return ;
+	
+} */
+
+void	do_rev_func(char *cmd, t_list **s_a, t_list **s_b)
+{
+	if (!cmd)
+		return ;
 	if (!ft_strncmp(cmd, "sa", 4))
-		return (ft_s(s_a, 0));
+		ft_s(s_a, 0);
 	else if (!ft_strncmp(cmd, "sb", 4))
-		return (ft_s(s_b, 1));
+		ft_s(s_b, 1);
 	else if (!ft_strncmp(cmd, "pa", 4))
-		return (ft_p(s_b, s_a, 0));
+		ft_p(s_b, s_a, 0);
 	else if (!ft_strncmp(cmd, "pb", 4))
-		return (ft_p(s_a, s_b, 1));
+		ft_p(s_a, s_b, 1);
 	else if (!ft_strncmp(cmd, "ra", 4))
-		return (ft_rr(s_a, s_b, 0));
+		ft_rr(s_a, s_b, 0);
 	else if (!ft_strncmp(cmd, "rb", 4))
-		return (ft_rr(s_b, s_a, 0));
+		ft_rr(s_b, s_a, 0);
 	else if (!ft_strncmp(cmd, "rra", 4))
-		return (ft_r(s_a, s_b, 0));
+		ft_r(s_a, s_b, 0);
 	else if (!ft_strncmp(cmd, "rrb", 4))
-		return (ft_r(s_b, s_a, 0));
-	return (0);
+		ft_r(s_b, s_a, 0);
 }
 
 int	do_func(char *cmd, t_list **s_a, t_list **s_b)
