@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/22 16:31:38 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:02:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int ac, char **av)
 	last = 13;
 	// printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
 	// printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
-	while (++i < 500)
+	while (++i < 1000)
 	{
 		if (ft_lstsorted(*stack_a, &is_increasing) && !(*stack_b))
 			break ;

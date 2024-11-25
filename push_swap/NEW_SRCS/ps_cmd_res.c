@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_cmd_res.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:41:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/22 16:20:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:50:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,6 @@ int	ft_p_res(t_list *top, t_list *bot, t_list *push, int witch)
 	return (-(1000 / do_op(bot, push) * ((do_op(push, bot) > 0) * -1)));
 }
 
-/* int	ft_p_res(t_list *lst_top, t_list *lst_bot, t_list *lst_p, int witch)
-{
-	int	dist;
-	int	res;
-
-	if (lst_top == lst_bot)
-		return (1000);
-	dist = do_op(lst_bot, lst_top) + ft_tern_int(
-			*(int *)lst_bot->content > *(int *)lst_top->content, 1, -1);
-	res = (do_op(lst_p, lst_top) / dist) * 1000;
-	if (!witch)
-		return (res);
-	if (res > 1000)
-		return (res);
-	else if (res < 0)
-		return (-res - 1000);
-	return (-res);
-} */
 /*
 for pb
 

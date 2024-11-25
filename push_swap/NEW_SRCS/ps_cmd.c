@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:30 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/22 16:21:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/23 20:05:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int	ft_r(t_list **stack, t_list **chk, int witch)
 	ft_lstadd_back(stack, temp);
 	*stack = temp->next;
 	temp->next = NULL;
-	if (witch)
+	if (!witch)
 	{
-		return (0);
+		// return (0);
 		chk_last_stk = ft_lstlast(*stack);
 		if (*stack == chk_last_stk)
 			return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
-		return (do_op(chk_last_stk, *chk)
-			- do_op(*stack, *chk));
+		return (1000 / (do_op(chk_last_stk, *chk)
+			- do_op(*stack, *chk)));
 	}
 	return (0);
 }
@@ -82,13 +82,13 @@ int	ft_rr(t_list **stack, t_list **chk, int witch)
 		curr = curr->next;
 	curr->next = NULL;
 	*stack = temp;
-	if (witch)
+	if (!witch)
 	{
 		return (0);
 		if (*stack == (*stack)->next)
 			return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
-		return (do_op((*stack)->next, *chk)
-			- do_op(*stack, *chk));
+		return ((do_op((*stack)->next, *chk)
+			- do_op(*stack, *chk)));
 	}
 	return (0);
 }

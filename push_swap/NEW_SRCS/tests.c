@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/22 16:30:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:28:34 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	block_back(size_t i, size_t last)
 		return (do_rev_func(get_cmds()[i], get_stack(0), get_stack(1)), 1);
 	else if ((i >= 4 && i <= 7) && ft_abs(i - last) == 2)
 		return (do_rev_func(get_cmds()[i], get_stack(0), get_stack(1)), 1);
-	else if ((i == 0 || i == 1 || (i >= 4 && i <= 7)) && (ft_abs(i - last) == 4
+	else if ((i == 1 || i == 5 || i == 7) && (ft_abs(i - last) == 4
 			|| ft_abs(i - last) == 6))
 		return (do_rev_func(get_cmds()[i], get_stack(0), get_stack(1)), 1);
 	return (0);
