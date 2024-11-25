@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/23 19:28:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:56:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	do_tests(int pos, size_t last)
 	best_res = -2147483648;
 	while (++i < 8)
 	{
-		// printf("\n%*sDoing [%s]\n", pos * 3, "", get_cmds()[i]);
+		// printf("%*sDoing [%s]\n", pos * 3, "", get_cmds()[i]);
 		temp_res = do_func(get_cmds()[i], get_stack(0), get_stack(1));
 		if ((temp_res == (-2147483647 / FUTUR_SIGHT + 1) / 10) || block_back(i, last))
 			continue ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/23 20:03:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:51:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 #include <stdio.h>
 
-# define FUTUR_SIGHT 3
+# define FUTUR_SIGHT 5
 
 /*		main.c			*/
 /************************/
@@ -39,15 +39,15 @@ int		*get_values(int ac, char **av);
 /************************/
 int		ft_s(t_list **stack, int witch);
 int		ft_p(t_list **stack_to, t_list **stack_from, int witch);
-int		ft_r(t_list **stack, t_list **chk, int witch);
+int		ft_r(t_list **stack, t_list **chk, int res);
 int		ft_rr(t_list **stack, t_list **chk, int witch);
 
 /*		ps_cmd.c		*/
 /************************/
 int		ft_s_res(t_list **stack, int witch);
 int		ft_p_res(t_list *lst_top, t_list *lst_bot, t_list *lst_p, int witch);
-int		ft_r_res(t_list **stack, t_list **chk, int witch);
-int		ft_rr_res(t_list **stack, t_list **chk, int witch);
+int		ft_r_res(t_list *stack, t_list *other_stack);
+int		ft_rr_res(t_list *stack, t_list *oth_stack);
 
 /*		ps_cmd_ab.c		*/
 /************************/

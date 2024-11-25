@@ -1,7 +1,7 @@
-LST =		ft_lstadd_back.c	ft_lstclear.c		ft_lstiter.c		\
-			ft_lstmap.c			ft_lstsize.c		ft_lstadd_front.c	\
-			ft_lstdelone.c		ft_lstlast.c		ft_lstnew.c			\
-			ft_lstsorted.c
+LST =		ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c		\
+			ft_lstcountf.c		ft_lstdelone.c		ft_lstiter.c		\
+			ft_lstlast.c		ft_lstmap.c			ft_lstnew.c			\
+			ft_lstsize.c		ft_lstsorted.c
 
 
 IS =		ft_isalnum.c		ft_isalpha.c		ft_isascii.c		\
@@ -40,7 +40,7 @@ SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(PRINT_SRC) $(MATH_SRC) $(F_SR
 OBJ = ${SRC:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = libft.a
 

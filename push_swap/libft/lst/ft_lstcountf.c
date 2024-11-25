@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_cmd_ab.c                                        :+:      :+:    :+:   */
+/*   ft_lstcountf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 09:51:02 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/25 15:54:39 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/25 13:17:57 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/25 13:20:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../libft.h"
 
-void	ft_sab(t_list **stack_a, t_list **stack_b, int witch)
+int	ft_lstcountf(t_list *lst, int (*f)(t_list *))
 {
-	ft_s(stack_a, witch);
-	ft_s(stack_b, witch);
-}
+	int	count;
 
-void	ft_rab(t_list **stack_a, t_list **stack_b)
-{
-	ft_r(stack_a, stack_b, 0);
-	ft_r(stack_b, stack_a, 0);
-}
-
-void	ft_rrab(t_list **stack_a, t_list **stack_b, int witch)
-{
-	ft_rr(stack_a, stack_b, witch);
-	ft_rr(stack_b, stack_a, witch);
+	count = 0;
+	if (!lst)
+		return (count);
+	while (lst->next)
+	{
+		if (f(lst))
+			count++;
+		lst = lst->next;
+	}
+	return (count);
 }

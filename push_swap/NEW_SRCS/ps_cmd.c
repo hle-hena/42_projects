@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:30 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/23 20:05:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:00:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,20 @@ int	ft_p(t_list **stack_to, t_list **stack_from, int witch)
 	return (res);
 }
 
-int	ft_r(t_list **stack, t_list **chk, int witch)
+int	ft_r(t_list **stack, t_list **chk, int res)
 {
 	t_list	*temp;
-	t_list	*chk_last_stk;
 
 	if (!(*stack))
+		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+	if (!(*stack)->next)
 		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
 	temp = *stack;
 	ft_lstadd_back(stack, temp);
 	*stack = temp->next;
 	temp->next = NULL;
-	if (!witch)
-	{
-		// return (0);
-		chk_last_stk = ft_lstlast(*stack);
-		if (*stack == chk_last_stk)
-			return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
-		return (1000 / (do_op(chk_last_stk, *chk)
-			- do_op(*stack, *chk)));
-	}
+	if (!res)
+		return (ft_r_res(*stack, *chk));
 	return (0);
 }
 
@@ -83,12 +77,6 @@ int	ft_rr(t_list **stack, t_list **chk, int witch)
 	curr->next = NULL;
 	*stack = temp;
 	if (!witch)
-	{
-		return (0);
-		if (*stack == (*stack)->next)
-			return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
-		return ((do_op((*stack)->next, *chk)
-			- do_op(*stack, *chk)));
-	}
+		return (ft_rr_res(*stack, *chk));
 	return (0);
 }
