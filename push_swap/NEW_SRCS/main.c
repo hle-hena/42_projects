@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/25 16:38:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:10:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int ac, char **av)
 	char	*func;
 	size_t	last;
 	size_t	i;
+	int		fd;
+	int		*values;
 
 	get_values(ac, av);
 	stack_a = get_stack(0);
@@ -42,16 +44,26 @@ int	main(int ac, char **av)
 	last = 13;
 	// printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
 	// printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
-	while (1)
+	while (++i < 10000)
 	{
 		if (ft_lstsorted(*stack_a, &is_increasing) && !(*stack_b))
 			break ;
 		last = do_tests(0, last);
 		func = get_cmds()[last];
-		printf("%s\n", func);
+		// printf("%s\n", func);
 		do_func(func, stack_a, stack_b);
 		// printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
 		// printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
+	}
+	printf("i is %ld\n", i);
+	if (i == 10000)
+	{
+		fd = open("out.txt", O_WRONLY | O_APPEND | O_CREAT, 0644);
+		values = get_values(0, 0);
+		for (int j = 1; j < ac; j++)
+			dprintf(fd, "%s ", av[j]);
+		dprintf(fd, "\n");
+		close(fd);
 	}
 	free_all();
 }

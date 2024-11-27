@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:23:05 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/25 13:06:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:20:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	*get_values(int ac, char **av)
 	if (!values)
 		values = parse_imput(ac, av);
 	if (!values)
-		return (fall_back(NULL), NULL);
+		return (fall_back(NULL, NULL), NULL);
 	return (values);
 }
 

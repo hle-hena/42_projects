@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/25 16:51:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:08:01 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 #include <stdio.h>
+#include <fcntl.h>
 
 # define FUTUR_SIGHT 5
 
@@ -67,7 +68,8 @@ void	do_rev_func(char *cmd, t_list **s_a, t_list **s_b);
 
 /*		ends.c			*/
 /************************/
-void	fall_back(int *values);
+void	fall_back(int *values, char **temp);
 void	free_all(void);
+void	free_temp(char **temp);
 
 #endif

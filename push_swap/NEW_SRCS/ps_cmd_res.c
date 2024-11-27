@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:41:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/25 16:37:33 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:41:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,24 @@ int	ft_s_res(t_list **stack, int witch)
 	return (1000 / do_op(*stack, (*stack)->next));
 }
 
-//might just set if push_b to always 0, not usefull, but not unusefull ?
 int	ft_p_res(t_list *top, t_list *bot, t_list *push, int witch)
 {
 	if (!witch)
 	{
 		if (bot == top)
-			return (5000);
+			return (50000);
 		if (do_op(top, bot) > 0)
 			return (5000 / do_op(push, bot) * ((do_op(push, top) > 0) * -1));
 		return (5000 / do_op(bot, push) * ((do_op(push, bot) > 0) * -1));
 	}
 	// return (0);
 	if (bot == top)
-		return (-5000);
+		return (-50000);
 	if (do_op(top, bot) > 0)
-		return (-(5000 / do_op(push, bot) * ((do_op(push, top) > 0) * -1)));
-	return (-(5000 / do_op(bot, push) * ((do_op(push, bot) > 0) * -1)));
+		return (-(2000 / do_op(push, bot) * ((do_op(push, top) > 0) * -1)));
+	return (-(2000 / do_op(bot, push) * ((do_op(push, bot) > 0) * -1)));
 }
 
-/* int	ft_r_res(t_list *stk, t_list *oth_stk int init_cop, int witch)
-{
-	int	cop;
-	int	res;
-
-	if (!witch)
-		cop = ft_lstcountf(stk, &is_increasing);
-	else
-		cop = ft_lstcountf(stk, &is_decreasing);
-	if (init_cop < cop)
-		res (100);
-	else if (init_cop > cop)
-		return (-1000);
-	return (0);
-} */
 
 int	ft_r_res(t_list *stack, t_list *oth_stack)
 {
@@ -68,7 +52,7 @@ int	ft_r_res(t_list *stack, t_list *oth_stack)
 	diff_bef = ft_abs(do_op(last, oth_stack));
 	diff_aft = ft_abs(do_op(stack, oth_stack));
 	if (diff_aft == diff_bef)
-		return (100);
+		return (0);
 	return (1000 / (diff_bef - diff_aft));
 }
 
@@ -84,7 +68,7 @@ int	ft_rr_res(t_list *stack, t_list *oth_stack)
 	diff_bef = ft_abs(do_op(stack->next, oth_stack));
 	diff_aft = ft_abs(do_op(stack, oth_stack));
 	if (diff_aft == diff_bef)
-		return (100);
+		return (0);
 	return (1000 / (diff_bef - diff_aft));
 }
 
