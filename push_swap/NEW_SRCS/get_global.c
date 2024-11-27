@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:23:05 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 11:20:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:14:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ char	**get_cmds(void)
 		/* "ss", "rr", "rrr", */ NULL};
 
 	return (funcs);
+}
+
+t_list	**get_states(int opt)
+{
+	static t_list	*states_a;
+	static t_list	*states_b;
+
+	if (!opt)
+		return (states_a);
+	return (states_b);
 }
