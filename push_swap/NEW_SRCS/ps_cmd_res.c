@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:41:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 16:41:54 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:28:52 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	ft_r_res(t_list *stack, t_list *oth_stack)
 	int		diff_aft;
 
 	if (!stack->next)
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	if (!stack->next->next)
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	last = ft_lstlast(stack);
 	diff_bef = ft_abs(do_op(last, oth_stack));
 	diff_aft = ft_abs(do_op(stack, oth_stack));
@@ -62,9 +62,9 @@ int	ft_rr_res(t_list *stack, t_list *oth_stack)
 	int	diff_aft;
 
 	if (!stack->next)
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	if (!stack->next->next)
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	diff_bef = ft_abs(do_op(stack->next, oth_stack));
 	diff_aft = ft_abs(do_op(stack, oth_stack));
 	if (diff_aft == diff_bef)

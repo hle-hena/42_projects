@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_global.c                                       :+:      :+:    :+:   */
+/*   global.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:23:05 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 17:14:19 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:46:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	*get_values(int ac, char **av)
 
 char	**get_cmds(void)
 {
-	static char	*funcs[9] = {"sa", "sb", "pa", "pb", "ra", "rb", "rra", "rrb",
-		/* "ss", "rr", "rrr", */ NULL};
+	static char	*funcs[13] = {"sa", "sb", "pa", "pb", "ra", "rb", "rra", "rrb",
+		"ss", "rr", "rrr", NULL};
 
 	return (funcs);
 }
@@ -47,6 +47,6 @@ t_list	**get_states(int opt)
 	static t_list	*states_b;
 
 	if (!opt)
-		return (states_a);
-	return (states_b);
+		return (&states_a);
+	return (&states_b);
 }

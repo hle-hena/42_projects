@@ -7,9 +7,10 @@ PS =	ps_cmd.c		ps_cmd_ab.c		main.c		\
 		tests.c			tests_utils.c	do_func.c	\
 		sample_utils.c	parser.c
 
-PS_NEW	=	do_func.c	free_things.c	get_global.c	\
-			main.c		parser.c		ps_cmd_ab.c		\
-			ps_cmd.c	tests.c			ps_cmd_res.c
+PS_NEW	=	do_func.c		free_things.c	global.c	\
+			main.c			parser.c		ps_cmd_ab.c	\
+			ps_cmd_res.c	ps_cmd.c		states.c	\
+			tests.c
 
 PS_SRC = ${addprefix SRCS/, ${PS}}
 PS_NEW_SRC = ${addprefix NEW_SRCS/, ${PS_NEW}}

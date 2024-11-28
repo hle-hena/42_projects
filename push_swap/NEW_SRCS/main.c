@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:20:29 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 16:10:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:22:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(int ac, char **av)
 	size_t	last;
 	size_t	i;
 	int		fd;
-	int		*values;
 
 	get_values(ac, av);
 	stack_a = get_stack(0);
@@ -48,6 +47,7 @@ int	main(int ac, char **av)
 	{
 		if (ft_lstsorted(*stack_a, &is_increasing) && !(*stack_b))
 			break ;
+		add_states();
 		last = do_tests(0, last);
 		func = get_cmds()[last];
 		// printf("%s\n", func);
@@ -59,7 +59,6 @@ int	main(int ac, char **av)
 	if (i == 10000)
 	{
 		fd = open("out.txt", O_WRONLY | O_APPEND | O_CREAT, 0644);
-		values = get_values(0, 0);
 		for (int j = 1; j < ac; j++)
 			dprintf(fd, "%s ", av[j]);
 		dprintf(fd, "\n");

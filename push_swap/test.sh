@@ -35,6 +35,6 @@ combinations=$(generate_permutations "" "$numbers")
 while read -r combination; do
     # Trim leading spaces
     combination=$(echo "$combination" | sed 's/^ //')
-	echo "Testing with: $combination"
+	# echo "Testing with: $combination"
     ./push_swap $combination
 done <<< "$combinations"

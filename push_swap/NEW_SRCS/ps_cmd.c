@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:30 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 16:41:17 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:45:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_s(t_list **stack, int witch)
 	t_list	*temp;
 
 	if (!(*stack))
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	if (!(*stack)->next)
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	temp = *stack;
 	*stack = (*stack)->next;
 	temp->next = (*stack)->next;
@@ -35,7 +35,7 @@ int	ft_p(t_list **stack_to, t_list **stack_from, int witch)
 	if (!witch)
 		res = ft_p_res(*stack_to, ft_lstlast(*stack_to), *stack_from, witch);
 	if (!(*stack_from))
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	temp = (*stack_from)->next;
 	(*stack_from)->next = *stack_to;
 	*stack_to = *stack_from;
@@ -50,9 +50,9 @@ int	ft_r(t_list **stack, t_list **chk, int res)
 	t_list	*temp;
 
 	if (!(*stack))
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	if (!(*stack)->next)
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	temp = *stack;
 	ft_lstadd_back(stack, temp);
 	*stack = temp->next;
@@ -62,13 +62,13 @@ int	ft_r(t_list **stack, t_list **chk, int res)
 	return (0);
 }
 
-int	ft_rr(t_list **stack, t_list **chk, int witch)
+int	ft_rr(t_list **stack, t_list **chk, int res)
 {
 	t_list	*curr;
 	t_list	*temp;
 
 	if (!(*stack))
-		return ((-2147483647 / FUTUR_SIGHT + 1) / 10);
+		return ((INT_MIN / FUTUR_SIGHT + 1) / 10);
 	temp = ft_lstlast(*stack);
 	temp->next = *stack;
 	curr = *stack;
@@ -76,7 +76,7 @@ int	ft_rr(t_list **stack, t_list **chk, int witch)
 		curr = curr->next;
 	curr->next = NULL;
 	*stack = temp;
-	if (!witch)
+	if (!res)
 		return (ft_rr_res(*stack, *chk));
 	return (0);
 }

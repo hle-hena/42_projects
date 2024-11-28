@@ -6,26 +6,37 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 09:51:02 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/25 15:54:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:45:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sab(t_list **stack_a, t_list **stack_b, int witch)
+int	ft_sab(t_list **stack_a, t_list **stack_b)
 {
-	ft_s(stack_a, witch);
-	ft_s(stack_b, witch);
+	int	res;
+
+	res = ft_s(stack_a, 0);
+	res += ft_s(stack_b, 1);
+	return (res);
 }
 
-void	ft_rab(t_list **stack_a, t_list **stack_b)
+int	ft_rab(t_list **stack_a, t_list **stack_b)
 {
-	ft_r(stack_a, stack_b, 0);
-	ft_r(stack_b, stack_a, 0);
+	int	diff;
+
+	diff = ft_abs(do_op(*stack_a, *stack_b));
+	ft_r(stack_a, stack_b, 1);
+	ft_r(stack_b, stack_a, 1);
+	return (1000 * (ft_abs(do_op(*stack_a, *stack_b)) - diff));
 }
 
-void	ft_rrab(t_list **stack_a, t_list **stack_b, int witch)
+int	ft_rrab(t_list **stack_a, t_list **stack_b)
 {
-	ft_rr(stack_a, stack_b, witch);
-	ft_rr(stack_b, stack_a, witch);
+	int	diff;
+
+	diff = ft_abs(do_op(*stack_a, *stack_b));
+	ft_rr(stack_a, stack_b, 1);
+	ft_rr(stack_b, stack_a, 1);
+	return (1000 * (ft_abs(do_op(*stack_a, *stack_b)) - diff));
 }

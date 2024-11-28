@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 17:08:01 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:58:48 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <fcntl.h>
 
 # define FUTUR_SIGHT 5
+# define INT_MIN -2147483647
 
 /*		main.c			*/
 /************************/
@@ -29,12 +30,12 @@ int		is_increasing(t_list *lst);
 /************************/
 int		*parse_imput(size_t ac, char **av);
 
-/*		get_global.c	*/
+/*		global.c		*/
 /************************/
 t_list	**get_stack(int opt);
-t_list	**get_cpy(int opt);
 char	**get_cmds(void);
 int		*get_values(int ac, char **av);
+t_list	**get_states(int opt);
 
 /*		ps_cmd.c		*/
 /************************/
@@ -52,13 +53,18 @@ int		ft_rr_res(t_list *stack, t_list *oth_stack);
 
 /*		ps_cmd_ab.c		*/
 /************************/
-void	ft_sab(t_list **stack_b, t_list **stack_a, int witch);
-void	ft_rrab(t_list **stack_b, t_list **stack_a, int witch);
-void	ft_rrab(t_list **stack_b, t_list **stack_a, int witch);
+int		ft_sab(t_list **stack_b, t_list **stack_a);
+int		ft_rab(t_list **stack_b, t_list **stack_a);
+int		ft_rrab(t_list **stack_b, t_list **stack_a);
 
 /*		tests.c			*/
 /************************/
 int		do_tests(int pos, size_t last);
+
+/*		states.c		*/
+/************************/
+int		check_state(int i);
+void	add_states();
 
 /*		do_func.c		*/
 /************************/

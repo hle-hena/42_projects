@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:54:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 16:40:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:41:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,44 @@ int	block_back(size_t i, size_t last)
 	return (0);
 }
 
-void	change_best(size_t *best_res_i, size_t i, int *best_res, int temp_res)
+void	change_best(size_t *best_res_i, size_t i, int *best_res, int res)
 {
-	if (temp_res > *best_res)
+	if (res > *best_res)
 	{
-		*best_res = temp_res;
+		*best_res = res;
 		*best_res_i = i;
 	}
+}
+
+void	do_tests_force(size_t last, size_t *best_res_i, int *best_res)
+{
+	size_t	b_res_i;
+	int		b_res;
+	int		res;
+	size_t	i;
+
+	if (*best_res_i != (size_t)-1)
+		return ;
+	i = -1;
+	b_res_i = -1;
+	b_res = -2147483648;
+	while (++i < 12)
+	{
+		res = do_func(get_cmds()[i], get_stack(0), get_stack(1));
+		if ((res == (INT_MIN + 1) / 10) || block_back(i, last))
+			continue ;
+		do_rev_func(get_cmds()[i], get_stack(0), get_stack(1));
+		change_best(&b_res_i, i, &b_res, res);
+	}
+	*best_res_i = b_res_i;
+	*best_res = b_res;
 }
 
 int	do_tests(int pos, size_t last)
 {
 	size_t	best_res_i;
 	int		best_res;
-	int		temp_res;
+	int		res;
 	size_t	i;
 
 	if (pos == FUTUR_SIGHT)
@@ -55,17 +79,19 @@ int	do_tests(int pos, size_t last)
 	i = -1;
 	best_res_i = -1;
 	best_res = -2147483648;
-	while (++i < 8)
+	while (++i < 12)
 	{
-		temp_res = do_func(get_cmds()[i], get_stack(0), get_stack(1));
-		if ((temp_res == (-2147483647 / FUTUR_SIGHT + 1) / 10) || block_back(i, last))
+		res = do_func(get_cmds()[i], get_stack(0), get_stack(1));
+		if ((res == (INT_MIN / FUTUR_SIGHT + 1) / 10) || block_back(i, last)
+				|| check_state(i))
 			continue ;
 		if (ft_lstsorted(*get_stack(0), &is_increasing) && !(*get_stack(1)))
 			return (finish_test(pos, i));
-		temp_res += do_tests(ft_tern_int(best_res_i >= (2147483647 / FUTUR_SIGHT
+		res += do_tests(ft_tern_int(best_res_i >= (2147483647 / FUTUR_SIGHT
 				- 1) / FUTUR_SIGHT, FUTUR_SIGHT, pos + 1), i);
 		do_rev_func(get_cmds()[i], get_stack(0), get_stack(1));
-		change_best(&best_res_i, i, &best_res, temp_res);
+		change_best(&best_res_i, i, &best_res, res);
 	}
+	do_tests_force(last, &best_res_i, &best_res);
 	return (ft_tern_int(pos == 0, best_res_i, best_res));
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 19:03:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/25 15:54:19 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:44:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	do_rev_func(char *cmd, t_list **s_a, t_list **s_b)
 		ft_r(s_a, s_b, 0);
 	else if (!ft_strncmp(cmd, "rrb", 4))
 		ft_r(s_b, s_a, 0);
+	else if (!ft_strncmp(cmd, "ss", 4))
+		ft_sab(s_a, s_b);
+	else if (!ft_strncmp(cmd, "rr", 4))
+		ft_rrab(s_a, s_b);
+	else if (!ft_strncmp(cmd, "rrr", 4))
+		ft_rab(s_a, s_b);
 }
 
 int	do_func(char *cmd, t_list **s_a, t_list **s_b)
@@ -71,5 +77,11 @@ int	do_func(char *cmd, t_list **s_a, t_list **s_b)
 		return (ft_rr(s_a, s_b, 0));
 	else if (!ft_strncmp(cmd, "rrb", 4))
 		return (ft_rr(s_b, s_a, 0));
+	else if (!ft_strncmp(cmd, "ss", 4))
+		return (ft_sab(s_a, s_b));
+	else if (!ft_strncmp(cmd, "rr", 4))
+		return (ft_rab(s_a, s_b));
+	else if (!ft_strncmp(cmd, "rrr", 4))
+		return (ft_rrab(s_a, s_b));
 	return (-1);
 }
