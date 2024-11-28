@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 09:43:39 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:05:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
-	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
+	size_t	i;
+
+	i = 0;
+	while ((unsigned char)s1[i] == (unsigned char)s2[i] && (unsigned char)s2[i]
+		&& i < n)
+		i ++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

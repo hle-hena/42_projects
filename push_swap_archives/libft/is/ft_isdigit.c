@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 08:56:30 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:00:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+int	ft_isdigit(int c)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
-	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
+	return (c >= '0' && c <= '9');
 }

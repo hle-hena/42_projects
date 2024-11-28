@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_ternary.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/09/30 18:12:45 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 17:59:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+long long int	ft_tern_int(int cnd, long long int val1, long long int val2)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
-	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
+	if (cnd)
+		return (val1);
+	return (val2);
+}
+
+char	*ft_tern_str(int cnd, char *ret1, char *ret2)
+{
+	if (cnd)
+		return (ret1);
+	return (ret2);
 }

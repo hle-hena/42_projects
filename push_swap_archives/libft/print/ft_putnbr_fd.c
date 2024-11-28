@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 14:01:43 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:04:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
+	long long int	nb;
+
+	nb = n;
+	if (nb < 0)
 	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
+		nb = -nb;
+		ft_putchar_fd('-', fd);
 	}
-	return (1);
+	if (nb > 9)
+		ft_putnbr_fd(nb / 10, fd);
+	ft_putchar_fd(nb % 10 + '0', fd);
 }

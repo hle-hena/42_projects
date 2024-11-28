@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 10:28:15 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:05:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (ft_strlen(src));
+	while (i < n - 1 && src[i])
 	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
+		dest[i] = src[i];
+		i++;
 	}
-	return (1);
+	dest[i] = 0;
+	return (ft_strlen(src));
 }

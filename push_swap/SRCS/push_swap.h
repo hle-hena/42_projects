@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 15:51:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/22 10:25:42 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/26 16:53:03 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/28 20:46:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,63 @@
 # include "../libft/libft.h"
 #include <stdio.h>
 
-# define FUTUR_SIGHT 5
+typedef struct s_push
+{
+	int	score_a;
+	int	score_b;
+}	t_push;
 
-typedef void **	t_vd;
+# define FIRST *(int *)stack->content
+# define SECOND *(int *)stack->next->content
+# define THIRD *(int *)stack->next->next->content
 
 /*		main.c			*/
 /************************/
-int		is_decreasing(t_list *lst);
+void	print(void *content);
 int		is_increasing(t_list *lst);
 
+/*		parser.c		*/
+/************************/
 int		*parse_imput(size_t ac, char **av);
 
-/*		ps_cmd_a.c		*/
-/************************/
-int		ft_s(t_list **stack, int witch);
-int		ft_p(t_list **stack_to, t_list **stack_from, int witch);
-int		ft_r(t_list **stack, t_list **chk, int witch);
-int		ft_rr(t_list **stack, t_list **chk, int witch);
-
-/*		ps_cmd_ab.c		*/
+/*		global.c		*/
 /************************/
 t_list	**get_stack(int opt);
-void	ft_sab(t_list **stack_b, t_list **stack_a, int witch);
-void	ft_rrab(t_list **stack_b, t_list **stack_a, int witch);
-void	ft_rrab(t_list **stack_b, t_list **stack_a, int witch);
+char	**get_cmds(void);
+int		*get_values(int ac, char **av);
 
-/*		tests.c			*/
+/*		commands_1.c	*/
 /************************/
-char	*init_tests(void);
+void	ft_s(t_list **stack);
+void	ft_p(t_list **stack_to, t_list **stack_from);
+void	ft_r(t_list **stack);
+void	ft_rr(t_list **stack);
 
-/*		sample_utils.c	*/
+/*		commands_2.c	*/
 /************************/
-t_list	*get_nlast_element(t_list *stack, size_t n);
-t_list	*get_sample(t_list *o_stack);
+void	ft_sab(void);
+void	ft_rab(void);
+void	ft_rrab(void);
 
-/*		tests_utils.c	*/
+/*		do_funcs.c		*/
 /************************/
-char	***get_cmds(void);
-void	free_tests(char ***tests);
+int		do_func(char *cmd);
+void	do_func_print(char *cmd);
 
-/*		do_func.c		*/
+/*		do_push.c		*/
 /************************/
-int		do_op(t_list *node1, t_list *node2);
-t_list	*get_closest(t_list *node, t_list *stack);
-int		do_func(char *cmd, t_list **s_a, t_list **s_b);
+void	calc_push(int opt, t_list *stack_fr, t_list *stack_to,
+			int (*f)(t_list *, t_list *));
+
+/*		struct_func.c	*/
+/************************/
+t_push	push_compare(t_push p_a, t_push p_b);
+void	do_push(t_push val, int opt);
+
+/*		ends.c			*/
+/************************/
+void	fall_back(int *values, char **temp);
+void	free_temp(char **temp);
+void	free_all(void);
 
 #endif

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 08:48:52 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:04:08 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+void	ft_bzero(void *add, size_t n)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
-	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
+	size_t	i;
+
+	i = -1;
+	while (++i < n)
+		((unsigned char *)add)[i] = 0;
 }

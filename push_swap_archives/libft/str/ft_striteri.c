@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 09:34:06 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:05:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+void	ft_striteri(char *str, void (*f)(unsigned int, char *))
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
+	size_t	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
+		f(i, &str[i]);
+		i++;
 	}
-	return (1);
 }

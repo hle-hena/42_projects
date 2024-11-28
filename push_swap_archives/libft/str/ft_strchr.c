@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 09:30:24 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:05:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+char	*ft_strchr(const char *str, int c)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
+	while (*str)
 	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
 	}
-	return (1);
+	if (*str == (char)c)
+		return ((char *)str);
+	return (NULL);
 }

@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_lstcountf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/25 13:17:57 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/25 13:20:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+int	ft_lstcountf(t_list *lst, int (*f)(t_list *))
 {
+	int	count;
+
+	count = 0;
 	if (!lst)
-		return (1);
-	while (lst && lst->next)
+		return (count);
+	while (lst->next)
 	{
-		if (!f(lst))
-			return (0);
+		if (f(lst))
+			count++;
 		lst = lst->next;
 	}
-	return (1);
+	return (count);
 }

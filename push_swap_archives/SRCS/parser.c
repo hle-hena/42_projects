@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/27 13:09:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:56:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,41 +71,23 @@ int	*parse_values(size_t ac, char **av)
 
 	values = ft_calloc(ac, sizeof(int));
 	if (ac == 1 || !values)
-		fall_back(values, NULL);
+	{
+		ft_del(values);
+		exit(1);
+	}
 	i = -1;
 	while (++i < ac - 1)
 	{
 		if (!is_valid_arg(av[i + 1]))
-			fall_back(values, NULL);
+		{
+			ft_del(values);
+			exit(1);
+		}
 		values[i] = ft_atoi(av[i + 1]);
 	}
 	values = load_index(values, ac - 1);
 	if (!values)
-		fall_back(NULL, NULL);
-	return (values);
-}
-
-int	*parse_value(char **av)
-{
-	size_t	i;
-	int		*values;
-	char	**temp;
-
-	values = ft_calloc(count_words(av[1], ' ') + 1, sizeof(int));
-	temp = ft_split(av[1], ' ');
-	if (!values || !temp)
-		fall_back(values, temp);
-	i = -1;
-	while (temp[++i])
-	{
-		if (!is_valid_arg(temp[i]))
-			fall_back(values, temp);
-		values[i] = ft_atoi(temp[i]);
-	}
-	values = load_index(values, i);
-	free_temp(temp);
-	if (!values)
-		fall_back(NULL, NULL);
+		exit(1);
 	return (values);
 }
 
@@ -116,22 +98,19 @@ int	*parse_imput(size_t ac, char **av)
 	size_t	i;
 	int		*values;
 
-	if (ac != 2)
-		values = parse_values(ac, av);
-	else
-	{
-		ac = count_words(av[1], ' ') + 1;
-		values = parse_value(av);
-	}
+	values = parse_values(ac, av);
 	stack_a = get_stack(0);
 	i = -1;
 	while (++i < ac - 1)
 	{
 		new_node = ft_lstnew((void *)&values[i]);
 		if (!new_node)
-			fall_back(values, NULL);
+		{
+			ft_del(values);
+			ft_lstclear(stack_a, &ft_del);
+			exit(1);
+		}
 		ft_lstadd_back(stack_a, new_node);
 	}
 	return (values);
-//split the "1 2 3"
 }

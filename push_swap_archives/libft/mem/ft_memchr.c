@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/05 09:14:43 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:04:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+void	*ft_memchr(const void *add, int c, size_t n)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
+	size_t	i;
+
+	i = 0;
+	while (i < n)
 	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
+		if (((unsigned char *)add)[i] == (unsigned char)c)
+			return ((void *)add + i);
+		i++;
 	}
-	return (1);
+	return (NULL);
 }

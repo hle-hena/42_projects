@@ -3,12 +3,18 @@ CC = cc
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror -g
 
-PUSH_SWAP =	commands_1.c	commands_2.c	do_funcs.c	\
-			do_push.c		ends.c			global.c	\
-			main.c			parser.c		struct_func.c
+PS =	ps_cmd.c		ps_cmd_ab.c		main.c		\
+		tests.c			tests_utils.c	do_func.c	\
+		sample_utils.c	parser.c
 
-PUSH_SWAP_SRC = ${addprefix SRCS/, ${PUSH_SWAP}}
-OBJ = ${PUSH_SWAP_SRC:.c=.o}
+PS_NEW	=	do_func.c		free_things.c	global.c	\
+			main.c			parser.c		ps_cmd_ab.c	\
+			ps_cmd_res.c	ps_cmd.c		states.c	\
+			tests.c
+
+PS_SRC = ${addprefix SRCS/, ${PS}}
+PS_NEW_SRC = ${addprefix NEW_SRCS/, ${PS_NEW}}
+OBJ = ${PS_NEW_SRC:.c=.o}
 BONUS_OBJ = ${BONUS_SRC:.c=.o}
 
 .c.o:

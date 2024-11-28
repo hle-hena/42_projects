@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsorted.c                                     :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 12:17:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:36:17 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/18 16:03:50 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/18 18:42:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsorted(t_list *lst, int (*f)(t_list *))
+void	*ft_realloc(void *ptr, size_t size)
 {
-	if (!lst)
-		return (1);
-	while (lst && lst->next)
+	void	*new_ptr;
+
+	if (!size)
+		return (free(ptr), NULL);
+	new_ptr = ft_calloc(size, 1);
+	if (!new_ptr)
+		return (NULL);
+	if (ptr)
 	{
-		if (!f(lst))
-			return (0);
-		lst = lst->next;
+		ft_memcpy(new_ptr, ptr, size);
+		free(ptr);
 	}
-	return (1);
+	return (new_ptr);
 }
