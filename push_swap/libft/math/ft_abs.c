@@ -6,11 +6,12 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:07:12 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/22 11:08:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:53:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../libft.h"
+#include "../libft.h"
+
 int	ft_abs(int nb)
 {
 	if (nb > 0)

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:15:37 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 19:26:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:46:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_temp(char **temp)
 {
 	char	**temptemp;
-	
+
 	temptemp = temp;
 	while (*temp)
 	{

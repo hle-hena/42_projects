@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:09:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 19:04:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:24:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int	calc_score(t_list *node, t_list *stack, int (*f)(t_list *, t_list *),
 		stack = stack->next;
 	}
 	if (close_val > 0)
-		return (ft_tern_int(close_ind < (i - 1) / 2, close_ind
-				, -(i - close_ind - 1)));
-	return (ft_tern_int(extrem_ind < (i - 1) / 2, extrem_ind
-			, -(i - extrem_ind - 1)));
+		return (ft_tern_int(close_ind < (i / 2), close_ind
+				, -(i - close_ind)));
+	return (ft_tern_int(extrem_ind < (i / 2), extrem_ind
+			, -(i - extrem_ind)));
 }
 
 void	calc_push(int opt, t_list *stack_fr, t_list *stack_to
@@ -75,14 +75,14 @@ void	calc_push(int opt, t_list *stack_fr, t_list *stack_to
 
 	extrem_ind = find_extrem(stack_to, opt);
 	size = ft_lstsize(stack_fr);
-	val = (t_push){0};
+	val = (t_push){1000, 1000};
 	i = 0;
 	while (stack_fr)
 	{
-		temp = (t_push){0};
-		stack_to = *get_stack(!opt);
+		temp = (t_push){1000, 1000};
+		stack_to = *get_stack(opt);
 		temp.score_b = calc_score(stack_fr, stack_to, f, extrem_ind);
-		temp.score_a = ft_tern_int(i < (size - 1) / 2, i, -(size - i - 1));
+		temp.score_a = ft_tern_int(i <= ((size) / 2), i, -(size - i));
 		val = push_compare(val, temp);
 		i++;
 		stack_fr = stack_fr->next;

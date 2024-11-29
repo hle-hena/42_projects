@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 12:46:37 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 11:49:53 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:53:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 				del(content);
 			return (NULL);
 		}
-		// printf("Content is [%d]\n", *(int *)new_node->content);
 		ft_lstadd_back(&dest_lst, new_node);
 		lst = lst->next;
 	}

@@ -6,17 +6,19 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:31:34 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 22:09:53 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:51:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print(void *content)
+/* void	print(void *content)
 {
 	//////
-	printf("[%d] --> ", *(int *)content);
-}
+	int fd = open("out.txt", O_WRONLY | O_APPEND | O_CREAT, 0644);
+	dprintf(fd, "[%d] --> ", *(int *)content);
+	close(fd);
+} */
 
 int	do_func(char *cmd)
 {
@@ -52,8 +54,6 @@ void	do_func_print(char *cmd)
 	if (!cmd)
 		return ;
 	ft_putendl_fd(cmd, 1);
-	printf("Stack a : "); ft_lstiter(*get_stack(0), &print); printf("\n");
-	printf("Stack b : "); ft_lstiter(*get_stack(1), &print); printf("\n");
 	if (!ft_strncmp(cmd, "sa", 4))
 		return (ft_s(get_stack(0)));
 	else if (!ft_strncmp(cmd, "sb", 4))

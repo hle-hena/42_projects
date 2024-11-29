@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:53:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/28 20:46:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:47:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
-#include <stdio.h>
 
 typedef struct s_push
 {
 	int	score_a;
 	int	score_b;
 }	t_push;
-
-# define FIRST *(int *)stack->content
-# define SECOND *(int *)stack->next->content
-# define THIRD *(int *)stack->next->next->content
 
 /*		main.c			*/
 /************************/
@@ -63,6 +58,7 @@ void	do_func_print(char *cmd);
 /************************/
 void	calc_push(int opt, t_list *stack_fr, t_list *stack_to,
 			int (*f)(t_list *, t_list *));
+int		find_extrem(t_list *stack, int opt);
 
 /*		struct_func.c	*/
 /************************/
