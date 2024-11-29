@@ -18,9 +18,9 @@ SRC = src/ft_printf.c\
 
 OBJ = $(SRC:.c=.o)
 
-bonus: ${NAME}
-
 all: $(NAME)
+
+bonus: ${NAME}
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)

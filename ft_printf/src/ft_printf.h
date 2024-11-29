@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:48:04 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/12 14:39:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:13:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../includes/libft.h"
 # include <stdarg.h>
-# include <stdio.h>
 
 # define HEX_MAJ "0123456789ABCDEF"
 # define HEX_MIN "0123456789abcdef"
