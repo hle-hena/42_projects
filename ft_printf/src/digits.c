@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:48:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/12 17:18:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:23:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_nb	create_nb(t_param args, va_list ap)
 			+ (args.placeholder == 'p') * 2;
 	nb.print = ft_tern_int(nb.nblen > args.precision, nb.nblen, args.precision);
 	if (ft_strchr("xX", args.placeholder))
-		nb.print += (args.flags) & 1 * 2;
+		nb.print += ((args.flags) & 1) * 2;
 	else if (ft_strchr("id", args.placeholder))
 		nb.print += nb.sign + (!nb.sign && (args.flags & 2 || args.flags & 4));
 	return (nb);
@@ -116,4 +116,12 @@ int	handle_digits(t_param args, va_list ap)
 	if (!(args.flags & 16))
 		c.len += print_digits(args, nb);
 	return (c.len + c.temp);
+}
+
+#include <stdio.h>
+
+int	main(void)
+{
+	printf("%#25.2x\n", 2);	
+	ft_printf("%#25.2x\n", 2);
 }
