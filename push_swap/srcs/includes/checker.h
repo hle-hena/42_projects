@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:53:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/02 15:45:10 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:38:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CHECKER_H
 
 # include "../../libft/libft.h"
-#include <stdio.h>
 
 typedef struct s_push
 {
