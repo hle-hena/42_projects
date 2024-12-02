@@ -44,4 +44,4 @@ while read -r combination; do
 done <<< "$combinations"
 
 
-#ARG=$(seq -300 300 | shuf -n 100 | tr "\n" " "); ./push_swap $ARG | wc -l && echo $ARG
+#ARG=$(seq -3000 3000 | shuf -n 500 | tr "\n" " "); ./push_swap $ARG | ./checker $ARG

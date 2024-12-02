@@ -58,7 +58,7 @@ norminette:
 
 clean:
 	@rm -f ${OBJ} ${OBJ_BONUS}
-	@echo "Files removed"
+	@echo "Library object files removed"
 
 fclean: clean
 	@rm -f ${NAME}
