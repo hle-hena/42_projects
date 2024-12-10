@@ -11,7 +11,7 @@ FRAMEWORK = -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-FDF =	main.c
+FDF =	main.c	draw.c
 FDF_SRC = $(addprefix srcs/, $(FDF))
 
 OBJ = $(FDF_SRC:.c=.o)

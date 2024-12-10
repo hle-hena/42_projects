@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/09 15:38:01 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:08:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,33 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
+	t_mat	matrix;
+	t_disp	display;
 }	t_vars;
+
+typedef	struct s_matrix
+{
+	int	**matrix;
+	int	len;
+	int	width;
+}	t_mat;
+
+typedef struct s_display
+{
+	int	rot_z;
+	int	rot_y;
+	int	scale;
+}	t_disp;
 
 typedef struct s_point
 {
 	int	x;
 	int	y;
-	int	color;
 }	t_point;
+
+/************************/
+/*		global.c		*/
+/************************/
+void	draw_line(t_vars *vars, t_point start, t_point end, int color);
 
 #endif
