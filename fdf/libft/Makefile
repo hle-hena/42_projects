@@ -20,6 +20,8 @@ MEM =		ft_bzero.c			ft_calloc.c			ft_del.c			\
 			ft_realloc.c
 #ft_del_tab.c
 
+GNL =		get_next_line.c
+
 PRINT = 	ft_putchar_fd.c		ft_putendl_fd.c		ft_putnbr_fd.c		\
 			ft_putstr_fd.c
 
@@ -32,11 +34,12 @@ STR_SRC = $(addprefix str/, $(STR))
 LST_SRC = $(addprefix lst/, $(LST))
 IS_SRC = $(addprefix is/, $(IS))
 MEM_SRC = $(addprefix mem/, $(MEM))
+GNL_SRC = $(addprefix gnl/, $(GNL))
 PRINT_SRC = $(addprefix print/, $(PRINT))
 MATH_SRC = $(addprefix math/, $(MATH))
 F_SRC = $(addprefix freedom/, $(F))
 
-SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(PRINT_SRC) $(MATH_SRC) $(F_SRC)
+SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(GNL_SRC) $(PRINT_SRC) $(MATH_SRC) $(F_SRC)
 OBJ = ${SRC:.c=.o}
 
 CC = cc

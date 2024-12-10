@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 10:26:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/10 13:23:49 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/22 14:19:06 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/22 15:04:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char	*ft_strdup(const char *src)
+int	ft_max(int a, int b)
 {
-	char	*dup;
-	size_t	len;
-
-	if (!src)
-		return (NULL);
-	len = ft_strlen(src);
-	dup = ft_calloc(len + 1, sizeof(char));
-	if (!dup)
-		return (NULL);
-	ft_strlcpy(dup, src, len + 1);
-	return (dup);
+	if (a > b)
+		return (a);
+	return (b);
 }

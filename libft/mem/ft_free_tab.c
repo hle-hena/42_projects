@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 10:26:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/10 13:23:49 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/20 10:56:44 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/20 16:19:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-char	*ft_strdup(const char *src)
+void	ft_free_tab(void **tab, size_t size)
 {
-	char	*dup;
-	size_t	len;
+	void	**temp;
+	size_t	i;
 
-	if (!src)
-		return (NULL);
-	len = ft_strlen(src);
-	dup = ft_calloc(len + 1, sizeof(char));
-	if (!dup)
-		return (NULL);
-	ft_strlcpy(dup, src, len + 1);
-	return (dup);
+	i = -1;
+	temp = tab;
+	while (++i < size)
+		ft_del(*tab++);
+	ft_del(temp);
 }

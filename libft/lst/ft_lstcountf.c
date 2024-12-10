@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstcountf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 10:26:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/10 13:23:49 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/11/25 13:17:57 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/11/25 13:20:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char	*ft_strdup(const char *src)
+int	ft_lstcountf(t_list *lst, int (*f)(t_list *))
 {
-	char	*dup;
-	size_t	len;
+	int	count;
 
-	if (!src)
-		return (NULL);
-	len = ft_strlen(src);
-	dup = ft_calloc(len + 1, sizeof(char));
-	if (!dup)
-		return (NULL);
-	ft_strlcpy(dup, src, len + 1);
-	return (dup);
+	count = 0;
+	if (!lst)
+		return (count);
+	while (lst->next)
+	{
+		if (f(lst))
+			count++;
+		lst = lst->next;
+	}
+	return (count);
 }

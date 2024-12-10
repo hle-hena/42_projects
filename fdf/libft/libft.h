@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/29 12:48:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:31:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ typedef long int		t_li;
 /********************************/
 t_lli	ft_tern_int(int cnd, t_lli val1, t_lli val2);
 char	*ft_tern_str(int cnd, char *ret1, char *ret2);
+
+/*			gnl					*/
+/********************************/
+char	*get_next_line(int fd);
+# define BUFFER_SIZE 64
 
 /*			is_smth				*/
 /********************************/

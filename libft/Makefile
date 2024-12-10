@@ -1,7 +1,8 @@
-LST =		ft_lstadd_back.c	ft_lstclear.c		ft_lstiter.c		\
-			ft_lstmap.c			ft_lstsize.c		ft_lstadd_front.c	\
-			ft_lstdelone.c		ft_lstlast.c		ft_lstnew.c			\
-			ft_lstsorted.c
+LST =		ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c		\
+			ft_lstcountf.c		ft_lstdelone.c		ft_lstiter.c		\
+			ft_lstlast.c		ft_lstmap.c			ft_lstnew.c			\
+			ft_lstsize.c		ft_lstsorted.c
+
 
 IS =		ft_isalnum.c		ft_isalpha.c		ft_isascii.c		\
 			ft_isdigit.c		ft_isprint.c		ft_isspace.c		\
@@ -13,14 +14,19 @@ STR =		ft_split.c			ft_strchr.c			ft_strdup.c			\
 			ft_strncmp.c		ft_strnstr.c		ft_strrchr.c		\
 			ft_strtrim.c		ft_substr.c
 
-MEM =		ft_bzero.c			ft_calloc.c			ft_memccpy.c		\
-			ft_memchr.c			ft_memcmp.c			ft_memcpy.c			\
-			ft_memmove.c		ft_memset.c			ft_realloc.c	
+MEM =		ft_bzero.c			ft_calloc.c			ft_del.c			\
+			ft_memccpy.c		ft_memchr.c			ft_memcmp.c			\
+			ft_memcpy.c			ft_memmove.c		ft_memset.c			\
+			ft_realloc.c
+#ft_del_tab.c
+
+GNL =		get_next_line.c
 
 PRINT = 	ft_putchar_fd.c		ft_putendl_fd.c		ft_putnbr_fd.c		\
 			ft_putstr_fd.c
 
-MATH =		ft_atoi.c			ft_itoa.c			ft_power.c
+MATH =		ft_abs.c			ft_atoi.c			ft_itoa.c			\
+			ft_max.c			ft_power.c
 
 F =			ft_ternary.c
 
@@ -28,15 +34,16 @@ STR_SRC = $(addprefix str/, $(STR))
 LST_SRC = $(addprefix lst/, $(LST))
 IS_SRC = $(addprefix is/, $(IS))
 MEM_SRC = $(addprefix mem/, $(MEM))
+GNL_SRC = $(addprefix gnl/, $(GNL))
 PRINT_SRC = $(addprefix print/, $(PRINT))
 MATH_SRC = $(addprefix math/, $(MATH))
 F_SRC = $(addprefix freedom/, $(F))
 
-SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(PRINT_SRC) $(MATH_SRC) $(F_SRC)
+SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(GNL_SRC) $(PRINT_SRC) $(MATH_SRC) $(F_SRC)
 OBJ = ${SRC:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = libft.a
 
@@ -54,7 +61,7 @@ norminette:
 
 clean:
 	@rm -f ${OBJ} ${OBJ_BONUS}
-	@echo "Files removed"
+	@echo "Library object files removed"
 
 fclean: clean
 	@rm -f ${NAME}
