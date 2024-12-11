@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/10 15:14:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:40:34 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include <math.h>
 # include <mlx.h>
+# include <fcntl.h>
 #include <stdio.h>
 
 # define ON_KEYDOWN 2
@@ -29,8 +30,8 @@
 typedef	struct s_matrix
 {
 	int	**matrix;
-	int	length;
-	int	width;
+	int	len;
+	int	wid;
 }	t_mat;
 
 typedef struct s_display
@@ -58,5 +59,10 @@ typedef struct s_point
 /*		global.c		*/
 /************************/
 void	draw_line(t_data *data, t_point start, t_point end, int color);
+
+/************************/
+/*		init.c			*/
+/************************/
+void	init_data(t_data *data, char *path);
 
 #endif

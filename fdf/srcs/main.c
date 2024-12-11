@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/10 15:47:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:07:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ t_point	*global_point(void)
 
 int	mlx_close(t_data *data)
 {
+	int	i;
+
+	i = -1;
+	while (++i < data->matrix.len)
+	{
+		free(data->matrix.matrix[i]);
+	}
+	free(data->matrix.matrix);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
