@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:45:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/19 10:18:20 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:31:37 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,39 @@ void	del(char **content)
 	}
 }
 
-char	*format_output(char *res, char **mem, int rv)
+void	ft_bzero(void *add, int n)
+{
+	int	i;
+
+	i = -1;
+	while (++i < n)
+		((unsigned char *)add)[i] = 0;
+}
+
+char	*format_output(char *res, char *mem, int rv)
 {
 	int		i;
 	char	*line;
 
 	if (ft_strchr(res, '\n'))
-		*mem = ft_strdup(ft_strchr(res, '\n') + 1);
-	if (ft_strchr(res, '\n') && !*mem)
-		return (del(&res), del(mem), NULL);
+	{
+		i = 0;
+		line = ft_strchr(res, '\n');
+		while (line[++i])
+			mem[i - 1] = line[i];
+		mem[i - 1] = 0;
+	}
 	i = 0;
 	while (res[i] && res[i] != '\n')
 		i++;
-	if (!res[i])
-		i--;
+	i -= (!res[i]);
 	line = ft_calloc(i + 2, sizeof(char));
 	if (!line)
-		return (del(&res), del(mem), NULL);
-	while (i >= 0)
-	{
-		line[i] = res[i];
-		i--;
-	}
+		return (del(&res), NULL);
+	while (--i >= -1)
+		line[i + 1] = res[i + 1];
 	if (*res == 0 && rv == 0)
-		return (del(&res), del(&line), del(mem), NULL);
+		return (del(&res), del(&line), NULL);
 	return (del(&res), line);
 }
 
@@ -70,7 +79,7 @@ int	read_next_line(int fd, char **res, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*mem[1024];
+	static char	mem[1024][BUFFER_SIZE + 1];
 	char		*res;
 	char		*temp;
 	int			rv;
@@ -80,21 +89,20 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	res = ft_calloc(1, sizeof(char));
-	if (!mem[fd])
-		mem[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!mem[fd] || !buffer || !res || read(fd, buffer, 0) < 0
+	if (!buffer || !res || read(fd, buffer, 0) < 0
 		|| BUFFER_SIZE <= 0)
-		return (del(&res), del(&buffer), del(&mem[fd]), NULL);
+		return (del(&res), del(&buffer), ft_bzero(mem[fd], BUFFER_SIZE + 1),
+			NULL);
 	temp = ft_strjoin(mem[fd], res);
 	if (!temp)
-		return (del(&res), del(&buffer), del(&mem[fd]), NULL);
+		return (del(&res), del(&buffer), NULL);
+	ft_bzero(mem[fd], BUFFER_SIZE + 1);
 	del(&res);
-	del(&mem[fd]);
 	res = temp;
 	rv = read_next_line(fd, &res, &buffer);
 	if (rv == -1)
 		return (del(&res), del(&buffer), NULL);
-	return (del(&buffer), format_output(res, &mem[fd], rv));
+	return (del(&buffer), format_output(res, mem[fd], rv));
 }
 
 /* #include <stdio.h>
@@ -102,29 +110,21 @@ char	*get_next_line(int fd)
 
 int	main(void)
 {
-	char	*test1;
-	char	*test2;
-	int		fd1;
-	int		fd2;
-
-	fd1 = open("test1.txt", O_RDONLY);
-	fd2 = open("test2.txt", O_RDONLY);
-	while (1)
+	char	*temp;
+	// char	*tem;
+	int		fd;
+	// int		f;
+	
+	fd = open("map.fdf", O_RDONLY);
+	// f = 0;
+	while((temp = get_next_line(fd)))
 	{
-		test1 = get_next_line(fd1);
-		test2 = get_next_line(fd2);
-		if (!test1 && !test2)
-			break ;
-		if (test1)
-		{
-			printf("%s", test1);
-			free(test1);
-		}
-		if (test2)
-		{
-			printf("%s", test2);
-			free(test2);
-		}
+		// tem = get_next_line(f);
+		// printf("stdin : %s", tem);
+		printf("maps. : %s", temp);
+		// free(tem);
+		free(temp);
 	}
+	close(fd);
 	return (0);
 } */
