@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:26:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/11 17:43:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:37:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	ft_pend_prog(int clean, char *custom_mess)
 		ft_perror(0, 1, NULL);
 	ft_putstr_fd("\033[0;32m", 2);
 	ft_putstr_fd(custom_mess, 2);
-	ft_putendl_fd("\033[0;32m", 2);
+	ft_putendl_fd("\033[0;37m", 2);
 	exit(0);
 }

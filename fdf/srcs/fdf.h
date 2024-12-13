@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/11 14:37:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:32:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,24 @@
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
 
-typedef	struct s_matrix
+typedef	struct s_trigo_val
+{
+	float	sin_x;
+	float	sin_y;
+	float	sin_z;
+	float	cos_x;
+	float	cos_y;
+	float	cos_z;
+}	t_trig;
+
+typedef	struct s_vector
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_vec;
+
+typedef struct s_matrix
 {
 	int	**matrix;
 	int	len;
@@ -36,34 +53,51 @@ typedef	struct s_matrix
 
 typedef struct s_display
 {
-	int	rot_z;
-	int	rot_y;
-	int	scale;
+	float	rot_x;
+	float	rot_y;
+	float	rot_z;
+	int		scale;
+	t_vec	i;
+	t_vec	j;
+	t_vec	k;
 }	t_disp;
 
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	t_mat	matrix;
-	t_disp	display;
+	int		proj;
+	t_mat	mat;
+	t_disp	disp;
 }	t_data;
 
 typedef struct s_point
 {
 	int	x;
 	int	y;
+	int	z;
 }	t_point;
 
 /************************/
 /*		main.c			*/
 /************************/
-int	mlx_del(t_data *data);
+int		mlx_del(t_data *data);
 
 /************************/
-/*		global.c		*/
+/*		draw.c			*/
 /************************/
 void	draw_line(t_data *data, t_point start, t_point end, int color);
+void	draw_map(t_data *data);
+
+/************************/
+/*		draw_utils.c	*/
+/************************/
+t_point	point(t_data *data, int x, int y);
+
+/************************/
+/*		display.c		*/
+/************************/
+void	calc_display(t_data *data);
 
 /************************/
 /*		init.c			*/
