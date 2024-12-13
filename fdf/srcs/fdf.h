@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/11 10:40:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:37:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ typedef struct s_point
 }	t_point;
 
 /************************/
+/*		main.c			*/
+/************************/
+int	mlx_del(t_data *data);
+
+/************************/
 /*		global.c		*/
 /************************/
 void	draw_line(t_data *data, t_point start, t_point end, int color);
@@ -64,5 +69,11 @@ void	draw_line(t_data *data, t_point start, t_point end, int color);
 /*		init.c			*/
 /************************/
 void	init_data(t_data *data, char *path);
+
+/************************/
+/*		errors.c		*/
+/************************/
+void	ft_perror(int error_code, int clean, char *custom_mess);
+void	ft_pend_prog(int clean, char *custom_mess);
 
 #endif

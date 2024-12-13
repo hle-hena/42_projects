@@ -1,0 +1,25 @@
+
+
+Well, if you plan on doing more graphical game programming, I'd suggest at least aiming for a minor in math.
+
+Really, though, if you do keep doing graphics stuff like this, it'd be a really good idea to pick up knowledge of trigonometry, matrix algebra, and vector algebra. Using vectors and matrices makes more complicated transforms (such as a perspective projection) easier, and can also help with simpler transforms, such as isometric ones.
+
+Anyway (and some of this, if not a lot of it, may be review for you): in effect, what a so-called "graphical transform" does is a literal transformation of points via some combination of translations, rotations, scales, reflections, and shears; most of these concepts should be familiar to you with regards to a two-dimensional coordinate system, and can be expressed fairly simply. In the following examples, I will use a line segment defined by two points expressed in the form "(x1, y1), (x2, y2)"; you may want to draw them out on a piece of graph paper or something for easier understanding.
+
+Examples: a translation would be going from (0, 0), (1, 0) to (1, 0), (2, 0), or from (0, 0), (1, 0) to (0, 1), (1, 1); a rotation would be going from (0, 0), (1, 0) to (0, 0), (0, 1); scaling would be going from (0, 0), (1, 0) to (0, 0), (2, 0) or from (0, 0), (1, 0) to (0, 0), (0.5, 0).
+
+Using a more simplistic notation, the translation of a single point (x, y) could be expressed as (x + a, y + b), where a and b are constants within the range of all real numbers. A rotation would be (x*cos(theta), y * sin(theta)), where "theta" is the angular value that you wish to rotate by, and a scale would be (ax, by), with a being the scale factor along the x-axis and b being the scale factor along the y-axis. (A uniform scale is a scale with equal scale factors for both axes, and so would be (ax, ay).)
+
+Combining simple transforms allows you to move objects around pretty much however you want, and the easiest way of combining simple transforms is using matrix multiplication.
+
+...Actually, this sort of thing is something that you might be better off learning via self-teaching or some sort of math class, as I now realize that it would take far too much for me myself to even start you off on actually understanding these things, but I'll give you what other references I can find for now.
+
+http://en.wikipedia.org/wiki/Transformation_(geometry)
+http://en.wikipedia.org/wiki/Transformation_matrix
+http://en.wikipedia.org/wiki/Euclidean_vector (May be necessary for you, may not be.)
+
+Anyway... while you could simply use transformation equations you find somewhere on the web, it's much better to learn how the transforms actually work and learn how to apply them yourself, as it allows you to be more flexible and be able to do the transforms in different ways, if need be, as well as enable to you do more complex transforms on your own.
+
+I hope this was of some help to you; it may not be the immediate answer that you probably want, but if you're willing to put in the time and effort to teach yourself (or be taught, if you do decide to take a class somewhere [after all, self-teaching isn't for everyone]) how to work with matrices and matrix transformations and the like, you'll probably find yourself understanding what you're trying to do a bit more.
+
+EDIT: Of course, if you have the graphics transforms already defined and don't have to worry about them yourself, then it's very easy to move a point around on any plane parallel to any axis in 3D space. Basically, in memory, the points lie in (or should lie in) a "normal-ville", to use your word, three-dimensional Cartesian coordinate system. Assuming the plane along which the movement is occurring is the plane z = 0, and the coordinates of the point are stored in a format equivalent to (x, y, z), you can move the point around simply with, say, (x + 10, y, 0) or (x, y + 10, 0); if you have a point that is on a higher plane than others, you simply set a higher value for z (and if you have a point on a lower plane, you set a value for z < 0). Once you've applied the movement to the point itself, you can apply the graphics transform to the environment if you haven't done so already, which sets it up for proper display on your output device (in your case, an iPhone). Applying the transform is a little bit more complicated than that, but if you have a pre-written method to do that, then you're all set.
