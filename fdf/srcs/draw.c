@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 15:28:37 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:21:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	draw_high(t_data *data, t_point start, t_point end, int color)
 	err = 2 * ft_abs(dx) - dy;
 	while (start.y <= end.y)
 	{
-		if (start.x < data->mat.wid * data->disp.scale * 3 && start.x >= 0
-			&& start.y < data->mat.len * data->disp.scale * 3 && start.y >= 0)
+		if (start.x < data->mat.wid * data->disp.init_scale * 3 && start.x >= 0
+			&& start.y < data->mat.len * data->disp.init_scale * 3 && start.y >= 0)
 			put_pixel(data, start, color);
 		if (err > 0)
 		{
@@ -48,8 +48,8 @@ void	draw_low(t_data *data, t_point start, t_point end, int color)
 	err = 2 * ft_abs(dy) - dx;
 	while (start.x <= end.x)
 	{
-		if (start.x < data->mat.wid * data->disp.scale * 3 && start.x >= 0
-			&& start.y < data->mat.len * data->disp.scale * 3 && start.y >= 0)
+		if (start.x < data->mat.wid * data->disp.init_scale * 3 && start.x >= 0
+			&& start.y < data->mat.len * data->disp.init_scale * 3 && start.y >= 0)
 			put_pixel(data, start, color);
 		if (err > 0)
 		{
@@ -66,11 +66,11 @@ void	draw_low(t_data *data, t_point start, t_point end, int color)
 	// 	color = color(start, end);
 void	draw_line(t_data *data, t_point start, t_point end, int color)
 {
-	if ((start.x >= (data->mat.wid + 4) * data->disp.scale * 3 || start.x < 0
-			|| start.y >= (data->mat.len + 4) * data->disp.scale * 3
+	if ((start.x >= (data->mat.wid + 4) * data->disp.init_scale * 3 || start.x < 0
+			|| start.y >= (data->mat.len + 4) * data->disp.init_scale * 3
 			|| start.y < 0)
-		&& (end.x >= (data->mat.wid + 4) * data->disp.scale * 3 || end.x < 0
-			|| end.y >= (data->mat.len + 4) * data->disp.scale * 3
+		&& (end.x >= (data->mat.wid + 4) * data->disp.init_scale * 3 || end.x < 0
+			|| end.y >= (data->mat.len + 4) * data->disp.init_scale * 3
 			|| end.y < 0))
 		return ;
 	if (ft_abs(end.y - start.y) < ft_abs(end.x - start.x))

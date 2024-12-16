@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 15:13:45 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:20:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_matrix
 
 typedef struct s_display
 {
+	int		init_scale;
 	int		scale;
 	float	rot_x;
 	float	rot_y;

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 16:52:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:02:59 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	do_rot(t_data *data)
 	do_roty(data, (t_trig){sin(data->disp.rot_y), cos(data->disp.rot_y)});
 	do_rotx(data, (t_trig){sin(data->disp.rot_x), cos(data->disp.rot_x)});
 	do_rotz(data, (t_trig){sin(data->disp.rot_z), cos(data->disp.rot_z)});
-	printf("i is \t%f; %f; %f\n", data->disp.i.x, data->disp.i.y, data->disp.i.z);
-	printf("j is \t%f; %f; %f\n", data->disp.j.x, data->disp.j.y, data->disp.j.z);
-	printf("k is \t%f; %f; %f\n", data->disp.k.x, data->disp.k.y, data->disp.k.z);
-	printf("rot is \t%f; %f; %f\n\n", data->disp.rot_x, data->disp.rot_y, data->disp.rot_z);
+	// printf("i is \t%f; %f; %f\n", data->disp.i.x, data->disp.i.y, data->disp.i.z);
+	// printf("j is \t%f; %f; %f\n", data->disp.j.x, data->disp.j.y, data->disp.j.z);
+	// printf("k is \t%f; %f; %f\n", data->disp.k.x, data->disp.k.y, data->disp.k.z);
+	// printf("rot is \t%f; %f; %f\n\n", data->disp.rot_x, data->disp.rot_y, data->disp.rot_z);
 }

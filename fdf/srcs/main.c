@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 15:27:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:24:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	key_hook(int keycode, t_data *data)
 	{
 		draw_map(data, -1);
 		if (keycode == 119)
-			data->disp.d_y -= 1;
-		else if (keycode == 115)
 			data->disp.d_y += 1;
+		else if (keycode == 115)
+			data->disp.d_y -= 1;
 		else if (keycode == 97)
-			data->disp.d_x -= 1;
-		else if (keycode == 100)
 			data->disp.d_x += 1;
+		else if (keycode == 100)
+			data->disp.d_x -= 1;
 		else if (keycode == 117)
 		{
 			data->disp.rot_x += 3 * (M_PI / 180);
@@ -121,14 +121,25 @@ int	move_hook(int x, int y, t_data *data)
 	return (1);
 }
 
-int	create_point(int button, int x, int y, t_data *data)
+int	mouse_wheel_hook(int button, int x, int y, t_data *data)
 {
 	if (button == 1)
 	{
-		mlx_pixel_put(data->mlx, data->win, x, y, 0x00FFFFFF);
+		printf("YUP, THATS ME\n");
+		/* mlx_pixel_put(data->mlx, data->win, x, y, 0x00FFFFFF);
 		global_point()->x = x;
-		global_point()->y = y;
+		global_point()->y = y; */
 	}
+	x = x + 1;
+	y = y + 1;
+	if (button == 4 || button == 5)
+		draw_map(data, -1);
+	if (button == 4 && data)
+		data->disp.scale += 1;
+	else if (button == 5 && data)
+		data->disp.scale -= 1;
+	if (button == 4 || button == 5)
+		draw_map(data, 0x00FFFFFF);
 	return (1);
 }
 
@@ -142,7 +153,7 @@ int	main(int ac, char **av)
 	init_data(data, av[1]);
 	draw_map(data, 0x00FFFFFF);
 	mlx_hook(data->win, 2, 1L << 0, key_hook, data);
-	// mlx_hook(data->win, 4, 1L << 2, create_point, data);
+	mlx_hook(data->win, 4, 1L << 2, mouse_wheel_hook, data);
 	// mlx_hook(data->win, 6, 1L << 6, move_hook, data);
 	mlx_hook(data->win, 17, 0, mlx_close, data);
 	mlx_loop(data->mlx);
