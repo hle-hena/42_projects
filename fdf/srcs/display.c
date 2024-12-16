@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:01:14 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 11:37:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:34:29 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	calc_isometric(t_vec *vector, t_trigs vals)
+/* void	calc_isometric(t_vec *vector, t_trigs vals)
 {
 	float	temp_x;
 	float	temp_y;
@@ -31,8 +31,6 @@ void	calc_isometric(t_vec *vector, t_trigs vals)
 void	calc_display(t_data *data)
 {
 	if (data->proj == 0)
-	{
-		do_roty(data, (t_trig){sin(data->disp.rot_y), cos(data->disp.rot_y)});
-		do_rotx(data, (t_trig){sin(data->disp.rot_x), cos(data->disp.rot_x)});
-	}
+		do_rot(data);
 }
+ */

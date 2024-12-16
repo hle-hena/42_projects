@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 10:23:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:28:37 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	draw_high(t_data *data, t_point start, t_point end, int color)
 	err = 2 * ft_abs(dx) - dy;
 	while (start.y <= end.y)
 	{
-		mlx_pixel_put(data->mlx, data->win, start.x, start.y, color);
+		if (start.x < data->mat.wid * data->disp.scale * 3 && start.x >= 0
+			&& start.y < data->mat.len * data->disp.scale * 3 && start.y >= 0)
+			put_pixel(data, start, color);
 		if (err > 0)
 		{
 			start.x += ft_tern_int(dx < 0, -1, 1);
@@ -46,7 +48,9 @@ void	draw_low(t_data *data, t_point start, t_point end, int color)
 	err = 2 * ft_abs(dy) - dx;
 	while (start.x <= end.x)
 	{
-		mlx_pixel_put(data->mlx, data->win, start.x, start.y, color);
+		if (start.x < data->mat.wid * data->disp.scale * 3 && start.x >= 0
+			&& start.y < data->mat.len * data->disp.scale * 3 && start.y >= 0)
+			put_pixel(data, start, color);
 		if (err > 0)
 		{
 			start.y += ft_tern_int(dy < 0, -1, 1);
@@ -62,6 +66,13 @@ void	draw_low(t_data *data, t_point start, t_point end, int color)
 	// 	color = color(start, end);
 void	draw_line(t_data *data, t_point start, t_point end, int color)
 {
+	if ((start.x >= (data->mat.wid + 4) * data->disp.scale * 3 || start.x < 0
+			|| start.y >= (data->mat.len + 4) * data->disp.scale * 3
+			|| start.y < 0)
+		&& (end.x >= (data->mat.wid + 4) * data->disp.scale * 3 || end.x < 0
+			|| end.y >= (data->mat.len + 4) * data->disp.scale * 3
+			|| end.y < 0))
+		return ;
 	if (ft_abs(end.y - start.y) < ft_abs(end.x - start.x))
 	{
 		if (start.x > end.x)
@@ -73,12 +84,14 @@ void	draw_line(t_data *data, t_point start, t_point end, int color)
 	return (draw_high(data, start, end, color));
 }
 
-void	draw_map(t_data *data)
+void	draw_map(t_data *data, int color)
 {
 	int		i;
 	int		j;
 
 	i = -1;
+	if (color == -1)
+		color = 0;
 	while (++i < data->mat.len - 1)
 	{
 		j = -1;
@@ -86,10 +99,11 @@ void	draw_map(t_data *data)
 		{
 			if (i != data->mat.len - 2)
 				draw_line(data, point(data, i, j), point(data, i + 1, j),
-					0x00FFFFFF);
+					color);
 			if (j != data->mat.wid - 1)
 				draw_line(data, point(data, i, j), point(data, i, j + 1),
-					0x00FFFFFF);
+					color);
 		}
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }

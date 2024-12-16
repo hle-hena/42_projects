@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 11:52:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:13:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
+	void	*img;
 	int		proj;
 	t_mat	mat;
 	t_disp	disp;
@@ -96,12 +97,14 @@ int		mlx_del(t_data *data);
 /*		draw.c			*/
 /************************/
 void	draw_line(t_data *data, t_point start, t_point end, int color);
-void	draw_map(t_data *data);
+void	draw_map(t_data *data, int color);
 
 /************************/
 /*		draw_utils.c	*/
 /************************/
 t_point	point(t_data *data, int x, int y);
+void	reset_img(t_data *data);
+void	put_pixel(t_data *data, t_point point, int color);
 
 /************************/
 /*		display.c		*/
@@ -111,9 +114,10 @@ void	calc_display(t_data *data);
 /************************/
 /*		rotate.c		*/
 /************************/
-void	do_rotx(t_data *data, t_trig vals);
-void	do_roty(t_data *data, t_trig vals);
-void	do_rotz(t_data *data, t_trig vals);
+void	do_rot(t_data *data);
+// void	do_rotx(t_data *data, t_trig vals);
+// void	do_roty(t_data *data, t_trig vals);
+// void	do_rotz(t_data *data, t_trig vals);
 
 /************************/
 /*		init.c			*/

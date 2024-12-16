@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 12:07:29 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:58:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,27 +117,17 @@ void	init_data(t_data *data, char *path)
 	data->disp = (t_disp){1, 0, 0, 0, (t_vec){1, 0, 0},
 		(t_vec){0, 0, 1}, (t_vec){0, -0.1, 0}, 0, 0, 0};
 	data->disp.rot_x = 45 * (M_PI / 180);
-	data->disp.rot_y = 45 * (M_PI / 180);
+	data->disp.rot_y = -45 * (M_PI / 180);
 	data->disp.rot_z = 0 * (M_PI / 180);
 	data->mlx = mlx_init();
 	mlx_get_screen_size(data->mlx, &len, &wid);
 	data->disp.scale = ft_min((len - 20) / (data->mat.len * 3),
-		(wid - 20) / (data->mat.wid * 3));
-	calc_display(data);
+			(wid - 20) / (data->mat.wid * 3));
+	do_rot(data);
 	data->disp.d_x = data->mat.wid / 1.4;
 	data->disp.d_y = data->mat.len / 8;
 	data->win = mlx_new_window(data->mlx, data->mat.wid * (data->disp.scale
 				* 3), data->mat.len * (data->disp.scale * 3), "Fdf");
+	data->img = mlx_new_image(data->mlx, data->mat.wid * (data->disp.scale
+				* 3), data->mat.len * (data->disp.scale * 3));
 }
-
-	// mlx_del(data);
-	// ft_pend_prog(0, "Program Ended.");
-	/* for (int i = 0; i < data->mat.len - 1; i++)
-	{
-		for (int j = 0; j < data->mat.wid - 1; j++)
-			printf("%d - ", data->mat.matrix[i][j]);
-		printf("%d\n", data->mat.matrix[i][data->mat.wid - 1]);
-	}
-	printf("The vector\ti\t is {%f, %f, %f}\n", data->disp.i.x, data->disp.i.y, data->disp.i.z);
-	printf("The vector\tj\t is {%f, %f, %f}\n", data->disp.j.x, data->disp.j.y, data->disp.j.z);
-	printf("The vector\tk\t is {%f, %f, %f}\n", data->disp.k.x, data->disp.k.y, data->disp.k.z); */

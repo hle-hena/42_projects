@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/13 15:36:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:27:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	mlx_del(t_data *data)
 	}
 	if (data->mlx && data->win)
 		mlx_destroy_window(data->mlx, data->win);
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
 	if (data->mlx)
 	{
 		mlx_destroy_display(data->mlx);
@@ -60,8 +62,51 @@ int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 		mlx_close(data);
-	if (keycode == 32)
-		draw_map(data);
+	if (keycode == 119 || keycode == 115 || keycode == 97 || keycode == 100
+			|| keycode == 117 || keycode == 106 || keycode == 105
+			|| keycode == 107 || keycode == 111 || keycode == 108)
+	{
+		draw_map(data, -1);
+		if (keycode == 119)
+			data->disp.d_y -= 1;
+		else if (keycode == 115)
+			data->disp.d_y += 1;
+		else if (keycode == 97)
+			data->disp.d_x -= 1;
+		else if (keycode == 100)
+			data->disp.d_x += 1;
+		else if (keycode == 117)
+		{
+			data->disp.rot_x += 3 * (M_PI / 180);
+			do_rot(data);
+		}
+		else if (keycode == 106)
+		{
+			data->disp.rot_x -= 3 * (M_PI / 180);
+			do_rot(data);
+		}
+		else if (keycode == 105)
+		{
+			data->disp.rot_y += 3 * (M_PI / 180);
+			do_rot(data);
+		}
+		else if (keycode == 107)
+		{
+			data->disp.rot_y -= 3 * (M_PI / 180);
+			do_rot(data);
+		}
+		else if (keycode == 111)
+		{
+			data->disp.rot_z += 3 * (M_PI / 180);
+			do_rot(data);
+		}
+		else if (keycode == 108)
+		{
+			data->disp.rot_z -= 3 * (M_PI / 180);
+			do_rot(data);
+		}
+		draw_map(data, 0x00FFFFFF);
+	}
 	return (0);
 }
 
@@ -95,6 +140,7 @@ int	main(int ac, char **av)
 		ft_perror(2, 0, NULL);
 	data = get_data();
 	init_data(data, av[1]);
+	draw_map(data, 0x00FFFFFF);
 	mlx_hook(data->win, 2, 1L << 0, key_hook, data);
 	// mlx_hook(data->win, 4, 1L << 2, create_point, data);
 	// mlx_hook(data->win, 6, 1L << 6, move_hook, data);
