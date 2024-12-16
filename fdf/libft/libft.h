@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/11 10:45:16 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:50:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		ft_abs(int nb);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 int		ft_max(int a, int b);
+int		ft_min(int a, int b);
 t_li	ft_pow(long int nb, int pow);
 
 /*			mem_func			*/

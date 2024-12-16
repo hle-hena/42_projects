@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/13 13:32:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:52:50 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
 
-typedef	struct s_trigo_val
+typedef struct s_trigo_vals
 {
 	float	sin_x;
 	float	sin_y;
@@ -35,9 +35,15 @@ typedef	struct s_trigo_val
 	float	cos_x;
 	float	cos_y;
 	float	cos_z;
+}	t_trigs;
+
+typedef struct s_trigo_val
+{
+	float	sin;
+	float	cos;
 }	t_trig;
 
-typedef	struct s_vector
+typedef struct s_vector
 {
 	float	x;
 	float	y;
@@ -53,13 +59,16 @@ typedef struct s_matrix
 
 typedef struct s_display
 {
+	int		scale;
 	float	rot_x;
 	float	rot_y;
 	float	rot_z;
-	int		scale;
 	t_vec	i;
 	t_vec	j;
 	t_vec	k;
+	int		d_x;
+	int		d_y;
+	int		d_z;
 }	t_disp;
 
 typedef struct s_data
@@ -98,6 +107,13 @@ t_point	point(t_data *data, int x, int y);
 /*		display.c		*/
 /************************/
 void	calc_display(t_data *data);
+
+/************************/
+/*		rotate.c		*/
+/************************/
+void	do_rotx(t_data *data, t_trig vals);
+void	do_roty(t_data *data, t_trig vals);
+void	do_rotz(t_data *data, t_trig vals);
 
 /************************/
 /*		init.c			*/

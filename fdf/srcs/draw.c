@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/13 15:41:06 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:23:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,11 @@ void	draw_map(t_data *data)
 		while (++j < data->mat.wid)
 		{
 			if (i != data->mat.len - 2)
-			{
-				// printf("i is %d;\tj is %d\n", i, j);
-				draw_line(data, point(data, i, j), point(data, i + 1, j), 0x00FFFFFF);
-			}
+				draw_line(data, point(data, i, j), point(data, i + 1, j),
+					0x00FFFFFF);
 			if (j != data->mat.wid - 1)
-			{
-				// printf("i is %d;\tj is %d\n", i, j);
-				draw_line(data, point(data, i, j), point(data, i, j + 1), 0x00FFFFFF);
-			}
+				draw_line(data, point(data, i, j), point(data, i, j + 1),
+					0x00FFFFFF);
 		}
 	}
 }
