@@ -12,7 +12,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 FDF =	main.c		draw.c			init.c		\
-		errors.c	draw_utils.c	display.c	\
+		errors.c	draw_utils.c	\
 		rotate.c
 
 FDF_SRC = $(addprefix srcs/, $(FDF))

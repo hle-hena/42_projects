@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 17:20:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:27:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_vector
 	float	z;
 }	t_vec;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_point;
+
 typedef struct s_matrix
 {
 	int	**matrix;
@@ -67,6 +74,8 @@ typedef struct s_display
 	t_vec	i;
 	t_vec	j;
 	t_vec	k;
+	t_vec	rot_cen;
+	t_vec	ori;
 	int		d_x;
 	int		d_y;
 	int		d_z;
@@ -81,13 +90,6 @@ typedef struct s_data
 	t_mat	mat;
 	t_disp	disp;
 }	t_data;
-
-typedef struct s_point
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_point;
 
 /************************/
 /*		main.c			*/

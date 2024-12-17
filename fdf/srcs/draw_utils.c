@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 17:20:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:16:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_point	point(t_data *data, int y, int x)
 	int	z;
 
 	z = data->mat.matrix[y][x];
-	n_x = (x * data->disp.i.x + y * data->disp.j.x + z * data->disp.k.x)
+	n_x = (x * data->disp.i.x + y * data->disp.j.x + z * data->disp.k.x + data->disp.ori.x)
 		* data->disp.scale * 2 + data->disp.d_x * data->disp.scale * 2;
-	n_y = (x * data->disp.i.y + y * data->disp.j.y + z * data->disp.k.y)
+	n_y = (x * data->disp.i.y + y * data->disp.j.y + z * data->disp.k.y + data->disp.ori.y)
 		* data->disp.scale * 2 + data->disp.d_y * data->disp.scale * 2;
-	n_z = (x * data->disp.i.z + y * data->disp.j.z + z * data->disp.k.z)
+	n_z = (x * data->disp.i.z + y * data->disp.j.z + z * data->disp.k.z + data->disp.ori.z)
 		* data->disp.scale * 2;
 	if (data->proj == 0)
 		return (get_isometric(n_x, n_y));

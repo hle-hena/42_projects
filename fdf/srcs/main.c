@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/16 17:24:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:33:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,15 @@ int	mouse_wheel_hook(int button, int x, int y, t_data *data)
 	if (button == 4 || button == 5)
 		draw_map(data, -1);
 	if (button == 4 && data)
+	{
+		//move to mouse
 		data->disp.scale += 1;
+	}
 	else if (button == 5 && data)
+	{
+		//move to mouse
 		data->disp.scale -= 1;
+	}
 	if (button == 4 || button == 5)
 		draw_map(data, 0x00FFFFFF);
 	return (1);
