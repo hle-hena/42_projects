@@ -1,0 +1,6 @@
+Fix the length issue at the read of the map.
+Fix the Makefile. It relinks I think
+Accept maps with new line at the end.
+Try to re implement the local rotation.
+Fix the movement. The w and s should make you go forward to where the camera is looking.
+Add the new perspective.

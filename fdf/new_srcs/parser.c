@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/18 16:47:32 by hle-hena         ###   ########.fr       */
+/*   Created: 2024/12/19 10:30:03 by hle-hena          #+#    #+#             */
+/*   Updated: 2024/12/19 20:11:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	line_size(char **line)
 	return (i);
 }
 
-int	get_line(char **src, int *nb, int size)
+int	parse_line(char **src, int *nb, int size)
 {
 	char	**temp;
 	int		i;
@@ -79,7 +79,7 @@ void	get_matsize(t_mat *mat, char *path)
 	close(fd);
 }
 
-void	init_matrix(t_mat *mat, char *path)
+void	parse_file(t_mat *mat, char *path)
 {
 	char	**temp;
 	char	*line;
@@ -101,43 +101,9 @@ void	init_matrix(t_mat *mat, char *path)
 		temp = ft_split(line, ' ');
 		mat->matrix[i] = ft_calloc(mat->wid + 1, sizeof(int));
 		ft_del(line);
-		if (!mat->matrix[i] || get_line(temp, mat->matrix[i], mat->wid))
+		if (!mat->matrix[i] || parse_line(temp, mat->matrix[i], mat->wid))
 			ft_perror(4, mlx_del(NULL), NULL);
 		ft_free_tab((void **)temp, mat->wid);
 	}
 	close(fd);
-}
-
-void	init_data(t_data *data, char *path)
-{
-	int	len;
-	int	wid;
-
-	init_matrix(&data->mat, path);
-	data->disp = (t_disp){1, 1, 0, 0, 0, (t_vec){1, 0, 0}, (t_vec){0, 1, 0},
-		(t_vec){0, 0, 1}, (t_vec){0, 0, 0}, (t_vec){0, 0, 0}, 0, 0, 0};
-	data->disp.rot_x = 90 * (M_PI / 180);
-	data->disp.rot_y = 0 * (M_PI / 180);
-	data->disp.rot_z = 0 * (M_PI / 180);
-	data->mlx = mlx_init();
-	mlx_get_screen_size(data->mlx, &len, &wid);
-	data->disp.scale = ft_min((len - 20) / (data->mat.len * 3),
-			(wid - 20) / (data->mat.wid * 3));
-	data->disp.init_scale = data->disp.scale;
-	data->disp.rot_cen.x = (data->mat.wid + 1) / 2;
-	// data->disp.rot_cen.x = 1;
-	data->disp.rot_cen.y = data->mat.len / 2;
-	// data->disp.rot_cen.y = 1;
-	data->disp.rot_cen.z = 0;
-	do_rot(data);
-	// data->disp.rot_x = 180 * (M_PI / 180);
-	// do_rot(data);
-	// data->disp.rot_x = 270 * (M_PI / 180);
-	// do_rot(data);
-	data->disp.d_x = data->mat.wid;
-	data->disp.d_y = data->mat.len;
-	data->win = mlx_new_window(data->mlx, data->mat.wid * (data->disp.init_scale
-				* 3), data->mat.len * (data->disp.init_scale * 3), "Fdf");
-	data->img = mlx_new_image(data->mlx, data->mat.wid * (data->disp.init_scale
-				* 3), data->mat.len * (data->disp.init_scale * 3));
 }

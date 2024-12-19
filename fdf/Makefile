@@ -15,7 +15,12 @@ FDF =	main.c		draw.c			init.c		\
 		errors.c	draw_utils.c	\
 		rotate.c
 
-FDF_SRC = $(addprefix srcs/, $(FDF))
+NEW_FDF =	draw_utils.c	draw.c	end.c		\
+			init.c			main.c	parser.c	\
+			rotate.c	
+
+# FDF_SRC = $(addprefix srcs/, $(FDF))
+FDF_SRC = $(addprefix new_srcs/, $(NEW_FDF))
 
 OBJ = $(FDF_SRC:.c=.o)
 

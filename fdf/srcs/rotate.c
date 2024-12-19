@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/17 16:43:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:44:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	do_rot_point(t_data *data)
 	float	temp_y;
 	float	temp_z;
 
-	data->disp.ori.x = -data->disp.rot_cen.x;
-	data->disp.ori.y = -data->disp.rot_cen.y;
-	data->disp.ori.z = -data->disp.rot_cen.z;
+	data->disp.ori.x = 0 - data->disp.rot_cen.x;
+	data->disp.ori.y = 0 - data->disp.rot_cen.y;
+	data->disp.ori.z = 0 - data->disp.rot_cen.z;
 	vals = (t_trig){sin(data->disp.rot_y), cos(data->disp.rot_y)};
 	temp_x = data->disp.ori.x * vals.cos
 		+ data->disp.ori.z * vals.sin;
@@ -124,6 +124,7 @@ void	do_rot_point(t_data *data)
 	printf("point is\t%f\t%f\t%f\n", data->disp.ori.x,
 		data->disp.ori.y,
 		data->disp.ori.z);
+	data->disp.ori = (t_vec){0, 0, 0};
 }
 
 void	do_rot(t_data *data)
