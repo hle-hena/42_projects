@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/19 19:06:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:41:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	key_hook(int keycode, t_data *data)
 	{
 		draw_map(data, -1);
 		if (keycode == 119)
-			data->disp.cam.ori.y += 10 * (data->disp.base.i.y
-				+ data->disp.base.j.y + data->disp.base.k.y);
+			data->disp.cam.ori.y += 10 /* * (data->disp.base.i.y
+				+ data->disp.base.j.y + data->disp.base.k.y) */;
 		else if (keycode == 115)
-			data->disp.cam.ori.y -= 10 * (data->disp.base.i.y
-				+ data->disp.base.j.y + data->disp.base.k.y);
+			data->disp.cam.ori.y -= 10 /* * (data->disp.base.i.y
+				+ data->disp.base.j.y + data->disp.base.k.y) */;
 		else if (keycode == 97)
-			data->disp.cam.ori.x += 10 * (data->disp.base.i.x
-				+ data->disp.base.j.x + data->disp.base.k.x);
+			data->disp.cam.ori.x += 10 /* * (data->disp.base.i.x
+				+ data->disp.base.j.x + data->disp.base.k.x) */;
 		else if (keycode == 100)
-			data->disp.cam.ori.x -= 10 * (data->disp.base.i.x
-				+ data->disp.base.j.x + data->disp.base.k.x);
+			data->disp.cam.ori.x -= 10 /* * (data->disp.base.i.x
+				+ data->disp.base.j.x + data->disp.base.k.x) */;
 		else if (keycode == 117)
 		{
 			data->disp.cam.rot.x += 3 * (M_PI / 180);

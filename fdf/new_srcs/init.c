@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/19 20:10:18 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:23:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_obj(t_obj *obj, char *path)
 	obj->ori.x = obj->mat.wid / 2;
 	obj->ori.y = obj->mat.len / 2;
 	obj->ori.z = 0;
-	obj->base = (t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}};
+	obj->base = (t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 0.1}};
 	obj->rot = (t_vec){0, 0, 0};
 	obj->scale = 1;
 }
@@ -44,8 +44,8 @@ void	init_data(t_data *data, char **path)
 	do_rot(&data->disp.base, data->disp.cam.rot);
 	data->win_len = data->obj.mat.len * (data->disp.init_scale * 3);
 	data->win_wid = data->obj.mat.wid * (data->disp.init_scale * 3);
-	data->disp.cam.ori.x = -data->obj.mat.wid * data->disp.scale * 1.5;
-	data->disp.cam.ori.y = -data->obj.mat.len * data->disp.scale * 1.5;
+	// data->disp.cam.ori.x = -data->obj.mat.wid * data->disp.scale * 1.5;
+	// data->disp.cam.ori.y = -data->obj.mat.len * data->disp.scale * 1.5;
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
 	data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
 }

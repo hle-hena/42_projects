@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/19 19:31:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:28:59 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	do_rot(t_base *base, t_vec rot)
 {
 	base->i = (t_vec){1, 0, 0};
 	base->j = (t_vec){0, 1, 0};
-	base->k = (t_vec){0, 0, -0.1};
+	base->k = (t_vec){0, 0, -1};
 	do_roty(base, (t_trig){sin(rot.y), cos(rot.y)});
 	do_rotx(base, (t_trig){sin(rot.x), cos(rot.x)});
 	do_rotz(base, (t_trig){sin(rot.z), cos(rot.z)});
