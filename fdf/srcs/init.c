@@ -6,138 +6,108 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/18 16:47:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:12:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	line_size(char **line)
+void	init_obj(t_obj *obj, char *path)
 {
-	int	i;
-
-	i = 0;
-	while (line[i])
-		i++;
-	return (i);
+	parse_file(&obj->mat, path);
+	obj->mat_ori.x = obj->mat.wid / 2;
+	obj->mat_ori.y = obj->mat.len / 2;
+	obj->mat_ori.z = 0;
+	obj->wld_ori = (t_vec){0, 0, 0};
+	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
+		(t_vec){0, 0, 0.15}};
+	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
+		(t_vec){0, 0, 0.15}};
+	obj->rot = (t_vec){0, 0, 0};
+	obj->scale = 1;
 }
 
-int	get_line(char **src, int *nb, int size)
+void	init_wld(t_wld *wld)
 {
-	char	**temp;
-	int		i;
-	int		j;
-
-	if (!nb || !src)
-		return (ft_free_tab((void **)src, line_size(src)), 1);
-	temp = src;
-	j = 0;
-	while (*temp)
+	*wld = (t_wld)
 	{
-		if (j == size)
-			return (ft_free_tab((void **)src, line_size(src)), 1);
-		i = -1;
-		while ((*temp)[++i])
-		{
-			if (!ft_isdigit((*temp)[i]) && (*temp)[i] != '-'
-					&& (*temp)[i] != '+' && (*temp)[i] != '\n')
-				return (ft_free_tab((void **)src, line_size(src)), 1);
-		}
-		nb[j++] = ft_atoi(*temp);
-		temp++;
-	}
-	if (j != size)
-		return (ft_free_tab((void **)src, line_size(src)), 1);
-	return (0);
-}
-
-void	get_matsize(t_mat *mat, char *path)
-{
-	char	**splited;
-	char	*temp;
-	int		fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		ft_perror(0, mlx_del(NULL), "Fd is invalid.");
-	while (++mat->len)
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_cam)
 	{
-		temp = get_next_line(fd);
-		if (!temp)
-			break ;
-		if (mat->len == 1)
-		{
-			splited = ft_split(temp, ' ');
-			if (!splited)
-				ft_perror(3, mlx_del(NULL), NULL);
-			while (splited[mat->wid])
-				mat->wid++;
-			ft_free_tab((void **)splited, mat->wid);
-		}
-		free(temp);
-	}
-	close(fd);
-}
-
-void	init_matrix(t_mat *mat, char *path)
-{
-	char	**temp;
-	char	*line;
-	int		fd;
-	int		i;
-
-	*mat = (t_mat){NULL, 0, 0};
-	get_matsize(mat, path);
-	if (mat->len == 0 || mat->wid == 0)
-		ft_perror(0, 0, "The map is empty.");
-	mat->matrix = ft_calloc(mat->len, sizeof(int *));
-	fd = open(path, O_RDONLY);
-	if (fd == -1 || !mat->matrix)
-		ft_perror(3, mlx_del(NULL), NULL);
-	i = -1;
-	while (++i < mat->len - 1)
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
+		// (t_vec){250, 30, 0},
+		(t_vec){0, 0, 0},
 	{
-		line = get_next_line(fd);
-		temp = ft_split(line, ' ');
-		mat->matrix[i] = ft_calloc(mat->wid + 1, sizeof(int));
-		ft_del(line);
-		if (!mat->matrix[i] || get_line(temp, mat->matrix[i], mat->wid))
-			ft_perror(4, mlx_del(NULL), NULL);
-		ft_free_tab((void **)temp, mat->wid);
-	}
-	close(fd);
+		// -19 * (M_PI / 180),
+		// 25 * (M_PI / 180),
+		// 40 * (M_PI / 180)
+		-90 * (M_PI / 180),
+		0 * (M_PI / 180),
+		0 * (M_PI / 180)
+	},
+		1,
+		-0.1,
+		1
+	},
+		1
+	};
+	/* Rot is -24	27	39
+Scale is 95
+Camera is 1020.000000	160.000000	0.000000 */
 }
 
-void	init_data(t_data *data, char *path)
+void	init_data(t_data *data, char **path)
 {
 	int	len;
 	int	wid;
 
-	init_matrix(&data->mat, path);
-	data->disp = (t_disp){1, 1, 0, 0, 0, (t_vec){1, 0, 0}, (t_vec){0, 1, 0},
-		(t_vec){0, 0, 1}, (t_vec){0, 0, 0}, (t_vec){0, 0, 0}, 0, 0, 0};
-	data->disp.rot_x = 90 * (M_PI / 180);
-	data->disp.rot_y = 0 * (M_PI / 180);
-	data->disp.rot_z = 0 * (M_PI / 180);
+	init_obj(&data->obj, path[0]);
+	init_wld(&data->wld);
 	data->mlx = mlx_init();
 	mlx_get_screen_size(data->mlx, &len, &wid);
-	data->disp.scale = ft_min((len - 20) / (data->mat.len * 3),
-			(wid - 20) / (data->mat.wid * 3));
-	data->disp.init_scale = data->disp.scale;
-	data->disp.rot_cen.x = (data->mat.wid + 1) / 2;
-	// data->disp.rot_cen.x = 1;
-	data->disp.rot_cen.y = data->mat.len / 2;
-	// data->disp.rot_cen.y = 1;
-	data->disp.rot_cen.z = 0;
-	do_rot(data);
-	// data->disp.rot_x = 180 * (M_PI / 180);
-	// do_rot(data);
-	// data->disp.rot_x = 270 * (M_PI / 180);
-	// do_rot(data);
-	data->disp.d_x = data->mat.wid;
-	data->disp.d_y = data->mat.len;
-	data->win = mlx_new_window(data->mlx, data->mat.wid * (data->disp.init_scale
-				* 3), data->mat.len * (data->disp.init_scale * 3), "Fdf");
-	data->img = mlx_new_image(data->mlx, data->mat.wid * (data->disp.init_scale
-				* 3), data->mat.len * (data->disp.init_scale * 3));
+	data->wld.init_scale = ft_min(len / (data->obj.mat.len * 3),
+			wid / (data->obj.mat.wid * 3));
+	data->wld.cam.scale = data->wld.init_scale;
+	do_rot(&data->wld.cam.base, data->wld.cam.init, data->wld.cam.rot);
+	data->win_len = data->obj.mat.len * (data->wld.init_scale * 3);
+	data->win_wid = data->obj.mat.wid * (data->wld.init_scale * 3);
+	data->wld.cam.scale = 45; /////////////////////////This is for test
+	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
+	data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
 }
+
+/* void	init_data(t_data *data, char *path)
+{
+	int	len;
+	int	wid;
+
+	init_matrix(&data->obj.mat, path);
+	data->wld = (t_wld){1, 1, 0, 0, 0, (t_vec){1, 0, 0}, (t_vec){0, 1, 0},
+		(t_vec){0, 0, 1}, (t_vec){0, 0, 0}, (t_vec){0, 0, 0}, 0, 0, 0};
+	data->wld.rot_x = 90 * (M_PI / 180);
+	data->wld.rot_y = 0 * (M_PI / 180);
+	data->wld.rot_z = 0 * (M_PI / 180);
+	data->mlx = mlx_init();
+	mlx_get_screen_size(data->mlx, &len, &wid);
+	data->wld.scale = ft_min((len - 20) / (data->mat.len * 3),
+			(wid - 20) / (data->mat.wid * 3));
+	data->wld.init_scale = data->wld.scale;
+	data->wld.rot_cen.x = (data->mat.wid + 1) / 2;
+	// data->wld.rot_cen.x = 1;
+	data->wld.rot_cen.y = data->mat.len / 2;
+	// data->wld.rot_cen.y = 1;
+	data->wld.rot_cen.z = 0;
+	do_rot(data);
+	// data->wld.rot_x = 180 * (M_PI / 180);
+	// do_rot(data);
+	// data->wld.rot_x = 270 * (M_PI / 180);
+	// do_rot(data);
+	data->wld.d_x = data->mat.wid;
+	data->wld.d_y = data->mat.len;
+	data->win = mlx_new_window(data->mlx, data->mat.wid * (data->wld.init_scale
+				* 3), data->mat.len * (data->wld.init_scale * 3), "Fdf");
+	data->img = mlx_new_image(data->mlx, data->mat.wid * (data->wld.init_scale
+				* 3), data->mat.len * (data->wld.init_scale * 3));
+} */

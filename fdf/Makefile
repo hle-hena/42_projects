@@ -11,16 +11,16 @@ FRAMEWORK = -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-FDF =	main.c		draw.c			init.c		\
-		errors.c	draw_utils.c	\
+FDF =	draw_utils.c	draw.c	end.c		\
+		init.c			main.c	parser.c	\
 		rotate.c
 
 NEW_FDF =	draw_utils.c	draw.c	end.c		\
 			init.c			main.c	parser.c	\
 			rotate.c	
 
-# FDF_SRC = $(addprefix srcs/, $(FDF))
-FDF_SRC = $(addprefix new_srcs/, $(NEW_FDF))
+FDF_SRC = $(addprefix srcs/, $(FDF))
+# FDF_SRC = $(addprefix new_srcs/, $(NEW_FDF))
 
 OBJ = $(FDF_SRC:.c=.o)
 

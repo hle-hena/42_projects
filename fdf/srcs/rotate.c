@@ -6,146 +6,126 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/18 16:44:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/21 20:28:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	do_rotx(t_data *data, t_trig vals)
+void	do_rotx(t_base *base, t_trig vals)
 {
 	float	temp_y;
 	float	temp_z;
 
-	temp_y = data->disp.i.y * vals.cos
-		- data->disp.i.z * vals.sin;
-	temp_z = data->disp.i.z * vals.cos
-		+ data->disp.i.y * vals.sin;
-	data->disp.i.y = temp_y;
-	data->disp.i.z = temp_z;
-	temp_y = data->disp.j.y * vals.cos
-		- data->disp.j.z * vals.sin;
-	temp_z = data->disp.j.z * vals.cos
-		+ data->disp.j.y * vals.sin;
-	data->disp.j.y = temp_y;
-	data->disp.j.z = temp_z;
-	temp_y = data->disp.k.y * vals.cos
-		- data->disp.k.z * vals.sin;
-	temp_z = data->disp.k.z * vals.cos
-		+ data->disp.k.y * vals.sin;
-	data->disp.k.y = temp_y;
-	data->disp.k.z = temp_z;
+	temp_y = base->i.y * vals.cos
+		- base->i.z * vals.sin;
+	temp_z = base->i.z * vals.cos
+		+ base->i.y * vals.sin;
+	base->i.y = temp_y;
+	base->i.z = temp_z;
+	temp_y = base->j.y * vals.cos
+		- base->j.z * vals.sin;
+	temp_z = base->j.z * vals.cos
+		+ base->j.y * vals.sin;
+	base->j.y = temp_y;
+	base->j.z = temp_z;
+	temp_y = base->k.y * vals.cos
+		- base->k.z * vals.sin;
+	temp_z = base->k.z * vals.cos
+		+ base->k.y * vals.sin;
+	base->k.y = temp_y;
+	base->k.z = temp_z;
 }
 
-void	do_roty(t_data *data, t_trig vals)
+void	do_roty(t_base *base, t_trig vals)
 {
 	float	temp_x;
 	float	temp_z;
 
-	temp_x = data->disp.i.x * vals.cos
-		+ data->disp.i.z * vals.sin;
-	temp_z = data->disp.i.z * vals.cos
-		- data->disp.i.x * vals.sin;
-	data->disp.i.x = temp_x;
-	data->disp.i.z = temp_z;
-	temp_x = data->disp.j.x * vals.cos
-		+ data->disp.j.z * vals.sin;
-	temp_z = data->disp.j.z * vals.cos
-		- data->disp.j.x * vals.sin;
-	data->disp.j.x = temp_x;
-	data->disp.j.z = temp_z;
-	temp_x = data->disp.k.x * vals.cos
-		+ data->disp.k.z * vals.sin;
-	temp_z = data->disp.k.z * vals.cos
-		- data->disp.k.x * vals.sin;
-	data->disp.k.x = temp_x;
-	data->disp.k.z = temp_z;
+	temp_x = base->i.x * vals.cos
+		+ base->i.z * vals.sin;
+	temp_z = base->i.z * vals.cos
+		- base->i.x * vals.sin;
+	base->i.x = temp_x;
+	base->i.z = temp_z;
+	temp_x = base->j.x * vals.cos
+		+ base->j.z * vals.sin;
+	temp_z = base->j.z * vals.cos
+		- base->j.x * vals.sin;
+	base->j.x = temp_x;
+	base->j.z = temp_z;
+	temp_x = base->k.x * vals.cos
+		+ base->k.z * vals.sin;
+	temp_z = base->k.z * vals.cos
+		- base->k.x * vals.sin;
+	base->k.x = temp_x;
+	base->k.z = temp_z;
 }
 
-void	do_rotz(t_data *data, t_trig vals)
+void	do_rotz(t_base *base, t_trig vals)
 {
 	float	temp_x;
 	float	temp_y;
 
-	temp_x = data->disp.i.x * vals.cos
-		- data->disp.i.y * vals.sin;
-	temp_y = data->disp.i.y * vals.cos
-		+ data->disp.i.x * vals.sin;
-	data->disp.i.x = temp_x;
-	data->disp.i.y = temp_y;
-	temp_x = data->disp.j.x * vals.cos
-		- data->disp.j.y * vals.sin;
-	temp_y = data->disp.j.y * vals.cos
-		+ data->disp.j.x * vals.sin;
-	data->disp.j.x = temp_x;
-	data->disp.j.y = temp_y;
-	temp_x = data->disp.k.x * vals.cos
-		- data->disp.k.y * vals.sin;
-	temp_y = data->disp.k.y * vals.cos
-		+ data->disp.k.x * vals.sin;
-	data->disp.k.x = temp_x;
-	data->disp.k.y = temp_y;
+	temp_x = base->i.x * vals.cos
+		- base->i.y * vals.sin;
+	temp_y = base->i.y * vals.cos
+		+ base->i.x * vals.sin;
+	base->i.x = temp_x;
+	base->i.y = temp_y;
+	temp_x = base->j.x * vals.cos
+		- base->j.y * vals.sin;
+	temp_y = base->j.y * vals.cos
+		+ base->j.x * vals.sin;
+	base->j.x = temp_x;
+	base->j.y = temp_y;
+	temp_x = base->k.x * vals.cos
+		- base->k.y * vals.sin;
+	temp_y = base->k.y * vals.cos
+		+ base->k.x * vals.sin;
+	base->k.x = temp_x;
+	base->k.y = temp_y;
 }
 
-void	do_rot_point(t_data *data)
+void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x,
+	t_trig rot_z)
 {
-	t_trig	vals;
-	float	temp_x;
-	float	temp_y;
-	float	temp_z;
+	float temp_x;
+	float temp_y;
+	float temp_z;
 
-	data->disp.ori.x = 0 - data->disp.rot_cen.x;
-	data->disp.ori.y = 0 - data->disp.rot_cen.y;
-	data->disp.ori.z = 0 - data->disp.rot_cen.z;
-	vals = (t_trig){sin(data->disp.rot_y), cos(data->disp.rot_y)};
-	temp_x = data->disp.ori.x * vals.cos
-		+ data->disp.ori.z * vals.sin;
-	temp_z = data->disp.ori.z * vals.cos
-		- data->disp.ori.x * vals.sin;
-	data->disp.ori.x = temp_x;
-	data->disp.ori.z = temp_z;
-	vals = (t_trig){sin(data->disp.rot_x), cos(data->disp.rot_x)};
-	temp_y = data->disp.ori.y * vals.cos
-		- data->disp.ori.z * vals.sin;
-	temp_z = data->disp.ori.z * vals.cos
-		+ data->disp.ori.y * vals.sin;
-	data->disp.ori.y = temp_y;
-	data->disp.ori.z = temp_z;
-	vals = (t_trig){sin(data->disp.rot_z), cos(data->disp.rot_z)};
-	temp_x = data->disp.ori.x * vals.cos
-		- data->disp.ori.y * vals.sin;
-	temp_y = data->disp.ori.y * vals.cos
-		+ data->disp.ori.x * vals.sin;
-	data->disp.ori.x = temp_x;
-	data->disp.ori.y = temp_y;
-	data->disp.ori.x += data->disp.rot_cen.x;
-	data->disp.ori.y += data->disp.rot_cen.y;
-	data->disp.ori.z += data->disp.rot_cen.z;
-	printf("point is\t%f\t%f\t%f\n", data->disp.ori.x,
-		data->disp.ori.y,
-		data->disp.ori.z);
-	data->disp.ori = (t_vec){0, 0, 0};
+	temp_x = vec->x * (rot_y.cos * rot_z.cos)
+		+ vec->y * (rot_x.sin * rot_y.sin * rot_z.cos - rot_x.cos * rot_z.sin)
+		+ vec->z * (rot_x.cos * rot_y.sin * rot_z.cos + rot_x.sin * rot_z.sin);
+	temp_y = vec->x * (rot_y.cos * rot_z.sin)
+		+ vec->y * (rot_x.sin * rot_y.sin * rot_z.sin + rot_x.cos * rot_z.cos)
+		+ vec->z * (rot_x.cos * rot_y.sin * rot_z.sin - rot_x.sin * rot_z.cos);
+	temp_z = vec->x * (-rot_y.sin)
+		+ vec->y * (rot_x.sin * rot_y.cos)
+		+ vec->z * (rot_x.cos * rot_y.cos);
+	vec->x = temp_x;
+	vec->y = temp_y;
+	vec->z = temp_z;
 }
 
-void	do_rot(t_data *data)
+void	do_rot(t_base *base, t_base init, t_vec rot)
 {
-	data->disp.i = (t_vec){1, 0, 0};
-	data->disp.j = (t_vec){0, 0, -1};
-	data->disp.k = (t_vec){0, -0.1, 0};
-	do_roty(data, (t_trig){sin(data->disp.rot_y), cos(data->disp.rot_y)});
-	do_rotx(data, (t_trig){sin(data->disp.rot_x), cos(data->disp.rot_x)});
-	do_rotz(data, (t_trig){sin(data->disp.rot_z), cos(data->disp.rot_z)});
-	do_rot_point(data);
-	
+	t_trig	rot_y;
+	t_trig	rot_x;
+	t_trig	rot_z;
 
-	// printf("cen is\t%d\t%d\t%d\n", data->disp.rot_cen.x, data->disp.rot_cen.y, data->disp.rot_cen.z);
-	// Use the updated values of i, j, k to calculate transformed coordinates
-	// Assuming `x`, `y`, and `z` are some point coordinates
-/* 	float x = 1, y = 1, z = 1; // Example point
-	float n_x = (x * data->disp.i.x + y * data->disp.j.x + z * data->disp.k.x + data->disp.ori.x);
-	float n_y = (x * data->disp.i.y + y * data->disp.j.y + z * data->disp.k.y + data->disp.ori.y);
-	float n_z = (x * data->disp.i.z + y * data->disp.j.z + z * data->disp.k.z + data->disp.ori.z);
-	
-	// Output transformed coordinates
-	printf("Transformed point: n_x = %f, n_y = %f, n_z = %f\n", n_x, n_y, n_z); */
+	base->i = (t_vec){init.i.x, init.i.y, init.i.z};
+	base->j = (t_vec){init.j.x, init.j.y, init.j.z};
+	base->k = (t_vec){init.k.x, init.k.y, init.k.z};
+	rot_y = (t_trig){sin(rot.y), cos(rot.y)};
+	rot_x = (t_trig){sin(rot.x), cos(rot.x)};
+	rot_z = (t_trig){sin(rot.z), cos(rot.z)};
+	do_rot_yxz(&base->i, rot_y, rot_x, rot_z);
+	do_rot_yxz(&base->j, rot_y, rot_x, rot_z);
+	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
+	// do_roty(base, rot_y);
+	// do_rotx(base, rot_x);
+	// do_rotz(base, rot_z);
+	//WHY DOES THE FIRST ROTATION IS CENTERED AROUND ITS AXIS, 
+	//BUT NOT THE OTHER ONES ????
 }

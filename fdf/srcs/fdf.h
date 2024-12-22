@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/17 16:27:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:40:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,7 @@
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
 
-typedef struct s_trigo_vals
-{
-	float	sin_x;
-	float	sin_y;
-	float	sin_z;
-	float	cos_x;
-	float	cos_y;
-	float	cos_z;
-}	t_trigs;
-
-typedef struct s_trigo_val
+typedef struct s_trigometry_values
 {
 	float	sin;
 	float	cos;
@@ -57,6 +47,13 @@ typedef struct s_point
 	int	z;
 }	t_point;
 
+typedef struct s_base
+{
+	t_vec	i;
+	t_vec	j;
+	t_vec	k;
+}	t_base;
+
 typedef struct s_matrix
 {
 	int	**matrix;
@@ -64,22 +61,35 @@ typedef struct s_matrix
 	int	wid;
 }	t_mat;
 
-typedef struct s_display
+typedef struct s_object
 {
-	int		init_scale;
+	t_base	base;
+	t_base	init;
+	t_vec	mat_ori;
+	t_vec	wld_ori;
+	t_vec	rot;
+	t_mat	mat;
 	int		scale;
-	float	rot_x;
-	float	rot_y;
-	float	rot_z;
-	t_vec	i;
-	t_vec	j;
-	t_vec	k;
-	t_vec	rot_cen;
+}	t_obj;
+
+typedef struct s_camera
+{
+	t_base	base;
+	t_base	init;
 	t_vec	ori;
-	int		d_x;
-	int		d_y;
-	int		d_z;
-}	t_disp;
+	t_vec	rot;
+	int		scale;
+	float	near_plane;
+	float	far_plane;
+}	t_cam;
+
+typedef struct s_world
+{
+	t_base	base;
+	t_base	init;
+	t_cam	cam;
+	int		init_scale;
+}	t_wld;
 
 typedef struct s_data
 {
@@ -87,14 +97,16 @@ typedef struct s_data
 	void	*win;
 	void	*img;
 	int		proj;
-	t_mat	mat;
-	t_disp	disp;
+	int		win_len;
+	int		win_wid;
+	t_obj	obj;
+	t_wld	wld;
 }	t_data;
 
 /************************/
 /*		main.c			*/
 /************************/
-int		mlx_del(t_data *data);
+t_data	*get_data(void);
 
 /************************/
 /*		draw.c			*/
@@ -105,7 +117,7 @@ void	draw_map(t_data *data, int color);
 /************************/
 /*		draw_utils.c	*/
 /************************/
-t_point	point(t_data *data, int x, int y);
+t_point	point(t_obj obj, t_wld wld, int y, int x);
 void	reset_img(t_data *data);
 void	put_pixel(t_data *data, t_point point, int color);
 
@@ -117,7 +129,7 @@ void	calc_display(t_data *data);
 /************************/
 /*		rotate.c		*/
 /************************/
-void	do_rot(t_data *data);
+void	do_rot(t_base *base, t_base init, t_vec rot);
 // void	do_rotx(t_data *data, t_trig vals);
 // void	do_roty(t_data *data, t_trig vals);
 // void	do_rotz(t_data *data, t_trig vals);
@@ -125,11 +137,17 @@ void	do_rot(t_data *data);
 /************************/
 /*		init.c			*/
 /************************/
-void	init_data(t_data *data, char *path);
+void	init_data(t_data *data, char **path);
+
+/************************/
+/*		parser.c		*/
+/************************/
+void	parse_file(t_mat *mat, char *path);
 
 /************************/
 /*		errors.c		*/
 /************************/
+int		mlx_del(t_data *data);
 void	ft_perror(int error_code, int clean, char *custom_mess);
 void	ft_pend_prog(int clean, char *custom_mess);
 

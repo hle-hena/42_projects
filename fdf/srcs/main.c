@@ -6,18 +6,18 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/17 09:33:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:13:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	*global_point(void)
+/* t_point	*global_point(void)
 {
 	static t_point	global = (t_point){0, 0, 0};
 
 	return (&global);
-}
+} */
 
 t_data	*get_data(void)
 {
@@ -33,29 +33,26 @@ int	mlx_close(t_data *data)
 	return (0);
 }
 
-int	mlx_del(t_data *data)
+void	add_rot(float *val, int sign)
 {
-	int	i;
+	*val += 1 * sign * (M_PI / 180);
+	if (*val >= (float)(2 * M_PI))
+		*val -= 2 * M_PI;
+	else if (*val <= (float)-(2 * M_PI))
+		*val += 2 * M_PI;
+}
 
-	if (!data)
-		data = get_data();
-	i = -1;
-	if (data->mat.matrix)
-	{
-		while (data->mat.matrix[++i])
-			free(data->mat.matrix[i]);
-		free(data->mat.matrix);
-	}
-	if (data->mlx && data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->img)
-		mlx_destroy_image(data->mlx, data->img);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-	return (0);
+void	go_forward(t_data *data, int sign)
+{
+	data->wld.cam.ori.x += sign * 10 * data->wld.cam.base.k.x;
+	data->wld.cam.ori.y += sign * 10 * data->wld.cam.base.k.y;
+	data->wld.cam.ori.z += sign * 10 * data->wld.cam.base.k.z;
+}
+
+void	go_side(t_data *data, int sign)
+{
+	data->wld.cam.ori.x += sign * 10 * (data->wld.cam.base.j.x
+		+ data->wld.cam.base.j.y + data->wld.cam.base.j.z);
 }
 
 int	key_hook(int keycode, t_data *data)
@@ -68,49 +65,39 @@ int	key_hook(int keycode, t_data *data)
 	{
 		draw_map(data, -1);
 		if (keycode == 119)
-			data->disp.d_y += 1;
+			go_forward(data, 1);
 		else if (keycode == 115)
-			data->disp.d_y -= 1;
+			go_forward(data, -1);
 		else if (keycode == 97)
-			data->disp.d_x += 1;
+			go_side(data, 1);
 		else if (keycode == 100)
-			data->disp.d_x -= 1;
+			go_side(data, -1);
 		else if (keycode == 117)
-		{
-			data->disp.rot_x += 3 * (M_PI / 180);
-			do_rot(data);
-		}
+			add_rot(&data->wld.cam.rot.x, 1);
 		else if (keycode == 106)
-		{
-			data->disp.rot_x -= 3 * (M_PI / 180);
-			do_rot(data);
-		}
+			add_rot(&data->wld.cam.rot.x, -1);
 		else if (keycode == 105)
-		{
-			data->disp.rot_y += 3 * (M_PI / 180);
-			do_rot(data);
-		}
+			add_rot(&data->wld.cam.rot.y, 1);
 		else if (keycode == 107)
-		{
-			data->disp.rot_y -= 3 * (M_PI / 180);
-			do_rot(data);
-		}
+			add_rot(&data->wld.cam.rot.y, -1);
 		else if (keycode == 111)
-		{
-			data->disp.rot_z += 3 * (M_PI / 180);
-			do_rot(data);
-		}
+			add_rot(&data->wld.cam.rot.z, 1);
 		else if (keycode == 108)
-		{
-			data->disp.rot_z -= 3 * (M_PI / 180);
-			do_rot(data);
-		}
+			add_rot(&data->wld.cam.rot.z, -1);
+		if (keycode == 117 || keycode == 106 || keycode == 105
+			|| keycode == 107 || keycode == 111 || keycode == 108)
+			do_rot(&data->wld.cam.base, data->wld.cam.init, data->wld.cam.rot);
 		draw_map(data, 0x00FFFFFF);
 	}
+	// printf("Rot is %d\t%d\t%d\n", (int)((data->wld.cam.rot.x * 180) / M_PI),
+	// 	(int)((180 * data->wld.cam.rot.y) / M_PI), (int)((180 * data->wld.cam.rot.z) / M_PI));
+	// printf("Scale is %d\n", data->wld.cam.scale);
+	// printf("Camera is %f\t%f\t%f\n", data->wld.cam.ori.x, data->wld.cam.ori.y, data->wld.cam.ori.z);
+	// printf("\n\n");
 	return (0);
 }
 
-int	move_hook(int x, int y, t_data *data)
+/* int	move_hook(int x, int y, t_data *data)
 {
 	static t_point	last = {0, 0, 0};
 
@@ -119,30 +106,24 @@ int	move_hook(int x, int y, t_data *data)
 	last.x = x;
 	last.y = y;
 	return (1);
-}
+} */
 
 int	mouse_wheel_hook(int button, int x, int y, t_data *data)
 {
-	if (button == 1)
-	{
-		printf("YUP, THATS ME\n");
-		/* mlx_pixel_put(data->mlx, data->win, x, y, 0x00FFFFFF);
-		global_point()->x = x;
-		global_point()->y = y; */
-	}
 	x = x + 1;
 	y = y + 1;
+	//future use for zooming into mouse pos
 	if (button == 4 || button == 5)
 		draw_map(data, -1);
-	if (button == 4 && data)
+	if (button == 4)
 	{
 		//move to mouse
-		data->disp.scale += 1;
+		data->wld.cam.scale += 1;
 	}
-	else if (button == 5 && data)
+	else if (button == 5 && data->wld.cam.scale != 0)
 	{
 		//move to mouse
-		data->disp.scale -= 1;
+		data->wld.cam.scale -= 1;
 	}
 	if (button == 4 || button == 5)
 		draw_map(data, 0x00FFFFFF);
@@ -156,7 +137,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_perror(2, 0, NULL);
 	data = get_data();
-	init_data(data, av[1]);
+	init_data(data, &av[1]);
 	draw_map(data, 0x00FFFFFF);
 	mlx_hook(data->win, 2, 1L << 0, key_hook, data);
 	mlx_hook(data->win, 4, 1L << 2, mouse_wheel_hook, data);
