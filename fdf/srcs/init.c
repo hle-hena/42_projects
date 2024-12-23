@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/22 15:36:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:05:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@ void	init_obj(t_obj *obj, char *path)
 	obj->mat_ori.y = obj->mat.len / 2;
 	obj->mat_ori.z = 0;
 	obj->wld_ori = (t_vec){0, 0, 0};
-	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
+	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
 		(t_vec){0, 0, 0.15}};
-	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
+	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
 		(t_vec){0, 0, 0.15}};
 	obj->rot = (t_vec){0, 0, 0};
 	obj->scale = 1;
+	obj->max_h = 10 * 0.15;
+	obj->min_h = 0;
 }
 
+		// -19 * (M_PI / 180),
+		// 25 * (M_PI / 180),
+		// 40 * (M_PI / 180)
 void	init_wld(t_wld *wld)
 {
 	*wld = (t_wld)
@@ -35,14 +40,10 @@ void	init_wld(t_wld *wld)
 		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
 		(t_cam)
 	{
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
-		// (t_vec){250, 30, 0},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
 		(t_vec){0, 0, 0},
 	{
-		// -19 * (M_PI / 180),
-		// 25 * (M_PI / 180),
-		// 40 * (M_PI / 180)
 		-90 * (M_PI / 180),
 		0 * (M_PI / 180),
 		0 * (M_PI / 180)
@@ -53,9 +54,6 @@ void	init_wld(t_wld *wld)
 	},
 		1
 	};
-	/* Rot is -24	27	39
-Scale is 95
-Camera is 1020.000000	160.000000	0.000000 */
 }
 
 void	init_data(t_data *data, char **path)
@@ -73,7 +71,6 @@ void	init_data(t_data *data, char **path)
 	do_rot(&data->wld.cam.base, data->wld.cam.init, data->wld.cam.rot);
 	data->win_len = data->obj.mat.len * (data->wld.init_scale * 3);
 	data->win_wid = data->obj.mat.wid * (data->wld.init_scale * 3);
-	data->wld.cam.scale = 45; /////////////////////////This is for test
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
 	data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
 }

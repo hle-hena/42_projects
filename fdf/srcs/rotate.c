@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/21 20:28:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/23 10:14:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void	do_rotz(t_base *base, t_trig vals)
 void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x,
 	t_trig rot_z)
 {
-	float temp_x;
-	float temp_y;
-	float temp_z;
+	float	temp_x;
+	float	temp_y;
+	float	temp_z;
 
 	temp_x = vec->x * (rot_y.cos * rot_z.cos)
 		+ vec->y * (rot_x.sin * rot_y.sin * rot_z.cos - rot_x.cos * rot_z.sin)
@@ -123,9 +123,4 @@ void	do_rot(t_base *base, t_base init, t_vec rot)
 	do_rot_yxz(&base->i, rot_y, rot_x, rot_z);
 	do_rot_yxz(&base->j, rot_y, rot_x, rot_z);
 	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
-	// do_roty(base, rot_y);
-	// do_rotx(base, rot_x);
-	// do_rotz(base, rot_z);
-	//WHY DOES THE FIRST ROTATION IS CENTERED AROUND ITS AXIS, 
-	//BUT NOT THE OTHER ONES ????
 }

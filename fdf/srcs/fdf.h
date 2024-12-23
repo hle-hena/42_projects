@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/22 14:40:53 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:52:04 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ typedef struct s_trigometry_values
 	float	cos;
 }	t_trig;
 
+typedef struct s_color
+{
+	int	re;
+	int	gr;
+	int	bl;
+}	t_col;
+
 typedef struct s_vector
 {
 	float	x;
@@ -42,9 +49,10 @@ typedef struct s_vector
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
+	int		x;
+	int		y;
+	int		z;
+	t_col	col;
 }	t_point;
 
 typedef struct s_base
@@ -70,6 +78,8 @@ typedef struct s_object
 	t_vec	rot;
 	t_mat	mat;
 	int		scale;
+	float		max_h;
+	float		min_h;
 }	t_obj;
 
 typedef struct s_camera
@@ -88,6 +98,7 @@ typedef struct s_world
 	t_base	base;
 	t_base	init;
 	t_cam	cam;
+	// t_vec	normal;
 	int		init_scale;
 }	t_wld;
 
@@ -111,15 +122,27 @@ t_data	*get_data(void);
 /************************/
 /*		draw.c			*/
 /************************/
-void	draw_line(t_data *data, t_point start, t_point end, int color);
 void	draw_map(t_data *data, int color);
 
 /************************/
 /*		draw_utils.c	*/
 /************************/
-t_point	point(t_obj obj, t_wld wld, int y, int x);
 void	reset_img(t_data *data);
+int		pixel_is_in_fov(t_data *data, t_vec point);
 void	put_pixel(t_data *data, t_point point, int color);
+
+/************************/
+/*		projection.c	*/
+/************************/
+t_point	point(t_obj obj, t_wld wld, t_point point, int color);
+
+/************************/
+/*		color.c			*/
+/************************/
+t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr);
+int		get_color(t_point start, t_point end, float percent);
+int		calc_color(t_col col);
+float	round_to_n_places(float value, int n);
 
 /************************/
 /*		display.c		*/
