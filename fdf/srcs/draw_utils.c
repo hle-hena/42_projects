@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/22 15:09:06 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:36:17 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ t_point	get_projection(int x, int y, int z)
 	if (data->proj == 0)
 	{
 		if (z < data->wld.cam.near_plane)
-			return((t_point){0, 0, 1});
+			return((t_point){x + (data->win_wid / 2),
+				y - 1 + (data->win_len), 1});
 		return ((t_point){x + (data->win_wid / 2),
-			y + (data->win_len / 2), 0});
+			y - 1 + (data->win_len), 0});
 	}
 	return ((t_point){x, y, z});
 }
@@ -55,11 +56,11 @@ t_point	point(t_obj obj, t_wld wld, int y, int x)
 	centered = (t_vec){wld_coo.x - wld.cam.ori.x, wld_coo.y - wld.cam.ori.y,
 		wld_coo.z - wld.cam.ori.z};
 	final.x = centered.x * wld.cam.base.i.x + centered.y * wld.cam.base.j.x
-		+ centered.z * wld.cam.base.k.x;
+		+ centered.z * wld.cam.base.k.x + wld.cam.ori.x * wld.cam.base.k.x;
 	final.y = centered.x * wld.cam.base.i.y + centered.y * wld.cam.base.j.y
-		+ centered.z * wld.cam.base.k.y;
+		+ centered.z * wld.cam.base.k.y + wld.cam.ori.y * wld.cam.base.k.y;
 	final.z = centered.x * wld.cam.base.i.z + centered.y * wld.cam.base.j.z
-		+ centered.z * wld.cam.base.k.z;
+		+ centered.z * wld.cam.base.k.z + wld.cam.ori.z * wld.cam.base.k.z;
 	// printf("Becomes %f\t%f\t%f\n\n\n",
 		// (1 - wld.cam.ori.x) * wld.cam.base.i.x + (1 - wld.cam.ori.y) * wld.cam.base.j.x,
 		// (1 - wld.cam.ori.x) * wld.cam.base.i.y + (1 - wld.cam.ori.y) * wld.cam.base.j.y,
