@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/24 11:54:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/24 17:44:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,15 @@ t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr)
 	percent = (wld.cam.base.k.x * (curr.x - obj.r_ori.x)
 			+ wld.cam.base.k.y * (curr.y - obj.r_ori.y)
 			+ wld.cam.base.k.z * (curr.z - obj.r_ori.z));
-	percent = round_float(percent, 6);
-	percent /= (obj.max_h * obj.scale * wld.cam.scale * 2);
-	percent = round_float(percent, 6);
+	percent = round_float(percent, 3);
+	if (percent >= 0)
+	{
+		if (obj.max_h)
+			percent /= (obj.max_h * obj.scale * wld.cam.scale * 2);
+	}
+	else
+		percent = percent / (obj.min_h * obj.scale * wld.cam.scale * 2 * -1);
+	percent = round_float(percent, 3);
 	chose_color(&col1, &col2, &percent);
 	final = (t_col){col1.re + (col2.re - col1.re) * percent,
 		col1.gr + (col2.gr - col1.gr) * percent,

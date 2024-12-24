@@ -1,12 +1,18 @@
-Fix the length issue at the read of the map.
+Change draw map so it draws from back to front, and not always from top to bot.
+Scale is affecting the gradient and breaking it if too zoomed in.
+
 Fix the Makefile. It relinks I think
-Accept maps with new line at the end.
-Fix the movement. The camera display is weird.
-Add the new perspective.
+
 Add the color to the parsing
-Add the automatic color
+Fix the length issue at the read of the map.
+Accept maps with new line at the end.
+
 Re implement the near plane. Went missing because it was poorly done and interacted with the automatic color
+Fix the movement. The camera display is weird.
 Make the zoom with the center at mouse pos
 Rotate with mouse
-Handle negative color
-Change draw map so it draws from back to front, and not always from top to bot.
+
+Add the new perspective.
+Add suppoert for multiple maps
+
+Fix the gradient

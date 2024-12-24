@@ -28,14 +28,14 @@ OBJ = $(FDF_SRC:.c=.o)
 .c.o: 
 	@$(CC) $(FLAGS) -Imlx -c $< -o $(<:.c=.o)
 
+all: $(NAME)
+
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(OBJ) $(FRAMEWORK) -o $(NAME) -L $(LIBFT_DIR) -lft
 	@echo "$(NAME) compiled successfully!"
-
-all: $(NAME)
 
 clean:
 	@make -C $(LIBFT_DIR) clean
