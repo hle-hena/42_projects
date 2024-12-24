@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/23 16:02:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/24 11:40:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ void	draw_high(t_data *data, t_point start, t_point end)
 			err += 2 * ft_abs(dx);
 		curr.y += 1;
 		curr.z = (float)(curr.y - start.y) / (end.y - start.y);
-		curr.z = round_to_n_places(curr.z, 6);
+		curr.z = round_float(curr.z, 6);
 	}
 }
 
-//color = get_color(curr, start, end);
-//curr.z = (curr.x / (end.x - start.x)) * (end.z - start.z);
 void	draw_low(t_data *data, t_point start, t_point end)
 {
 	int		dx;
@@ -68,7 +66,7 @@ void	draw_low(t_data *data, t_point start, t_point end)
 			err += 2 * ft_abs(dy);
 		curr.x += 1;
 		curr.z = (float)(curr.x - start.x) / (end.x - start.x);
-		curr.z = round_to_n_places(curr.z, 6);
+		curr.z = round_float(curr.z, 6);
 	}
 }
 
@@ -109,6 +107,7 @@ void	draw_map(t_data *data, int color)
 	int		j;
 
 	i = -1;
+	data->obj.r_ori = calc_vec(data->obj, data->wld, data->obj.wld_ori);
 	while (++i < data->obj.mat.len - 1)
 	{
 		j = -1;

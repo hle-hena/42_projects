@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/23 16:05:54 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/24 12:10:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 void	init_obj(t_obj *obj, char *path)
 {
-	parse_file(&obj->mat, path);
-	obj->mat_ori.x = obj->mat.wid / 2;
-	obj->mat_ori.y = obj->mat.len / 2;
-	obj->mat_ori.z = 0;
-	obj->wld_ori = (t_vec){0, 0, 0};
-	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
+	obj->wld_ori = (t_point){0, 0, 0, (t_col){0}};
+	obj->r_ori = (t_vec){0, 0, 0};
+	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
 		(t_vec){0, 0, 0.15}};
-	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
+	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
 		(t_vec){0, 0, 0.15}};
 	obj->rot = (t_vec){0, 0, 0};
 	obj->scale = 1;
-	obj->max_h = 10 * 0.15;
+	obj->max_h = 0;
 	obj->min_h = 0;
+	parse_file(&obj->mat, path, obj);
+	obj->mat_ori.x = obj->mat.wid / 2;
+	obj->mat_ori.y = obj->mat.len / 2;
+	obj->mat_ori.z = 0;
+	obj->max_h *= 0.15;
+	obj->min_h *= 0.15;
 }
 
 		// -19 * (M_PI / 180),
@@ -40,13 +43,14 @@ void	init_wld(t_wld *wld)
 		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
 		(t_cam)
 	{
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
+		(t_vec){0, 0, 0},
 		(t_vec){0, 0, 0},
 	{
-		-90 * (M_PI / 180),
-		0 * (M_PI / 180),
-		0 * (M_PI / 180)
+		-19 * (M_PI / 180),
+		25 * (M_PI / 180),
+		40 * (M_PI / 180)
 	},
 		1,
 		-10,

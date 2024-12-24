@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:30:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/19 20:11:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/24 12:10:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ int	line_size(char **line)
 	return (i);
 }
 
-int	parse_line(char **src, int *nb, int size)
+void	find_extrem(int val, t_obj *obj)
+{
+	if (val > obj->max_h)
+		obj->max_h = val;
+	if (val < obj->min_h)
+		obj->min_h = val;
+}
+
+int	parse_line(char **src, int *nb, int size, t_obj *obj)
 {
 	char	**temp;
 	int		i;
@@ -44,6 +52,7 @@ int	parse_line(char **src, int *nb, int size)
 				return (ft_free_tab((void **)src, line_size(src)), 1);
 		}
 		nb[j++] = ft_atoi(*temp);
+		find_extrem(nb[j - 1], obj);
 		temp++;
 	}
 	if (j != size)
@@ -79,7 +88,7 @@ void	get_matsize(t_mat *mat, char *path)
 	close(fd);
 }
 
-void	parse_file(t_mat *mat, char *path)
+void	parse_file(t_mat *mat, char *path, t_obj *obj)
 {
 	char	**temp;
 	char	*line;
@@ -101,7 +110,7 @@ void	parse_file(t_mat *mat, char *path)
 		temp = ft_split(line, ' ');
 		mat->matrix[i] = ft_calloc(mat->wid + 1, sizeof(int));
 		ft_del(line);
-		if (!mat->matrix[i] || parse_line(temp, mat->matrix[i], mat->wid))
+		if (!mat->matrix[i] || parse_line(temp, mat->matrix[i], mat->wid, obj))
 			ft_perror(4, mlx_del(NULL), NULL);
 		ft_free_tab((void **)temp, mat->wid);
 	}

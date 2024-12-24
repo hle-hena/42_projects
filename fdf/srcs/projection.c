@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/23 14:36:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/24 11:41:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,36 @@ t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 
 t_point	point(t_obj obj, t_wld wld, t_point point, int color)
 {
-	t_point	wld_coo;
-	t_vec	centered;
 	t_vec	final;
 	t_col	col;
 
-	wld_coo = get_wld_coo(point, obj, wld);
-	centered = (t_vec){wld_coo.x - wld.cam.ori.x, wld_coo.y - wld.cam.ori.y,
-		wld_coo.z - wld.cam.ori.z};
-	final.x = centered.x * wld.cam.base.i.x + centered.y * wld.cam.base.j.x
-		+ centered.z * wld.cam.base.k.x;
-	final.y = centered.x * wld.cam.base.i.y + centered.y * wld.cam.base.j.y
-		+ centered.z * wld.cam.base.k.y;
-	final.z = centered.x * wld.cam.base.i.z + centered.y * wld.cam.base.j.z
-		+ centered.z * wld.cam.base.k.z;
+	final = calc_vec(obj, wld, point);
 	if (!color)
 		col = (t_col){0, 0, 0};
 	else
 		col = get_real_color(obj, wld, final);
 		// col = (t_col){0xFF, 0xFF, 0xFF};
 	return (get_projection(final.x, final.y, final.z, col));
+}
+
+t_vec	calc_vec(t_obj obj, t_wld wld, t_point point)
+{
+	t_point	wld_coo;
+	t_vec	centered;
+	t_vec	final;
+
+	wld_coo = get_wld_coo(point, obj, wld);
+	centered = (t_vec){wld_coo.x - wld.cam.ori.x, wld_coo.y - wld.cam.ori.y,
+		wld_coo.z - wld.cam.ori.z};
+	round_vec(&centered);
+	final.x = centered.x * wld.cam.base.i.x + centered.y * wld.cam.base.j.x
+		+ centered.z * wld.cam.base.k.x;
+	final.y = centered.x * wld.cam.base.i.y + centered.y * wld.cam.base.j.y
+		+ centered.z * wld.cam.base.k.y;
+	final.z = centered.x * wld.cam.base.i.z + centered.y * wld.cam.base.j.z
+		+ centered.z * wld.cam.base.k.z;
+	round_vec(&final);
+	return (final);
 }
 
 /* int	get_color(t_data *data, t_vec curr, int color)

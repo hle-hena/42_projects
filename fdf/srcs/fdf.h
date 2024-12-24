@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/23 15:52:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/24 12:03:06 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ typedef struct s_object
 	t_base	base;
 	t_base	init;
 	t_vec	mat_ori;
-	t_vec	wld_ori;
+	t_point	wld_ori;
+	t_vec	r_ori;
 	t_vec	rot;
 	t_mat	mat;
 	int		scale;
@@ -87,6 +88,7 @@ typedef struct s_camera
 	t_base	base;
 	t_base	init;
 	t_vec	ori;
+	t_vec	r_ori;
 	t_vec	rot;
 	int		scale;
 	float	near_plane;
@@ -135,6 +137,7 @@ void	put_pixel(t_data *data, t_point point, int color);
 /*		projection.c	*/
 /************************/
 t_point	point(t_obj obj, t_wld wld, t_point point, int color);
+t_vec	calc_vec(t_obj obj, t_wld wld, t_point point);
 
 /************************/
 /*		color.c			*/
@@ -142,7 +145,12 @@ t_point	point(t_obj obj, t_wld wld, t_point point, int color);
 t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr);
 int		get_color(t_point start, t_point end, float percent);
 int		calc_color(t_col col);
-float	round_to_n_places(float value, int n);
+
+/************************/
+/*		float.c			*/
+/************************/
+float	round_float(float value, int n);
+void	round_vec(t_vec *vec);
 
 /************************/
 /*		display.c		*/
@@ -165,7 +173,7 @@ void	init_data(t_data *data, char **path);
 /************************/
 /*		parser.c		*/
 /************************/
-void	parse_file(t_mat *mat, char *path);
+void	parse_file(t_mat *mat, char *path, t_obj *obj);
 
 /************************/
 /*		errors.c		*/

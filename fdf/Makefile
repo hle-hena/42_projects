@@ -13,7 +13,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 FDF =	draw_utils.c	draw.c			end.c		\
 		init.c			main.c			parser.c	\
-		rotate.c		projection.c	color.c
+		rotate.c		projection.c	color.c		\
+		float.c
 
 NEW_FDF =	draw_utils.c	draw.c	end.c		\
 			init.c			main.c	parser.c	\
