@@ -6,26 +6,24 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/24 17:43:59 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:50:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-		// if (z < data->wld.cam.near_plane)
-		// 	return((t_point){x + (data->win_wid / 2),
-		// 		y - 1 + (data->win_len), 1});
 t_point	get_projection(int x, int y, int z, t_col color)
 {
 	t_data	*data;
 
 	data = get_data();
 	if (data->proj == 0)
-	{
 		return ((t_point){x + (data->win_wid / 2),
-			y - 1 + (data->win_len / 2), z, color});
-	}
-	return ((t_point){x, y, z, color});
+			y + (data->win_len / 2), 0, color});
+	else if (data->proj == 1)
+		return ((t_point){x + (data->win_wid / 2),
+			y - 1 + data->win_len, z, color});
+	return ((t_point){0, 0, 0, (t_col){0, 0, 0}});
 }
 
 t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
@@ -75,26 +73,6 @@ t_vec	calc_vec(t_obj obj, t_wld wld, t_point point)
 		+ centered.z * wld.cam.base.k.y;
 	final.z = centered.x * wld.cam.base.i.z + centered.y * wld.cam.base.j.z
 		+ centered.z * wld.cam.base.k.z;
-	round_vec(&final);
+	// round_vec(&final);
 	return (final);
 }
-
-/* int	get_color(t_data *data, t_vec curr, int color)
-{
-	float	percent;
-
-	if (color == -1)
-		return (0);
-	percent = (data->wld.cam.base.k.x * (curr.x - data->obj.wld_ori.x)
-			+ data->wld.cam.base.k.y * (curr.y - data->obj.wld_ori.y)
-			+ data->wld.cam.base.k.z * (curr.z - data->obj.wld_ori.z))
-			/ sqrt(ft_pow(data->wld.cam.base.k.x, 2)
-				+ ft_pow(data->wld.cam.base.k.y, 2)
-				+ ft_pow(data->wld.cam.base.k.z, 2));
-	percent = percent * 100 / data->obj.max_h;
-	if (percent <= 0.5 && percent >= 0)
-		return (0x00FFFFFF + (0x00FFFB7D - 0x00FFFFFF) * (percent / 50));
-	else if (percent > 0.5)
-		return (0x00FFFB7D + (0x00FF4BF3 - 0x00FFFB7D) * ((percent - 50) / 50));
-	return (0);
-} */

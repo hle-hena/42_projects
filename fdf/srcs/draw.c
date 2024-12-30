@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/24 11:40:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:48:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_high(t_data *data, t_point start, t_point end)
 	dx = end.x - start.x;
 	dy = end.y - start.y;
 	err = 2 * ft_abs(dx) - dy;
-	curr = (t_vec){start.x, start.y, start.z};
+	curr = (t_vec){start.x, start.y, 0};
 	while (curr.y <= end.y)
 	{
 		if (pixel_is_in_fov(data, curr))
@@ -51,7 +51,7 @@ void	draw_low(t_data *data, t_point start, t_point end)
 	dx = end.x - start.x;
 	dy = end.y - start.y;
 	err = 2 * ft_abs(dy) - dx;
-	curr = (t_vec){start.x, start.y, start.z};
+	curr = (t_vec){start.x, start.y, 0};
 	while (curr.x <= end.x)
 	{
 		if (pixel_is_in_fov(data, curr))
@@ -80,6 +80,8 @@ void	draw_line(t_data *data, t_point start, t_point end)
 			|| end.x < 0
 			|| end.y >= (data->obj.mat.len + 4) * data->wld.init_scale * 3
 			|| end.y < 0))
+		return ;
+	if (start.z < 0 && end.z < 0)
 		return ;
 	if (ft_abs(end.y - start.y) < ft_abs(end.x - start.x))
 	{

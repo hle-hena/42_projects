@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/23 13:16:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:52:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ int	key_hook(int keycode, t_data *data)
 		mlx_close(data);
 	if (keycode == 119 || keycode == 115 || keycode == 97 || keycode == 100
 		|| keycode == 117 || keycode == 106 || keycode == 105
-		|| keycode == 107 || keycode == 111 || keycode == 108)
+		|| keycode == 107 || keycode == 111 || keycode == 108 || keycode == 32)
 	{
 		draw_map(data, 0);
-		if (keycode == 119)
+		if (keycode == 32)
+			data->proj = !data->proj;
+		else if (keycode == 119)
 			go_forward(data, 1);
 		else if (keycode == 115)
 			go_forward(data, -1);
