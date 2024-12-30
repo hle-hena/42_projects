@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 15:50:36 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/30 22:11:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_point	get_projection(int x, int y, int z, t_col color)
 			y + (data->win_len / 2), 0, color});
 	else if (data->proj == 1)
 		return ((t_point){x + (data->win_wid / 2),
-			y - 1 + data->win_len, z, color});
+			y - 1 + (data->win_len / 2), z, color});
 	return ((t_point){0, 0, 0, (t_col){0, 0, 0}});
 }
 
@@ -66,13 +66,13 @@ t_vec	calc_vec(t_obj obj, t_wld wld, t_point point)
 	wld_coo = get_wld_coo(point, obj, wld);
 	centered = (t_vec){wld_coo.x - wld.cam.ori.x, wld_coo.y - wld.cam.ori.y,
 		wld_coo.z - wld.cam.ori.z};
-	round_vec(&centered);
-	final.x = centered.x * wld.cam.base.i.x + centered.y * wld.cam.base.j.x
-		+ centered.z * wld.cam.base.k.x;
-	final.y = centered.x * wld.cam.base.i.y + centered.y * wld.cam.base.j.y
-		+ centered.z * wld.cam.base.k.y;
-	final.z = centered.x * wld.cam.base.i.z + centered.y * wld.cam.base.j.z
-		+ centered.z * wld.cam.base.k.z;
+	// round_vec(&centered);
+	final.x = centered.x * wld.base.i.x + centered.y * wld.base.j.x
+		+ centered.z * wld.base.k.x;
+	final.y = centered.x * wld.base.i.y + centered.y * wld.base.j.y
+		+ centered.z * wld.base.k.y;
+	final.z = centered.x * wld.base.i.z + centered.y * wld.base.j.z
+		+ centered.z * wld.base.k.z;
 	// round_vec(&final);
 	return (final);
 }

@@ -1,3 +1,14 @@
+I need to :
+	Rotate the camera base
+	Rotate the world base by -the angle ?
+	Move the camera based on the camera base
+	Calculate points base on the world base
+	What about the view z placement ?
+	What about the color ?
+
+
+
+
 Change draw map so it draws from back to front, and not always from top to bot.
 Scale is affecting the gradient and breaking it if too zoomed in.
 

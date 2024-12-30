@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 15:48:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/30 22:29:06 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	draw_high(t_data *data, t_point start, t_point end)
 	curr = (t_vec){start.x, start.y, 0};
 	while (curr.y <= end.y)
 	{
-		if (pixel_is_in_fov(data, curr))
+		curr.z = (float)(curr.y - start.y) / (end.y - start.y);
+		curr.z = round_float(curr.z, 6);
+		if (pixel_is_in_fov(data, curr, start, end))
 			put_pixel(data, (t_point){curr.x, curr.y, curr.z, (t_col){0}},
 				get_color(start, end, curr.z));
 		if (err > 0)
@@ -36,8 +38,6 @@ void	draw_high(t_data *data, t_point start, t_point end)
 		else
 			err += 2 * ft_abs(dx);
 		curr.y += 1;
-		curr.z = (float)(curr.y - start.y) / (end.y - start.y);
-		curr.z = round_float(curr.z, 6);
 	}
 }
 
@@ -54,7 +54,9 @@ void	draw_low(t_data *data, t_point start, t_point end)
 	curr = (t_vec){start.x, start.y, 0};
 	while (curr.x <= end.x)
 	{
-		if (pixel_is_in_fov(data, curr))
+		curr.z = (float)(curr.x - start.x) / (end.x - start.x);
+		curr.z = round_float(curr.z, 6);
+		if (pixel_is_in_fov(data, curr, start, end))
 			put_pixel(data, (t_point){curr.x, curr.y, curr.z, (t_col){0}},
 				get_color(start, end, curr.z));
 		if (err > 0)
@@ -65,8 +67,6 @@ void	draw_low(t_data *data, t_point start, t_point end)
 		else
 			err += 2 * ft_abs(dy);
 		curr.x += 1;
-		curr.z = (float)(curr.x - start.x) / (end.x - start.x);
-		curr.z = round_float(curr.z, 6);
 	}
 }
 
@@ -98,9 +98,6 @@ void	draw_line(t_data *data, t_point start, t_point end)
 	// 	data->wld.base.i.x, data->wld.base.i.y, data->wld.base.i.z,
 	// 	data->wld.base.j.x, data->wld.base.j.y, data->wld.base.j.z,
 	// 	data->wld.base.k.x, data->wld.base.k.y, data->wld.base.k.z);
-	// printf("Rot is \n%f\n%f\n%f\n", data->wld.cam.rot.x / (M_PI / 180),
-	// 	data->wld.cam.rot.y / (M_PI / 180),
-	// 	data->wld.cam.rot.z / (M_PI / 180));
 	// printf("Cam ori is %f\t%f\t%f\n", data->wld.cam.ori.x,
 	// 	data->wld.cam.ori.y, data->wld.cam.ori.z);
 void	draw_map(t_data *data, int color)
@@ -110,6 +107,9 @@ void	draw_map(t_data *data, int color)
 
 	i = -1;
 	data->obj.r_ori = calc_vec(data->obj, data->wld, data->obj.wld_ori);
+	printf("Rot is \n%f\n%f\n%f\n", data->wld.cam.rot.x / (M_PI / 180),
+		data->wld.cam.rot.y / (M_PI / 180),
+		data->wld.cam.rot.z / (M_PI / 180));
 	while (++i < data->obj.mat.len - 1)
 	{
 		j = -1;

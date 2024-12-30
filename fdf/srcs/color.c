@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 15:40:36 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/30 22:28:00 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr)
 	t_col	col2;
 	t_col	final;
 
-	percent = (wld.cam.base.k.x * (curr.x - obj.r_ori.x)
-			+ wld.cam.base.k.y * (curr.y - obj.r_ori.y)
-			+ wld.cam.base.k.z * (curr.z - obj.r_ori.z));
+	percent = (wld.base.k.x * (curr.x - obj.r_ori.x)
+			+ wld.base.k.y * (curr.y - obj.r_ori.y)
+			+ wld.base.k.z * (curr.z - obj.r_ori.z));
 	percent = round_float(percent, 3);
 	// printf("percent is %f\n", percent);
 	// printf("max is %f\n",(obj.max_h * obj.scale * wld.cam.scale * 2));
@@ -94,11 +94,11 @@ int	get_color(t_point start, t_point end, float percent)
 	if (percent < 0)
 		return (calc_color(start.col));
 	col1 = (t_col){start.col.re, start.col.gr, start.col.bl};
-	if (calc_color(start.col) == 0x00FFFFFF && calc_color(end.col) != 0x00FFFFFF)
-		col1 = (t_col){0xFF, 0xFB, 0x7D};
+	// if (calc_color(start.col) == 0x00FFFFFF && calc_color(end.col) != 0x00FFFFFF)
+	// 	col1 = (t_col){0xFF, 0xFB, 0x7D};
 	col2 = (t_col){end.col.re, end.col.gr, end.col.bl};
-	if (calc_color(end.col) == 0x00FFFFFF && calc_color(start.col) != 0x00FFFFFF)
-		col2 = (t_col){0xFF, 0xFB, 0x7D};
+	// if (calc_color(end.col) == 0x00FFFFFF && calc_color(start.col) != 0x00FFFFFF)
+	// 	col2 = (t_col){0xFF, 0xFB, 0x7D};
 	color.re = col1.re + (col2.re - col1.re) * percent;
 	color.gr = col1.gr + (col2.gr - col1.gr) * percent;
 	color.bl = col1.bl + (col2.bl - col1.bl) * percent;

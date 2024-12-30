@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 15:52:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2024/12/30 22:47:28 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,18 @@ void	add_rot(float *val, int sign)
 		*val -= 2 * M_PI;
 	else if (*val <= (float)-(2 * M_PI))
 		*val += 2 * M_PI;
+	round_float(*val, 5);
 }
 
 void	go_forward(t_data *data, int sign)
 {
-	data->wld.cam.ori.x += sign * 10 * data->wld.cam.base.k.x;
-	data->wld.cam.ori.y += sign * 10 * data->wld.cam.base.k.y;
-	data->wld.cam.ori.z += sign * 10 * data->wld.cam.base.k.z;
+	printf("scale is %d\n", data->wld.cam.scale);
+	do_rot(&data->wld.cam.base, data->wld.cam.init,
+		(t_vec){-data->wld.cam.rot.x, -data->wld.cam.rot.y,
+			-data->wld.cam.rot.z});
+	data->wld.cam.ori.x += sign * 4 * data->wld.base.k.x;
+	data->wld.cam.ori.y += sign * 4 * data->wld.base.k.y;
+	data->wld.cam.ori.z += sign * 4 * data->wld.base.k.z;
 }
 
 void	go_side(t_data *data, int sign)
@@ -88,7 +93,7 @@ int	key_hook(int keycode, t_data *data)
 			add_rot(&data->wld.cam.rot.z, -1);
 		if (keycode == 117 || keycode == 106 || keycode == 105
 			|| keycode == 107 || keycode == 111 || keycode == 108)
-			do_rot(&data->wld.cam.base, data->wld.cam.init, data->wld.cam.rot);
+			do_rot(&data->wld.base, data->wld.init, data->wld.cam.rot);
 		draw_map(data, 1);
 	}
 	return (0);
