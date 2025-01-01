@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 21:58:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:55:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,17 @@ void	draw_map(t_data *data, int color);
 /*		draw_utils.c	*/
 /************************/
 void	reset_img(t_data *data);
-int		pixel_is_in_fov(t_data *data, t_vec point, t_point start, t_point end);
 void	put_pixel(t_data *data, t_point point, int color);
+void	change_point(t_point *change, t_point other);
+int		point_is_in_fov(t_data *data, t_point point);
 
 /************************/
 /*		projection.c	*/
+/************************/
+int	calc_point(t_data *data, t_point *start, t_point *end);
+
+/************************/
+/*		point.c			*/
 /************************/
 t_point	point(t_obj obj, t_wld wld, t_point point, int color);
 t_vec	calc_vec(t_obj obj, t_wld wld, t_point point);
@@ -143,7 +149,7 @@ t_vec	calc_vec(t_obj obj, t_wld wld, t_point point);
 /*		color.c			*/
 /************************/
 t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr);
-int		get_color(t_point start, t_point end, float percent);
+t_col	get_color(t_point start, t_point end, float percent);
 int		calc_color(t_col col);
 
 /************************/

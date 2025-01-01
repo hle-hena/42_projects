@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 22:05:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:57:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_wld(t_wld *wld)
 	{
 		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
 		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
-		(t_vec){0, 0, 0},
+		(t_vec){0, 0, 1},
 		(t_vec){0, 0, 0},
 	{
 		// -19 * (M_PI / 180),
@@ -78,6 +78,7 @@ void	init_data(t_data *data, char **path)
 	data->win_wid = data->obj.mat.wid * (data->wld.init_scale * 3);
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
 	data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
+	// data->wld.cam.scale = 1;
 }
 
 /* void	init_data(t_data *data, char *path)

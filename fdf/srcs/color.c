@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 22:28:00 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:56:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr)
 	return (final);
 }
 
-int	get_color(t_point start, t_point end, float percent)
+t_col	get_color(t_point start, t_point end, float percent)
 {
 	t_col	color;
 	t_col	col1;
 	t_col	col2;
 
 	if (percent < 0)
-		return (calc_color(start.col));
+		return (start.col);
 	col1 = (t_col){start.col.re, start.col.gr, start.col.bl};
 	// if (calc_color(start.col) == 0x00FFFFFF && calc_color(end.col) != 0x00FFFFFF)
 	// 	col1 = (t_col){0xFF, 0xFB, 0x7D};
@@ -103,5 +103,5 @@ int	get_color(t_point start, t_point end, float percent)
 	color.gr = col1.gr + (col2.gr - col1.gr) * percent;
 	color.bl = col1.bl + (col2.bl - col1.bl) * percent;
 	// printf("percent is %f\n", percent);
-	return (calc_color(color));
+	return (color);
 }

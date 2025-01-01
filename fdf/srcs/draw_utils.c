@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 22:43:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/01 16:46:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,13 @@ void	reset_img(t_data *data)
 	draw_map(data, 0);
 }
 
-int	pixel_is_in_fov(t_data *data, t_vec point, t_point start, t_point end)
+int	point_is_in_fov(t_data *data, t_point point)
 {
-	float	dist;
-
-	dist = start.z - (start.z - end.z) * point.z;
 	if (point.x < data->obj.mat.wid * data->wld.init_scale * 3 && point.x >= 0
 		&& point.y < data->obj.mat.len * data->wld.init_scale * 3
-		&& point.y >= 0 && dist >= 0)
+		&& point.y >= 0)
 		return (1);
 	return (0);
-	if (point.z * (end.z - start.z) >= 0)
-		return (1);
 }
 
 void	put_pixel(t_data *data, t_point point, int color)
@@ -39,6 +34,17 @@ void	put_pixel(t_data *data, t_point point, int color)
 
 	img = (int *)mlx_get_data_addr(data->img, &temp, &size_line, &temp);
 	img[point.y * data->obj.mat.wid * data->wld.init_scale * 3 + point.x] = color;
+}
+
+void	change_point(t_point *change, t_point other)
+{
+	float	param;
+	t_point	n_point;
+
+	param = (float)(1 - change->z) / (other.z - change->z);
+	n_point = (t_point){change->x + param * (other.x - change->x),
+		change->y + param * (other.y - change->y), 1, get_color(*change, other, param)};
+	*change = n_point;
 }
 
 	// printf("x is %d; y is %d; z is %d\n", x, y, z);

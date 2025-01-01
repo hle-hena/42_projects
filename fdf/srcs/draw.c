@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 22:29:06 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:38:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ void	draw_high(t_data *data, t_point start, t_point end)
 	int		dx;
 	int		dy;
 	int		err;
-	t_vec	curr;
+	float	percent;
+	t_point	curr;
 
 	dx = end.x - start.x;
 	dy = end.y - start.y;
 	err = 2 * ft_abs(dx) - dy;
-	curr = (t_vec){start.x, start.y, 0};
+	percent = 0;
+	curr = (t_point){start.x, start.y, 0, (t_col){0}};
 	while (curr.y <= end.y)
 	{
-		curr.z = (float)(curr.y - start.y) / (end.y - start.y);
-		curr.z = round_float(curr.z, 6);
-		if (pixel_is_in_fov(data, curr, start, end))
-			put_pixel(data, (t_point){curr.x, curr.y, curr.z, (t_col){0}},
-				get_color(start, end, curr.z));
+		if (point_is_in_fov(data, curr))
+			put_pixel(data, curr, calc_color(get_color(start, end, percent)));
 		if (err > 0)
 		{
 			curr.x += ft_tern_int(dx < 0, -1, 1);
@@ -38,6 +37,7 @@ void	draw_high(t_data *data, t_point start, t_point end)
 		else
 			err += 2 * ft_abs(dx);
 		curr.y += 1;
+		percent += (float)1 / dy;
 	}
 }
 
@@ -46,19 +46,18 @@ void	draw_low(t_data *data, t_point start, t_point end)
 	int		dx;
 	int		dy;
 	int		err;
-	t_vec	curr;
+	float	percent;
+	t_point	curr;
 
 	dx = end.x - start.x;
 	dy = end.y - start.y;
 	err = 2 * ft_abs(dy) - dx;
-	curr = (t_vec){start.x, start.y, 0};
+	percent = 0;
+	curr = (t_point){start.x, start.y, 0, (t_col){0}};
 	while (curr.x <= end.x)
 	{
-		curr.z = (float)(curr.x - start.x) / (end.x - start.x);
-		curr.z = round_float(curr.z, 6);
-		if (pixel_is_in_fov(data, curr, start, end))
-			put_pixel(data, (t_point){curr.x, curr.y, curr.z, (t_col){0}},
-				get_color(start, end, curr.z));
+		if (point_is_in_fov(data, curr))
+			put_pixel(data, curr, calc_color(get_color(start, end, percent)));
 		if (err > 0)
 		{
 			curr.y += ft_tern_int(dy < 0, -1, 1);
@@ -67,12 +66,11 @@ void	draw_low(t_data *data, t_point start, t_point end)
 		else
 			err += 2 * ft_abs(dy);
 		curr.x += 1;
+		percent += (float)1 / dx;
 	}
 }
 
-void	draw_line(t_data *data, t_point start, t_point end)
-{
-	if ((start.x >= (data->obj.mat.wid + 4) * data->wld.init_scale * 3
+/* 	if ((start.x >= (data->obj.mat.wid + 4) * data->wld.init_scale * 3
 			|| start.x < 0
 			|| start.y >= (data->obj.mat.len + 4) * data->wld.init_scale * 3
 			|| start.y < 0)
@@ -82,7 +80,15 @@ void	draw_line(t_data *data, t_point start, t_point end)
 			|| end.y < 0))
 		return ;
 	if (start.z < 0 && end.z < 0)
+		return ; */
+void	draw_line(t_data *data, t_point start, t_point end)
+{
+	if (!calc_point(data, &start, &end))
 		return ;
+	if (!point_is_in_fov(data, start) && !point_is_in_fov(data, end))
+		return ;
+	if (start.x == end.x && start.y == end.y && start.z == end.z)
+		return;
 	if (ft_abs(end.y - start.y) < ft_abs(end.x - start.x))
 	{
 		if (start.x > end.x)
@@ -107,9 +113,6 @@ void	draw_map(t_data *data, int color)
 
 	i = -1;
 	data->obj.r_ori = calc_vec(data->obj, data->wld, data->obj.wld_ori);
-	printf("Rot is \n%f\n%f\n%f\n", data->wld.cam.rot.x / (M_PI / 180),
-		data->wld.cam.rot.y / (M_PI / 180),
-		data->wld.cam.rot.z / (M_PI / 180));
 	while (++i < data->obj.mat.len - 1)
 	{
 		j = -1;
@@ -130,4 +133,5 @@ void	draw_map(t_data *data, int color)
 		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	printf("End of draw\n\n\n\n");
 }

@@ -6,8 +6,9 @@ I need to :
 	What about the view z placement ?
 	What about the color ?
 
+Block the rotation so it is logic (for ex, in x and y, only able to go like 0 to 180 deg)
 
-
+Fix the size of the window. It is fucked up.
 
 Change draw map so it draws from back to front, and not always from top to bot.
 Scale is affecting the gradient and breaking it if too zoomed in.
