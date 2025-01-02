@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 12:12:01 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:48:59 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,12 +147,14 @@ int		calc_point(t_data *data, t_line *line, t_vec *start, t_vec *end);
 /*		projection_		*/
 /*			utils.c		*/
 /************************/
+int		move_point(t_data *data, t_point *start, t_point *end);
 void	change_point(t_vec *change, t_vec other);
 
 /************************/
 /*		point.c			*/
 /************************/
 t_vec	vec(t_obj obj, t_wld wld, t_point point);
+void	norm_vec(t_vec *vec);
 
 /************************/
 /*		color.c			*/

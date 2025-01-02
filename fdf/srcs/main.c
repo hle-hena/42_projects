@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 12:23:45 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:49:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	go_forward(t_data *data, int sign)
 	do_rot(&data->wld.cam.base, data->wld.cam.init,
 		(t_vec){-data->wld.cam.rot.x, -data->wld.cam.rot.y,
 			-data->wld.cam.rot.z});
-	data->wld.cam.ori.x += sign * 50 * data->wld.base.k.x;
-	data->wld.cam.ori.y += sign * 50 * data->wld.base.k.y;
+	norm_vec(&data->wld.cam.base.k);
+	data->wld.cam.ori.x += sign * (data->wld.cam.scale / 4) * data->wld.base.k.x;
+	data->wld.cam.ori.y += sign * (data->wld.cam.scale / 4) * data->wld.base.k.y;
 	// data->wld.cam.ori.z += sign * 4 * data->wld.base.k.z;
 }
 

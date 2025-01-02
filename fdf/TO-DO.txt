@@ -1,15 +1,9 @@
-I need to :
-	Rotate the camera base
-	Rotate the world base by -the angle ?
-	Move the camera based on the camera base
-	Calculate points base on the world base
-	What about the view z placement ?
-	What about the color ?
-
-STOP MAKING A FLOAT GOING INTO AN INT YOU DUMBASS
-Things to fix : the change_point func. the draw func. probably the projection func.
-
 Block the rotation so it is logic (for ex, in x and y, only able to go like 0 to 180 deg)
+
+Fix the movement. Also differentiate the movement when in perspective and in isometric.
+
+Fix the draw func. In perspective, if the two dots are outside of the screen, it just doesnt draw.
+Might be fixed by changing the perspective func ?
 
 Fix the size of the window. It is fucked up.
 
