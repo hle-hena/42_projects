@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 19:49:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:18:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	go_forward(t_data *data, int sign)
 		(t_vec){-data->wld.cam.rot.x, -data->wld.cam.rot.y,
 			-data->wld.cam.rot.z});
 	norm_vec(&data->wld.cam.base.k);
-	data->wld.cam.ori.x += sign * (data->wld.cam.scale / 4) * data->wld.base.k.x;
-	data->wld.cam.ori.y += sign * (data->wld.cam.scale / 4) * data->wld.base.k.y;
+	data->wld.cam.ori.x += sign * (data->wld.cam.scale / 4) * data->wld.cam.base.k.x;
+	data->wld.cam.ori.y += sign * (data->wld.cam.scale / 4) * data->wld.cam.base.k.y;
 	// data->wld.cam.ori.z += sign * 4 * data->wld.base.k.z;
 }
 
@@ -65,6 +65,28 @@ void	go_side(t_data *data, int sign)
 			+ data->wld.cam.base.j.y + data->wld.cam.base.j.z);
 }
 
+void	go_to_proj(t_data *data)
+{
+	if (data->proj)
+	{
+		data->wld.cam.ori = (t_vec){0, -data->obj.mat.len / 2,
+			2 * data->wld.cam.scale};
+		data->wld.cam.rot = (t_vec){90 * (M_PI / 180),
+			-180 * (M_PI / 180), 0};
+		data->wld.cam.scale = data->wld.init_scale;
+	}
+	else if (!data->proj)
+	{
+		data->wld.cam.rot = (t_vec){
+			-19 * (M_PI / 180),
+			25 * (M_PI / 180),
+			40 * (M_PI / 180)
+		};
+		data->wld.cam.ori = (t_vec){0, 0, 0};
+		data->wld.cam.scale = data->wld.init_scale;
+	}
+}
+
 int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 65307)
@@ -76,7 +98,10 @@ int	key_hook(int keycode, t_data *data)
 	{
 		draw_map(data, 0);
 		if (keycode == 32)
+		{
 			data->proj = !data->proj;
+			go_to_proj(data);
+		}
 		else if (keycode == 119)
 			go_forward(data, 1);
 		else if (keycode == 115)
@@ -102,9 +127,13 @@ int	key_hook(int keycode, t_data *data)
 		else if (keycode == 108)
 			add_rot(&data->wld.cam.rot.z, -1);
 		if (keycode == 117 || keycode == 106 || keycode == 105
-			|| keycode == 107 || keycode == 111 || keycode == 108)
+			|| keycode == 107 || keycode == 111 || keycode == 108
+			|| keycode == 32)
 			do_rot(&data->wld.base, data->wld.init, data->wld.cam.rot);
 		draw_map(data, 1);
+		// printf("Rot is %d\t%d\t%d\n", (int)((data->wld.cam.rot.x * 180) / M_PI),
+		// 	(int)((180 * data->wld.cam.rot.y) / M_PI),
+		// 	(int)((180 * data->wld.cam.rot.z) / M_PI));
 	}
 	return (0);
 }
