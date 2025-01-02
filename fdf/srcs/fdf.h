@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 19:48:59 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:26:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef struct s_object
 	t_vec	rot;
 	t_mat	mat;
 	int		scale;
-	float		max_h;
-	float		min_h;
+	float	max_h;
+	float	min_h;
 }	t_obj;
 
 typedef struct s_camera

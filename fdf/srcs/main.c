@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 20:18:36 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:28:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ void	go_forward(t_data *data, int sign)
 {
 	do_rot(&data->wld.cam.base, data->wld.cam.init,
 		(t_vec){-data->wld.cam.rot.x, -data->wld.cam.rot.y,
-			-data->wld.cam.rot.z});
+		-data->wld.cam.rot.z});
 	norm_vec(&data->wld.cam.base.k);
-	data->wld.cam.ori.x += sign * (data->wld.cam.scale / 4) * data->wld.cam.base.k.x;
-	data->wld.cam.ori.y += sign * (data->wld.cam.scale / 4) * data->wld.cam.base.k.y;
-	// data->wld.cam.ori.z += sign * 4 * data->wld.base.k.z;
+	data->wld.cam.ori.x += sign * (data->wld.cam.scale / 4)
+		* data->wld.cam.base.k.x;
+	data->wld.cam.ori.y += sign * (data->wld.cam.scale / 4)
+		* data->wld.cam.base.k.y;
 }
 
 void	go_up(t_data *data, int sign)
@@ -131,9 +132,6 @@ int	key_hook(int keycode, t_data *data)
 			|| keycode == 32)
 			do_rot(&data->wld.base, data->wld.init, data->wld.cam.rot);
 		draw_map(data, 1);
-		// printf("Rot is %d\t%d\t%d\n", (int)((data->wld.cam.rot.x * 180) / M_PI),
-		// 	(int)((180 * data->wld.cam.rot.y) / M_PI),
-		// 	(int)((180 * data->wld.cam.rot.z) / M_PI));
 	}
 	return (0);
 }

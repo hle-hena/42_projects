@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 19:48:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:24:10 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,18 @@ t_vec	vec(t_obj obj, t_wld wld, t_point point)
 	wld_coo = get_wld_coo(point, obj, wld);
 	centered = (t_vec){wld_coo.x - wld.cam.ori.x, wld_coo.y - wld.cam.ori.y,
 		wld_coo.z - wld.cam.ori.z};
-	// round_vec(&centered);
 	final.x = centered.x * wld.base.i.x + centered.y * wld.base.j.x
 		+ centered.z * wld.base.k.x;
 	final.y = centered.x * wld.base.i.y + centered.y * wld.base.j.y
 		+ centered.z * wld.base.k.y;
 	final.z = centered.x * wld.base.i.z + centered.y * wld.base.j.z
 		+ centered.z * wld.base.k.z;
-	// round_vec(&final);
 	return (final);
 }
 
 void	norm_vec(t_vec *vec)
 {
-	float len;
+	float	len;
 
 	len = sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 	if (len == 0)

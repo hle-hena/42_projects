@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 18:41:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:26:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	draw_low(t_data *data, t_point start, t_point end)
 		return ;
 	if (start.z < 0 && end.z < 0)
 		return ; */
-void	draw_line(t_data *data, t_vec start, t_vec end, int	col)
+void	draw_line(t_data *data, t_vec start, t_vec end, int col)
 {
 	t_line	line;
 
@@ -94,7 +94,6 @@ void	draw_line(t_data *data, t_vec start, t_vec end, int	col)
 	}
 	else
 		set_color(data, &line, start, end);
-	// if (!point_is_in_fov(data, line.start) && !point_is_in_fov(data, line.end))
 	if (!move_point(data, &line.start, &line.end))
 		return ;
 	if (line.start.x == line.end.x && line.start.y == line.end.y

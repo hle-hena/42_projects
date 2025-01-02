@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 12:04:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:28:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	put_pixel(t_data *data, t_point point, int color)
 	int	size_line;
 
 	img = (int *)mlx_get_data_addr(data->img, &temp, &size_line, &temp);
-	img[point.y * data->obj.mat.wid * data->wld.init_scale * 3 + point.x] = color;
+	img[point.y * data->win_wid + point.x] = color;
 }
 
 	// printf("x is %d; y is %d; z is %d\n", x, y, z);

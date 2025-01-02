@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 15:31:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:24:59 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,4 @@ void	do_rot(t_base *base, t_base init, t_vec rot)
 	do_rot_yxz(&base->i, rot_y, rot_x, rot_z);
 	do_rot_yxz(&base->j, rot_y, rot_x, rot_z);
 	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
-	// round_vec(&base->i);
-	// round_vec(&base->j);
-	// round_vec(&base->k);
 }
