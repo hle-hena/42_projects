@@ -11,10 +11,11 @@ FRAMEWORK = -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-FDF =	draw_utils.c	draw.c			end.c		\
-		init.c			main.c			parser.c	\
-		rotate.c		projection.c	color.c		\
-		float.c			point.c
+FDF =	color_utils.c	color.c				draw_utils.c	\
+		draw.c			end.c				float.c			\
+		init.c			main.c				parser.c		\
+		point.c			projection_utils.c	projection.c	\
+		rotate.c
 
 NEW_FDF =	draw_utils.c	draw.c	end.c		\
 			init.c			main.c	parser.c	\

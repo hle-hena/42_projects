@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/30 22:47:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:23:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,17 @@ void	add_rot(float *val, int sign)
 
 void	go_forward(t_data *data, int sign)
 {
-	printf("scale is %d\n", data->wld.cam.scale);
 	do_rot(&data->wld.cam.base, data->wld.cam.init,
 		(t_vec){-data->wld.cam.rot.x, -data->wld.cam.rot.y,
 			-data->wld.cam.rot.z});
-	data->wld.cam.ori.x += sign * 4 * data->wld.base.k.x;
-	data->wld.cam.ori.y += sign * 4 * data->wld.base.k.y;
-	data->wld.cam.ori.z += sign * 4 * data->wld.base.k.z;
+	data->wld.cam.ori.x += sign * 50 * data->wld.base.k.x;
+	data->wld.cam.ori.y += sign * 50 * data->wld.base.k.y;
+	// data->wld.cam.ori.z += sign * 4 * data->wld.base.k.z;
+}
+
+void	go_up(t_data *data, int sign)
+{
+	data->wld.cam.ori.z += sign;
 }
 
 void	go_side(t_data *data, int sign)
@@ -66,7 +70,8 @@ int	key_hook(int keycode, t_data *data)
 		mlx_close(data);
 	if (keycode == 119 || keycode == 115 || keycode == 97 || keycode == 100
 		|| keycode == 117 || keycode == 106 || keycode == 105
-		|| keycode == 107 || keycode == 111 || keycode == 108 || keycode == 32)
+		|| keycode == 107 || keycode == 111 || keycode == 108 || keycode == 32
+		|| keycode == 113 || keycode == 101)
 	{
 		draw_map(data, 0);
 		if (keycode == 32)
@@ -79,6 +84,10 @@ int	key_hook(int keycode, t_data *data)
 			go_side(data, 1);
 		else if (keycode == 100)
 			go_side(data, -1);
+		else if (keycode == 113)
+			go_up(data, 1);
+		else if (keycode == 101)
+			go_up(data, -1);
 		else if (keycode == 117)
 			add_rot(&data->wld.cam.rot.x, 1);
 		else if (keycode == 106)

@@ -6,16 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/01 16:46:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:04:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	reset_img(t_data *data)
-{
-	draw_map(data, 0);
-}
 
 int	point_is_in_fov(t_data *data, t_point point)
 {
@@ -34,17 +29,6 @@ void	put_pixel(t_data *data, t_point point, int color)
 
 	img = (int *)mlx_get_data_addr(data->img, &temp, &size_line, &temp);
 	img[point.y * data->obj.mat.wid * data->wld.init_scale * 3 + point.x] = color;
-}
-
-void	change_point(t_point *change, t_point other)
-{
-	float	param;
-	t_point	n_point;
-
-	param = (float)(1 - change->z) / (other.z - change->z);
-	n_point = (t_point){change->x + param * (other.x - change->x),
-		change->y + param * (other.y - change->y), 1, get_color(*change, other, param)};
-	*change = n_point;
 }
 
 	// printf("x is %d; y is %d; z is %d\n", x, y, z);

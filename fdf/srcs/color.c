@@ -6,54 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/01 15:56:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:10:28 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	calc_color(t_col col)
-{
-	return ((col.re << 16) | (col.gr << 8) | col.bl);
-}
-
-void	chose_color_2(t_col *col1, t_col *col2, float *percent)
-{
-	*percent *= -1;
-	if (*percent <= 0.5)
-	{
-		*col1 = (t_col){0xFF, 0xFF, 0xFF};
-		*col2 = (t_col){0x80, 0xFF, 0xBA};
-		*percent /= 0.5;
-	}
-	else if (*percent > 0.5)
-	{
-		*col1 = (t_col){0x80, 0xFF, 0xBA};
-		*col2 = (t_col){0x00, 0xF2, 0xFF};
-		*percent = (*percent - 0.5) / 0.5;
-	}
-}
-
-void	chose_color(t_col *col1, t_col *col2, float *percent)
-{
-	if (*percent >= 0)
-	{
-		if (*percent <= 0.5)
-		{
-			*col1 = (t_col){0xFF, 0xFF, 0xFF};
-			*col2 = (t_col){0xFF, 0xFB, 0x7D};
-			*percent /= 0.5;
-		}
-		else if (*percent > 0.5)
-		{
-			*col1 = (t_col){0xFF, 0xFB, 0x7D};
-			*col2 = (t_col){0xFF, 0x4B, 0xF3};
-			*percent = (*percent - 0.5) / 0.5;
-		}
-		return ;
-	}
-	chose_color_2(col1, col2, percent);
-}
 
 t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr)
 {
@@ -66,8 +23,6 @@ t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr)
 			+ wld.base.k.y * (curr.y - obj.r_ori.y)
 			+ wld.base.k.z * (curr.z - obj.r_ori.z));
 	percent = round_float(percent, 3);
-	// printf("percent is %f\n", percent);
-	// printf("max is %f\n",(obj.max_h * obj.scale * wld.cam.scale * 2));
 	if (percent >= 0)
 	{
 		if (obj.max_h)
@@ -75,9 +30,7 @@ t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr)
 	}
 	else
 		percent /= (obj.min_h * obj.scale * wld.cam.scale * 2 * -1);
-	// printf("percent is %f\n", percent);
 	percent = round_float(percent, 3);
-	// printf("percent is %f\n", percent);
 	chose_color(&col1, &col2, &percent);
 	final = (t_col){col1.re + (col2.re - col1.re) * percent,
 		col1.gr + (col2.gr - col1.gr) * percent,
@@ -102,6 +55,11 @@ t_col	get_color(t_point start, t_point end, float percent)
 	color.re = col1.re + (col2.re - col1.re) * percent;
 	color.gr = col1.gr + (col2.gr - col1.gr) * percent;
 	color.bl = col1.bl + (col2.bl - col1.bl) * percent;
-	// printf("percent is %f\n", percent);
 	return (color);
+}
+
+void	set_color(t_data *data, t_line *line, t_vec start, t_vec end)
+{
+	line->start.col = get_real_color(data->obj, data->wld, start);
+	line->end.col = get_real_color(data->obj, data->wld, end);
 }

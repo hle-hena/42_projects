@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/01 15:33:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:09:48 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,7 @@ t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 		wld_coo.z - obj.wld_ori.z, (t_col){0}});
 }
 
-t_point	point(t_obj obj, t_wld wld, t_point point, int color)
-{
-	t_vec	final;
-	t_col	col;
-
-	final = calc_vec(obj, wld, point);
-	if (!color)
-		col = (t_col){0, 0, 0};
-	else
-		col = get_real_color(obj, wld, final);
-		// col = (t_col){0xFF, 0xFF, 0xFF};
-	return ((t_point){final.x, final.y, final.z, col});
-	// return (get_projection(obj, wld, (t_point){final.x, final.y, final.z, col}, col));
-}
-
-t_vec	calc_vec(t_obj obj, t_wld wld, t_point point)
+t_vec	vec(t_obj obj, t_wld wld, t_point point)
 {
 	t_point	wld_coo;
 	t_vec	centered;

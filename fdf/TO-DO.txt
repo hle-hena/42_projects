@@ -6,6 +6,9 @@ I need to :
 	What about the view z placement ?
 	What about the color ?
 
+STOP MAKING A FLOAT GOING INTO AN INT YOU DUMBASS
+Things to fix : the change_point func. the draw func. probably the projection func.
+
 Block the rotation so it is logic (for ex, in x and y, only able to go like 0 to 180 deg)
 
 Fix the size of the window. It is fucked up.
