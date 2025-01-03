@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 13:58:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 20:23:36 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:48:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	get_iso(t_data *data, t_line *line, t_vec *start, t_vec *end)
 {
 	line->start = (t_point){start->x + (data->win_wid / 2),
-		start->y + (data->win_len / 2), 0, (t_col){0, 0, 0}};
+		start->y + (data->win_len / 2), 1, (t_col){0, 0, 0}};
 	line->end = (t_point){end->x + (data->win_wid / 2),
-		end->y + (data->win_len / 2), 0, (t_col){0, 0, 0}};
+		end->y + (data->win_len / 2), 1, (t_col){0, 0, 0}};
 	return (1);
 }
 
@@ -26,8 +26,8 @@ int	get_persp(t_data *data, t_line *line, t_vec *start, t_vec *end)
 	float	fov_scale_x;
 	float	fov_scale_y;
 
-	fov_scale_x = data->win_wid / (2.0f * tan(30 / 2.0f));
-	fov_scale_y = data->win_len / (2.0f * tan(30 / 2.0f));
+	fov_scale_x = data->win_wid / (2.0f * tan((60 * (M_PI / 180)) / 2.0f));
+	fov_scale_y = data->win_len / (2.0f * tan((60 * (M_PI / 180)) / 2.0f));
 	if (start->z < 1 && end->z < 1)
 		return (0);
 	if (start->z < 1)

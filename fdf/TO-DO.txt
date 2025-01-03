@@ -2,8 +2,8 @@ Block the rotation so it is logic (for ex, in x and y, only able to go like 0 to
 
 Fix the movement. Also differentiate the movement when in perspective and in isometric.
 
-Fix the draw func. In perspective, if the two dots are outside of the screen, it just doesnt draw.
-Might be fixed by changing the perspective func ?
+The rotation is still not working properly ...
+Try to rotate on the "x" axis (look up) when having rotated on the "y" axis (looking around)
 
 Fix the size of the window. It is fucked up.
 
@@ -16,8 +16,6 @@ Add the color to the parsing
 Fix the length issue at the read of the map.
 Accept maps with new line at the end.
 
-Re implement the near plane. Went missing because it was poorly done and interacted with the automatic color
-Fix the movement. The camera display is weird.
 Make the zoom with the center at mouse pos
 Rotate with mouse
 

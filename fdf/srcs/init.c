@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 20:25:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:37:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	init_obj(t_obj *obj, char *path)
 {
 	obj->wld_ori = (t_point){0, 0, 0, (t_col){0}};
 	obj->r_ori = (t_vec){0, 0, 0};
-	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
+	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
 		(t_vec){0, 0, 0.15}};
-	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
+	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
 		(t_vec){0, 0, 0.15}};
 	obj->rot = (t_vec){0, 0, 0};
 	obj->scale = 1;
@@ -36,8 +36,8 @@ void	init_wld(t_wld *wld)
 {
 	*wld = (t_wld)
 	{
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
 		(t_cam)
 	{
 		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
@@ -45,9 +45,9 @@ void	init_wld(t_wld *wld)
 		(t_vec){0, 0, 0},
 		(t_vec){0, 0, 0},
 	{
-		-19 * (M_PI / 180),
-		25 * (M_PI / 180),
-		40 * (M_PI / 180)
+		-25 * (M_PI / 180),
+		156 * (M_PI / 180),
+		-140 * (M_PI / 180)
 	},
 		1,
 		1,
@@ -69,7 +69,7 @@ void	init_data(t_data *data, char **path)
 	data->wld.init_scale = ft_min(len / (data->obj.mat.len * 3),
 			wid / (data->obj.mat.wid * 3));
 	data->wld.cam.scale = data->wld.init_scale;
-	do_rot(&data->wld.base, data->wld.init, data->wld.cam.rot);
+	look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
 	data->win_len = data->obj.mat.len * (data->wld.init_scale * 3);
 	data->win_wid = data->obj.mat.wid * (data->wld.init_scale * 3);
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");

@@ -15,7 +15,7 @@ FDF =	color_utils.c	color.c				draw_utils.c	\
 		draw.c			end.c				float.c			\
 		init.c			main.c				parser.c		\
 		point.c			projection_utils.c	projection.c	\
-		rotate.c
+		rotate.c		movement.c			rotate_utils.c
 
 NEW_FDF =	draw_utils.c	draw.c	end.c		\
 			init.c			main.c	parser.c	\

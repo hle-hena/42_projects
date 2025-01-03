@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 20:26:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:44:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,11 @@ typedef struct s_data
 t_data	*get_data(void);
 
 /************************/
+/*		movement.c		*/
+/************************/
+void	move(t_data *data, int keycode);
+
+/************************/
 /*		draw.c			*/
 /************************/
 void	draw_map(t_data *data, int color);
@@ -178,7 +183,17 @@ void	round_vec(t_vec *vec);
 /************************/
 /*		rotate.c		*/
 /************************/
-void	do_rot(t_base *base, t_base init, t_vec rot);
+void	look_at(t_base *base, t_base init, t_vec rot);
+void	do_rot(t_vec *cam_r, t_base *base, int keycode);
+
+/************************/
+/*		rotate_utils.c	*/
+/************************/
+void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z);
+void	do_rotx(t_base *base, t_trig vals);
+void	do_roty(t_base *base, t_trig vals);
+void	do_rotz(t_base *base, t_trig vals);
+void	add_rot(float *val, float *rot, int sign);
 
 /************************/
 /*		init.c			*/
