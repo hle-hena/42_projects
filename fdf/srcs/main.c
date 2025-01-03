@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 16:01:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:47:00 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	go_to_proj(t_data *data)
 {
 	if (data->proj)
 	{
-		data->wld.cam.ori = (t_vec){0, (-data->obj.mat.len / 2)
-			* data->wld.init_scale, 2 * data->wld.init_scale};
-		data->wld.cam.rot = (t_vec){90 * (M_PI / 180),
-			-0 * (M_PI / 180), 0};
+		data->wld.cam.ori = (t_vec){0, -data->obj.mat.len
+			* (15), 10 * (15)};
+		data->wld.cam.rot = (t_vec){135 * (M_PI / 180),
+			0 * (M_PI / 180), 0};
+		data->wld.cam.scale = (15);
 		look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
-		data->wld.cam.scale = data->wld.init_scale;
 	}
 	else if (!data->proj)
 	{

@@ -1,7 +1,10 @@
-Fix the size of the window. It is fucked up.
-Add the color to the parsing
 Change draw map so it draws from back to front, and not always from top to bot.
+Add the color to the parsing
 Sometimes, there are float issue, making part of the map not render
+
+Please I swear to god make opti !
+->if a precedent line couldnt be drawn, just dont even ask for the next one and just qui already man
+->the far plane should be an option, not a default
 
 Scale is affecting the perspective proj //Might just not allow to scale I think
 Fix the gradient

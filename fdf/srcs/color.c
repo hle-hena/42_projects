@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 20:25:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:33:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_col	get_color(t_point start, t_point end, float percent)
 	t_col	col1;
 	t_col	col2;
 
+	// return (start.col);
 	if (percent < 0)
 		return (start.col);
 	col1 = (t_col){start.col.re, start.col.gr, start.col.bl};
@@ -58,6 +59,10 @@ t_col	get_color(t_point start, t_point end, float percent)
 
 void	set_color(t_data *data, t_line *line, t_vec start, t_vec end)
 {
+	// line->start.col = (t_col){0xFF, 0xFF, 0xFF};
+	// line->end.col = (t_col){0xFF, 0xFF, 0xFF};
+	// return ;
+	// //start here
 	line->start.col = get_real_color(data->obj, data->wld, start);
 	line->end.col = get_real_color(data->obj, data->wld, end);
 }

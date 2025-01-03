@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 18:17:10 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:54:49 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ typedef struct s_camera
 	t_vec	r_ori;
 	t_vec	rot;
 	int		scale;
-	float	near_plane;
-	float	far_plane;
+	float	n_plane;
+	float	f_plane;
 }	t_cam;
 
 typedef struct s_world
@@ -153,7 +153,7 @@ int		calc_point(t_data *data, t_line *line, t_vec *start, t_vec *end);
 /*			utils.c		*/
 /************************/
 int		move_point(t_data *data, t_point *start, t_point *end);
-void	change_point(t_vec *change, t_vec other);
+void	change_point(t_vec *change, t_vec other, int z);
 
 /************************/
 /*		point.c			*/

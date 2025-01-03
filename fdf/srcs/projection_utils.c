@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 19:27:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:58:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ int	move_point(t_data *data, t_point *start, t_point *end)
 	return (1);
 }
 
-void	change_point(t_vec *change, t_vec other)
+void	change_point(t_vec *change, t_vec other, int z)
 {
 	float	param;
 	t_vec	n_point;
 
-	param = (float)(1 - change->z) / (other.z - change->z);
+	param = (float)(z - change->z) / (other.z - change->z);
 	n_point = (t_vec){change->x + param * (other.x - change->x),
-		change->y + param * (other.y - change->y), 1};
+		change->y + param * (other.y - change->y), z};
 	*change = n_point;
 }
