@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 15:37:16 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:16:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,37 +75,3 @@ void	init_data(t_data *data, char **path)
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
 	data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
 }
-
-/* void	init_data(t_data *data, char *path)
-{
-	int	len;
-	int	wid;
-
-	init_matrix(&data->obj.mat, path);
-	data->wld = (t_wld){1, 1, 0, 0, 0, (t_vec){1, 0, 0}, (t_vec){0, 1, 0},
-		(t_vec){0, 0, 1}, (t_vec){0, 0, 0}, (t_vec){0, 0, 0}, 0, 0, 0};
-	data->wld.rot_x = 90 * (M_PI / 180);
-	data->wld.rot_y = 0 * (M_PI / 180);
-	data->wld.rot_z = 0 * (M_PI / 180);
-	data->mlx = mlx_init();
-	mlx_get_screen_size(data->mlx, &len, &wid);
-	data->wld.scale = ft_min((len - 20) / (data->mat.len * 3),
-			(wid - 20) / (data->mat.wid * 3));
-	data->wld.init_scale = data->wld.scale;
-	data->wld.rot_cen.x = (data->mat.wid + 1) / 2;
-	// data->wld.rot_cen.x = 1;
-	data->wld.rot_cen.y = data->mat.len / 2;
-	// data->wld.rot_cen.y = 1;
-	data->wld.rot_cen.z = 0;
-	do_rot(data);
-	// data->wld.rot_x = 180 * (M_PI / 180);
-	// do_rot(data);
-	// data->wld.rot_x = 270 * (M_PI / 180);
-	// do_rot(data);
-	data->wld.d_x = data->mat.wid;
-	data->wld.d_y = data->mat.len;
-	data->win = mlx_new_window(data->mlx, data->mat.wid * (data->wld.init_scale
-				* 3), data->mat.len * (data->wld.init_scale * 3), "Fdf");
-	data->img = mlx_new_image(data->mlx, data->mat.wid * (data->wld.init_scale
-				* 3), data->mat.len * (data->wld.init_scale * 3));
-} */

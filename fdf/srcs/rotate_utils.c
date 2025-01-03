@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:25:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 15:48:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:23:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,26 @@ void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z)
 	vec->z = temp_z;
 }
 
-void	add_rot(float *val, float *rot, int sign)
+void	block_rot(float *val, float *rot, int axis)
 {
-	int	inc;
-
-	inc = 1;
-	*val += inc * sign * (M_PI / 180);
-	*rot = inc * sign * (M_PI / 180);
-	if (*val >= (float)(2 * M_PI))
-		*val -= 2 * M_PI;
-	else if (*val <= (float)-(2 * M_PI))
-		*val += 2 * M_PI;
-	round_float(*val, 5);
+	if (axis == 1 && ((180 * *val) / M_PI) >= 180)
+	{
+		*val = 180 * (M_PI / 180);
+		*rot = 0;
+	}
+	else if (axis == 1 && ((180 * *val) / M_PI) <= 0)
+	{
+		*val = 0;
+		*rot = 0;
+	}
+	else if (axis == 3 && ((180 * *val) / M_PI) < 0)
+	{
+		*val = 0;
+		*rot = 0;
+	}
+	else if (axis == 3 && ((180 * *val) / M_PI) > 0)
+	{
+		*val = 0;
+		*rot = 0;
+	}
 }

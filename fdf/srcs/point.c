@@ -6,35 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/02 20:24:10 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:16:52 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/* t_point	get_projection(t_obj obj, t_wld wld, t_point point, t_col color)
-{
-	t_data	*data;
-	// float	dist;
-
-	data = get_data();
-	if (data->proj == 0)
-		return ((t_point){point.x + (data->win_wid / 2),
-			point.y + (data->win_len / 2), 0, color});
-	else if (data->proj == 1)
-	{
-		// return ((t_point){point.x + (data->win_wid / 2),
-		// 	point.y + (data->win_len / 2), point.z, color});
-		// dist = get_distance(obj, wld, point);
-		// printf("%f\n", dist);
-		if (point.z >= 1)
-			return ((t_point){(point.x / point.z) + (data->win_wid / 2),
-				(point.y / point.z) + (data->win_len / 2), point.z, color});
-		return ((t_point){(point.x) + (data->win_wid / 2),
-				(point.y) + (data->win_len / 2), -1, color});
-	}
-	return ((t_point){-1, -1, 0, (t_col){0, 0, 0}});
-} */
 
 t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 {
@@ -69,14 +45,4 @@ t_vec	vec(t_obj obj, t_wld wld, t_point point)
 	final.z = centered.x * wld.base.i.z + centered.y * wld.base.j.z
 		+ centered.z * wld.base.k.z;
 	return (final);
-}
-
-void	norm_vec(t_vec *vec)
-{
-	float	len;
-
-	len = sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
-	if (len == 0)
-		return ;
-	*vec = (t_vec){vec->x / len, vec->y / len, vec->z / len};
 }

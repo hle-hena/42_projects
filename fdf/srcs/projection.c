@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 13:58:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 15:48:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:19:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	get_iso(t_data *data, t_line *line, t_vec *start, t_vec *end)
 {
 	line->start = (t_point){start->x + (data->win_wid / 2),
-		start->y + (data->win_len / 2), 1, (t_col){0, 0, 0}};
+		start->y + (data->win_len / 2), 100, (t_col){0, 0, 0}};
 	line->end = (t_point){end->x + (data->win_wid / 2),
-		end->y + (data->win_len / 2), 1, (t_col){0, 0, 0}};
+		end->y + (data->win_len / 2), 100, (t_col){0, 0, 0}};
 	return (1);
 }
 

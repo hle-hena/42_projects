@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 15:44:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:17:10 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ void	change_point(t_vec *change, t_vec other);
 /*		point.c			*/
 /************************/
 t_vec	vec(t_obj obj, t_wld wld, t_point point);
-void	norm_vec(t_vec *vec);
 
 /************************/
 /*		color.c			*/
@@ -193,7 +192,7 @@ void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z);
 void	do_rotx(t_base *base, t_trig vals);
 void	do_roty(t_base *base, t_trig vals);
 void	do_rotz(t_base *base, t_trig vals);
-void	add_rot(float *val, float *rot, int sign);
+void	block_rot(float *val, float *rot, int axis);
 
 /************************/
 /*		init.c			*/

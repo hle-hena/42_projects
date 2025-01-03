@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 15:52:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:19:04 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ void	look_at(t_base *base, t_base init, t_vec rot)
 	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
 }
 
+void	add_rot(float *val, float *rot, int sign, int axis)
+{
+	int		inc;
+	t_data	*data;
+
+	inc = 1;
+	*val += inc * sign * (M_PI / 180);
+	*rot = inc * sign * (M_PI / 180);
+	if (*val >= (float)(2 * M_PI))
+		*val -= 2 * M_PI;
+	else if (*val <= (float)-(2 * M_PI))
+		*val += 2 * M_PI;
+	*val = round_float(*val, 5);
+	data = get_data();
+	if (data->proj)
+		block_rot(val, rot, axis);
+}
+
 void	do_rot(t_vec *cam_r, t_base *base, int keycode)
 {
 	t_trig	rot_y;
@@ -38,17 +56,17 @@ void	do_rot(t_vec *cam_r, t_base *base, int keycode)
 
 	rot = (t_vec){0, 0, 0};
 	if (keycode == 117)
-		add_rot(&cam_r->x, &rot.x, 1);
+		add_rot(&cam_r->x, &rot.x, 1, 1);
 	else if (keycode == 106)
-		add_rot(&cam_r->x, &rot.x, -1);
+		add_rot(&cam_r->x, &rot.x, -1, 1);
 	else if (keycode == 105)
-		add_rot(&cam_r->y, &rot.y, 1);
+		add_rot(&cam_r->y, &rot.y, 1, 2);
 	else if (keycode == 107)
-		add_rot(&cam_r->y, &rot.y, -1);
+		add_rot(&cam_r->y, &rot.y, -1, 2);
 	else if (keycode == 111)
-		add_rot(&cam_r->z, &rot.z, 1);
+		add_rot(&cam_r->z, &rot.z, 1, 3);
 	else if (keycode == 108)
-		add_rot(&cam_r->z, &rot.z, -1);
+		add_rot(&cam_r->z, &rot.z, -1, 3);
 	rot_y = (t_trig){sin(rot.y), cos(rot.y)};
 	rot_x = (t_trig){sin(rot.x), cos(rot.x)};
 	rot_z = (t_trig){sin(rot.z), cos(rot.z)};

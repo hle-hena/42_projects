@@ -1,25 +1,16 @@
-Block the rotation so it is logic (for ex, in x and y, only able to go like 0 to 180 deg)
-
-Fix the movement. Also differentiate the movement when in perspective and in isometric.
-
-The rotation is still not working properly ...
-Try to rotate on the "x" axis (look up) when having rotated on the "y" axis (looking around)
-
 Fix the size of the window. It is fucked up.
-
-Change draw map so it draws from back to front, and not always from top to bot.
-Scale is affecting the gradient and breaking it if too zoomed in.
-
-Fix the Makefile. It relinks I think
-
 Add the color to the parsing
+Change draw map so it draws from back to front, and not always from top to bot.
+Sometimes, there are float issue, making part of the map not render
+
+Scale is affecting the perspective proj //Might just not allow to scale I think
+Fix the gradient
+Make the zoom with the center at mouse pos
+
 Fix the length issue at the read of the map.
 Accept maps with new line at the end.
 
-Make the zoom with the center at mouse pos
 Rotate with mouse
 
-Add the new perspective.
-Add suppoert for multiple maps
-
-Fix the gradient
+Add a menu
+Add support for multiple maps
