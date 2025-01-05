@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:26:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/19 14:10:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/04 23:03:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ int	mlx_del(t_data *data)
 
 	if (!data)
 		data = get_data();
-	i = -1;
-	if (data->obj.mat.matrix)
-	{
-		while (data->obj.mat.matrix[++i])
-			free(data->obj.mat.matrix[i]);
-		free(data->obj.mat.matrix);
-	}
+	i = 0;
+	while (data->obj.mat.matrix[i])
+		i++;
+	ft_free_tab((void **)data->obj.mat.matrix, i);
+	i = 0;
+	while (data->obj.mat.color[i])
+		i++;
+	ft_free_tab((void **)data->obj.mat.color, i);
 	if (data->mlx && data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->img)

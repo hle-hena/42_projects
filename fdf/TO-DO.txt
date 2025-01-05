@@ -1,17 +1,22 @@
 Change draw map so it draws from back to front, and not always from top to bot.
-Add the color to the parsing
-Sometimes, there are float issue, making part of the map not render
+I am 90 % sure there is no floating point error left. But it will need some checking
+
+fix the rotation in perspective so rotating around the y axis doesnt change the others.
 
 Please I swear to god make opti !
+->Create a func create_line which will create the line and give the color to each point based on the grid created at init. When calling draw_line, calling it on two points then.
 ->if a precedent line couldnt be drawn, just dont even ask for the next one and just qui already man
 ->the far plane should be an option, not a default
+->
+```
+if (far.left is not in screen)
+	dont't go down to the camera, and go directly to the next one.
+	//same for the right ?
+```
 
 Scale is affecting the perspective proj //Might just not allow to scale I think
 Fix the gradient
 Make the zoom with the center at mouse pos
-
-Fix the length issue at the read of the map.
-Accept maps with new line at the end.
 
 Rotate with mouse
 

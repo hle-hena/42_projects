@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 19:54:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/04 22:48:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ typedef struct s_base
 typedef struct s_matrix
 {
 	int	**matrix;
+	int	**color;
 	int	len;
 	int	wid;
+	int	col;
 }	t_mat;
 
 typedef struct s_object
@@ -142,6 +144,8 @@ void	draw_map(t_data *data, int color);
 /************************/
 void	put_pixel(t_data *data, t_point point, int color);
 int		point_is_in_fov(t_data *data, t_point point);
+void	draw_low(t_data *data, t_point start, t_point end);
+void	draw_high(t_data *data, t_point start, t_point end);
 
 /************************/
 /*		projection.c	*/
@@ -202,7 +206,16 @@ void	init_data(t_data *data, char **path);
 /************************/
 /*		parser.c		*/
 /************************/
-void	parse_file(t_mat *mat, char *path, t_obj *obj);
+void	parse_file(t_obj *obj, char *path);
+
+/************************/
+/*		parser_utils.c	*/
+/************************/
+int		line_size(char **line);
+// void	find_extrem(int val, t_obj *obj);
+void	extract_data(t_obj	*obj, char *data, int x, int y);
+int		is_valid_arg(t_obj *obj, char *str);
+void	get_matsize(t_mat *mat, char *path);
 
 /************************/
 /*		end.c			*/

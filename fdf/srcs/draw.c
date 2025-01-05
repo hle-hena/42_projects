@@ -6,81 +6,12 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 19:24:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:08:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_high(t_data *data, t_point start, t_point end)
-{
-	int		dx;
-	int		dy;
-	int		err;
-	float	percent;
-	t_point	curr;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	err = 2 * ft_abs(dx) - dy;
-	percent = 0;
-	curr = (t_point){start.x, start.y, 0, (t_col){0}};
-	while (curr.y <= end.y)
-	{
-		if (point_is_in_fov(data, curr))
-			put_pixel(data, curr, calc_color(get_color(start, end, percent)));
-		if (err > 0)
-		{
-			curr.x += ft_tern_int(dx < 0, -1, 1);
-			err += 2 * (ft_abs(dx) - dy);
-		}
-		else
-			err += 2 * ft_abs(dx);
-		curr.y += 1;
-		percent += (float)1 / dy;
-	}
-}
-
-void	draw_low(t_data *data, t_point start, t_point end)
-{
-	int		dx;
-	int		dy;
-	int		err;
-	float	percent;
-	t_point	curr;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	err = 2 * ft_abs(dy) - dx;
-	percent = 0;
-	curr = (t_point){start.x, start.y, 0, (t_col){0}};
-	while (curr.x <= end.x)
-	{
-		if (point_is_in_fov(data, curr))
-			put_pixel(data, curr, calc_color(get_color(start, end, percent)));
-		if (err > 0)
-		{
-			curr.y += ft_tern_int(dy < 0, -1, 1);
-			err += 2 * (ft_abs(dy) - dx);
-		}
-		else
-			err += 2 * ft_abs(dy);
-		curr.x += 1;
-		percent += (float)1 / dx;
-	}
-}
-
-/* 	if ((start.x >= (data->obj.mat.wid + 4) * data->wld.init_scale * 3
-			|| start.x < 0
-			|| start.y >= (data->obj.mat.len + 4) * data->wld.init_scale * 3
-			|| start.y < 0)
-		&& (end.x >= (data->obj.mat.wid + 4) * data->wld.init_scale * 3
-			|| end.x < 0
-			|| end.y >= (data->obj.mat.len + 4) * data->wld.init_scale * 3
-			|| end.y < 0))
-		return ;
-	if (start.z < 0 && end.z < 0)
-		return ; */
 void	draw_line(t_data *data, t_vec start, t_vec end, int col)
 {
 	t_line	line;
@@ -110,12 +41,29 @@ void	draw_line(t_data *data, t_vec start, t_vec end, int col)
 	return (draw_high(data, line.start, line.end));
 }
 
-	// printf("Base is %f\t%f\t%f\n%f\t%f\t%f\n%f\t%f\t%f\n",
-	// 	data->wld.base.i.x, data->wld.base.i.y, data->wld.base.i.z,
-	// 	data->wld.base.j.x, data->wld.base.j.y, data->wld.base.j.z,
-	// 	data->wld.base.k.x, data->wld.base.k.y, data->wld.base.k.z);
-	// printf("Cam ori is %f\t%f\t%f\n", data->wld.cam.ori.x,
-	// 	data->wld.cam.ori.y, data->wld.cam.ori.z);
+/* void	create_line(t_data *data, t_point start, t_point end, int col)
+{
+	t_line	line;
+	t_vec	v_start;
+	t_vec	v_end;
+
+	v_start = vec(data->obj, data->wld, (t_point){start.x, start.y,
+		start.z, (t_col){0}});
+	v_end = vec(data->obj, data->wld, (t_point){end.x, end.y,
+		end.z, (t_col){0}});
+	if (!calc_point(data, &line, &v_start, &v_end))
+		return ;
+	if (col == 0)
+	{
+		line.start.col = (t_col){0, 0, 0};
+		line.end.col = (t_col){0, 0, 0};
+	}
+	else
+		set_color(data, &line, start, end);
+	if (!move_point(data, &line.start, &line.end))
+		return ;
+} */
+
 void	draw_map(t_data *data, int color)
 {
 	int		i;
@@ -123,12 +71,12 @@ void	draw_map(t_data *data, int color)
 
 	i = -1;
 	data->obj.r_ori = vec(data->obj, data->wld, data->obj.wld_ori);
-	while (++i < data->obj.mat.len - 1)
+	while (++i < data->obj.mat.len)
 	{
 		j = -1;
 		while (++j < data->obj.mat.wid)
 		{
-			if (i != data->obj.mat.len - 2)
+			if (i != data->obj.mat.len - 1)
 				draw_line(data,
 					vec(data->obj, data->wld, (t_point){j, i,
 						data->obj.mat.matrix[i][j], (t_col){0}}),

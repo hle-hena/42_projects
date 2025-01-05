@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/16 11:50:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/04 22:42:29 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		ft_lstsorted(t_list *lst, int (*f)(t_list *));
 /********************************/
 int		ft_abs(int nb);
 int		ft_atoi(const char *str);
+int		ft_atoi_base(const char *str, const char *base);
 char	*ft_itoa(int n);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);

@@ -6,105 +6,53 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:30:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/24 12:10:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/04 22:53:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	line_size(char **line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-		i++;
-	return (i);
-}
-
-void	find_extrem(int val, t_obj *obj)
-{
-	if (val > obj->max_h)
-		obj->max_h = val;
-	if (val < obj->min_h)
-		obj->min_h = val;
-}
-
-int	parse_line(char **src, int *nb, int size, t_obj *obj)
+/* int	parse_line(char **src, int *tab, int size, t_obj *obj)
 {
 	char	**temp;
-	int		i;
 	int		j;
 
-	if (!nb || !src)
+	if (!tab || !src)
 		return (ft_free_tab((void **)src, line_size(src)), 1);
 	temp = src;
 	j = 0;
 	while (*temp)
 	{
-		if (j == size)
+		if (j == size || !is_valid_arg(*temp))
 			return (ft_free_tab((void **)src, line_size(src)), 1);
-		i = -1;
-		while ((*temp)[++i])
-		{
-			if (!ft_isdigit((*temp)[i]) && (*temp)[i] != '-'
-					&& (*temp)[i] != '+' && (*temp)[i] != '\n')
-				return (ft_free_tab((void **)src, line_size(src)), 1);
-		}
-		nb[j++] = ft_atoi(*temp);
-		find_extrem(nb[j - 1], obj);
+		// extract_data(*temp, tab, j, obj);
+		tab[j++] = ft_atoi(*temp);
+		find_extrem(tab[j - 1], obj);
 		temp++;
 	}
+	ft_free_tab((void **)src, line_size(src));
 	if (j != size)
-		return (ft_free_tab((void **)src, line_size(src)), 1);
+		return (1);
 	return (0);
-}
+} */
 
-void	get_matsize(t_mat *mat, char *path)
-{
-	char	**splited;
-	char	*temp;
-	int		fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		ft_perror(0, mlx_del(NULL), "Fd is invalid.");
-	while (++mat->len)
-	{
-		temp = get_next_line(fd);
-		if (!temp)
-			break ;
-		if (mat->len == 1)
-		{
-			splited = ft_split(temp, ' ');
-			if (!splited)
-				ft_perror(3, mlx_del(NULL), NULL);
-			while (splited[mat->wid])
-				mat->wid++;
-			ft_free_tab((void **)splited, mat->wid);
-		}
-		free(temp);
-	}
-	close(fd);
-}
-
-void	parse_file(t_mat *mat, char *path, t_obj *obj)
+/* void	parse_file(t_mat *mat, char *path, t_obj *obj)
 {
 	char	**temp;
 	char	*line;
 	int		fd;
 	int		i;
 
-	*mat = (t_mat){NULL, 0, 0};
+	*mat = (t_mat){NULL, NULL, 0, 0, 0};
 	get_matsize(mat, path);
 	if (mat->len == 0 || mat->wid == 0)
 		ft_perror(0, 0, "The map is empty.");
-	mat->matrix = ft_calloc(mat->len, sizeof(int *));
+	mat->matrix = ft_calloc(mat->len + 1, sizeof(int *));
 	fd = open(path, O_RDONLY);
 	if (fd == -1 || !mat->matrix)
 		ft_perror(3, mlx_del(NULL), NULL);
 	i = -1;
-	while (++i < mat->len - 1)
+	while (++i < mat->len)
 	{
 		line = get_next_line(fd);
 		temp = ft_split(line, ' ');
@@ -112,7 +60,59 @@ void	parse_file(t_mat *mat, char *path, t_obj *obj)
 		ft_del(line);
 		if (!mat->matrix[i] || parse_line(temp, mat->matrix[i], mat->wid, obj))
 			ft_perror(4, mlx_del(NULL), NULL);
-		ft_free_tab((void **)temp, mat->wid);
+	}
+	close(fd);
+} */
+
+int	parse_line(t_obj *obj, char **src, int line)
+{
+	char	**temp;
+	int		j;
+
+	obj->mat.matrix[line] = ft_calloc(obj->mat.wid + 1, sizeof(int));
+	obj->mat.color[line] = ft_calloc(obj->mat.wid + 1, sizeof(int));
+	if (!obj->mat.matrix[line] || !obj->mat.color[line] || !src)
+		return (ft_free_tab((void **)src, line_size(src)), 1);
+	temp = src;
+	j = 0;
+	while (*temp)
+	{
+		if (j == obj->mat.wid || !is_valid_arg(obj, *temp))
+			return (ft_free_tab((void **)src, line_size(src)), 1);
+		extract_data(obj, *temp, j, line);
+		temp++;
+		j++;
+	}
+	ft_free_tab((void **)src, line_size(src));
+	if (j != obj->mat.wid)
+		return (1);
+	return (0);
+}
+
+void	parse_file(t_obj *obj, char *path)
+{
+	char	**temp;
+	char	*line;
+	int		fd;
+	int		i;
+
+	obj->mat = (t_mat){NULL, NULL, 0, 0, 0};
+	get_matsize(&obj->mat, path);
+	if (obj->mat.len == 0 || obj->mat.wid == 0)
+		ft_perror(0, 0, "The map is empty.");
+	obj->mat.matrix = ft_calloc(obj->mat.len + 1, sizeof(int *));
+	obj->mat.color = ft_calloc(obj->mat.len + 1, sizeof(int *));
+	fd = open(path, O_RDONLY);
+	if (fd == -1 || !obj->mat.matrix || !obj->mat.color)
+		ft_perror(3, mlx_del(NULL), NULL);
+	i = -1;
+	while (++i < obj->mat.len)
+	{
+		line = get_next_line(fd);
+		temp = ft_split(line, ' ');
+		ft_del(line);
+		if (parse_line(obj, temp, i))
+			ft_perror(4, mlx_del(NULL), NULL);
 	}
 	close(fd);
 }

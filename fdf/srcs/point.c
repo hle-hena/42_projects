@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 18:16:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/04 10:33:29 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_vec	vec(t_obj obj, t_wld wld, t_point point)
 		+ centered.z * wld.base.k.y;
 	final.z = centered.x * wld.base.i.z + centered.y * wld.base.j.z
 		+ centered.z * wld.base.k.z;
+	round_vec(&final);
 	return (final);
 }

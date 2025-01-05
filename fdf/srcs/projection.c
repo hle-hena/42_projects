@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 13:58:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 19:55:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/04 11:26:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	get_persp(t_data *data, t_line *line, t_vec *start, t_vec *end)
 		change_point(start, *end, data->wld.cam.n_plane);
 	else if (end->z < data->wld.cam.n_plane)
 		change_point(end, *start, data->wld.cam.n_plane);
-	// if (start->z > data->wld.cam.f_plane)
-	// 	change_point(start, *end, data->wld.cam.f_plane);
-	// else if (end->z > data->wld.cam.f_plane)
-	// 	change_point(end, *start, data->wld.cam.f_plane);
+	if (start->z > data->wld.cam.f_plane)
+		change_point(start, *end, data->wld.cam.f_plane);
+	else if (end->z > data->wld.cam.f_plane)
+		change_point(end, *start, data->wld.cam.f_plane);
 	line->start = (t_point){
 		(start->x * fov_scale_x) / start->z + (data->win_wid / 2),
 		(start->y * fov_scale_y) / start->z + (data->win_len / 2),

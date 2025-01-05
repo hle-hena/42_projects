@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 20:01:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 10:58:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_obj(t_obj *obj, char *path)
 	obj->scale = 1;
 	obj->max_h = 0;
 	obj->min_h = 0;
-	parse_file(&obj->mat, path, obj);
+	parse_file(obj, path);
 	obj->mat_ori.x = obj->mat.wid / 2;
 	obj->mat_ori.y = obj->mat.len / 2;
 	obj->mat_ori.z = 0;
@@ -69,10 +69,16 @@ void	init_data(t_data *data, char **path)
 	len *= 0.9;
 	data->wld.init_scale = ft_min(len / (data->obj.mat.len * 3),
 			wid / (data->obj.mat.wid * 3));
+	if (data->wld.init_scale < 1)
+		data->wld.init_scale = 1;
 	data->wld.cam.scale = data->wld.init_scale;
 	look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
 	data->win_len = (data->obj.mat.len) * (data->wld.init_scale * 3);
 	data->win_wid = (data->obj.mat.wid)* (data->wld.init_scale * 3);
+	if (data->win_len > len)
+		data->win_len = len;
+	if (data->win_wid > wid)
+		data->win_wid = wid;
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
 	data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
 }
