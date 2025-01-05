@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/04 11:18:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:35:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	draw_high(t_data *data, t_point start, t_point end)
 	while (curr.y <= end.y)
 	{
 		if (point_is_in_fov(data, curr))
-			put_pixel(data, curr, calc_color(get_color(start, end, percent)));
+			put_pixel(data, curr, calc_color(get_grad(start, end, percent)));
 		if (err > 0)
 		{
 			curr.x += ft_tern_int(dx < 0, -1, 1);
@@ -76,7 +76,7 @@ void	draw_low(t_data *data, t_point start, t_point end)
 	while (curr.x <= end.x)
 	{
 		if (point_is_in_fov(data, curr))
-			put_pixel(data, curr, calc_color(get_color(start, end, percent)));
+			put_pixel(data, curr, calc_color(get_grad(start, end, percent)));
 		if (err > 0)
 		{
 			curr.y += ft_tern_int(dy < 0, -1, 1);

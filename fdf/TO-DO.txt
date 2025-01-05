@@ -4,9 +4,8 @@ I am 90 % sure there is no floating point error left. But it will need some chec
 fix the rotation in perspective so rotating around the y axis doesnt change the others.
 
 Please I swear to god make opti !
-->Create a func create_line which will create the line and give the color to each point based on the grid created at init. When calling draw_line, calling it on two points then.
-->if a precedent line couldnt be drawn, just dont even ask for the next one and just qui already man
 ->the far plane should be an option, not a default
+->if a precedent line couldnt be drawn, just dont even ask for the next one and just qui already man
 ->
 ```
 if (far.left is not in screen)

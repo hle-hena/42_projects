@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 11:43:53 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/04 11:03:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:13:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 int	calc_color(t_col col)
 {
 	return ((col.re << 16) | (col.gr << 8) | col.bl);
+}
+
+t_col	rev_calc_color(int col)
+{
+	return ((t_col){col >> 16 & 0xFF, col >> 8 & 0xFF, col & 0xFF});
 }
 
 void	chose_color_2(t_col *col1, t_col *col2, float *percent)

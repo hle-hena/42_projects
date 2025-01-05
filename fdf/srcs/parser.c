@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:30:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/04 22:53:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:54:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	parse_line(t_obj *obj, char **src, int line)
 	j = 0;
 	while (*temp)
 	{
-		if (j == obj->mat.wid || !is_valid_arg(obj, *temp))
+		if (j == obj->mat.wid || !is_valid_arg(*temp))
 			return (ft_free_tab((void **)src, line_size(src)), 1);
 		extract_data(obj, *temp, j, line);
 		temp++;
@@ -97,7 +97,7 @@ void	parse_file(t_obj *obj, char *path)
 	int		i;
 
 	obj->mat = (t_mat){NULL, NULL, 0, 0, 0};
-	get_matsize(&obj->mat, path);
+	get_matsize(&obj->mat, open(path, O_RDONLY));
 	if (obj->mat.len == 0 || obj->mat.wid == 0)
 		ft_perror(0, 0, "The map is empty.");
 	obj->mat.matrix = ft_calloc(obj->mat.len + 1, sizeof(int *));

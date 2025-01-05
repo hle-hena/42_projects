@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/03 19:58:36 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:17:20 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	move_point_w(t_data *data, t_point *change, t_point other, int bord)
 	n_point = (t_point){border,
 		change->y + param * (other.y - change->y),
 		change->z + param * (other.z - change->z),
-		get_color(*change, other, param)};
+		get_grad(*change, other, param)};
 	*change = n_point;
 	return (0);
 }
@@ -53,7 +53,7 @@ int	move_point_l(t_data *data, t_point *change, t_point other, int bord)
 	n_point = (t_point){change->x + param * (other.x - change->x),
 		border,
 		change->z + param * (other.z - change->z),
-		get_color(*change, other, param)};
+		get_grad(*change, other, param)};
 	*change = n_point;
 	return (0);
 }
@@ -85,4 +85,28 @@ void	change_point(t_vec *change, t_vec other, int z)
 	n_point = (t_vec){change->x + param * (other.x - change->x),
 		change->y + param * (other.y - change->y), z};
 	*change = n_point;
+}
+
+void	go_to_proj(t_data *data)
+{
+	if (data->proj)
+	{
+		data->wld.cam.ori = (t_vec){0, -data->obj.mat.len
+			* (15), 10 * (15)};
+		data->wld.cam.rot = (t_vec){115 * (M_PI / 180),
+			0 * (M_PI / 180), 0};
+		data->wld.cam.scale = (15);
+		look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
+	}
+	else if (!data->proj)
+	{
+		data->wld.cam.rot = (t_vec){
+			-25 * (M_PI / 180),
+			156 * (M_PI / 180),
+			-140 * (M_PI / 180)
+		};
+		look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
+		data->wld.cam.ori = (t_vec){0, 0, 0};
+		data->wld.cam.scale = data->wld.init_scale;
+	}
 }

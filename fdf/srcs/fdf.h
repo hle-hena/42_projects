@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/04 22:48:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:18:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
-#include <stdio.h>
-
-# define ON_KEYDOWN 2
-# define ON_KEYUP 3
-# define ON_MOUSEDOWN 4
-# define ON_MOUSEUP 5
-# define ON_MOUSEMOVE 6
-# define ON_EXPOSE 12
-# define ON_DESTROY 17
+// #include <stdio.h>
 
 typedef struct s_trigometry_values
 {
@@ -108,7 +100,6 @@ typedef struct s_world
 	t_base	base;
 	t_base	init;
 	t_cam	cam;
-	// t_vec	normal;
 	int		init_scale;
 }	t_wld;
 
@@ -128,6 +119,13 @@ typedef struct s_data
 /*		main.c			*/
 /************************/
 t_data	*get_data(void);
+
+/************************/
+/*		mlx_utils.c		*/
+/************************/
+int		mlx_close(t_data *data);
+int		key_hook(int keycode, t_data *data);
+int		mouse_wheel_hook(int button, int x, int y, t_data *data);
 
 /************************/
 /*		movement.c		*/
@@ -158,6 +156,7 @@ int		calc_point(t_data *data, t_line *line, t_vec *start, t_vec *end);
 /************************/
 int		move_point(t_data *data, t_point *start, t_point *end);
 void	change_point(t_vec *change, t_vec other, int z);
+void	go_to_proj(t_data *data);
 
 /************************/
 /*		point.c			*/
@@ -168,13 +167,15 @@ t_vec	vec(t_obj obj, t_wld wld, t_point point);
 /*		color.c			*/
 /************************/
 t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr);
-t_col	get_color(t_point start, t_point end, float percent);
-void	set_color(t_data *data, t_line *line, t_vec start, t_vec end);
+t_col	get_grad(t_point start, t_point end, float percent);
+void	set_color(t_obj *obj);
+void	get_color(t_data *data, t_line *line, t_point start, t_point end);
 
 /************************/
 /*		color_utils.c	*/
 /************************/
 int		calc_color(t_col col);
+t_col	rev_calc_color(int col);
 void	chose_color(t_col *col1, t_col *col2, float *percent);
 
 /************************/
@@ -214,8 +215,8 @@ void	parse_file(t_obj *obj, char *path);
 int		line_size(char **line);
 // void	find_extrem(int val, t_obj *obj);
 void	extract_data(t_obj	*obj, char *data, int x, int y);
-int		is_valid_arg(t_obj *obj, char *str);
-void	get_matsize(t_mat *mat, char *path);
+int		is_valid_arg(char *str);
+void	get_matsize(t_mat *mat, int fd);
 
 /************************/
 /*		end.c			*/

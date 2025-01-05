@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 11:44:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/04 23:15:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:12:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,26 @@ int	line_size(char **line)
 
 void	extract_data(t_obj	*obj, char *data, int x, int y)
 {
+	char	*src;
+
 	obj->mat.matrix[y][x] = ft_atoi(data);
 	if (obj->mat.col)
-		obj->mat.color[y][x] = ft_max(ft_atoi_base(data, "0123456789ABCDEF"),
-			ft_atoi_base(data, "0123456789abcdef"));
+	{
+		src = ft_strchr(data, 'x');
+		if (!src)
+			obj->mat.color[y][x] = 0xFFFFFF;
+		else
+			obj->mat.color[y][x] = ft_max(
+					ft_atoi_base(ft_strchr(data, 'x') + 1, "0123456789ABCDEF"),
+					ft_atoi_base(ft_strchr(data, 'x') + 1, "0123456789abcdef"));
+	}
 	if (obj->mat.matrix[y][x] > obj->max_h)
 		obj->max_h = obj->mat.matrix[y][x];
 	else if (obj->mat.matrix[y][x] < obj->min_h)
 		obj->min_h = obj->mat.matrix[y][x];
 }
 
-int	is_valid_arg(t_obj *obj, char *str)
+int	is_valid_arg(char *str)
 {
 	int	i;
 
@@ -50,7 +59,7 @@ int	is_valid_arg(t_obj *obj, char *str)
 	while (str[++i])
 	{
 		if (str[i] == ',')
-			break;
+			break ;
 		if ((i == 0 && (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+'))
 			|| (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+'
 				&& str[i] != '\n'))
@@ -58,7 +67,6 @@ int	is_valid_arg(t_obj *obj, char *str)
 	}
 	if (!str[i])
 		return (1);
-	obj->mat.col = 1;
 	if (str[i + 1] != '0' && str[i + 2] != 'x')
 		return (0);
 	i += 2;
@@ -71,13 +79,11 @@ int	is_valid_arg(t_obj *obj, char *str)
 	return (1);
 }
 
-void	get_matsize(t_mat *mat, char *path)
+void	get_matsize(t_mat *mat, int fd)
 {
 	char	**splited;
 	char	*temp;
-	int		fd;
 
-	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		ft_perror(0, mlx_del(NULL), "Fd is invalid.");
 	while (1)
@@ -85,6 +91,8 @@ void	get_matsize(t_mat *mat, char *path)
 		temp = get_next_line(fd);
 		if (!temp)
 			break ;
+		if (ft_strchr(temp, ','))
+			mat->col = 1;
 		if (mat->len == 0)
 		{
 			splited = ft_split(temp, ' ');

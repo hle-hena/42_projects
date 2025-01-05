@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:40:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/04 22:43:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:30:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_atoi_base(const char *str, const char *base)
 	int	len;
 
 	nb = 0;
+	if (!str)
+		return (nb);
 	len = ft_strlen(base);
 	while (ft_isspace(*str))
 		str++;

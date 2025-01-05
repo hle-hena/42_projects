@@ -6,26 +6,37 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:26:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/04 23:03:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:10:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	mlx_del(t_data *data)
+void	del_matrix(t_data *data)
 {
 	int	i;
 
+	if (data->obj.mat.matrix)
+	{
+		i = 0;
+		while (data->obj.mat.matrix[i])
+			i++;
+		ft_free_tab((void **)data->obj.mat.matrix, i);
+	}
+	if (data->obj.mat.color)
+	{
+		i = 0;
+		while (data->obj.mat.color[i])
+			i++;
+		ft_free_tab((void **)data->obj.mat.color, i);
+	}
+}
+
+int	mlx_del(t_data *data)
+{
 	if (!data)
 		data = get_data();
-	i = 0;
-	while (data->obj.mat.matrix[i])
-		i++;
-	ft_free_tab((void **)data->obj.mat.matrix, i);
-	i = 0;
-	while (data->obj.mat.color[i])
-		i++;
-	ft_free_tab((void **)data->obj.mat.color, i);
+	del_matrix(data);
 	if (data->mlx && data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->img)
