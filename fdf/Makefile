@@ -18,12 +18,7 @@ FDF =	color_utils.c	color.c				draw_utils.c	\
 		rotate.c		movement.c			rotate_utils.c	\
 		parser_utils.c	mlx_utils.c
 
-NEW_FDF =	draw_utils.c	draw.c	end.c		\
-			init.c			main.c	parser.c	\
-			rotate.c	
-
 FDF_SRC = $(addprefix srcs/, $(FDF))
-# FDF_SRC = $(addprefix new_srcs/, $(NEW_FDF))
 
 OBJ = $(FDF_SRC:.c=.o)
 
