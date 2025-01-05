@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 11:35:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:09:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,3 @@ void	draw_low(t_data *data, t_point start, t_point end)
 		percent += (float)1 / dx;
 	}
 }
-
-	// printf("x is %d; y is %d; z is %d\n", x, y, z);
-	// printf("\t\tn_x is %d; n_y is %d; n_z is %d\n\n", n_x, n_y, n_z);
-
-/* int	color(t_point a, t_point b)
-{
-	return (0x00000000);
-} */

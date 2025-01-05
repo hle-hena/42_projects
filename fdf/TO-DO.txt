@@ -1,11 +1,9 @@
 Change draw map so it draws from back to front, and not always from top to bot.
 I am 90 % sure there is no floating point error left. But it will need some checking
 
-fix the rotation in perspective so rotating around the y axis doesnt change the others.
-
 Please I swear to god make opti !
 ->the far plane should be an option, not a default
-->if a precedent line couldnt be drawn, just dont even ask for the next one and just qui already man
+->if a precedent line couldnt be drawn, just dont even ask for the next one and just quit already man
 ->
 ```
 if (far.left is not in screen)
@@ -13,9 +11,8 @@ if (far.left is not in screen)
 	//same for the right ?
 ```
 
-Scale is affecting the perspective proj //Might just not allow to scale I think
 Fix the gradient
-Make the zoom with the center at mouse pos
+Make the zoom with the center at mouse pos //We don't actually care, it scales base on origin so it is not so strange
 
 Rotate with mouse
 

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 13:18:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 15:33:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
-// #include <stdio.h>
+#include <stdio.h>
 
 typedef struct s_trigometry_values
 {
