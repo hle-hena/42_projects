@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 15:24:20 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 16:36:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef	struct	s_events
 	int	rot_x;
 	int	rot_y;
 	int	rot_z;
+	int	sc;
 }	t_event;
 
 typedef struct s_data
@@ -131,13 +132,18 @@ typedef struct s_data
 t_data	*get_data(void);
 
 /************************/
-/*		mlx_utils.c		*/
+/*		mlx.c			*/
 /************************/
-int		mlx_close(t_data *data);
 int		event_loop(t_data *data);
 int		key_press(int keycode, t_data *data);
 int		key_down(int keycode, t_data *data);
-int		mouse_wheel_hook(int button, int x, int y, t_data *data);
+int		mouse_down(int button, int x, int y, t_data *data);
+int		mouse_up(int button, int x, int y, t_data *data);
+
+/************************/
+/*		mlx_utils.c		*/
+/************************/
+int		mlx_close(t_data *data);
 
 /************************/
 /*		movement.c		*/

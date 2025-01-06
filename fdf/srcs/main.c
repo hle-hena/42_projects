@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 15:24:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:32:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av)
 	draw_map(data, 1);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_down, data);
-	mlx_hook(data->win, 4, 1L << 2, mouse_wheel_hook, data);
+	mlx_hook(data->win, 4, 1L << 2, mouse_down, data);
 	mlx_hook(data->win, 17, 0, mlx_close, data);
 	mlx_loop_hook(data->mlx, event_loop, data);
 	mlx_loop(data->mlx);

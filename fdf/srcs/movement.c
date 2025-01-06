@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:50:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 13:25:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:31:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	move_forward(t_data *data, int sign)
 	t_trig	rot_z;
 
 	if (!data->proj)
-		data->wld.cam.ori.y += -sign * (data->wld.cam.scale);
+		data->wld.cam.ori.y += sign * (data->wld.cam.scale);
 	else
 	{
 		rot_y = (t_trig){sin(-data->wld.cam.rot.y), cos(-data->wld.cam.rot.y)};
@@ -45,6 +45,8 @@ void	move_forward(t_data *data, int sign)
 			* data->wld.cam.base.i.z;
 		data->wld.cam.ori.y += -sign * (5)
 			* data->wld.cam.base.i.x;
+		data->wld.cam.ori.z += -sign * (5)
+			* data->wld.cam.base.i.y;
 	}
 }
 
