@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 11:01:30 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:28:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	create_line(t_data *data, t_point start, t_point end, int col)
 	v_end = vec(data->obj, data->wld, end);
 	if (!calc_point(data, &line, &v_start, &v_end))
 		return (0);
+	// line.start = start;
+	// line.end = end;
 	if (col == 0)
 	{
 		line.start.col = (t_col){0, 0, 0};
@@ -72,7 +74,8 @@ void	draw_iso(t_data *data, int color, t_point pt, t_point inc)
 		}
 		pt.y += inc.y;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	if (color)
+		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
 void	draw_map(t_data *data, int color)

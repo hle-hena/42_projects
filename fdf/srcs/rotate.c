@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 15:37:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:00:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,24 @@ void	do_rot_a(t_base *base, t_vec rot)
 	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
 }
 
-void	do_rot(t_vec *cam_r, t_base *base, int keycode)
+void	do_rot(t_vec *cam_r, t_base *base, int sign, int axis)
 {
 	t_vec	rot;
 	t_data	*data;
 
 	data = get_data();
 	rot = (t_vec){0, 0, 0};
-	if (keycode == 117)
-		add_rot(&cam_r->x, &rot.x, 1, 1);
-	else if (keycode == 106)
-		add_rot(&cam_r->x, &rot.x, -1, 1);
-	else if (keycode == 105)
-		add_rot(&cam_r->y, &rot.y, 1, 2);
-	else if (keycode == 107)
-		add_rot(&cam_r->y, &rot.y, -1, 2);
-	else if (keycode == 111)
-		add_rot(&cam_r->z, &rot.z, 1, 3);
-	else if (keycode == 108)
-		add_rot(&cam_r->z, &rot.z, -1, 3);
-	if (data->proj && (keycode == 105 || keycode == 107))
+	if (axis == 1)
+		add_rot(&cam_r->x, &rot.x, sign, axis);
+	else if (axis == 2)
+		add_rot(&cam_r->y, &rot.y, sign, axis);
+	else if (axis == 3)
+		add_rot(&cam_r->z, &rot.z, sign, axis);
+	if (data->proj && axis == 2)
 		do_rot_a(base, (t_vec){((90 * (M_PI / 180)) - cam_r->x), 0, 0});
 	do_rot_a(base, rot);
-	if (data->proj && (keycode == 105 || keycode == 107))
+	if (data->proj && axis == 2)
 		do_rot_a(base, (t_vec){-((90 * (M_PI / 180)) - cam_r->x), 0, 0});
+	// printf("rot is {%f, %f, %f}\n", (cam_r->x * 180) / M_PI, (cam_r->y * 180) / M_PI, (cam_r->z * 180) / M_PI);
+	// printf("Angle is {%f, %f, %f}\n", get_data()->wld.base.i.x, get_data()->wld.base.i.y, get_data()->wld.base.i.z);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 11:13:58 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 13:36:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,6 @@ t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr)
 		col1.gr + (col2.gr - col1.gr) * percent,
 		col1.bl + (col2.bl - col1.bl) * percent};
 	return (final);
-}
-
-// if (calc_color(end.col) == 0x00FFFFFF && calc_color(start.col) != 0x00FFFFFF)
-// 	col2 = (t_col){0xFF, 0xFB, 0x7D};
-t_col	get_grad(t_point start, t_point end, float percent)
-{
-	t_col	color;
-	t_col	col1;
-	t_col	col2;
-
-	// return (start.col);
-	if (percent <= 0)
-		return (start.col);
-	col1 = (t_col){start.col.re, start.col.gr, start.col.bl};
-	col2 = (t_col){end.col.re, end.col.gr, end.col.bl};
-	color.re = col1.re + (col2.re - col1.re) * percent;
-	color.gr = col1.gr + (col2.gr - col1.gr) * percent;
-	color.bl = col1.bl + (col2.bl - col1.bl) * percent;
-	return (color);
 }
 
 void	set_color(t_obj *obj)
@@ -82,11 +63,24 @@ void	set_color(t_obj *obj)
 	}
 }
 
+t_col	get_grad(t_point start, t_point end, float percent)
+{
+	t_col	color;
+	t_col	col1;
+	t_col	col2;
+
+	if (percent <= 0)
+		return (start.col);
+	col1 = (t_col){start.col.re, start.col.gr, start.col.bl};
+	col2 = (t_col){end.col.re, end.col.gr, end.col.bl};
+	color.re = col1.re + (col2.re - col1.re) * percent;
+	color.gr = col1.gr + (col2.gr - col1.gr) * percent;
+	color.bl = col1.bl + (col2.bl - col1.bl) * percent;
+	return (color);
+}
+
 void	get_color(t_data *data, t_line *line, t_point start, t_point end)
 {
-	// line->start.col = (t_col){0xFF, 0xFF, 0xFF};
-	// line->end.col = (t_col){0xFF, 0xFF, 0xFF};
-	// return ;
 	line->start.col = rev_calc_color(data->obj.mat.color[start.y][start.x]);
 	line->end.col = rev_calc_color(data->obj.mat.color[end.y][end.x]);
 }

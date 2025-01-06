@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 15:33:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:24:20 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,15 @@ typedef struct s_world
 	int		init_scale;
 }	t_wld;
 
+typedef	struct	s_events
+{
+	int	mo_f;
+	int	mo_s;
+	int	rot_x;
+	int	rot_y;
+	int	rot_z;
+}	t_event;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -111,6 +120,7 @@ typedef struct s_data
 	int		proj;
 	int		win_len;
 	int		win_wid;
+	t_event	event;
 	t_obj	obj;
 	t_wld	wld;
 }	t_data;
@@ -124,13 +134,16 @@ t_data	*get_data(void);
 /*		mlx_utils.c		*/
 /************************/
 int		mlx_close(t_data *data);
-int		key_hook(int keycode, t_data *data);
+int		event_loop(t_data *data);
+int		key_press(int keycode, t_data *data);
+int		key_down(int keycode, t_data *data);
 int		mouse_wheel_hook(int button, int x, int y, t_data *data);
 
 /************************/
 /*		movement.c		*/
 /************************/
-void	move(t_data *data, int keycode);
+void	move_forward(t_data *data, int sign);
+void	move_side(t_data *data, int sign);
 
 /************************/
 /*		draw.c			*/
@@ -188,7 +201,7 @@ void	round_vec(t_vec *vec);
 /*		rotate.c		*/
 /************************/
 void	look_at(t_base *base, t_base init, t_vec rot);
-void	do_rot(t_vec *cam_r, t_base *base, int keycode);
+void	do_rot(t_vec *cam_r, t_base *base, int sign, int axis);
 
 /************************/
 /*		rotate_utils.c	*/

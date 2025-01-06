@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 15:37:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 13:33:59 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,17 @@ int	move_point(t_data *data, t_point *start, t_point *end)
 
 	res = 0;
 	if (start->x > data->win_wid || start->x < 0)
-		res += move_point_w(data, start, *end, start->x < 0);
+		if (move_point_w(data, start, *end, start->x < 0))
+			return (0);
 	if (end->x > data->win_wid || end->x < 0)
-		res += move_point_w(data, end, *start, end->x < 0);
+		if (move_point_w(data, end, *start, end->x < 0))
+			return (0);
 	if (start->y > data->win_len || start->y < 0)
-		res += move_point_l(data, start, *end, start->y < 0);
+		if (move_point_l(data, start, *end, start->y < 0))
+			return (0);
 	if (end->y > data->win_len || end->y < 0)
-		res += move_point_l(data, end, *start, end->y < 0);
-	if (res != 0)
-		return (0);
+		if (move_point_l(data, end, *start, end->y < 0))
+			return (0);
 	return (1);
 }
 
@@ -91,7 +93,7 @@ void	go_to_proj(t_data *data)
 {
 	if (data->proj)
 	{
-		data->wld.cam.ori = (t_vec){0, -data->obj.mat.len
+		data->wld.cam.ori = (t_vec){0, data->obj.mat.len
 			* (15), 10 * (15)};
 		data->wld.cam.rot = (t_vec){115 * (M_PI / 180),
 			0 * (M_PI / 180), 0};
@@ -101,9 +103,9 @@ void	go_to_proj(t_data *data)
 	else if (!data->proj)
 	{
 		data->wld.cam.rot = (t_vec){
-			-25 * (M_PI / 180),
-			156 * (M_PI / 180),
-			-140 * (M_PI / 180)
+			24 * (M_PI / 180),
+			-24 * (M_PI / 180),
+			37 * (M_PI / 180)
 		};
 		look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
 		data->wld.cam.ori = (t_vec){0, 0, 0};

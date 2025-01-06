@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 10:47:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:33:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,18 @@ void	init_wld(t_wld *wld)
 {
 	*wld = (t_wld)
 	{
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, -1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, -1, 0}, (t_vec){0, 0, 1}},
 		(t_cam)
 	{
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, -1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){1, 0, 0}, (t_vec){0, -1, 0}, (t_vec){0, 0, 1}},
 		(t_vec){0, 0, 0},
 		(t_vec){0, 0, 0},
 	{
-		// -25 * (M_PI / 180),
-		// 156 * (M_PI / 180),
-		// -140 * (M_PI / 180)
-		40 * (M_PI / 180),
-		40 * (M_PI / 180),
-		0 * (M_PI / 180)
+		24 * (M_PI / 180),
+		-24 * (M_PI / 180),
+		37 * (M_PI / 180)
 	},
 		1,
 		1 * (15),
@@ -83,6 +80,7 @@ void	init_data(t_data *data, char **path)
 	int	len;
 	int	wid;
 
+	data->event = (t_event){0, 0, 0, 0, 0};
 	init_obj(&data->obj, path[0]);
 	init_wld(&data->wld);
 	data->mlx = mlx_init();
