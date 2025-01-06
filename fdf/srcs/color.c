@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 17:02:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:13:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ t_col	get_grad(t_point start, t_point end, float percent)
 	t_col	col1;
 	t_col	col2;
 
-	if (percent < 0)
+	// return (start.col);
+	if (percent <= 0)
 		return (start.col);
 	col1 = (t_col){start.col.re, start.col.gr, start.col.bl};
 	col2 = (t_col){end.col.re, end.col.gr, end.col.bl};
@@ -83,6 +84,9 @@ void	set_color(t_obj *obj)
 
 void	get_color(t_data *data, t_line *line, t_point start, t_point end)
 {
+	// line->start.col = (t_col){0xFF, 0xFF, 0xFF};
+	// line->end.col = (t_col){0xFF, 0xFF, 0xFF};
+	// return ;
 	line->start.col = rev_calc_color(data->obj.mat.color[start.y][start.x]);
 	line->end.col = rev_calc_color(data->obj.mat.color[end.y][end.x]);
 }

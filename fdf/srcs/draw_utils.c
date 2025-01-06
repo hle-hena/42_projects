@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 16:09:07 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:13:08 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ void	put_pixel(t_data *data, t_point point, int color)
 	img[point.y * data->win_wid + point.x] = color;
 }
 
+void	calc_err(int *err, int *slope, int da, int db)
+{
+	if (*err > 0)
+		{
+			*slope += ft_tern_int(da < 0, -1, 1);
+			*err += 2 * (ft_abs(da) - db);
+		}
+		else
+			*err += 2 * ft_abs(da);
+}
+
 void	draw_high(t_data *data, t_point start, t_point end)
 {
 	int		dx;
@@ -48,15 +59,10 @@ void	draw_high(t_data *data, t_point start, t_point end)
 	{
 		if (point_is_in_fov(data, curr))
 			put_pixel(data, curr, calc_color(get_grad(start, end, percent)));
-		if (err > 0)
-		{
-			curr.x += ft_tern_int(dx < 0, -1, 1);
-			err += 2 * (ft_abs(dx) - dy);
-		}
-		else
-			err += 2 * ft_abs(dx);
+		calc_err(&err, &curr.x, dx, dy);
 		curr.y += 1;
-		percent += (float)1 / dy;
+		if (calc_color(start.col) != calc_color(end.col))
+			percent += (float)1 / dy;
 	}
 }
 
@@ -77,14 +83,9 @@ void	draw_low(t_data *data, t_point start, t_point end)
 	{
 		if (point_is_in_fov(data, curr))
 			put_pixel(data, curr, calc_color(get_grad(start, end, percent)));
-		if (err > 0)
-		{
-			curr.y += ft_tern_int(dy < 0, -1, 1);
-			err += 2 * (ft_abs(dy) - dx);
-		}
-		else
-			err += 2 * ft_abs(dy);
+		calc_err(&err, &curr.y, dy, dx);
 		curr.x += 1;
-		percent += (float)1 / dx;
+		if (calc_color(start.col) != calc_color(end.col))
+			percent += (float)1 / dx;
 	}
 }
