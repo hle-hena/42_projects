@@ -1,0 +1,10 @@
+For isometric and for perspective, the drawmap will be different.
+
+For isometric, there are only 4 positive angles, therefore, I just need to do one of four to project.
+The four are :
+->0 to len, 0 to wid
+->0 to len, wid to 0
+->len to 0, 0 to wid
+->len to 0, wid to 0
+
+For perspective, I will do a more complex algo. I will try and find the four equivalent points which are inside of the screen. When I have them, I will try to print every pixel in that area from back left, back right, back left + 1, back right - 1 ect ect

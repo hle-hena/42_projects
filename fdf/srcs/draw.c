@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 11:41:37 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:28:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,50 @@ int	create_line(t_data *data, t_point start, t_point end, int col)
 	return (1);
 }
 
-void	draw_map(t_data *data, int color)
+void	draw_iso(t_data *data, int color, t_point pt, t_point inc)
 {
-	int	i;
-	int	j;
+	int	start;
 
-	i = -1;
-	data->obj.r_ori = vec(data->obj, data->wld, data->obj.wld_ori);
-	while (++i < data->obj.mat.len)
+	start = pt.x;
+	while (pt.y != pt.z)
 	{
-		j = -1;
-		while (++j < data->obj.mat.wid)
+		pt.x = start;
+		while (pt.x != inc.z)
 		{
-			if (i != data->obj.mat.len - 1)
+			if (pt.y != data->obj.mat.len - 1)
 				create_line(data,
-					(t_point){j, i, data->obj.mat.matrix[i][j], (t_col){0}},
-					(t_point){j, i + 1, data->obj.mat.matrix[i + 1][j],
-					(t_col){0}}, color);
-			if (j != data->obj.mat.wid - 1)
+					(t_point){pt.x, pt.y, data->obj.mat.matrix[pt.y][pt.x], (t_col){0}},
+					(t_point){pt.x, pt.y + 1, data->obj.mat.matrix[pt.y + 1][pt.x], (t_col){0}},
+					color);
+			if (pt.x != data->obj.mat.wid - 1)
 				create_line(data,
-					(t_point){j, i, data->obj.mat.matrix[i][j], (t_col){0}},
-					(t_point){j + 1, i, data->obj.mat.matrix[i][j + 1],
-					(t_col){0}}, color);
+					(t_point){pt.x, pt.y, data->obj.mat.matrix[pt.y][pt.x], (t_col){0}},
+					(t_point){pt.x + 1, pt.y, data->obj.mat.matrix[pt.y][pt.x + 1], (t_col){0}},
+					color);
+			pt.x += inc.x;
 		}
+		pt.y += inc.y;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+}
+
+void	draw_map(t_data *data, int color)
+{
+	data->obj.r_ori = vec(data->obj, data->wld, data->obj.wld_ori);
+	printf("Base if {%f, %f, %f}\n", data->wld.base.k.x, data->wld.base.k.y, data->wld.base.k.z);
+	if (data->wld.base.i.x >= 0 && data->wld.base.i.y >= 0)
+		draw_iso(data, color, (t_point){0, 0, data->obj.mat.len, (t_col){0}},
+			(t_point){1, 1, data->obj.mat.wid, (t_col){0}});
+
+	else if (data->wld.base.i.x <= 0 && data->wld.base.i.y >= 0)
+		draw_iso(data, color, (t_point){data->obj.mat.wid - 1, 0, data->obj.mat.len, (t_col){0}},
+			(t_point){-1, 1, -1, (t_col){0}});
+
+	else if (data->wld.base.i.x >= 0 && data->wld.base.i.y <= 0)
+		draw_iso(data, color, (t_point){0, data->obj.mat.len - 1, -1, (t_col){0}},
+			(t_point){1, -1, data->obj.mat.wid, (t_col){0}});
+
+	else
+		draw_iso(data, color, (t_point){data->obj.mat.wid - 1, data->obj.mat.len - 1, -1, (t_col){0}},
+			(t_point){-1, -1, -1, (t_col){0}});
 }

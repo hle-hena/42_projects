@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 15:43:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:24:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	init_obj(t_obj *obj, char *path)
 {
 	obj->wld_ori = (t_point){0, 0, 0, (t_col){0}};
 	obj->r_ori = (t_vec){0, 0, 0};
-	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
+	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
 		(t_vec){0, 0, 0.15}};
-	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, -0.97, 0},
+	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
 		(t_vec){0, 0, 0.15}};
 	obj->rot = (t_vec){0, 0, 0};
 	obj->scale = 1;
@@ -54,18 +54,21 @@ void	init_wld(t_wld *wld)
 {
 	*wld = (t_wld)
 	{
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){-1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
+		(t_base){(t_vec){-1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
 		(t_cam)
 	{
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
-		(t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, 1}},
+		(t_base){(t_vec){-1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
+		(t_base){(t_vec){-1, 0, 0}, (t_vec){0, 1, 0}, (t_vec){0, 0, -1}},
 		(t_vec){0, 0, 0},
 		(t_vec){0, 0, 0},
 	{
-		-25 * (M_PI / 180),
-		156 * (M_PI / 180),
-		-140 * (M_PI / 180)
+		// -25 * (M_PI / 180),
+		// 156 * (M_PI / 180),
+		// -140 * (M_PI / 180)
+		40 * (M_PI / 180),
+		40 * (M_PI / 180),
+		0 * (M_PI / 180)
 	},
 		1,
 		1 * (15),
