@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/04 22:42:29 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:56:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_isspace(int c);
-int		ft_tolower(int c);
-int		ft_toupper(int c);
+char	*ft_tolower(char *str);
+char	*ft_toupper(char *str);
 
 /*			lst_func			*/
 /********************************/
@@ -64,7 +64,7 @@ int		ft_lstsorted(t_list *lst, int (*f)(t_list *));
 /********************************/
 int		ft_abs(int nb);
 int		ft_atoi(const char *str);
-int		ft_atoi_base(const char *str, const char *base);
+int		ft_atoi_base(const char *str, const char *base, int len);
 char	*ft_itoa(int n);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);

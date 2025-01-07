@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 17:28:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 10:20:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	key_press(int keycode, t_data *data)
 		data->event.rot_y = (keycode == 105) * 1 + (keycode == 107) * -1;
 	else if (keycode == 111 || keycode == 108)
 		data->event.rot_z = (keycode == 111) * 1 + (keycode == 108) * -1;
+	// event_loop(data);
 	return (0);
 }
 

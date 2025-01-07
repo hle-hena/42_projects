@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:18:14 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/18 18:00:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:55:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_tolower(int c)
+char	*ft_tolower(char *str)
 {
-	if (c > 64 && c < 91)
-		return (c + 32);
-	return (c);
+	size_t	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] > 64 && str[i] < 91)
+			str[i] += 32;
+	}
+	return (str);
 }

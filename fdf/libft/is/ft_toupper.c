@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:19:18 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/18 18:00:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:00:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_toupper(int c)
+char	*ft_toupper(char *str)
 {
-	if (c > 96 && c < 123)
-		return (c - 32);
-	return (c);
+	size_t	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] > 96 && str[i] < 123)
+			str[i] -= 32;
+	}
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:40:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 12:30:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:03:49 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,42 @@
 
 static int	find_index(char c, const char *base)
 {
-	int	i;
+	static int	lookup[256] = {0};
+	static int	initialized = 0;
+	int			i;
 
-	i = -1;
-	while (base[++i])
-		if (c == base[i])
-			return (i);
-	return (-1);
+	if (!initialized)
+	{
+		i = -1;
+		while (++i < 256)
+			lookup[i] = -1;
+		i = -1;
+		while (base[++i])
+			lookup[(unsigned char)base[i]] = i;
+		initialized = 1;
+	}
+	return (lookup[(unsigned char)c]);
 }
 
-int	ft_atoi_base(const char *str, const char *base)
+// static int	find_index(char c, const char *base)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (base[++i])
+// 		if (c == base[i])
+// 			return (i);
+// 	return (-1);
+// }
+
+int	ft_atoi_base(const char *str, const char *base, int len)
 {
 	int	nb;
 	int	ind;
-	int	len;
 
 	nb = 0;
 	if (!str)
 		return (nb);
-	len = ft_strlen(base);
 	while (ft_isspace(*str))
 		str++;
 	while (1)

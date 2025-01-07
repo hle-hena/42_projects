@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 14:28:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:41:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ void	draw_map(t_data *data, int color)
 {
 	data->obj.r_ori = vec(data->obj, data->wld, data->obj.wld_ori);
 	// printf("Base if {%f, %f, %f}\n", data->wld.base.k.x, data->wld.base.k.y, data->wld.base.k.z);
-	if (data->wld.base.i.x <= 0 && data->wld.base.i.y <= 0)
+	if (data->wld.base.i.x >= 0 && data->wld.base.i.y >= 0)
 		draw_iso(data, color, (t_point){0, 0, data->obj.mat.len, (t_col){0}},
 			(t_point){1, 1, data->obj.mat.wid, (t_col){0}});
 
-	else if (data->wld.base.i.x >= 0 && data->wld.base.i.y <= 0)
+	else if (data->wld.base.i.x > 0 && data->wld.base.i.y < 0)
 		draw_iso(data, color, (t_point){data->obj.mat.wid - 1, 0, data->obj.mat.len, (t_col){0}},
 			(t_point){-1, 1, -1, (t_col){0}});
 
-	else if (data->wld.base.i.x <= 0 && data->wld.base.i.y >= 0)
+	else if (data->wld.base.i.x < 0 && data->wld.base.i.y > 0)
 		draw_iso(data, color, (t_point){0, data->obj.mat.len - 1, -1, (t_col){0}},
 			(t_point){1, -1, data->obj.mat.wid, (t_col){0}});
 

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 11:44:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 13:12:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:07:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ void	extract_data(t_obj	*obj, char *data, int x, int y)
 		if (!src)
 			obj->mat.color[y][x] = 0xFFFFFF;
 		else
-			obj->mat.color[y][x] = ft_max(
-					ft_atoi_base(ft_strchr(data, 'x') + 1, "0123456789ABCDEF"),
-					ft_atoi_base(ft_strchr(data, 'x') + 1, "0123456789abcdef"));
+			obj->mat.color[y][x] = ft_atoi_base(ft_tolower(src + 1),
+				"0123456789abcdef", 16);
 	}
 	if (obj->mat.matrix[y][x] > obj->max_h)
 		obj->max_h = obj->mat.matrix[y][x];
