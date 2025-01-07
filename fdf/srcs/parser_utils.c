@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 11:44:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:06:01 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:42:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,27 @@ int	is_valid_arg(char *str)
 	int	i;
 
 	i = -1;
-	while (str[++i])
+	while (str[++i] != ' ' && str[i])
 	{
 		if (str[i] == ',')
 			break ;
 		if ((i == 0 && (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+'))
 			|| (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+'
 				&& str[i] != '\n'))
-			return (0);
+			return (-1);
 	}
-	if (!str[i])
-		return (1);
+	if (str[i] == ' ' || !str[i])
+		return (i - !str[i]);
 	if (str[i + 1] != '0' && str[i + 2] != 'x')
-		return (0);
+		return (-1);
 	i += 2;
-	while (str[++i])
+	while (str[++i] != ' ' && str[i])
 	{
 		if (!ft_strchr("0123456789ABCDEF", str[i])
 			&& !ft_strchr("abcdef", str[i]) && str[i] != '\n')
-			return (0);
+			return (-1);
 	}
-	return (1);
+	return (i - !str[i]);
 }
 
 void	get_matsize(t_mat *mat, int fd)

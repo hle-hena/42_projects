@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:28:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:08:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_obj(t_obj *obj, char *path)
 	obj->mat_ori.y = obj->mat.len / 2;
 	obj->mat_ori.z = 0;
 	set_color(obj);
+	printf("Wid is %d, len is %d\n", obj->mat.wid, obj->mat.len);
 }
 
 void	init_wld(t_wld *wld)

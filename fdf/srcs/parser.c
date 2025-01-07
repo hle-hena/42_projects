@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:30:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/05 12:54:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:42:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,29 @@
 	close(fd);
 } */
 
-int	parse_line(t_obj *obj, char **src, int line)
+int	parse_line(t_obj *obj, char *src, int line)
 {
-	char	**temp;
+	char	*temp;
 	int		j;
+	int		i;
+	int		test;
 
 	obj->mat.matrix[line] = ft_calloc(obj->mat.wid + 1, sizeof(int));
 	obj->mat.color[line] = ft_calloc(obj->mat.wid + 1, sizeof(int));
 	if (!obj->mat.matrix[line] || !obj->mat.color[line] || !src)
-		return (ft_free_tab((void **)src, line_size(src)), 1);
+		return (1);
 	temp = src;
 	j = 0;
-	while (*temp)
+	i = -1;
+	while (src[++i])
 	{
-		if (j == obj->mat.wid || !is_valid_arg(*temp))
-			return (ft_free_tab((void **)src, line_size(src)), 1);
-		extract_data(obj, *temp, j, line);
-		temp++;
+		test = is_valid_arg(src + i);
+		if (j == obj->mat.wid || test == -1)
+			return (1);
+		extract_data(obj, src + i, j, line);
 		j++;
+		i += test /* + (src[i + test] != 0) */;
 	}
-	ft_free_tab((void **)src, line_size(src));
 	if (j != obj->mat.wid)
 		return (1);
 	return (0);
@@ -91,7 +94,6 @@ int	parse_line(t_obj *obj, char **src, int line)
 
 void	parse_file(t_obj *obj, char *path)
 {
-	char	**temp;
 	char	*line;
 	int		fd;
 	int		i;
@@ -109,10 +111,9 @@ void	parse_file(t_obj *obj, char *path)
 	while (++i < obj->mat.len)
 	{
 		line = get_next_line(fd);
-		temp = ft_split(line, ' ');
-		ft_del(line);
-		if (parse_line(obj, temp, i))
+		if (parse_line(obj, line, i))
 			ft_perror(4, mlx_del(NULL), NULL);
+		ft_del(line);
 	}
 	close(fd);
 }

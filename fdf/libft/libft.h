@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/07 11:56:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:12:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ char	*ft_tern_str(int cnd, char *ret1, char *ret2);
 
 /*			gnl					*/
 /********************************/
+# define BUFFER_SIZE 256
 char	*get_next_line(int fd);
-# define BUFFER_SIZE 64
 
 /*			is_smth				*/
 /********************************/
