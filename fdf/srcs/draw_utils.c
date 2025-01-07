@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 12:44:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:05:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	put_pixel(t_data *data, t_point point, int color)
 void	calc_err(int *err, int *slope, int da, int db)
 {
 	if (*err > 0)
-		{
-			*slope += ft_tern_int(da < 0, -1, 1);
-			*err += 2 * (ft_abs(da) - db);
-		}
-		else
-			*err += 2 * ft_abs(da);
+	{
+		*slope += ft_tern_int(da < 0, -1, 1);
+		*err += 2 * (ft_abs(da) - db);
+	}
+	else
+		*err += 2 * ft_abs(da);
 }
 
 void	draw_high(t_data *data, t_point start, t_point end)

@@ -1,6 +1,3 @@
-Change draw map so it draws from back to front, and not always from top to bot.
-I am 90 % sure there is no floating point error left. But it will need some checking
-
 Please I swear to god make opti !
 ->the far plane should be an option, not a default
 ->if a precedent line couldnt be drawn, just dont even ask for the next one and just quit already man
@@ -10,9 +7,6 @@ if (far.left is not in screen)
 	dont't go down to the camera, and go directly to the next one.
 	//same for the right ?
 ```
-
-Fix the gradient
-Make the zoom with the center at mouse pos //We don't actually care, it scales base on origin so it is not so strange
 
 Rotate with mouse
 

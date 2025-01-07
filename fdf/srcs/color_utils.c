@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 11:43:53 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 13:12:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:04:41 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ int	calc_color(t_col col)
 t_col	rev_calc_color(int col)
 {
 	return ((t_col){col >> 16 & 0xFF, col >> 8 & 0xFF, col & 0xFF});
-}
-
-float	logarithmic_scale(float percent, float k)
-{
-	if (percent < 0)
-		percent = -percent;
-	return log(1 + k * percent) / log(1 + k);
 }
 
 void	chose_color_2(t_col *col1, t_col *col2, float *percent)
@@ -68,7 +61,7 @@ void	chose_color(t_col *col1, t_col *col2, float *percent)
 			*col2 = (t_col){0xFF, 0x4B, 0xF3};
 			*percent = (*percent - 0.5) * 2;
 		}
-		return;
+		return ;
 	}
 	chose_color_2(col1, col2, percent);
 }

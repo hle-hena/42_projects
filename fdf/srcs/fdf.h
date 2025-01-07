@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 16:36:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:16:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
-#include <stdio.h>
+// #include <stdio.h>
 
 typedef struct s_trigometry_values
 {
@@ -103,7 +103,7 @@ typedef struct s_world
 	int		init_scale;
 }	t_wld;
 
-typedef	struct	s_events
+typedef struct s_events
 {
 	int	mo_f;
 	int	mo_s;

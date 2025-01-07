@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 17:27:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:09:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,5 @@ void	do_rot(t_vec *cam_r, t_base *base, int sign, int axis)
 		do_rot_a(base, (t_vec){((90 * (M_PI / 180)) - cam_r->x), 0, 0});
 	do_rot_a(base, rot);
 	if (data->proj && axis == 2)
-		do_rot_a(base, (t_vec){-((90 * (M_PI / 180)) - cam_r->x), 0, 0});
-	// printf("rot is {%f, %f, %f}\n", (cam_r->x * 180) / M_PI, (cam_r->y * 180) / M_PI, (cam_r->z * 180) / M_PI);
-	// printf("Angle is {%f, %f, %f}\n", get_data()->wld.base.i.x, get_data()->wld.base.i.y, get_data()->wld.base.i.z);
+		do_rot_a(base, (t_vec){((90 * (M_PI / 180)) * -1 - cam_r->x), 0, 0});
 }

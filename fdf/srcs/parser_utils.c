@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 11:44:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 12:07:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:06:01 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ int	line_size(char **line)
 	return (i);
 }
 
-// void	find_extrem(int val, t_obj *obj)
-// {
-// 	if (val > obj->max_h)
-// 		obj->max_h = val;
-// 	if (val < obj->min_h)
-// 		obj->min_h = val;
-// }
-
 void	extract_data(t_obj	*obj, char *data, int x, int y)
 {
 	char	*src;
@@ -42,7 +34,7 @@ void	extract_data(t_obj	*obj, char *data, int x, int y)
 			obj->mat.color[y][x] = 0xFFFFFF;
 		else
 			obj->mat.color[y][x] = ft_atoi_base(ft_tolower(src + 1),
-				"0123456789abcdef", 16);
+					"0123456789abcdef", 16);
 	}
 	if (obj->mat.matrix[y][x] > obj->max_h)
 		obj->max_h = obj->mat.matrix[y][x];

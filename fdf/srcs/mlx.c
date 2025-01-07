@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 10:20:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:04:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	event_loop(t_data *data)
 
 	if (data->event.mo_s || data->event.mo_f || data->event.rot_x
 		|| data->event.rot_y || data->event.rot_z || data->event.sc)
-		// draw_map(data, 0);
-		ft_bzero((void *)mlx_get_data_addr(data->img, &temp, &temp, &temp), data->win_len * data->win_wid * sizeof(int));
+		ft_bzero((void *)mlx_get_data_addr(data->img, &temp, &temp, &temp),
+			data->win_len * data->win_wid * sizeof(int));
 	if (data->event.sc)
 		data->wld.cam.scale += data->event.sc;
 	if (data->event.rot_y)
@@ -54,7 +54,6 @@ int	key_press(int keycode, t_data *data)
 		data->event.rot_y = (keycode == 105) * 1 + (keycode == 107) * -1;
 	else if (keycode == 111 || keycode == 108)
 		data->event.rot_z = (keycode == 111) * 1 + (keycode == 108) * -1;
-	// event_loop(data);
 	return (0);
 }
 
