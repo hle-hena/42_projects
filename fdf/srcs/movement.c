@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:50:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:11:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:24:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	move_side(t_data *data, int sign)
 		rot_y = (t_trig){sin(-data->wld.cam.rot.y), cos(-data->wld.cam.rot.y)};
 		rot_x = (t_trig){sin(-data->wld.cam.rot.x), cos(-data->wld.cam.rot.x)};
 		rot_z = (t_trig){sin(-data->wld.cam.rot.z), cos(-data->wld.cam.rot.z)};
-		data->wld.cam.base.i = data->wld.init.i;
+		data->wld.cam.base.j = data->wld.init.j;
 		do_rot_yxz(&data->wld.cam.base.j, rot_y, rot_x, rot_z);
 		data->wld.cam.ori.x += sign * (5)
 			* data->wld.cam.base.j.z;
