@@ -2,7 +2,7 @@ MAKEFLAGS += --no-print-directory
 
 NAME = fdf
 CC = cc
-FLAGS = -Wall -Wextra -Werror -o3 -g
+FLAGS = -Wall -Wextra -Werror -O3 -g
 RM = rm -f
 
 FRAMEDIR = ./mlx
@@ -16,7 +16,8 @@ FDF =	color_utils.c	color.c				draw_utils.c	\
 		init.c			main.c				parser.c		\
 		point.c			projection_utils.c	projection.c	\
 		rotate.c		movement.c			rotate_utils.c	\
-		parser_utils.c	mlx_utils.c			mlx.c
+		parser_utils.c	mlx_utils.c			event.c			\
+		mlx_hook.c
 
 FDF_SRC = $(addprefix srcs/, $(FDF))
 

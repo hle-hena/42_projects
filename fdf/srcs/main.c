@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 10:20:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:05:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ t_data	*get_data(void)
 	// 	data->wld.cam.ori.y, data->wld.cam.ori.z);
 	// printf("\n\n");
 
-/* int	move_hook(int x, int y, t_data *data)
-{
-	static t_point	last = {0, 0, 0};
-
-	draw_line(data, *global_point(), last, 0x00000000);
-	draw_line(data, *global_point(), (t_point){x, y, 0}, 0x00FFFFFF);
-	last.x = x;
-	last.y = y;
-	return (1);
-} */
-
-	// mlx_hook(data->win, 6, 1L << 6, move_hook, data);
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -57,6 +45,8 @@ int	main(int ac, char **av)
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_down, data);
 	mlx_hook(data->win, 4, 1L << 2, mouse_down, data);
+	mlx_hook(data->win, 5, 1L << 3, mouse_up, data);
+	mlx_hook(data->win, 6, 1L << 6, move_hook, data);
 	mlx_hook(data->win, 17, 0, mlx_close, data);
 	mlx_loop_hook(data->mlx, event_loop, data);
 	mlx_loop(data->mlx);

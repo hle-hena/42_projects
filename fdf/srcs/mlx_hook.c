@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.c                                              :+:      :+:    :+:   */
+/*   mlx_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:04:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:58:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	event_loop(t_data *data)
-{
-	int	temp;
-
-	if (data->event.mo_s || data->event.mo_f || data->event.rot_x
-		|| data->event.rot_y || data->event.rot_z || data->event.sc)
-		ft_bzero((void *)mlx_get_data_addr(data->img, &temp, &temp, &temp),
-			data->win_len * data->win_wid * sizeof(int));
-	if (data->event.sc)
-		data->wld.cam.scale += data->event.sc;
-	if (data->event.rot_y)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_y, 2);
-	if (data->event.rot_x)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_x, 1);
-	if (data->event.rot_z)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_z, 3);
-	if (data->event.mo_f)
-		move_forward(data, data->event.mo_f);
-	if (data->event.mo_s)
-		move_side(data, data->event.mo_s);
-	if (data->event.mo_s || data->event.mo_f || data->event.rot_x
-		|| data->event.rot_y || data->event.rot_z || data->event.sc)
-		draw_map(data, 1);
-	if (data->event.sc != 0)
-		data->event.sc = 0;
-	return (1);
-}
 
 int	key_press(int keycode, t_data *data)
 {
@@ -83,9 +55,44 @@ int	mouse_down(int button, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
+	if (button == 1)
+		data->event.lock = 1;
 	if (button == 4 && data->proj == 0)
-		data->event.sc = 1;
+		data->event.sc += 1;
 	else if (button == 5 && data->wld.cam.scale != 1 && data->proj == 0)
 		data->event.sc -= 1;
+	return (1);
+}
+
+int	mouse_up(int button, int x, int y, t_data *data)
+{
+	(void)x;
+	(void)y;
+	if (button == 1)
+		data->event.lock = 0;
+	return (1);
+}
+
+int	move_hook(int x, int y, t_data *data)
+{
+	static int	last[2] = {0, 0};
+	int			speed_limit;
+
+	speed_limit = 100;
+	if (data->proj && data->event.lock)
+	{
+		data->event.rp_y = (float)(last[0] - x) / 10;
+		data->event.rp_x = (float)(y - last[1]) / 10;
+		if (data->event.rp_y > speed_limit)
+			data->event.rp_y = speed_limit;
+		else if (data->event.rp_y < -speed_limit)
+			data->event.rp_y = -speed_limit;
+		if (data->event.rp_x > speed_limit)
+			data->event.rp_x = speed_limit;
+		else if (data->event.rp_x < -speed_limit)
+			data->event.rp_x = -speed_limit;
+	}
+	last[0] = x;
+	last[1] = y;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 12:44:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:53:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,37 @@ void	set_color(t_obj *obj)
 	}
 }
 
-t_col	get_grad(t_point start, t_point end, float percent)
+t_col	get_grad(t_col start, t_col end, float percent)
 {
 	t_col	color;
 	t_col	col1;
 	t_col	col2;
 
 	if (percent <= 0)
-		return (start.col);
-	col1 = (t_col){start.col.re, start.col.gr, start.col.bl};
-	col2 = (t_col){end.col.re, end.col.gr, end.col.bl};
+		return (start);
+	col1 = (t_col){start.re, start.gr, start.bl};
+	col2 = (t_col){end.re, end.gr, end.bl};
 	color.re = col1.re + (col2.re - col1.re) * percent;
 	color.gr = col1.gr + (col2.gr - col1.gr) * percent;
 	color.bl = col1.bl + (col2.bl - col1.bl) * percent;
 	return (color);
 }
 
+//set power to 4 for visibility, set to 0.25 for night/horror view
 void	get_color(t_data *data, t_line *line, t_point start, t_point end)
 {
-	line->start.col = rev_calc_color(data->obj.mat.color[start.y][start.x]);
-	line->end.col = rev_calc_color(data->obj.mat.color[end.y][end.x]);
+	float	percent;
+
+	if (!data->proj)
+	{
+		line->start.col = rev_calc_color(data->obj.mat.color[start.y][start.x]);
+		line->end.col = rev_calc_color(data->obj.mat.color[end.y][end.x]);
+	}
+	else
+	{
+		percent = pow((float)line->start.z / data->wld.cam.f_plane, 4);
+		line->start.col = get_grad(rev_calc_color(data->obj.mat.color[start.y][start.x]), (t_col){0x00, 0x00, 0x00}, percent);
+		percent = pow((float)line->end.z / data->wld.cam.f_plane, 4);
+		line->end.col = get_grad(rev_calc_color(data->obj.mat.color[end.y][end.x]), (t_col){0x00, 0x00, 0x00}, percent);
+	}
 }

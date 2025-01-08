@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:14:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 12:27:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	create_line(t_data *data, t_point start, t_point end, int col)
 	v_end = vec(data->obj, data->wld, end);
 	if (!calc_point(data, &line, &v_start, &v_end))
 		return (0);
+	if (!move_point(data, &line.start, &line.end))
+		return (0);
 	if (col == 0)
 	{
 		line.start.col = (t_col){0, 0, 0};
@@ -42,8 +44,6 @@ int	create_line(t_data *data, t_point start, t_point end, int col)
 	}
 	else
 		get_color(data, &line, start, end);
-	if (!move_point(data, &line.start, &line.end))
-		return (0);
 	draw_line(data, line.start, line.end);
 	return (1);
 }

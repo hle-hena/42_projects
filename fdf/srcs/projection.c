@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 13:58:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 13:04:35 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 12:28:37 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	get_persp(t_data *data, t_line *line, t_vec *start, t_vec *end)
 	line->start = (t_point){
 		(start->x * fov_scale_x) / start->z + (data->win_wid / 2),
 		(start->y * fov_scale_y) / start->z + (data->win_len / 2),
-		0, (t_col){0, 0, 0}};
+		start->z, (t_col){0, 0, 0}};
 	line->end = (t_point){
 		(end->x * fov_scale_x) / end->z + (data->win_wid / 2),
 		(end->y * fov_scale_y) / end->z + (data->win_len / 2),
-		0, (t_col){0, 0, 0}};
+		end->z, (t_col){0, 0, 0}};
 	return (1);
 }
 

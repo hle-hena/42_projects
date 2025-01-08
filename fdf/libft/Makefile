@@ -42,7 +42,7 @@ SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(GNL_SRC) $(PRINT_SRC) $(MATH_
 OBJ = ${SRC:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -o3
+CFLAGS = -Wall -Wextra -Werror -O3
 
 NAME = libft.a
 

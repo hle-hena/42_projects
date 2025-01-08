@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:26:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:12:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	look_at(t_base *base, t_base init, t_vec rot)
 	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
 }
 
-void	add_rot(float *val, float *rot, int sign, int axis)
+void	add_rot(float *val, float *rot, float sign, int axis)
 {
 	int		inc;
 	t_data	*data;
@@ -39,9 +39,9 @@ void	add_rot(float *val, float *rot, int sign, int axis)
 	*val += inc * sign * (M_PI / 180);
 	*rot = inc * sign * (M_PI / 180);
 	if (*val >= (float)(2 * M_PI))
-		*val -= 2 * M_PI;
+		*val -=0;
 	else if (*val <= (float)-(2 * M_PI))
-		*val += 2 * M_PI;
+		*val += 0;
 	*val = round_float(*val, 5);
 	if (data->proj)
 		block_rot(val, rot, axis);
@@ -61,7 +61,7 @@ void	do_rot_a(t_base *base, t_vec rot)
 	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
 }
 
-void	do_rot(t_vec *cam_r, t_base *base, int sign, int axis)
+void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 {
 	t_vec	rot;
 	t_data	*data;

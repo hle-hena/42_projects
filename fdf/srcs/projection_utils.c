@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/06 15:37:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 12:25:04 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	move_point_w(t_data *data, t_point *change, t_point other, int bord)
 	n_point = (t_point){border,
 		change->y + param * (other.y - change->y),
 		change->z + param * (other.z - change->z),
-		get_grad(*change, other, param)};
+		get_grad(change->col, other.col, param)};
 	*change = n_point;
 	return (0);
 }
@@ -53,7 +53,7 @@ int	move_point_l(t_data *data, t_point *change, t_point other, int bord)
 	n_point = (t_point){change->x + param * (other.x - change->x),
 		border,
 		change->z + param * (other.z - change->z),
-		get_grad(*change, other, param)};
+		get_grad(change->col, other.col, param)};
 	*change = n_point;
 	return (0);
 }

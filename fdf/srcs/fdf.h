@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 17:09:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:57:49 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,16 @@ typedef struct s_world
 
 typedef struct s_events
 {
-	int	mo_f;
-	int	mo_s;
-	int	rot_x;
-	int	rot_y;
-	int	rot_z;
-	int	sc;
+	int		mo_f;
+	int		mo_s;
+	int		rot_x;
+	int		rot_y;
+	int		rot_z;
+	int		lock;
+	int		rot_fix;
+	float	rp_x;
+	float	rp_y;
+	int		sc;
 }	t_event;
 
 typedef struct s_data
@@ -132,13 +136,18 @@ typedef struct s_data
 t_data	*get_data(void);
 
 /************************/
-/*		mlx.c			*/
+/*		event.c			*/
 /************************/
 int		event_loop(t_data *data);
+
+/************************/
+/*		mlx.c			*/
+/************************/
 int		key_press(int keycode, t_data *data);
 int		key_down(int keycode, t_data *data);
 int		mouse_down(int button, int x, int y, t_data *data);
 int		mouse_up(int button, int x, int y, t_data *data);
+int		move_hook(int x, int y, t_data *data);
 
 /************************/
 /*		mlx_utils.c		*/
@@ -186,7 +195,7 @@ t_vec	vec(t_obj obj, t_wld wld, t_point point);
 /*		color.c			*/
 /************************/
 t_col	get_real_color(t_obj obj, t_wld wld, t_vec curr);
-t_col	get_grad(t_point start, t_point end, float percent);
+t_col	get_grad(t_col start, t_col end, float percent);
 void	set_color(t_obj *obj);
 void	get_color(t_data *data, t_line *line, t_point start, t_point end);
 
@@ -207,7 +216,7 @@ void	round_vec(t_vec *vec);
 /*		rotate.c		*/
 /************************/
 void	look_at(t_base *base, t_base init, t_vec rot);
-void	do_rot(t_vec *cam_r, t_base *base, int sign, int axis);
+void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis);
 
 /************************/
 /*		rotate_utils.c	*/
