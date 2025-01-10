@@ -8,7 +8,7 @@ if (far.left is not in screen)
 	//same for the right ?
 ```
 
-Rotate with mouse
+Fix the rotation problem. If I block, the rotation slowly move up or down.
 
 Add a menu
 Add support for multiple maps

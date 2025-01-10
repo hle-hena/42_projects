@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/09 11:19:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:44:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ typedef struct s_vector
 	float	z;
 }	t_vec;
 
-typedef struct s_quat {
-    float w, x, y, z;
-} t_quat;
+typedef struct s_quat
+{
+	float	w;
+	float	x;
+	float	y;
+	float	z;
+}	t_quat;
 
 typedef struct s_point
 {
@@ -95,8 +99,9 @@ typedef struct s_camera
 	t_vec	r_ori;
 	t_vec	rot;
 	int		scale;
-	float	n_plane;
-	float	f_plane;
+	int		n_plane;
+	int		f_plane;
+	float	fog;
 }	t_cam;
 
 typedef struct s_world
@@ -119,6 +124,7 @@ typedef struct s_events
 	float	rp_x;
 	float	rp_y;
 	int		sc;
+	int		fog;
 }	t_event;
 
 typedef struct s_data
@@ -191,9 +197,10 @@ void	change_point(t_vec *change, t_vec other, int z);
 void	go_to_proj(t_data *data);
 
 /************************/
-/*		point.c			*/
+/*		vec.c			*/
 /************************/
 t_vec	vec(t_obj obj, t_wld wld, t_point point);
+void	orthonormalize_base(t_base *base);
 
 /************************/
 /*		color.c			*/
@@ -232,7 +239,7 @@ void	do_rotz(t_base *base, t_trig vals);
 void	block_rot(float *val, float *rot, int axis);
 
 t_vec	rotate_vector_by_quaternion(t_vec v, t_quat q);
-t_quat axis_angle_to_quaternion(float angle, t_vec axis);
+t_quat	axis_angle_to_quaternion(float angle, t_vec axis);
 
 /************************/
 /*		init.c			*/

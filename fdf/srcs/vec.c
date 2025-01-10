@@ -1,53 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.c                                            :+:      :+:    :+:   */
+/*   vec.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:08:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:03:37 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
+t_vec	normalize(t_vec v)
 {
-	t_point	centered;
-	t_point	wld_coo;
+	float	mag;
 
-	centered = (t_point){point.x - obj.mat_ori.x, point.y - obj.mat_ori.y,
-		point.z - obj.mat_ori.z, (t_col){0}};
-	wld_coo.x = (centered.x * obj.base.i.x + centered.y * obj.base.j.x
-			+ centered.z * obj.base.k.x) * obj.scale * wld.cam.scale * 2;
-	wld_coo.y = (centered.x * obj.base.i.y + centered.y * obj.base.j.y
-			+ centered.z * obj.base.k.y) * obj.scale * wld.cam.scale * 2;
-	wld_coo.z = (centered.x * obj.base.i.z + centered.y * obj.base.j.z
-			+ centered.z * obj.base.k.z) * obj.scale * wld.cam.scale * 2;
-	return ((t_point){wld_coo.x - obj.wld_ori.x, wld_coo.y - obj.wld_ori.y,
-		wld_coo.z - obj.wld_ori.z, (t_col){0}});
+	mag = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	return ((t_vec){v.x / mag, v.y / mag, v.z / mag});
 }
 
-t_vec	vec(t_obj obj, t_wld wld, t_point point)
+t_vec	cross_product(t_vec a, t_vec b)
 {
-	t_point	wld_coo;
-	t_vec	centered;
-	t_vec	final;
-
-	wld_coo = get_wld_coo(point, obj, wld);
-	centered = (t_vec){wld_coo.x - wld.cam.ori.x, wld_coo.y - wld.cam.ori.y,
-		wld_coo.z - wld.cam.ori.z};
-	final.x = centered.x * wld.base.i.x + centered.y * wld.base.j.x
-		+ centered.z * wld.base.k.x;
-	final.y = centered.x * wld.base.i.y + centered.y * wld.base.j.y
-		+ centered.z * wld.base.k.y;
-	final.z = centered.x * wld.base.i.z + centered.y * wld.base.j.z
-		+ centered.z * wld.base.k.z;
-	// round_vec(&final);
-	return (final);
+	return ((t_vec){
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x
+	});
 }
- */
+
+void	orthonormalize_base(t_base *base)
+{
+	t_data	*data;
+
+	data = get_data();
+	base->i = normalize(base->i);
+	base->j = normalize(base->j);
+	if (data->proj)
+		base->k = cross_product(base->j, base->i);
+	else
+		base->k = cross_product(base->i, base->j);
+	base->k = normalize(base->k);
+	if (data->proj)
+		base->j = cross_product(base->i, base->k);
+	else
+		base->j = cross_product(base->k, base->i);
+	base->j = normalize(base->j);
+}
 
 t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 {

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:50:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/09 17:42:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:13:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,46 +25,48 @@ void	go_up(t_data *data, int sign)
 // 	data->wld.cam.base.k.y, data->wld.cam.base.k.z);
 void	move_forward(t_data *data, int sign)
 {
-	t_trig	rot_y;
-	t_trig	rot_x;
-	t_trig	rot_z;
-
 	if (!data->proj)
 		data->wld.cam.ori.y += sign * (data->wld.cam.scale);
 	else
 	{
-		rot_y = (t_trig){sin(-data->wld.cam.rot.y), cos(-data->wld.cam.rot.y)};
-		rot_x = (t_trig){sin(-data->wld.cam.rot.x), cos(-data->wld.cam.rot.x)};
-		rot_z = (t_trig){sin(-data->wld.cam.rot.z), cos(-data->wld.cam.rot.z)};
 		data->wld.cam.base.i = data->wld.init.i;
-		do_rot_yxz(&data->wld.cam.base.i, rot_y, rot_x, rot_z);
-		data->wld.cam.ori.x += sign * (5)
+		data->wld.cam.base.i = rotate_vector_by_quaternion(data->wld.cam.base.i,
+				axis_angle_to_quaternion(data->wld.cam.rot.x,
+					(t_vec){1, 0, 0}));
+		data->wld.cam.base.i = rotate_vector_by_quaternion(data->wld.cam.base.i,
+				axis_angle_to_quaternion(data->wld.cam.rot.y,
+					(t_vec){0, 1, 0}));
+		data->wld.cam.base.i = rotate_vector_by_quaternion(data->wld.cam.base.i,
+				axis_angle_to_quaternion(data->wld.cam.rot.z,
+					(t_vec){0, 0, 1}));
+		data->wld.cam.ori.x += -sign * (5)
 			* data->wld.cam.base.i.z;
 		data->wld.cam.ori.y += -sign * (5)
 			* data->wld.cam.base.i.x;
-		// data->wld.cam.ori.z += -sign * (5)
-		// 	* data->wld.cam.base.i.y;
 	}
 }
+		// data->wld.cam.ori.z += -sign * (5)
+		// 	* data->wld.cam.base.i.y;
 
 void	move_side(t_data *data, int sign)
 {
-	t_trig	rot_y;
-	t_trig	rot_x;
-	t_trig	rot_z;
-
 	if (!data->proj)
 		data->wld.cam.ori.x += -sign * (data->wld.cam.scale);
 	else
 	{
-		rot_y = (t_trig){sin(-data->wld.cam.rot.y), cos(-data->wld.cam.rot.y)};
-		rot_x = (t_trig){sin(-data->wld.cam.rot.x), cos(-data->wld.cam.rot.x)};
-		rot_z = (t_trig){sin(-data->wld.cam.rot.z), cos(-data->wld.cam.rot.z)};
 		data->wld.cam.base.j = data->wld.init.j;
-		do_rot_yxz(&data->wld.cam.base.j, rot_y, rot_x, rot_z);
-		data->wld.cam.ori.x += sign * (5)
+		data->wld.cam.base.j = rotate_vector_by_quaternion(data->wld.cam.base.j,
+				axis_angle_to_quaternion(data->wld.cam.rot.x,
+					(t_vec){1, 0, 0}));
+		data->wld.cam.base.j = rotate_vector_by_quaternion(data->wld.cam.base.j,
+				axis_angle_to_quaternion(data->wld.cam.rot.y,
+					(t_vec){0, 1, 0}));
+		data->wld.cam.base.j = rotate_vector_by_quaternion(data->wld.cam.base.j,
+				axis_angle_to_quaternion(data->wld.cam.rot.z,
+					(t_vec){0, 0, 1}));
+		data->wld.cam.ori.x += -sign * (5)
 			* data->wld.cam.base.j.z;
-		data->wld.cam.ori.y += sign * (5)
+		data->wld.cam.ori.y += -sign * (5)
 			* data->wld.cam.base.j.x;
 	}
 }

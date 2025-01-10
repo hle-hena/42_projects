@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/09 10:10:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:03:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	init_wld(t_wld *wld)
 	},
 		1,
 		1 * (15),
-		200 * (15)
+		200 * (15),
+		4
 	},
 		1
 	};
@@ -80,7 +81,7 @@ void	init_data(t_data *data, char **path)
 	int	len;
 	int	wid;
 
-	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	init_obj(&data->obj, path[0]);
 	init_wld(&data->wld);
 	data->mlx = mlx_init();
@@ -92,12 +93,6 @@ void	init_data(t_data *data, char **path)
 		data->wld.init_scale = 1;
 	data->wld.cam.scale = data->wld.init_scale;
 	look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
-	// data->win_len = (data->obj.mat.len) * (data->wld.init_scale * 3);
-	// data->win_wid = (data->obj.mat.wid) * (data->wld.init_scale * 3);
-	// if (data->win_len > len)
-	// 	data->win_len = len;
-	// if (data->win_wid > wid)
-	// 	data->win_wid = wid;
 	data->win_len = len;
 	data->win_wid = wid;
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
