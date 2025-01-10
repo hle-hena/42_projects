@@ -8,7 +8,8 @@ if (far.left is not in screen)
 	//same for the right ?
 ```
 
-Fix the rotation problem. If I block, the rotation slowly move up or down.
+For the fps idea :
+- When first loading the map, record the fps, and then always set this to the desired speed. The faster it has been loaded the first time, the smaller that speed should be.
 
 Add a menu
 Add support for multiple maps
