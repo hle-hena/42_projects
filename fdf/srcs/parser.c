@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:30:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 16:42:07 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 20:13:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@
 
 int	parse_line(t_obj *obj, char *src, int line)
 {
-	char	*temp;
 	int		j;
 	int		i;
 	int		test;
@@ -75,7 +74,6 @@ int	parse_line(t_obj *obj, char *src, int line)
 	obj->mat.color[line] = ft_calloc(obj->mat.wid + 1, sizeof(int));
 	if (!obj->mat.matrix[line] || !obj->mat.color[line] || !src)
 		return (1);
-	temp = src;
 	j = 0;
 	i = -1;
 	while (src[++i])

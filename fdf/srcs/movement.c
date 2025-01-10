@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:50:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 14:34:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:42:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	move_forward(t_data *data, int sign)
 		rot_z = (t_trig){sin(-data->wld.cam.rot.z), cos(-data->wld.cam.rot.z)};
 		data->wld.cam.base.i = data->wld.init.i;
 		do_rot_yxz(&data->wld.cam.base.i, rot_y, rot_x, rot_z);
-		data->wld.cam.ori.x += -sign * (5)
+		data->wld.cam.ori.x += sign * (5)
 			* data->wld.cam.base.i.z;
 		data->wld.cam.ori.y += -sign * (5)
 			* data->wld.cam.base.i.x;
-		data->wld.cam.ori.z += -sign * (5)
-			* data->wld.cam.base.i.y;
+		// data->wld.cam.ori.z += -sign * (5)
+		// 	* data->wld.cam.base.i.y;
 	}
 }
 

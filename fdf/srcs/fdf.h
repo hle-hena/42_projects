@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 14:57:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:19:34 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ typedef struct s_vector
 	float	y;
 	float	z;
 }	t_vec;
+
+typedef struct s_quat {
+    float w, x, y, z;
+} t_quat;
 
 typedef struct s_point
 {
@@ -226,6 +230,9 @@ void	do_rotx(t_base *base, t_trig vals);
 void	do_roty(t_base *base, t_trig vals);
 void	do_rotz(t_base *base, t_trig vals);
 void	block_rot(float *val, float *rot, int axis);
+
+t_vec	rotate_vector_by_quaternion(t_vec v, t_quat q);
+t_quat axis_angle_to_quaternion(float angle, t_vec axis);
 
 /************************/
 /*		init.c			*/

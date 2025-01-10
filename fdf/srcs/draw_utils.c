@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 12:23:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:12:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	point_is_in_fov(t_data *data, t_point point)
 {
-	if (point.x < data->obj.mat.wid * data->wld.init_scale * 3 && point.x >= 0
-		&& point.y < data->obj.mat.len * data->wld.init_scale * 3
+	if (point.x < data->win_wid && point.x >= 0
+		&& point.y < data->win_len
 		&& point.y >= 0)
 		return (1);
 	return (0);

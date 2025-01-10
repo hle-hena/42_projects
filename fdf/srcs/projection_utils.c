@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 12:25:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/08 20:14:10 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ int	move_point_l(t_data *data, t_point *change, t_point other, int bord)
 
 int	move_point(t_data *data, t_point *start, t_point *end)
 {
-	int	res;
-
-	res = 0;
 	if (start->x > data->win_wid || start->x < 0)
 		if (move_point_w(data, start, *end, start->x < 0))
 			return (0);

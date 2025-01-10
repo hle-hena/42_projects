@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 15:58:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:45:08 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	move_hook(int x, int y, t_data *data)
 	if (data->proj && data->event.lock)
 	{
 		data->event.rp_y = (float)(last[0] - x) / 10;
-		data->event.rp_x = (float)(y - last[1]) / 10;
+		data->event.rp_x = (float)(last[1] - y) / 10;
 		if (data->event.rp_y > speed_limit)
 			data->event.rp_y = speed_limit;
 		else if (data->event.rp_y < -speed_limit)

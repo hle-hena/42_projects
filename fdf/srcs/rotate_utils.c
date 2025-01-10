@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:25:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 16:12:33 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:13:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,14 @@ void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z)
 
 void	block_rot(float *val, float *rot, int axis)
 {
-	if (axis == 1 && ((180 * *val) / M_PI) >= 180)
+	if (axis == 1 && ((180 * *val) / M_PI) >= 170)
 	{
-		*val = 180 * (M_PI / 180);
+		*val = 170 * (M_PI / 180);
 		*rot = 0;
 	}
-	else if (axis == 1 && ((180 * *val) / M_PI) <= 0)
+	else if (axis == 1 && ((180 * *val) / M_PI) <= 10)
 	{
-		*val = 0;
+		*val = 10 * (M_PI / 180);
 		*rot = 0;
 	}
 }
