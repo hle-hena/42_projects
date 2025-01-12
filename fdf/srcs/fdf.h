@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 16:44:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:51:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
-#include <stdio.h>
+# include <time.h>
+// #include <stdio.h>
+
+# define TARGET_FPS 60
+
+typedef struct timespec	t_time;
 
 typedef struct s_trigometry_values
 {
@@ -125,6 +130,7 @@ typedef struct s_events
 	float	rp_y;
 	int		sc;
 	int		fog;
+	int		init;
 }	t_event;
 
 typedef struct s_data
@@ -135,6 +141,7 @@ typedef struct s_data
 	int		proj;
 	int		win_len;
 	int		win_wid;
+	float	d_time;
 	t_event	event;
 	t_obj	obj;
 	t_wld	wld;
@@ -144,6 +151,13 @@ typedef struct s_data
 /*		main.c			*/
 /************************/
 t_data	*get_data(void);
+
+/************************/
+/*		fps.c			*/
+/************************/
+float	get_current_time(void);
+void	limit_frame_rate(float frame_start_time);
+int		calculate_fps(void);
 
 /************************/
 /*		event.c			*/

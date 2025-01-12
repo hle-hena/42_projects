@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 14:14:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:25:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	add_rot(float *val, float *rot, float sign, int axis)
 
 	inc = 1;
 	data = get_data();
-	*val += inc * sign * (M_PI / 180);
-	*rot = inc * sign * (M_PI / 180);
+	*val += inc * sign * (M_PI / 180) * data->d_time;
+	*rot = inc * sign * (M_PI / 180) * data->d_time;
 	if (*val >= (float)(2 * M_PI))
 		*val = 0;
 	else if (*val <= (float)-(2 * M_PI))

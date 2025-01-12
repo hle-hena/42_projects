@@ -8,8 +8,7 @@ if (far.left is not in screen)
 	//same for the right ?
 ```
 
-For the fps idea :
-- When first loading the map, record the fps, and then always set this to the desired speed. The faster it has been loaded the first time, the smaller that speed should be.
+remake the draw func so it also works for perspective and for the worlds upside down
 
 Add a menu
 Add support for multiple maps

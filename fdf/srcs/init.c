@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 13:03:53 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:14:17 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,10 @@ void	init_data(t_data *data, char **path)
 	int	len;
 	int	wid;
 
-	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
 	init_obj(&data->obj, path[0]);
 	init_wld(&data->wld);
+	data->d_time = 1;
 	data->mlx = mlx_init();
 	mlx_get_screen_size(data->mlx, &wid, &len);
 	len *= 0.9;

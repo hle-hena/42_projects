@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 12:29:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/12 16:17:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,11 @@ int	mouse_up(int button, int x, int y, t_data *data)
 int	move_hook(int x, int y, t_data *data)
 {
 	static int	last[2] = {0, 0};
-	int			speed_limit;
 
-	speed_limit = 100;
 	if (data->proj && data->event.lock)
 	{
 		data->event.rp_y = (float)(last[0] - x) / 10;
 		data->event.rp_x = (float)(y - last[1]) / 10;
-		if (data->event.rp_y > speed_limit)
-			data->event.rp_y = speed_limit;
-		else if (data->event.rp_y < -speed_limit)
-			data->event.rp_y = -speed_limit;
-		if (data->event.rp_x > speed_limit)
-			data->event.rp_x = speed_limit;
-		else if (data->event.rp_x < -speed_limit)
-			data->event.rp_x = -speed_limit;
 	}
 	last[0] = x;
 	last[1] = y;

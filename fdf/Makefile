@@ -21,11 +21,11 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 FDF =	color_utils.c	color.c				draw_utils.c		\
 		draw.c			end.c				event.c				\
-		float.c			init.c				main.c				\
-		mlx_hook.c		mlx_utils.c			movement.c			\
-		parser_utils.c	parser.c			projection_utils.c	\
-		projection.c	rotate_euler.c		rotate_quaternion.c	\
-		rotate.c		vec.c
+		float.c			fps.c				init.c				\
+		main.c				mlx_hook.c		mlx_utils.c			\
+		movement.c			parser_utils.c	parser.c			\
+		projection_utils.c	projection.c	rotate_euler.c		\
+		rotate_quaternion.c	rotate.c		vec.c
 
 FDF_SRC = $(addprefix srcs/, $(FDF))
 
