@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 16:32:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:04:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,3 @@ void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 			axis_angle_to_quaternion(angle, rot));
 	orthonormalize_base(base);
 }
-	// clear_last_lines(4);
-	// printf("Base is \n\t{%f, %f, %f}\n\t{%f, %f, %f}\n\t{%f, %f, %f}\n",
-	// 	data->wld.base.i.x, data->wld.base.i.y, data->wld.base.i.z,
-	// 	data->wld.base.j.x, data->wld.base.j.y, data->wld.base.j.z,
-	// 	data->wld.base.k.x, data->wld.base.k.y, data->wld.base.k.z);
