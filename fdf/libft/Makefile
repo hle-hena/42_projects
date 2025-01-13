@@ -24,6 +24,9 @@ GNL =		get_next_line.c
 PRINT = 	ft_putchar_fd.c		ft_putendl_fd.c		ft_putnbr_fd.c		\
 			ft_putstr_fd.c
 
+PRINTF =	digits.c			ft_printf.c			handle_args.c		\
+			str.c
+
 MATH =		ft_abs.c			ft_atoi.c			ft_itoa.c			\
 			ft_max.c			ft_power.c
 
@@ -35,10 +38,11 @@ IS_SRC = $(addprefix is/, $(IS))
 MEM_SRC = $(addprefix mem/, $(MEM))
 GNL_SRC = $(addprefix gnl/, $(GNL))
 PRINT_SRC = $(addprefix print/, $(PRINT))
+PRINTF_SRC = $(addprefix print/ft_printf/, $(PRINTF))
 MATH_SRC = $(addprefix math/, $(MATH))
 F_SRC = $(addprefix freedom/, $(F))
 
-SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(GNL_SRC) $(PRINT_SRC) $(MATH_SRC) $(F_SRC)
+SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(GNL_SRC) $(PRINT_SRC) $(PRINTF_SRC) $(MATH_SRC) $(F_SRC)
 OBJ = ${SRC:.c=.o}
 
 CC = cc

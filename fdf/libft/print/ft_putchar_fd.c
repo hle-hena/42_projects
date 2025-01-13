@@ -6,14 +6,15 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:58:56 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 20:19:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:31:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
 	if (write(fd, &c, 1) == -1)
-		return ;
+		return (0);
+	return (1);
 }

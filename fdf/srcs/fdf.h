@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/12 17:51:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:30:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <time.h>
-// #include <stdio.h>
+#include <stdio.h>
+void	clear_last_lines(int lines);
 
 # define TARGET_FPS 60
 
@@ -105,8 +106,6 @@ typedef struct s_camera
 	t_vec	rot;
 	int		scale;
 	int		n_plane;
-	int		f_plane;
-	float	fog;
 }	t_cam;
 
 typedef struct s_world
@@ -129,20 +128,32 @@ typedef struct s_events
 	float	rp_x;
 	float	rp_y;
 	int		sc;
-	int		fog;
+	int		inc;
 	int		init;
 }	t_event;
+
+typedef struct s_modifiers
+{
+	int		ind;
+	float	fog;
+	float	mo_speed;
+	float	rot_speed;
+	float	fov;
+	int		f_plane;
+}	t_modif;
 
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
+	int		fps;
 	int		proj;
 	int		win_len;
 	int		win_wid;
 	float	d_time;
 	t_event	event;
+	t_modif	modif;
 	t_obj	obj;
 	t_wld	wld;
 }	t_data;
@@ -155,9 +166,13 @@ t_data	*get_data(void);
 /************************/
 /*		fps.c			*/
 /************************/
-float	get_current_time(void);
-void	limit_frame_rate(float frame_start_time);
-int		calculate_fps(void);
+void	limit_frame_rate(const t_time *frame_start_time);
+int		calculate_fps(t_data *data);
+
+/************************/
+/*		status.c		*/
+/************************/
+void	update_terminal_status(t_data *data, int init);
 
 /************************/
 /*		event.c			*/

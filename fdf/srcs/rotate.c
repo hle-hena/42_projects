@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/12 15:25:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:32:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ void	look_at(t_base *base, t_base init, t_vec rot)
 
 void	add_rot(float *val, float *rot, float sign, int axis)
 {
-	int		inc;
 	t_data	*data;
 
-	inc = 1;
 	data = get_data();
-	*val += inc * sign * (M_PI / 180) * data->d_time;
-	*rot = inc * sign * (M_PI / 180) * data->d_time;
+	*val += data->modif.rot_speed * sign * (M_PI / 180) * data->d_time;
+	*rot = data->modif.rot_speed * sign * (M_PI / 180) * data->d_time;
 	if (*val >= (float)(2 * M_PI))
 		*val = 0;
 	else if (*val <= (float)-(2 * M_PI))
@@ -75,3 +73,8 @@ void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 			axis_angle_to_quaternion(angle, rot));
 	orthonormalize_base(base);
 }
+	// clear_last_lines(4);
+	// printf("Base is \n\t{%f, %f, %f}\n\t{%f, %f, %f}\n\t{%f, %f, %f}\n",
+	// 	data->wld.base.i.x, data->wld.base.i.y, data->wld.base.i.z,
+	// 	data->wld.base.j.x, data->wld.base.j.y, data->wld.base.j.z,
+	// 	data->wld.base.k.x, data->wld.base.k.y, data->wld.base.k.z);

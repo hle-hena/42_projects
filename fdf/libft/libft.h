@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/07 15:12:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:44:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,14 @@ void	*ft_realloc(void *ptr, size_t size);
 
 /*			print&co			*/
 /********************************/
-void	ft_putchar_fd(char c, int fd);
+int		ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *str, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *str, int fd);
+int		ft_putstr_fd(char *str, int fd);
+int		ft_putnbr_fd(int n, int fd);
+int		ft_numlen(long int num);
+int		ft_putnbr_base_fd(unsigned long nb, char *base, int fd);
+int		ft_numlen_base(unsigned long nb, char *base);
+int		ft_printf(const char *str, ...);
 
 /*			str_func			*/
 /********************************/

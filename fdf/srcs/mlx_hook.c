@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/12 16:17:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:25:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	key_press(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 		mlx_close(data);
-	if (keycode == 119 || keycode == 115)
+	else if (keycode == 65289)
+		data->modif.ind = (data->modif.ind + 1) % 5;
+	else if (keycode == 119 || keycode == 115)
 		data->event.mo_f = (keycode == 119) * 1 + (keycode == 115) * -1;
 	else if (keycode == 100 || keycode == 97)
 		data->event.mo_s = (keycode == 100) * 1 + (keycode == 97) * -1;
@@ -27,7 +29,7 @@ int	key_press(int keycode, t_data *data)
 	else if (keycode == 111 || keycode == 108)
 		data->event.rot_z = (keycode == 111) * 1 + (keycode == 108) * -1;
 	else if (keycode == 45 || keycode == 61)
-		data->event.fog = (keycode == 61) * 1 + (keycode == 45) * -1;
+		data->event.inc = (keycode == 61) * 1 + (keycode == 45) * -1;
 	return (0);
 }
 
@@ -51,7 +53,7 @@ int	key_down(int keycode, t_data *data)
 	else if (keycode == 111 || keycode == 108)
 		data->event.rot_z = 0;
 	else if (keycode == 45 || keycode == 61)
-		data->event.fog = 0;
+		data->event.inc = 0;
 	return (0);
 }
 

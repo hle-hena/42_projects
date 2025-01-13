@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/12 15:14:17 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:33:34 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	init_wld(t_wld *wld)
 	},
 		1,
 		1 * (15),
-		200 * (15),
-		4
 	},
 		1
 	};
@@ -82,12 +80,14 @@ void	init_data(t_data *data, char **path)
 	int	wid;
 
 	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+	data->modif = (t_modif){0, 4, 1, 1, 60, 200 * (15)};
 	init_obj(&data->obj, path[0]);
 	init_wld(&data->wld);
 	data->d_time = 1;
 	data->mlx = mlx_init();
 	mlx_get_screen_size(data->mlx, &wid, &len);
 	len *= 0.9;
+	wid *= 0.8;
 	data->wld.init_scale = ft_min(len / (data->obj.mat.len * 3),
 			wid / (data->obj.mat.wid * 3));
 	if (data->wld.init_scale < 1)
@@ -98,4 +98,5 @@ void	init_data(t_data *data, char **path)
 	data->win_wid = wid;
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
 	data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
+	update_terminal_status(data, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 13:20:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:33:34 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	get_color(t_data *data, t_line *line, t_point start, t_point end)
 	}
 	else
 	{
-		percent = pow((float)line->start.z / data->wld.cam.f_plane,
-				data->wld.cam.fog);
+		percent = pow((float)line->start.z / data->modif.f_plane,
+				data->modif.fog);
 		line->start.col = get_grad(rev_calc_color(data->obj.mat.color[start.y]
 				[start.x]), (t_col){0x00, 0x00, 0x00}, percent);
-		percent = pow((float)line->end.z / data->wld.cam.f_plane,
-				data->wld.cam.fog);
+		percent = pow((float)line->end.z / data->modif.f_plane,
+				data->modif.fog);
 		line->end.col = get_grad(rev_calc_color(data->obj.mat.color[end.y]
 				[end.x]), (t_col){0x00, 0x00, 0x00}, percent);
 	}

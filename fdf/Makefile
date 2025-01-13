@@ -25,7 +25,8 @@ FDF =	color_utils.c	color.c				draw_utils.c		\
 		main.c				mlx_hook.c		mlx_utils.c			\
 		movement.c			parser_utils.c	parser.c			\
 		projection_utils.c	projection.c	rotate_euler.c		\
-		rotate_quaternion.c	rotate.c		vec.c
+		rotate_quaternion.c	rotate.c		status.c			\
+		vec.c
 
 FDF_SRC = $(addprefix srcs/, $(FDF))
 

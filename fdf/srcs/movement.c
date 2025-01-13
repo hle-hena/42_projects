@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:50:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/12 15:50:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:34:50 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	go_up(t_data *data, int sign)
 void	move_forward(t_data *data, int sign)
 {
 	if (!data->proj)
-		data->wld.cam.ori.y += sign * (data->wld.cam.scale) * data->d_time;
+		data->wld.cam.ori.y += sign * (data->wld.cam.scale) * data->d_time
+			* data->modif.mo_speed;
 	else
 	{
 		data->wld.cam.base.i = data->wld.init.i;
@@ -40,9 +41,9 @@ void	move_forward(t_data *data, int sign)
 				axis_angle_to_quaternion(data->wld.cam.rot.z,
 					(t_vec){0, 0, 1}));
 		data->wld.cam.ori.x += -sign * (10) * data->d_time
-			* data->wld.cam.base.i.z;
+			* data->wld.cam.base.i.z * data->modif.mo_speed;
 		data->wld.cam.ori.y += -sign * (10) * data->d_time
-			* data->wld.cam.base.i.x;
+			* data->wld.cam.base.i.x * data->modif.mo_speed;
 	}
 }
 		// data->wld.cam.ori.z += -sign * (5)
@@ -51,7 +52,8 @@ void	move_forward(t_data *data, int sign)
 void	move_side(t_data *data, int sign)
 {
 	if (!data->proj)
-		data->wld.cam.ori.x += -sign * (data->wld.cam.scale) * data->d_time;
+		data->wld.cam.ori.x += -sign * (data->wld.cam.scale) * data->d_time
+			* data->modif.mo_speed;
 	else
 	{
 		data->wld.cam.base.j = data->wld.init.j;
@@ -65,9 +67,9 @@ void	move_side(t_data *data, int sign)
 				axis_angle_to_quaternion(data->wld.cam.rot.z,
 					(t_vec){0, 0, 1}));
 		data->wld.cam.ori.x += -sign * (5) * data->d_time
-			* data->wld.cam.base.j.z;
+			* data->wld.cam.base.j.z * data->modif.mo_speed;
 		data->wld.cam.ori.y += -sign * (5) * data->d_time
-			* data->wld.cam.base.j.x;
+			* data->wld.cam.base.j.x * data->modif.mo_speed;
 	}
 }
 

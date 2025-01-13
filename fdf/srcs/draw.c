@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 12:27:35 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:13:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,30 @@ void	draw_iso(t_data *data, int color, t_point pt, t_point inc)
 		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
+	// if (data->proj)
+	// 	return (draw_persp())
 void	draw_map(t_data *data, int color)
 {
+	int	up;
+	int	side;
+
+	up = ft_tern_int(data->wld.base.k.z >= 0, 1, -1);
+	side = ft_tern_int(data->wld.base.k.y <= 0, 1, -1);
 	data->obj.r_ori = vec(data->obj, data->wld, data->obj.wld_ori);
-	if (data->wld.base.i.x >= 0 && data->wld.base.i.y >= 0)
+	if (data->wld.base.i.x * side >= 0
+		&& data->wld.base.i.y * side * up >= 0)
 		draw_iso(data, color, (t_point){0, 0, data->obj.mat.len, (t_col){0}},
 			(t_point){1, 1, data->obj.mat.wid, (t_col){0}});
-	else if (data->wld.base.i.x > 0 && data->wld.base.i.y < 0)
+	else if (data->wld.base.i.x * side > 0
+		&& data->wld.base.i.y * side * up < 0)
 		draw_iso(data, color, (t_point){data->obj.mat.wid - 1, 0,
 			data->obj.mat.len, (t_col){0}}, (t_point){-1, 1, -1, (t_col){0}});
-	else if (data->wld.base.i.x < 0 && data->wld.base.i.y > 0)
+	else if (data->wld.base.i.x * side < 0
+		&& data->wld.base.i.y * side * up > 0)
 		draw_iso(data, color, (t_point){0, data->obj.mat.len - 1, -1,
 			(t_col){0}}, (t_point){1, -1, data->obj.mat.wid, (t_col){0}});
-	else
+	else if (data->wld.base.i.x * side < 0
+		&& data->wld.base.i.y * side * up < 0)
 		draw_iso(data, color, (t_point){data->obj.mat.wid - 1, data->obj.mat.len
 			- 1, -1, (t_col){0}}, (t_point){-1, -1, -1, (t_col){0}});
 }
