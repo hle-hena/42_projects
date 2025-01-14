@@ -2,9 +2,9 @@ MAKEFLAGS += --no-print-directory
 
 NAME = fdf
 CC = cc
-FLAGS = -O3 -g
+FLAGS = -Wall -Wextra -Werror -O3 -g
 RM = rm -f
-#-Wall -Wextra -Werror
+
 FRAMEDIR = ./mlx
 FRAMEWORK = -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz
 

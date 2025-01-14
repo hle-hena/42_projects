@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:13:26 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 13:25:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:05:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	mlx_close(t_data *data)
 {
 	mlx_del(data);
-	ft_pend_prog(0, "Program Ended.");
+	ft_pend_prog();
 	return (0);
 }

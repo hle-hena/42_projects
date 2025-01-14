@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/14 19:40:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:04:48 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,6 @@ void	get_matsize(t_mat *mat, int fd);
 /************************/
 int		mlx_del(t_data *data);
 void	ft_perror(int error_code, int clean, char *custom_mess);
-void	ft_pend_prog(int clean, char *custom_mess);
+void	ft_pend_prog(void);
 
 #endif
