@@ -6,36 +6,45 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 14:33:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:55:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* void	print_map(t_obj obj, int **tab)
+void	new_window(t_data *data)
 {
-	int		i;
-	int		j;
+	int		wid;
+	int		len;
 
-	printf("Map :\n");
-	i = -1;
-	while (++i < obj.mat.len)
+	data->control = !data->control;
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img);
+	if (data->control)
 	{
-		j = -1;
-		while (++j < obj.mat.wid - 1)
-		{
-			printf("%d ", tab[i][j]);
-		}
-		printf("%d\n", tab[i][j]);
+		data->win_wid *= 0.8;
+		data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len,
+				"Fdf - CONTROL");
+		data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
 	}
-	printf("\n\n");
-} */
+	else
+	{
+		mlx_get_screen_size(data->mlx, &wid, &len);
+		data->win_wid = wid;
+		data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len,
+				"Fdf");
+		data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
+	}
+	if (data->proj)
+		mlx_mouse_hide(data->mlx, data->win);
+	loop();
+}
 
 void	init_obj(t_obj *obj, char *path)
 {
 	obj->wld_ori = (t_point){0, 0, 0, (t_col){0}};
 	obj->r_ori = (t_vec){0, 0, 0};
-	obj->base = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
+	obj->base = (t_base){(t_vec){1, 0, 0}, (t_vec){0, 1, 0},
 		(t_vec){0, 0, 0.15}};
 	obj->init = (t_base){(t_vec){0.849, 0, 0}, (t_vec){0, 0.97, 0},
 		(t_vec){0, 0, 0.15}};
@@ -79,6 +88,7 @@ void	init_data(t_data *data, char **path)
 	int	len;
 	int	wid;
 
+	data->control = 0;
 	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
 	data->modif = (t_modif){0, 4, 1, 1, 60, 200 * (15)};
 	init_obj(&data->obj, path[0]);
@@ -87,7 +97,6 @@ void	init_data(t_data *data, char **path)
 	data->mlx = mlx_init();
 	mlx_get_screen_size(data->mlx, &wid, &len);
 	len *= 0.9;
-	wid *= 0.8;
 	data->wld.init_scale = ft_min(len / (data->obj.mat.len * 3),
 			wid / (data->obj.mat.wid * 3));
 	if (data->wld.init_scale < 1)

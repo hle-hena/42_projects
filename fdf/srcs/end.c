@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:26:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/12 17:43:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:36:50 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,14 @@ void	ft_perror(int error_code, int clean, char *custom_mess)
 		ft_putendl_fd("What even happened there ???", 2);
 	else
 	{
+		ft_printf("\033[0;36m/**********************************/\n");
+		ft_printf("/*  FDF STATUS : \033[0;31mDEAD\033[0;36m             */\n");
+		ft_printf("/**********************************/\n");
+		ft_printf("/* Current fps : ---              */\n");
+		ft_printf("/**********************************/\n");
+		ft_printf("/* Current modifier : ----------  */\n");
+		ft_printf("/*     value : ---------------    */\n");
+		ft_printf("/**********************************/\n\033[0;0m");
 		ft_putstr_fd("\033[0;31m", 2);
 		if (error_code)
 			put_error_code(error_code);
@@ -81,8 +89,14 @@ void	ft_pend_prog(int clean, char *custom_mess)
 {
 	if (clean)
 		ft_perror(0, 1, NULL);
-	ft_putstr_fd("\033[0;32m", 2);
-	ft_putstr_fd(custom_mess, 2);
-	ft_putendl_fd("\033[0;0m", 2);
+	clear_last_lines(8);
+	ft_printf("\033[0;36m/**********************************/\n");
+	ft_printf("/*  FDF STATUS : \033[0;32mENDED\033[0;36m            */\n");
+	ft_printf("/**********************************/\n");
+	ft_printf("/* Current fps : ---              */\n");
+	ft_printf("/**********************************/\n");
+	ft_printf("/* Current modifier : ----------  */\n");
+	ft_printf("/*     value : ---------------    */\n");
+	ft_printf("/**********************************/\n\033[0;0m");
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 15:30:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:40:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <time.h>
-#include <stdio.h>
-void	clear_last_lines(int lines);
+// #include <stdio.h>
 
 # define TARGET_FPS 60
 
@@ -147,6 +146,7 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	void	*img;
+	int		control;
 	int		fps;
 	int		proj;
 	int		win_len;
@@ -162,6 +162,7 @@ typedef struct s_data
 /*		main.c			*/
 /************************/
 t_data	*get_data(void);
+void	loop(void);
 
 /************************/
 /*		fps.c			*/
@@ -170,8 +171,15 @@ void	limit_frame_rate(const t_time *frame_start_time);
 int		calculate_fps(t_data *data);
 
 /************************/
+/*		draw_persp.c	*/
+/************************/
+t_point	get_obj_coo(t_wld wld, t_obj obj);
+void	draw_persp(t_data *data, int color);
+
+/************************/
 /*		status.c		*/
 /************************/
+void	clear_last_lines(int lines);
 void	update_terminal_status(t_data *data, int init);
 
 /************************/
@@ -202,6 +210,8 @@ void	move_side(t_data *data, int sign);
 /************************/
 /*		draw.c			*/
 /************************/
+void	draw_line(t_data *data, t_point start, t_point end);
+int		create_line(t_data *data, t_point start, t_point end, int col);
 void	draw_map(t_data *data, int color);
 
 /************************/
@@ -273,6 +283,7 @@ t_quat	axis_angle_to_quaternion(float angle, t_vec axis);
 /************************/
 /*		init.c			*/
 /************************/
+void	new_window(t_data *data);
 void	init_data(t_data *data, char **path);
 
 /************************/

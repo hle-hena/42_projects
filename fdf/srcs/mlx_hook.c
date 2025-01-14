@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 14:25:16 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:57:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	key_press(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 		mlx_close(data);
-	else if (keycode == 65289)
+	else if (keycode == 65507)
+		new_window(data);
+	else if (keycode == 65289 && data->control)
 		data->modif.ind = (data->modif.ind + 1) % 5;
 	else if (keycode == 119 || keycode == 115)
 		data->event.mo_f = (keycode == 119) * 1 + (keycode == 115) * -1;
@@ -87,6 +89,8 @@ int	move_hook(int x, int y, t_data *data)
 	{
 		data->event.rp_y = (float)(last[0] - x) / 10;
 		data->event.rp_x = (float)(y - last[1]) / 10;
+		mlx_mouse_move(data->mlx, data->win, data->win_wid / 2,
+			data->win_len / 2);
 	}
 	last[0] = x;
 	last[1] = y;

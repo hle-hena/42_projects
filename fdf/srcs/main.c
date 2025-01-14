@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:12:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/12 17:54:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:24:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,11 @@ t_data	*get_data(void)
 	// 	data->wld.cam.ori.y, data->wld.cam.ori.z);
 	// printf("\n\n");
 
-int	main(int ac, char **av)
+void	loop(void)
 {
 	t_data	*data;
 
-	if (ac != 2)
-		ft_perror(2, 0, NULL);
 	data = get_data();
-	init_data(data, &av[1]);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_down, data);
 	mlx_hook(data->win, 4, 1L << 2, mouse_down, data);
@@ -49,4 +46,15 @@ int	main(int ac, char **av)
 	mlx_hook(data->win, 17, 0, mlx_close, data);
 	mlx_loop_hook(data->mlx, event_loop, data);
 	mlx_loop(data->mlx);
+}
+
+int	main(int ac, char **av)
+{
+	t_data	*data;
+
+	if (ac != 2)
+		ft_perror(2, 0, NULL);
+	data = get_data();
+	init_data(data, &av[1]);
+	loop();
 }

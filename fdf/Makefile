@@ -2,9 +2,9 @@ MAKEFLAGS += --no-print-directory
 
 NAME = fdf
 CC = cc
-FLAGS = -Wall -Wextra -Werror -O3 -g
+FLAGS = -O3 -g
 RM = rm -f
-
+#-Wall -Wextra -Werror
 FRAMEDIR = ./mlx
 FRAMEWORK = -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz
 
@@ -19,14 +19,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 # 		parser_utils.c	mlx_utils.c			event.c			\
 # 		mlx_hook.c		rotate_quaternion.c	
 
-FDF =	color_utils.c	color.c				draw_utils.c		\
-		draw.c			end.c				event.c				\
-		float.c			fps.c				init.c				\
+FDF =	color_utils.c		color.c			draw_utils.c		\
+		draw.c				end.c			event.c				\
+		float.c				fps.c			init.c				\
 		main.c				mlx_hook.c		mlx_utils.c			\
 		movement.c			parser_utils.c	parser.c			\
 		projection_utils.c	projection.c	rotate_euler.c		\
 		rotate_quaternion.c	rotate.c		status.c			\
-		vec.c
+		vec.c				draw_persp.c
 
 FDF_SRC = $(addprefix srcs/, $(FDF))
 

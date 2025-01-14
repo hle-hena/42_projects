@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:26:38 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 16:31:59 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:40:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void	inc_event(t_data *data)
 	}
 }
 
+// t_point	tem = get_obj_coo(data->wld, data->obj);
+// if (tem.y > -1 && tem.y < data->obj.mat.len && tem.x > -1
+// 		&& tem.x < data->obj.mat.wid)
+// 	data->wld.cam.ori.z = (data->obj.mat.matrix[tem.y][tem.x] * 0.5 + 2) * 15;
 int	event_loop(t_data *data)
 {
 	static int	update = 0;
@@ -89,7 +93,7 @@ int	event_loop(t_data *data)
 	if (fps != 0)
 		data->d_time = TARGET_FPS / fps;
 	limit_frame_rate(&frame_start_time);
-	if (update == 0)
+	if (update == 0 && data->control)
 		update_terminal_status(data, 0);
 	update = (update + 1) % 10;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/13 13:44:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:39:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_list
 typedef long long int	t_lli;
 typedef long int		t_li;
 
+# define BUFFER_SIZE 256
+
 /*			freedom				*/
 /********************************/
 t_lli	ft_tern_int(int cnd, t_lli val1, t_lli val2);
@@ -32,7 +34,6 @@ char	*ft_tern_str(int cnd, char *ret1, char *ret2);
 
 /*			gnl					*/
 /********************************/
-# define BUFFER_SIZE 256
 char	*get_next_line(int fd);
 
 /*			is_smth				*/

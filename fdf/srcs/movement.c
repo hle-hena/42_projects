@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:50:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 12:34:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:03:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	move_side(t_data *data, int sign)
 		data->wld.cam.base.j = rotate_vector_by_quaternion(data->wld.cam.base.j,
 				axis_angle_to_quaternion(data->wld.cam.rot.z,
 					(t_vec){0, 0, 1}));
-		data->wld.cam.ori.x += -sign * (5) * data->d_time
+		data->wld.cam.ori.x += -sign * (10) * data->d_time
 			* data->wld.cam.base.j.z * data->modif.mo_speed;
-		data->wld.cam.ori.y += -sign * (5) * data->d_time
+		data->wld.cam.ori.y += -sign * (10) * data->d_time
 			* data->wld.cam.base.j.x * data->modif.mo_speed;
 	}
 }

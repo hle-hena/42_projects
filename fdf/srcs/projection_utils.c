@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/08 20:14:10 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:49:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ void	go_to_proj(t_data *data)
 	{
 		data->wld.init.j = (t_vec){0, -1, 0};
 		data->wld.cam.init.j = (t_vec){0, -1, 0};
-		data->wld.cam.ori = (t_vec){0, data->obj.mat.len
-			* (15), 10 * (15)};
+		data->wld.cam.ori = (t_vec){0, data->obj.mat.len * (15), 10 * (15)};
 		data->wld.cam.rot = (t_vec){115 * (M_PI / 180),
 			0 * (M_PI / 180), 0};
 		data->wld.cam.scale = (15);
 		look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
+		mlx_mouse_hide(data->mlx, data->win);
 	}
 	else if (!data->proj)
 	{
@@ -111,5 +111,6 @@ void	go_to_proj(t_data *data)
 		look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
 		data->wld.cam.ori = (t_vec){0, 0, 0};
 		data->wld.cam.scale = data->wld.init_scale;
+		mlx_mouse_show(data->mlx, data->win);
 	}
 }

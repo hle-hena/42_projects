@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:35:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 17:04:17 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:41:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,6 @@ void	draw_iso(t_data *data, int color, t_point pt, t_point inc)
 		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
-// Look at base.i.x, 
-// 	between 0.5 and 1.0 is looking forward
-// 	between -0.5 and 0.5 is looking to a side
-// 	between -0.5 and -1 is looking backward
-// base.j.x for side
-// 	negative means left, positive means right
-// void	draw_persp(t_data *data, int color)
-// {
-// 	if (data->wld.cam.base.i)
-// }
-
 	// if (data->proj)
 	// 	return (draw_persp())
 void	draw_map(t_data *data, int color)
@@ -94,6 +83,8 @@ void	draw_map(t_data *data, int color)
 	int	up;
 	int	side;
 
+	if (data->proj)
+		return (draw_persp(data, color));
 	up = ft_tern_int(data->wld.base.k.z >= 0, 1, -1);
 	side = ft_tern_int(data->wld.base.k.y <= 0, 1, -1);
 	data->obj.r_ori = vec(data->obj, data->wld, data->obj.wld_ori);
