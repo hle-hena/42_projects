@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:26:38 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/14 19:40:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 13:17:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,30 @@
 
 void	rotate_event(t_data *data)
 {
-	if (data->event.rot_y && !data->proj)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_y, 2);
-	if (data->event.rot_x && !data->proj)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_x, 1);
-	if (data->event.rot_z && !data->proj)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_z, 3);
-	if (data->event.rp_y && data->proj)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rp_y, 2);
-	if (data->event.rp_x && data->proj)
-		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rp_x, 1);
-	if (data->event.rp_x || data->event.rp_y)
+	if (data->event.rot_y/*  && !data->proj */)
 	{
-		data->event.rp_x = 0;
-		data->event.rp_y = 0;
+		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_y, 2);
+		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rot_y, 2);
+	}
+	if (data->event.rot_x/*  && !data->proj */)
+	{
+		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_x, 1);
+		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rot_x, 1);
+	}
+	if (data->event.rot_z && !data->proj)
+	{
+		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_z, 3);
+		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rot_z, 3);
+	}
+	if (data->event.rp_y && data->proj)
+	{
+		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rp_y, 2);
+		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rp_y, 2);
+	}
+	if (data->event.rp_x && data->proj)
+	{
+		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rp_x, 1);
+		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rp_x, 1);
 	}
 }
 
@@ -96,5 +106,7 @@ int	event_loop(t_data *data)
 	if (update == 0 && data->control)
 		update_terminal_status(data, 0);
 	update = (update + 1) % 10;
+	data->event.rp_x = 0;
+	data->event.rp_y = 0;
 	return (1);
 }

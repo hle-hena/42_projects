@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:25:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 17:04:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 13:05:34 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	do_rotx(t_base *base, t_trig vals)
+/* void	do_rotx(t_base *base, t_trig vals)
 {
 	float	temp_y;
 	float	temp_z;
@@ -85,7 +85,7 @@ void	do_rotz(t_base *base, t_trig vals)
 		+ base->k.x * vals.sin;
 	base->k.x = temp_x;
 	base->k.y = temp_y;
-}
+} */
 
 void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z)
 {
@@ -106,6 +106,17 @@ void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z)
 	vec->y = temp_y;
 	vec->z = temp_z;
 	round_vec(vec);
+}
+
+void	block_cam(float val, float *rot, int axis)
+{
+	if (axis == 1)
+	{
+		if (val + *rot >= 160 * (M_PI / 180))
+			*rot -= ((180 * (val + *rot)) / M_PI - 160) * (M_PI / 180);
+		else if (val + *rot <= 20 * (M_PI / 180))
+			*rot -= ((180 * (val + *rot)) / M_PI - 20) * (M_PI / 180);
+	}
 }
 
 void	block_rot(float *val, float *rot, int axis)

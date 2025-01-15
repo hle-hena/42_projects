@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/14 20:04:48 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 13:04:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <time.h>
-// #include <stdio.h>
+#include <stdio.h>
 
 # define TARGET_FPS 60
 
@@ -266,6 +266,7 @@ void	round_vec(t_vec *vec);
 /*		rotate.c		*/
 /************************/
 void	look_at(t_base *base, t_base init, t_vec rot);
+void	rot_cam(t_vec cam_r, t_base *base, float sign, int axis);
 void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis);
 
 /************************/
@@ -275,6 +276,7 @@ void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z);
 void	do_rotx(t_base *base, t_trig vals);
 void	do_roty(t_base *base, t_trig vals);
 void	do_rotz(t_base *base, t_trig vals);
+void	block_cam(float val, float *rot, int axis);
 void	block_rot(float *val, float *rot, int axis);
 
 t_vec	rotate_vector_by_quaternion(t_vec v, t_quat q);

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 10:39:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:37:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	init_data(t_data *data, char **path)
 		data->wld.init_scale = 1;
 	data->wld.cam.scale = data->wld.init_scale;
 	look_at(&data->wld.base, data->wld.init, data->wld.cam.rot);
+	look_at(&data->wld.cam.base, data->wld.cam.init, data->wld.cam.rot);
 	data->win_len = len;
 	data->win_wid = wid;
 	data->win = mlx_new_window(data->mlx, data->win_wid, data->win_len, "Fdf");
