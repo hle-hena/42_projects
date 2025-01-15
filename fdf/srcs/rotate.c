@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 13:17:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:51:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,16 @@ void	add_rot(float *val, float *rot, float sign, int axis)
 		block_rot(val, rot, axis);
 }
 
-void	rot_cam(t_vec cam_r, t_base *base, float sign, int axis)
+void	rot_cam(t_base *base, float angle, t_vec axis)
 {
-	t_vec	rot;
-	t_data	*data;
-	float	angle;
-
-	data = get_data();
-	angle = data->modif.rot_speed * sign * (M_PI / 180) * data->d_time;
-	if (data->proj)
-		block_cam(cam_r.x * (axis ==  1) + cam_r.y * (axis == 2)
-			+ cam_r.z * (axis == 3), &angle, axis);
-	rot = (t_vec){1 * (axis == 1), 0, (1 * axis == 3)};
-	if (axis == 2)
-	{
-		if (data->proj)
-			rot = base->k;
-		else
-			rot = (t_vec){-base->k.x, -base->k.y, -base->k.z};
-	}
 	base->i = rotate_vector_by_quaternion(base->i,
-			axis_angle_to_quaternion(angle, rot));
+			axis_angle_to_quaternion(angle, axis));
 	base->j = rotate_vector_by_quaternion(base->j,
-			axis_angle_to_quaternion(angle, rot));
+			axis_angle_to_quaternion(angle, axis));
 	base->k = rotate_vector_by_quaternion(base->k,
-			axis_angle_to_quaternion(angle, rot));
+			axis_angle_to_quaternion(angle, axis));
 	orthonormalize_base(base);
 }
-	// clear_last_lines(3);
-	// printf("The vec i is {%f, %f, %f}\n", data->wld.cam.base.i.x,
-	// 	data->wld.cam.base.i.y, data->wld.cam.base.i.z);
-	// printf("The vec j is {%f, %f, %f}\n", data->wld.cam.base.j.x,
-	// 	data->wld.cam.base.j.y, data->wld.cam.base.j.z);
-	// printf("The vec k is {%f, %f, %f}\n", data->wld.cam.base.k.x,
-	// 	data->wld.cam.base.k.y, data->wld.cam.base.k.z);
 
 void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 {
@@ -88,16 +64,14 @@ void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 
 	data = get_data();
 	rot = (t_vec){1 * (axis == 1), 0, (1 * axis == 3)};
+	if (data->proj && axis == 2)
+		rot = base->k;
+	else if (!data->proj && axis == 2)
+		rot = (t_vec){-base->k.x, -base->k.y, -base->k.z};
 	if (axis == 1)
 		add_rot(&cam_r->x, &angle, sign, axis);
 	else if (axis == 2)
-	{
-		if (data->proj)
-			rot = base->k;
-		else
-			rot = (t_vec){-base->k.x, -base->k.y, -base->k.z};
 		add_rot(&cam_r->y, &angle, sign, axis);
-	}
 	else
 		add_rot(&cam_r->z, &angle, sign, axis);
 	base->i = rotate_vector_by_quaternion(base->i,
@@ -107,4 +81,5 @@ void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 	base->k = rotate_vector_by_quaternion(base->k,
 			axis_angle_to_quaternion(angle, rot));
 	orthonormalize_base(base);
+	rot_cam(&data->wld.cam.base, angle, rot);
 }

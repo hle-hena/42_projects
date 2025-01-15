@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 13:03:37 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:26:48 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	orthonormalize_base(t_base *base)
 
 t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 {
+	t_data	*data;
 	t_point	centered;
 	t_point	wld_coo;
 	int		scale_factor;
@@ -67,6 +68,8 @@ t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 	wld_coo.x -= obj.wld_ori.x;
 	wld_coo.y -= obj.wld_ori.y;
 	wld_coo.z -= obj.wld_ori.z;
+	data = get_data();
+	wld_coo.z /= data->modif.height;
 	return (wld_coo);
 }
 

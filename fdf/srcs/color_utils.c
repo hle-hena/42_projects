@@ -6,22 +6,33 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 11:43:53 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:04:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:00:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to convert an rbg structure col into an int used by          */
+/* the mlx.                                                                   */
+/* -------------------------------------------------------------------------- */
 int	calc_color(t_col col)
 {
 	return ((col.re << 16) | (col.gr << 8) | col.bl);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to convert an int into an rgb structure used by me.          */
+/* -------------------------------------------------------------------------- */
 t_col	rev_calc_color(int col)
 {
 	return ((t_col){col >> 16 & 0xFF, col >> 8 & 0xFF, col & 0xFF});
 }
 
+/* -------------------------------------------------------------------------- */
+/* Functions used to chose which color to put for the gradient, base on the   */
+/* percentage of the height of the point chosen.                              */
+/* -------------------------------------------------------------------------- */
 void	chose_color_2(t_col *col1, t_col *col2, float *percent)
 {
 	*percent *= -1;

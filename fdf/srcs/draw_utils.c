@@ -6,12 +6,16 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:22:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 13:06:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:27:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to know if a point is within the image, in order to          */
+/* avoid a segfault.                                                          */
+/* -------------------------------------------------------------------------- */
 int	point_is_in_fov(t_data *data, t_point point)
 {
 	if (point.x < data->win_wid && point.x >= 0
@@ -21,6 +25,10 @@ int	point_is_in_fov(t_data *data, t_point point)
 	return (0);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to mimic the mlx_put_pixel func, but using the image of the  */
+/* mlx in order to have a faster draw function.                               */
+/* -------------------------------------------------------------------------- */
 void	put_pixel(t_data *data, t_point point, int color)
 {
 	int	*img;
@@ -31,6 +39,10 @@ void	put_pixel(t_data *data, t_point point, int color)
 	img[point.y * data->win_wid + point.x] = color;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used within the Brehensam algorithm. It is used to know if the    */
+/* slope goes up by a pixel or not.                                           */
+/* -------------------------------------------------------------------------- */
 void	calc_err(int *err, int *slope, int da, int db)
 {
 	if (*err > 0)
@@ -42,6 +54,10 @@ void	calc_err(int *err, int *slope, int da, int db)
 		*err += 2 * ft_abs(da);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used within the Brehensam algorithm to draw every line with a     */
+/* slope's coeficient greater than 1 or smaller than -1.                      */
+/* -------------------------------------------------------------------------- */
 void	draw_high(t_data *data, t_point start, t_point end)
 {
 	int		dx;
@@ -67,6 +83,10 @@ void	draw_high(t_data *data, t_point start, t_point end)
 	}
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used within the Brehensam algorithm to draw every line with a     */
+/* slope's coeficient between 1 and -1.                                       */
+/* -------------------------------------------------------------------------- */
 void	draw_low(t_data *data, t_point start, t_point end)
 {
 	int		dx;

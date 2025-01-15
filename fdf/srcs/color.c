@@ -6,12 +6,17 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 11:16:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/13 12:33:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:03:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Init function for the color. It is only used at the init, and sets the     */
+/* color to its corresponding color's height, or to whatever color was        */
+/* specified in the map.                                                      */
+/* -------------------------------------------------------------------------- */
 void	set_color(t_obj *obj)
 {
 	int		i;
@@ -41,6 +46,9 @@ void	set_color(t_obj *obj)
 	}
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to do an interpolation between two points' color.            */
+/* -------------------------------------------------------------------------- */
 t_col	get_grad(t_col start, t_col end, float percent)
 {
 	t_col	color;
@@ -57,6 +65,10 @@ t_col	get_grad(t_col start, t_col end, float percent)
 	return (color);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to get the color of a point and adding its gradient to       */
+/* black if we are in perspective.                                            */
+/* -------------------------------------------------------------------------- */
 void	get_color(t_data *data, t_line *line, t_point start, t_point end)
 {
 	float	percent;

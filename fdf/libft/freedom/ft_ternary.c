@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ternary.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 18:12:45 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/18 17:59:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:37:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long long int	ft_tern_int(int cnd, long long int val1, long long int val2)
 	return (val2);
 }
 
-char	*ft_tern_str(int cnd, char *ret1, char *ret2)
+void	*ft_tern(int cnd, void *ret1, void *ret2)
 {
 	if (cnd)
 		return (ret1);

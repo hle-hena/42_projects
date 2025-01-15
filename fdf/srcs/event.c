@@ -6,49 +6,47 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:26:38 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 13:17:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:59:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to handle the event of rotation. The rot_n value are the     */
+/* rotation using the key input, and the rp_n value are the rotation using    */
+/* the mouse input.                                                           */
+/* -------------------------------------------------------------------------- */
 void	rotate_event(t_data *data)
 {
-	if (data->event.rot_y/*  && !data->proj */)
-	{
+	if (data->event.rot_y && !data->proj)
 		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_y, 2);
-		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rot_y, 2);
-	}
-	if (data->event.rot_x/*  && !data->proj */)
-	{
+	if (data->event.rot_x && !data->proj)
 		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_x, 1);
-		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rot_x, 1);
-	}
 	if (data->event.rot_z && !data->proj)
-	{
 		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rot_z, 3);
-		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rot_z, 3);
-	}
 	if (data->event.rp_y && data->proj)
-	{
 		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rp_y, 2);
-		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rp_y, 2);
-	}
 	if (data->event.rp_x && data->proj)
-	{
 		do_rot(&data->wld.cam.rot, &data->wld.base, data->event.rp_x, 1);
-		rot_cam(data->wld.cam.rot, &data->wld.cam.base, data->event.rp_x, 1);
-	}
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to handle the event of movement.                             */
+/* -------------------------------------------------------------------------- */
 void	move_event(t_data *data)
 {
+	if (data->event.mo_u)
+		go_up(data, data->event.mo_u);
 	if (data->event.mo_f)
 		move_forward(data, data->event.mo_f);
 	if (data->event.mo_s)
 		move_side(data, data->event.mo_s);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to handle the event of scaling.                              */
+/* -------------------------------------------------------------------------- */
 void	scale_event(t_data *data)
 {
 	if (data->event.sc)
@@ -59,6 +57,10 @@ void	scale_event(t_data *data)
 		data->event.sc = 0;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to handle the event of incrementing the value specified in   */
+/* the control window.                                                        */
+/* -------------------------------------------------------------------------- */
 void	inc_event(t_data *data)
 {
 	if (data->event.inc)
@@ -73,17 +75,26 @@ void	inc_event(t_data *data)
 			data->modif.fov = (int)(data->modif.fov + data->event.inc) % 360;
 		else if (data->modif.ind == 4)
 		{
-			data->modif.f_plane += data->event.inc * (15);
+			data->modif.f_plane += data->event.inc
+				* (15 + (data->modif.f_plane / 15));
 			if (data->modif.f_plane <= 0)
 				data->modif.f_plane = 1;
+		}
+		else if (data->modif.ind == 5)
+		{
+			data->modif.height += data->event.inc * 0.1;
+			if (data->modif.height <= 0.1)
+				data->modif.height = 0.1;
 		}
 	}
 }
 
-// t_point	tem = get_obj_coo(data->wld, data->obj);
-// if (tem.y > -1 && tem.y < data->obj.mat.len && tem.x > -1
-// 		&& tem.x < data->obj.mat.wid)
-// 	data->wld.cam.ori.z = (data->obj.mat.matrix[tem.y][tem.x] * 0.5 + 2) * 15;
+/* -------------------------------------------------------------------------- */
+/* Function used to create a game loop.                                       */
+/* It first deletes the whole map, then handle all of the input events before */
+/* redrawing the map, and finaly update the terminal status and calculate the */
+/* framerate, and limits it if necessary.                                     */
+/* -------------------------------------------------------------------------- */
 int	event_loop(t_data *data)
 {
 	static int	update = 0;

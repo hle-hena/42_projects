@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 13:04:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:12:00 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <time.h>
-#include <stdio.h>
+// #include <stdio.h>
 
 # define TARGET_FPS 60
 
@@ -119,6 +119,7 @@ typedef struct s_events
 {
 	int		mo_f;
 	int		mo_s;
+	int		mo_u;
 	int		rot_x;
 	int		rot_y;
 	int		rot_z;
@@ -139,6 +140,8 @@ typedef struct s_modifiers
 	float	rot_speed;
 	float	fov;
 	int		f_plane;
+	float	height;
+	int		r_move;
 }	t_modif;
 
 typedef struct s_data
@@ -190,11 +193,11 @@ int		event_loop(t_data *data);
 /************************/
 /*		mlx.c			*/
 /************************/
-int		key_press(int keycode, t_data *data);
 int		key_down(int keycode, t_data *data);
+int		key_up(int keycode, t_data *data);
 int		mouse_down(int button, int x, int y, t_data *data);
 int		mouse_up(int button, int x, int y, t_data *data);
-int		move_hook(int x, int y, t_data *data);
+int		mouse_move(int x, int y, t_data *data);
 
 /************************/
 /*		mlx_utils.c		*/
@@ -204,6 +207,7 @@ int		mlx_close(t_data *data);
 /************************/
 /*		movement.c		*/
 /************************/
+void	go_up(t_data *data, int sign);
 void	move_forward(t_data *data, int sign);
 void	move_side(t_data *data, int sign);
 
@@ -266,7 +270,7 @@ void	round_vec(t_vec *vec);
 /*		rotate.c		*/
 /************************/
 void	look_at(t_base *base, t_base init, t_vec rot);
-void	rot_cam(t_vec cam_r, t_base *base, float sign, int axis);
+// void	rot_cam(t_vec cam_r, t_base *base, float sign, int axis);
 void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis);
 
 /************************/

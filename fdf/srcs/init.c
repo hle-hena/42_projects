@@ -6,12 +6,17 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 11:37:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:06:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to change between window size. To do that, we need to delete */
+/* the precent window and its image, and create a new one, and finaly restart */
+/* the loops to ensure the good working of the fdf.                           */
+/* -------------------------------------------------------------------------- */
 void	new_window(t_data *data)
 {
 	int		wid;
@@ -38,6 +43,9 @@ void	new_window(t_data *data)
 	loop();
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used init an object.                                              */
+/* -------------------------------------------------------------------------- */
 void	init_obj(t_obj *obj, char *path)
 {
 	obj->wld_ori = (t_point){0, 0, 0, (t_col){0}};
@@ -57,6 +65,9 @@ void	init_obj(t_obj *obj, char *path)
 	set_color(obj);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to init the world.                                           */
+/* -------------------------------------------------------------------------- */
 void	init_wld(t_wld *wld)
 {
 	*wld = (t_wld)
@@ -81,14 +92,17 @@ void	init_wld(t_wld *wld)
 	};
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to init everything in the data structure.                    */
+/* -------------------------------------------------------------------------- */
 void	init_data(t_data *data, char **path)
 {
 	int	len;
 	int	wid;
 
 	data->control = 0;
-	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
-	data->modif = (t_modif){0, 4, 1, 1, 60, 200 * (15)};
+	data->event = (t_event){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+	data->modif = (t_modif){0, 4, 1, 1, 60, 200 * (15), 1, 0};
 	init_obj(&data->obj, path[0]);
 	init_wld(&data->wld);
 	data->d_time = 1;

@@ -6,12 +6,16 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:37:44 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/14 18:40:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:36:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to retrieve the camera's position in the map.                */
+/* It is an unused func at the moment.                                        */
+/* -------------------------------------------------------------------------- */
 t_point	get_obj_coo(t_wld wld, t_obj obj)
 {
 	t_point	cam_coo;
@@ -27,8 +31,18 @@ t_point	get_obj_coo(t_wld wld, t_obj obj)
 	return (cam_coo);
 }
 
-// start.x = left
-// start.y = right
+/* -------------------------------------------------------------------------- */
+/* Function used to draw the map in perspective, looking down or up the       */
+/* y axis, drawing each line one after the other, in the order specified by   */
+/* the limits.                                                                */
+/* The limits and start for the map are given in pt as follows :              */
+/*   pt.x  : start index of the columns                                       */
+/*   pt.y  : start index of the lines                                         */
+/*   pt.z  : limit for the index of the lines (either 0 or the map len - 1)   */
+/*   inc.x : the value to add to the line index to make the loop (1 or -1)    */
+/*   inc.y : the value to add to the column index to make the loop (1 or -1)  */
+/*   inc.z : limit for the index of the columns (either 0 or the map wid - 1) */
+/* -------------------------------------------------------------------------- */
 void	draw_for(t_data *data, int color, t_point pt, t_point inc)
 {
 	int	start;
@@ -57,6 +71,18 @@ void	draw_for(t_data *data, int color, t_point pt, t_point inc)
 		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to draw the map in perspective, looking down or up the       */
+/* x axis, drawing each column one after the other, in the order specified by */
+/* the limits.                                                                */
+/* The limits and start for the map are given in pt as follows :              */
+/*   pt.x  : start index of the columns                                       */
+/*   pt.y  : start index of the lines                                         */
+/*   pt.z  : limit for the index of the lines (either 0 or the map len - 1)   */
+/*   inc.x : the value to add to the line index to make the loop (1 or -1)    */
+/*   inc.y : the value to add to the column index to make the loop (1 or -1)  */
+/*   inc.z : limit for the index of the columns (either 0 or the map wid - 1) */
+/* -------------------------------------------------------------------------- */
 void	draw_side(t_data *data, int color, t_point pt, t_point inc)
 {
 	int	start;
@@ -85,17 +111,18 @@ void	draw_side(t_data *data, int color, t_point pt, t_point inc)
 		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
-// Look at base.i.x, 
-// 	between 0.5 and 1.0 is looking forward
-// 	between -0.5 and 0.5 is looking to a side
-// 	between -0.5 and -1 is looking backward
-// base.j.x for side
-// 	negative means left, positive means right
-// void	draw_persp(t_data *data, int color)
-// {
-// 	if (data->wld.cam.base.i)
-// }
-
+/* -------------------------------------------------------------------------- */
+/* Function used to draw the map in perspective. To know which way we are     */
+/* looking, we can look at the world's base x value of the the vectors i and  */
+/* j, and conclude the following :                                            */
+/*   If the i.x value is greater than 0.5, we are looking up the y axis.      */
+/*   If the i.x value is smaller than -0.5, we are looking down the y axis.   */
+/*   If the i.x value is between -0.5 and 0.5, but the j.x value is negative, */
+/*   we are looking up the x axis.                                            */
+/*   If the i.x value is between -0.5 and 0.5, but the j.x value is positive, */
+/*   we are looking up the x axis.                                            */
+/* We then call the appropriate function, with its corresponding value.       */
+/* -------------------------------------------------------------------------- */
 void	draw_persp(t_data *data, int color)
 {
 	data->obj.r_ori = vec(data->obj, data->wld, data->obj.wld_ori);
