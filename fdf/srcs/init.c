@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:47:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/14 19:55:18 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 10:39:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	new_window(t_data *data)
 				"Fdf");
 		data->img = mlx_new_image(data->mlx, data->win_wid, data->win_len);
 	}
-	if (data->proj)
-		mlx_mouse_hide(data->mlx, data->win);
 	loop();
 }
 

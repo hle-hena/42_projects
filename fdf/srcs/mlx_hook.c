@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:14:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/14 19:57:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:03:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,12 @@ int	move_hook(int x, int y, t_data *data)
 	{
 		data->event.rp_y = (float)(last[0] - x) / 10;
 		data->event.rp_x = (float)(y - last[1]) / 10;
-		mlx_mouse_move(data->mlx, data->win, data->win_wid / 2,
-			data->win_len / 2);
+		if (x <= 0)
+			mlx_mouse_move(data->mlx, data->win, data->win_wid - 2, y);
+		else if (x >= data->win_wid - 1)
+			mlx_mouse_move(data->mlx, data->win, 1, y);
 	}
-	last[0] = x;
-	last[1] = y;
+	last[0] = x % data->win_wid;
+	last[1] = y % data->win_len;
 	return (1);
 }

@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror -O3 -g
 RM = rm -f
 
 FRAMEDIR = ./mlx
-FRAMEWORK = -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz
+FRAMEWORK = -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz -lXfixes
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -36,6 +36,8 @@ OBJ = $(FDF_SRC:.c=.o)
 	@$(CC) $(FLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 all: $(NAME)
+
+bonus: $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
