@@ -6,12 +6,19 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 11:36:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:52:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to interpolate between two points, in order to keep both     */
+/* points of a line in the screen. To do so, we use the parametric equation   */
+/* of the line, and calculate a new parameter. If the parameter is greater    */
+/* than 1 or smaller than 0, it means that the line is completly outside of   */
+/* the screen, therfore we return 1, meaning that the line must not be drawn. */
+/* -------------------------------------------------------------------------- */
 int	move_point_w(t_data *data, t_point *change, t_point other, int bord)
 {
 	int		border;
@@ -35,6 +42,10 @@ int	move_point_w(t_data *data, t_point *change, t_point other, int bord)
 	return (0);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to do the same thing as the one above, except that it is     */
+/* handling the vectical cliping.                                             */
+/* -------------------------------------------------------------------------- */
 int	move_point_l(t_data *data, t_point *change, t_point other, int bord)
 {
 	int		border;
@@ -58,6 +69,12 @@ int	move_point_l(t_data *data, t_point *change, t_point other, int bord)
 	return (0);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to decide if it is needed to move a point. We need to move   */
+/* it only if one or both points are outside of the screen. If we cannot move */
+/* the point back into the screen, the line is completly outside and should   */
+/* not be drawn, therefore we return 0.                                       */
+/* -------------------------------------------------------------------------- */
 int	move_point(t_data *data, t_point *start, t_point *end)
 {
 	if (start->x > data->win_wid || start->x < 0)
@@ -75,6 +92,11 @@ int	move_point(t_data *data, t_point *start, t_point *end)
 	return (1);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Move a point into the view frustrum by using the line's paramtric equation */
+/* and setting the z (depth) value to whatever we want (either the far plane  */
+/* or the near plane).                                                        */
+/* -------------------------------------------------------------------------- */
 void	change_point(t_vec *change, t_vec other, int z)
 {
 	float	param;
@@ -86,6 +108,14 @@ void	change_point(t_vec *change, t_vec other, int z)
 	*change = n_point;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to switch between the different projections.                 */
+/* If we are going into perspective, we reverse the j vector in order to      */
+/* prevent a flipping of the world. We also fix the scale to 15. Finaly, we   */
+/* place the camera to the edge of the obj, looking a bit down.               */
+/* If we are going into isometric, we zoom back in, and make the camera look  */
+/* the closest possible to the subject reference.                             */
+/* -------------------------------------------------------------------------- */
 void	go_to_proj(t_data *data)
 {
 	if (data->proj)

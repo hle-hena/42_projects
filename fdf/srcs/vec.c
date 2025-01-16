@@ -6,12 +6,15 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:38:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 15:26:48 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:40:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Normalize a vectore by multiplying each of its component by its magnitude. */
+/* -------------------------------------------------------------------------- */
 t_vec	normalize(t_vec v)
 {
 	float	mag;
@@ -20,6 +23,9 @@ t_vec	normalize(t_vec v)
 	return ((t_vec){v.x / mag, v.y / mag, v.z / mag});
 }
 
+/* -------------------------------------------------------------------------- */
+/* Doing the cross product of two vectors.                                    */
+/* -------------------------------------------------------------------------- */
 t_vec	cross_product(t_vec a, t_vec b)
 {
 	return ((t_vec){
@@ -29,6 +35,11 @@ t_vec	cross_product(t_vec a, t_vec b)
 	});
 }
 
+/* -------------------------------------------------------------------------- */
+/* This function is used to make sure that the base stay orthonomalized,      */
+/* because if it starts drifting by a tiny bit, it is going to be more and    */
+/* more off.                                                                  */
+/* -------------------------------------------------------------------------- */
 void	orthonormalize_base(t_base *base)
 {
 	t_data	*data;
@@ -48,6 +59,12 @@ void	orthonormalize_base(t_base *base)
 	base->j = normalize(base->j);
 }
 
+/* -------------------------------------------------------------------------- */
+/* This function is used to transfer the object's coordinates into world      */
+/* coordinates. To do so, we first center the object on its center. We then   */
+/* multiply it by its base and the world's scale factor. Finaly, we move it   */
+/* by its world origin.                                                       */
+/* -------------------------------------------------------------------------- */
 t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 {
 	t_data	*data;
@@ -73,6 +90,10 @@ t_point	get_wld_coo(t_point point, t_obj obj, t_wld wld)
 	return (wld_coo);
 }
 
+/* -------------------------------------------------------------------------- */
+/* This function is used to do the camera's rotation on the world's           */
+/* coordinates, after having centered the camera in 0, 0, 0.                  */
+/* -------------------------------------------------------------------------- */
 t_vec	vec(t_obj obj, t_wld wld, t_point point)
 {
 	t_point	wld_coo;

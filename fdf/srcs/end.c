@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:26:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 17:32:00 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:31:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_perror(int error_code, int clean, char *custom_mess)
 /* -------------------------------------------------------------------------- */
 void	ft_pend_prog(void)
 {
-	clear_last_lines(11);
+	clear_lines(11);
 	ft_printf("\033[0;36m/**********************************/\n");
 	ft_printf(
 		"/*  FDF STATUS : \033[38;2;0;255;0mENDED\033[0;36m            */\n");

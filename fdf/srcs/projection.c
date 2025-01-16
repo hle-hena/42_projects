@@ -6,12 +6,17 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 13:58:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/14 19:46:38 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:02:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to change the points of the line to make an isometric        */
+/* projection. To do so, we simply only keep the x and y coordinate, and move */
+/* the center to half the wid and the len of the window.                      */
+/* -------------------------------------------------------------------------- */
 int	get_iso(t_data *data, t_line *line, t_vec *start, t_vec *end)
 {
 	line->start = (t_point){start->x + (data->win_wid / 2),
@@ -21,6 +26,14 @@ int	get_iso(t_data *data, t_line *line, t_vec *start, t_vec *end)
 	return (1);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to change the points of a line to make a perspective         */
+/* projection. To do so, we first ignore the line if both points are outside  */
+/* the view frustrum. We then handle the cliping outside of the view          */
+/* frustrum. Finaly we multiply the x and y coordinates by their respective   */
+/* fov scaling, divide this result by the z value of the point, and place     */
+/* back the center to half the wid and the len of the window.                 */
+/* -------------------------------------------------------------------------- */
 int	get_persp(t_data *data, t_line *line, t_vec *start, t_vec *end)
 {
 	float	fov_scale_x;
@@ -50,6 +63,10 @@ int	get_persp(t_data *data, t_line *line, t_vec *start, t_vec *end)
 	return (1);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to chose between the two projection, and return its          */
+/* return value.                                                              */
+/* -------------------------------------------------------------------------- */
 int	calc_point(t_data *data, t_line *line, t_vec *start, t_vec *end)
 {
 	if (data->proj == 0)

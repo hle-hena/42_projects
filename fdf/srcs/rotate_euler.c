@@ -6,87 +6,16 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:25:20 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 13:05:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:06:20 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* void	do_rotx(t_base *base, t_trig vals)
-{
-	float	temp_y;
-	float	temp_z;
-
-	temp_y = base->i.y * vals.cos
-		- base->i.z * vals.sin;
-	temp_z = base->i.z * vals.cos
-		+ base->i.y * vals.sin;
-	base->i.y = temp_y;
-	base->i.z = temp_z;
-	temp_y = base->j.y * vals.cos
-		- base->j.z * vals.sin;
-	temp_z = base->j.z * vals.cos
-		+ base->j.y * vals.sin;
-	base->j.y = temp_y;
-	base->j.z = temp_z;
-	temp_y = base->k.y * vals.cos
-		- base->k.z * vals.sin;
-	temp_z = base->k.z * vals.cos
-		+ base->k.y * vals.sin;
-	base->k.y = temp_y;
-	base->k.z = temp_z;
-}
-
-void	do_roty(t_base *base, t_trig vals)
-{
-	float	temp_x;
-	float	temp_z;
-
-	temp_x = base->i.x * vals.cos
-		+ base->i.z * vals.sin;
-	temp_z = base->i.z * vals.cos
-		- base->i.x * vals.sin;
-	base->i.x = temp_x;
-	base->i.z = temp_z;
-	temp_x = base->j.x * vals.cos
-		+ base->j.z * vals.sin;
-	temp_z = base->j.z * vals.cos
-		- base->j.x * vals.sin;
-	base->j.x = temp_x;
-	base->j.z = temp_z;
-	temp_x = base->k.x * vals.cos
-		+ base->k.z * vals.sin;
-	temp_z = base->k.z * vals.cos
-		- base->k.x * vals.sin;
-	base->k.x = temp_x;
-	base->k.z = temp_z;
-}
-
-void	do_rotz(t_base *base, t_trig vals)
-{
-	float	temp_x;
-	float	temp_y;
-
-	temp_x = base->i.x * vals.cos
-		- base->i.y * vals.sin;
-	temp_y = base->i.y * vals.cos
-		+ base->i.x * vals.sin;
-	base->i.x = temp_x;
-	base->i.y = temp_y;
-	temp_x = base->j.x * vals.cos
-		- base->j.y * vals.sin;
-	temp_y = base->j.y * vals.cos
-		+ base->j.x * vals.sin;
-	base->j.x = temp_x;
-	base->j.y = temp_y;
-	temp_x = base->k.x * vals.cos
-		- base->k.y * vals.sin;
-	temp_y = base->k.y * vals.cos
-		+ base->k.x * vals.sin;
-	base->k.x = temp_x;
-	base->k.y = temp_y;
-} */
-
+/* -------------------------------------------------------------------------- */
+/* Function used to multiply a vector by the 3D rotation matrix around the y, */
+/* x, and finaly z axis.                                                      */
+/* -------------------------------------------------------------------------- */
 void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z)
 {
 	float	temp_x;
@@ -108,17 +37,11 @@ void	do_rot_yxz(t_vec *vec, t_trig rot_y, t_trig rot_x, t_trig rot_z)
 	round_vec(vec);
 }
 
-void	block_cam(float val, float *rot, int axis)
-{
-	if (axis == 1)
-	{
-		if (val + *rot >= 160 * (M_PI / 180))
-			*rot -= ((180 * (val + *rot)) / M_PI - 160) * (M_PI / 180);
-		else if (val + *rot <= 20 * (M_PI / 180))
-			*rot -= ((180 * (val + *rot)) / M_PI - 20) * (M_PI / 180);
-	}
-}
-
+/* -------------------------------------------------------------------------- */
+/* Function used to block the rotation around the x axis (pitch). If the      */
+/* rotation to be aplied makes the rotation greater than the limit set, we    */
+/* set the rotaion back to the limit, and remove the excess in the rot value. */
+/* -------------------------------------------------------------------------- */
 void	block_rot(float *val, float *rot, int axis)
 {
 	if (axis == 1)

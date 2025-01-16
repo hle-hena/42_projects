@@ -6,13 +6,16 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:49:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 15:53:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:31:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	clear_last_lines(int lines)
+/* -------------------------------------------------------------------------- */
+/* Function used to clean lines lines.                                        */
+/* -------------------------------------------------------------------------- */
+void	clear_lines(int lines)
 {
 	int	i;
 
@@ -24,6 +27,9 @@ void	clear_last_lines(int lines)
 	}
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to retrieve the name of the current modifier.                */
+/* -------------------------------------------------------------------------- */
 char	*get_modif(t_data *data)
 {
 	if (data->modif.ind == 0)
@@ -41,6 +47,9 @@ char	*get_modif(t_data *data)
 	return (NULL);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to retrieve the value of the current modifier.               */
+/* -------------------------------------------------------------------------- */
 int	get_modif_val(t_data *data)
 {
 	if (data->modif.ind == 0)
@@ -58,10 +67,13 @@ int	get_modif_val(t_data *data)
 	return (0);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to update the fps, the modifier, and the r_move value.       */
+/* -------------------------------------------------------------------------- */
 void	update_terminal_status(t_data *data, int init)
 {
 	if (!init)
-		clear_last_lines(11);
+		clear_lines(11);
 	ft_printf("\033[0;36m/**********************************/\n");
 	ft_printf("/*  FDF STATUS : \033[0;33mRUNNING\033[0;36m          */\n");
 	ft_printf("/**********************************/\n");

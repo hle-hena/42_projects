@@ -6,12 +6,15 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:33:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 15:51:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:26:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Functions used to make the camera looks in a direction.                    */
+/* -------------------------------------------------------------------------- */
 void	look_at(t_base *base, t_base init, t_vec rot)
 {
 	t_trig	rot_y;
@@ -29,6 +32,10 @@ void	look_at(t_base *base, t_base init, t_vec rot)
 	do_rot_yxz(&base->k, rot_y, rot_x, rot_z);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to change the value of the rotation based on input given     */
+/* into the var sign.                                                         */
+/* -------------------------------------------------------------------------- */
 void	add_rot(float *val, float *rot, float sign, int axis)
 {
 	t_data	*data;
@@ -45,17 +52,21 @@ void	add_rot(float *val, float *rot, float sign, int axis)
 		block_rot(val, rot, axis);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Make the camera rotate along with the world. The camera base is primarly   */
+/* used for the movement.                                                     */
+/* -------------------------------------------------------------------------- */
 void	rot_cam(t_base *base, float angle, t_vec axis)
 {
-	base->i = rotate_vector_by_quaternion(base->i,
-			axis_angle_to_quaternion(angle, axis));
-	base->j = rotate_vector_by_quaternion(base->j,
-			axis_angle_to_quaternion(angle, axis));
-	base->k = rotate_vector_by_quaternion(base->k,
-			axis_angle_to_quaternion(angle, axis));
+	base->i = rot_vec(base->i, eul_to_quat(angle, axis));
+	base->j = rot_vec(base->j, eul_to_quat(angle, axis));
+	base->k = rot_vec(base->k, eul_to_quat(angle, axis));
 	orthonormalize_base(base);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to make the world rotate based on the input.                 */
+/* -------------------------------------------------------------------------- */
 void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 {
 	t_vec	rot;
@@ -74,12 +85,9 @@ void	do_rot(t_vec *cam_r, t_base *base, float sign, int axis)
 		add_rot(&cam_r->y, &angle, sign, axis);
 	else
 		add_rot(&cam_r->z, &angle, sign, axis);
-	base->i = rotate_vector_by_quaternion(base->i,
-			axis_angle_to_quaternion(angle, rot));
-	base->j = rotate_vector_by_quaternion(base->j,
-			axis_angle_to_quaternion(angle, rot));
-	base->k = rotate_vector_by_quaternion(base->k,
-			axis_angle_to_quaternion(angle, rot));
+	base->i = rot_vec(base->i, eul_to_quat(angle, rot));
+	base->j = rot_vec(base->j, eul_to_quat(angle, rot));
+	base->k = rot_vec(base->k, eul_to_quat(angle, rot));
 	orthonormalize_base(base);
 	rot_cam(&data->wld.cam.base, angle, rot);
 }

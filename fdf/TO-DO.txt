@@ -8,7 +8,5 @@ if (far.left is not in screen)
 	//same for the right ?
 ```
 
-remake the draw func so it also works for perspective and for the worlds upside down
-
 Add a menu
 Add support for multiple maps

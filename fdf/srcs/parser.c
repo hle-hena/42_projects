@@ -6,12 +6,16 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:30:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 13:11:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:39:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to parse a line. If at any point, an argument is invalid, we */
+/* return 1 significating that everything must be stopped.                    */
+/* -------------------------------------------------------------------------- */
 int	parse_line(t_obj *obj, char *src, int line)
 {
 	int		j;
@@ -38,6 +42,11 @@ int	parse_line(t_obj *obj, char *src, int line)
 	return (0);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to initialise the matrix of the obj. To do so, we first      */
+/* retrieve the width and len of the map. We then read the while file once    */
+/* again, and call parse line on each line.                                   */
+/* -------------------------------------------------------------------------- */
 void	parse_file(t_obj *obj, char *path)
 {
 	char	*line;

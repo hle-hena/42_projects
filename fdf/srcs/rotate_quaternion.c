@@ -6,13 +6,16 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:19:37 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/10 13:07:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:22:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_quat	quaternion_multiply(t_quat q1, t_quat q2)
+/* -------------------------------------------------------------------------- */
+/* Function used to multply two quaternions.                                  */
+/* -------------------------------------------------------------------------- */
+t_quat	quat_mult(t_quat q1, t_quat q2)
 {
 	t_quat	result;
 
@@ -23,7 +26,10 @@ t_quat	quaternion_multiply(t_quat q1, t_quat q2)
 	return (result);
 }
 
-t_quat	axis_angle_to_quaternion(float angle, t_vec axis)
+/* -------------------------------------------------------------------------- */
+/* Function used to get a quaternion from an axis and a rotation.             */
+/* -------------------------------------------------------------------------- */
+t_quat	eul_to_quat(float angle, t_vec axis)
 {
 	t_quat	q;
 	float	sin_half_angle;
@@ -36,7 +42,10 @@ t_quat	axis_angle_to_quaternion(float angle, t_vec axis)
 	return (q);
 }
 
-t_vec	rotate_vector_by_quaternion(t_vec v, t_quat q)
+/* -------------------------------------------------------------------------- */
+/* Function used to rotate a vector by a quaternion.                          */
+/* -------------------------------------------------------------------------- */
+t_vec	rot_vec(t_vec v, t_quat q)
 {
 	t_quat	qv;
 	t_quat	q_conj;
@@ -44,6 +53,6 @@ t_vec	rotate_vector_by_quaternion(t_vec v, t_quat q)
 
 	qv = (t_quat){0, v.x, v.y, v.z};
 	q_conj = (t_quat){q.w, -q.x, -q.y, -q.z};
-	q_res = quaternion_multiply(quaternion_multiply(q, qv), q_conj);
+	q_res = quat_mult(quat_mult(q, qv), q_conj);
 	return ((t_vec){q_res.x, q_res.y, q_res.z});
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:58:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/15 17:12:00 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:31:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void	draw_persp(t_data *data, int color);
 /************************/
 /*		status.c		*/
 /************************/
-void	clear_last_lines(int lines);
+void	clear_lines(int lines);
 void	update_terminal_status(t_data *data, int init);
 
 /************************/
@@ -283,8 +283,12 @@ void	do_rotz(t_base *base, t_trig vals);
 void	block_cam(float val, float *rot, int axis);
 void	block_rot(float *val, float *rot, int axis);
 
-t_vec	rotate_vector_by_quaternion(t_vec v, t_quat q);
-t_quat	axis_angle_to_quaternion(float angle, t_vec axis);
+/************************/
+/*		rotate_         */
+/*         quaternion.c	*/
+/************************/
+t_vec	rot_vec(t_vec v, t_quat q);
+t_quat	eul_to_quat(float angle, t_vec axis);
 
 /************************/
 /*		init.c			*/

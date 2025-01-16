@@ -6,12 +6,15 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 11:44:46 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 16:42:18 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:36:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* -------------------------------------------------------------------------- */
+/* Function used to retrieve the size of a line in the map.                   */
+/* -------------------------------------------------------------------------- */
 int	line_size(char **line)
 {
 	int	i;
@@ -22,6 +25,11 @@ int	line_size(char **line)
 	return (i);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function to retrieve the height of the point at line y and column x. Also  */
+/* retrieves the hex value if the map has it. Finaly, it updates the          */
+/* extremums which will be used to calculate the color.                       */
+/* -------------------------------------------------------------------------- */
 void	extract_data(t_obj	*obj, char *data, int x, int y)
 {
 	char	*src;
@@ -42,6 +50,13 @@ void	extract_data(t_obj	*obj, char *data, int x, int y)
 		obj->min_h = obj->mat.matrix[y][x];
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to check if an arg is valid. A valid argument must :         */
+/*   -Not start with a new line.                                              */
+/*   -Have only digits in the first part.                                     */
+/*   -If it has a comma, that there is 0x after, and it is then only followed */
+/*     by hexa.                                                               */
+/* -------------------------------------------------------------------------- */
 int	is_valid_arg(char *str)
 {
 	int	i;
@@ -70,6 +85,9 @@ int	is_valid_arg(char *str)
 	return (i - !str[i]);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Function used to retrieve the width, the len, and the color of the map.    */
+/* -------------------------------------------------------------------------- */
 void	get_matsize(t_mat *mat, int fd)
 {
 	char	**splited;
