@@ -1,1 +1,2 @@
-0
+PIPEX_SRC = $(addprefix srcs/, $(PIPEX))$
+OBJ = $(PIPEX_SRC:.c=.o)$

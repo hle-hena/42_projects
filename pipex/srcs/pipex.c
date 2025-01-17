@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:58:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/17 19:10:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:40:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_path(char *func_name, char **env)
 	while (!paths && env[++i])
 		paths = ft_strnstr(env[i], "PATH=", 5);
 	if (!paths)
-		return (ft_perror(0, 0, "Path not found.\n"), NULL);
+		return (ft_perror(0, 0, "Path not found."), NULL);
 	i = -1;
 	tries = ft_split(paths, ':');
 	while (tries && tries[++i])
@@ -55,7 +55,7 @@ void	exec_func(char *args, char **env)
 		ft_free_tab((void **)av, count_words(args, ' '));
 		ft_del(path);
 		ft_perror(0, 0, "An error occured during the execution of \
-the command.\n");
+the command.");
 	}
 }
 
@@ -65,17 +65,17 @@ void	do_func(char *args, char **env)
 	pid_t	f_id;
 
 	if (pipe(p_fd) == -1)
-		ft_perror(0, 0, "The pipe didn't open.\n");
+		ft_perror(0, 0, "The pipe didn't open.");
 	f_id = fork();
 	if (f_id == -1)
-		ft_perror(0, 0, "A subprocess was not started.\n");
+		ft_perror(0, 0, "A subprocess was not started.");
 	if (f_id == 0)
 	{
-		dup2(p_fd[0], 0);
+		dup2(p_fd[1], 1);
 		close(p_fd[0]);
 		exec_func(args, env);
 	}
-	dup2(p_fd[1], 1);
+	dup2(p_fd[0], 0);
 	close(p_fd[1]);
 }
 
@@ -87,18 +87,18 @@ int	main(int ac, char **av, char **env)
 	int	fd;
 
 	if (ac < 5)
-		ft_perror(0, 0, "Not enough arguments.\n");
+		ft_perror(0, 0, "Not enough arguments.");
 	i = 1;
 	fd = open(av[i], O_CREAT | O_RDONLY, 0777);
 	if (fd == -1)
-		return (ft_perror(0, 0, "One of the file name is incorect.\n"), 0);
+		return (ft_perror(0, 0, "One of the file name is incorect."), 0);
 	dup2(fd, 0);
 	while (++i < ac - 2)
 		do_func(av[i], env);
 	close(fd);
 	fd = open(av[ac - 1], O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (fd == -1)
-		return (ft_perror(0, 0, "One of the file name is incorect.\n"), 0);
+		return (ft_perror(0, 0, "One of the file name is incorect."), 0);
 	dup2(fd, 1);
 	exec_func(av[i], env);
 	return (0);
