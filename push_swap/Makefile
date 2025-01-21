@@ -27,8 +27,10 @@ LIBFT = ${LIBFT_DIR}/libft.a
 ${NAME}: ${LIBFT} ${OBJ}
 	@${CC} ${FLAGS} ${OBJ} -o ${NAME} -L ${LIBFT_DIR} -lft
 	@echo "${NAME} compiled successfully!"
+	
+bonus: checker
 
-bonus: ${LIBFT} ${BONUS_OBJ}
+checker: ${LIBFT} ${BONUS_OBJ}
 	@${CC} ${FLAGS} ${BONUS_OBJ} -o checker -L ${LIBFT_DIR} -lft
 	@echo "checker compiled successfully!"
 

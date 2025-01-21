@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:09:58 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/02 14:57:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:25:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,44 @@ void	calc_push(int opt, t_list *stack_fr, t_list *stack_to
 	if (opt)
 		return (do_func_print(get_cmds()[3]));
 	return (do_func_print(get_cmds()[2]));
+}
+
+void	sort_2(void)
+{
+	t_list	*stack;
+
+	stack = *get_stack(0);
+	if (ft_lstsize(stack) < 2 || !stack->next)
+		return ;
+	if (!ft_lstsorted(*get_stack(0), &is_increasing))
+		do_func_print(get_cmds()[0]);
+}
+
+void	sort_3(void)
+{
+	t_list	*stack;
+	int		a;
+	int		b;
+	int		c;
+
+	stack = *get_stack(0);
+	if (ft_lstsize(stack) <= 2)
+		return (sort_2());
+	a = *(int *)stack->content;
+	b = *(int *)stack->next->content;
+	c = *(int *)stack->next->next->content;
+	if (c > b && b > a)
+		return ;
+	else if (a > b && a > c)
+	{
+		do_func_print(get_cmds()[4]);
+		if (!ft_lstsorted(*get_stack(0), &is_increasing))
+			do_func_print(get_cmds()[0]);
+	}
+	else if (b > a && c > a)
+		return (do_func_print(get_cmds()[6]), do_func_print(get_cmds()[0]));
+	else if (b > a && b > c)
+		do_func_print(get_cmds()[6]);
+	else if (a > b && c > b)
+		do_func_print(get_cmds()[0]);
 }

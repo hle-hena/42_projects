@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/02 15:48:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:23:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,6 @@ static int	is_bigger(t_list *node_1, t_list *node_2)
 	return (*(int *)node_2->content - *(int *)node_1->content);
 }
 
-void	push_sort_3(void)
-{
-	t_list	*stack;
-
-	stack = *get_stack(0);
-	if (*(int *)stack->next->next->content > *(int *)stack->next->content
-		&& *(int *)stack->next->content > *(int *)stack->content)
-		return ;
-	else if (*(int *)stack->content > *(int *)stack->next->content
-		&& *(int *)stack->content > *(int *)stack->next->next->content)
-	{
-		do_func_print(get_cmds()[4]);
-		if (!ft_lstsorted(*get_stack(0), &is_increasing))
-			do_func_print(get_cmds()[0]);
-	}
-	else if (*(int *)stack->next->content > *(int *)stack->content
-		&& *(int *)stack->next->next->content > *(int *)stack->content)
-	{
-		do_func_print(get_cmds()[6]);
-		do_func_print(get_cmds()[0]);
-	}
-	else if (*(int *)stack->next->content > *(int *)stack->content
-		&& *(int *)stack->next->content > *(int *)stack->next->next->content)
-		do_func_print(get_cmds()[6]);
-	else if (*(int *)stack->content > *(int *)stack->next->content
-		&& *(int *)stack->next->next->content > *(int *)stack->next->content)
-		do_func_print(get_cmds()[0]);
-}
-
 int	main(int ac, char **av)
 {
 	t_list	**stack_a;
@@ -67,11 +38,13 @@ int	main(int ac, char **av)
 	get_values(ac, av);
 	stack_a = get_stack(0);
 	stack_b = get_stack(1);
-	while (ft_lstsize(*stack_a) > 3 && ft_lstsize(*stack_b) < 2)
+	while (ft_lstsize(*stack_a) > 3 && ft_lstsize(*stack_b) < 2
+		&& !ft_lstsorted(*get_stack(0), &is_increasing))
 		do_func_print(get_cmds()[3]);
-	while (ft_lstsize(*stack_a) > 3)
+	while (ft_lstsize(*stack_a) > 3
+		&& !ft_lstsorted(*get_stack(0), &is_increasing))
 		calc_push(1, *get_stack(0), *get_stack(1), &is_smaller);
-	push_sort_3();
+	sort_3();
 	while (*get_stack(1))
 		calc_push(0, *get_stack(1), *get_stack(0), &is_bigger);
 	size = ft_lstsize(*get_stack(0));

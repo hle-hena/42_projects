@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:53:03 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/02 15:03:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:22:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	do_func_print(char *cmd);
 void	calc_push(int opt, t_list *stack_fr, t_list *stack_to,
 			int (*f)(t_list *, t_list *));
 int		find_extrem(t_list *stack, int opt);
+void	sort_3(void);
 
 /*		struct_func.c	*/
 /************************/
