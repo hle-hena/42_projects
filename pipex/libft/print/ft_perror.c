@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:07:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/17 12:21:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:30:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ void	ft_perror(int error_code, int clean, char *custom_mess)
 	else
 	{
 		ft_putstr_fd("\033[0;31m", 2);
-		if (error_code)
-			put_error_code(error_code);
-		else
-			ft_putstr_fd(custom_mess, 2);
+		ft_putstr_fd(custom_mess, 2);
 		ft_putendl_fd("\033[0;0m", 2);
 	}
-	exit(0);
+	if (error_code >= 0)
+		exit(error_code);
 }

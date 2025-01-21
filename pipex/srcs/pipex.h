@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:58:30 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/17 19:08:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:56:12 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 # include "../libft/libft.h"
 # include <fcntl.h>
+# include <sys/wait.h>
 
 #endif
