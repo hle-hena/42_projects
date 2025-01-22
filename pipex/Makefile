@@ -8,9 +8,9 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-PIPEX =	pipex.c
+NEW_PIPEX = pipex.c	path.c	data.c
 
-PIPEX_SRC = $(addprefix srcs/, $(PIPEX))
+PIPEX_SRC = $(addprefix srcs/, $(NEW_PIPEX))
 
 OBJ = $(PIPEX_SRC:.c=.o)
 

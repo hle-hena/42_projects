@@ -5,143 +5,93 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 11:58:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/21 17:20:13 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/22 10:15:20 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/22 14:51:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*get_path(char *func_name, char **env)
-{
-	char	**tries;
-	char	*paths;
-	char	*path;
-	char	*temp;
-	int		i;
-
-	i = 0;
-	paths = ft_strnstr(env[i], "PATH=", 5);
-	while (!paths && env[++i])
-		paths = ft_strnstr(env[i], "PATH=", 5);
-	if (!paths)
-		return (ft_perror(3, 0, "Path not found."), NULL);
-	i = -1;
-	tries = ft_split(paths, ':');
-	while (tries && tries[++i])
-	{
-		temp = ft_strjoin(tries[i], "/");
-		path = ft_strjoin(temp, func_name);
-		ft_del(temp);
-		if (access(path, F_OK | X_OK) == 0)
-			return (ft_free_tab((void **)tries, count_words(paths, ':')), path);
-		ft_del(path);
-	}
-	return (ft_free_tab((void **)tries, count_words(paths, ':')), NULL);
-}
-
-void	exec_func(char *args, char **env)
-{
-	char	**av;
-	char	*path;
-
-	av = ft_split(args, ' ');
-	if (!av[0])
-		return (ft_free_tab((void **)av, count_words(args, ' ')),
-			ft_perror(127, 0, "A function given was invalid."));
-	path = get_path(av[0], env);
-	if (!path)
-		return (ft_free_tab((void **)av, count_words(args, ' ')),
-			ft_perror(127, 0, "A function given was invalid."));
-	if (execve(path, av, env) == -1)
-	{
-		ft_free_tab((void **)av, count_words(args, ' '));
-		ft_del(path);
-		ft_perror(127, 0, "An error occured during the execution of \
-the command.");
-	}
-}
-
-void	do_func(char *args, char **env)
-{
-	int		p_fd[2];
-	pid_t	f_id;
-
-	if (pipe(p_fd) == -1)
-		ft_perror(1, 0, "The pipe didn't open.");
-	f_id = fork();
-	if (f_id == -1)
-		ft_perror(1, 0, "A subprocess was not started.");
-	if (f_id == 0)
-	{
-		close(p_fd[0]);
-		dup2(p_fd[1], 1);
-		close(p_fd[1]);
-		exec_func(args, env);
-		exit(EXIT_FAILURE);
-	}
-	close(p_fd[1]);
-	dup2(p_fd[0], 0);
-	close(p_fd[0]);
-	if (!ft_strncmp(args, "sleep", 5))
-		waitpid(f_id, NULL, 0);
-}
-
-void	here_doc(char *limiter)
-{
-	int		p_fd[2];
-	pid_t	f_id;
-	char	*temp;
-
-	if (pipe(p_fd) == -1)
-		ft_perror(1, 0, "The pipe didn't open.");
-	f_id = fork();
-	if (f_id == -1)
-		ft_perror(1, 0, "A subprocess was not started.");
-	if (f_id == 0)
-	{
-		close(p_fd[0]);
-		while (1)
-		{
-			temp = get_next_line(0);
-			if (ft_strncmp(temp, limiter, ft_strlen(limiter)) == 0
-				&& temp[ft_strlen(limiter)] == '\n')
-				return (ft_del(temp), exit(0));
-			ft_putstr_fd(temp, p_fd[1]);
-			ft_del(temp);
-		}
-	}
-	close(p_fd[1]);
-	dup2(p_fd[0], 0);
-}
-
-//p_fd[0] -> R
-//p_fd[1] -> W
-int	main(int ac, char **av, char **env)
+void	close_fds(t_data *data)
 {
 	int	i;
-	int	fd;
+
+	if (data->fd_out != -1)
+		close(data->fd_out);
+	i = -1;
+	while (++i < (data->nb_cmd - 1) * 2)
+		close(data->p_fd[i]);
+}
+
+int	parent(t_data *data)
+{
+	pid_t	wpid;
+	int		child;
+	int		status;
+	int		exit_code;
+
+	close_fds(data);
+	child = data->nb_cmd;
+	exit_code = 1;
+	while (--child >= 0)
+	{
+		wpid = waitpid(data->f_id[child], &status, 0);
+		if (wpid == data->f_id[data->nb_cmd - 1])
+			if ((child == (data->nb_cmd - 1)) && WIFEXITED(status))
+				exit_code = WEXITSTATUS(status);
+	}
+	ft_del(data->p_fd);
+	ft_del(data->f_id);
+	if (data->fd_out == -1)
+		exit_code = 1;
+	return (exit_code);
+}
+
+void	set_in_out(t_data *data, int in, int out)
+{
+	if (dup2(in, 0) == -1)
+		return (clean_data(data), exit(0));
+	if (dup2(out, 1) == -1)
+		return (clean_data(data), exit(0));
+}
+
+void	exec_child(t_data *data, int child)
+{
+	if (child == 0 && data->fd_in == -1)
+		return (clean_data(data), exit(0));
+	if (child == 0)
+		set_in_out(data, 0, data->p_fd[1]);
+	else if (child == data->nb_cmd - 1)
+		set_in_out(data, data->p_fd[child * 2 - 2], data->fd_out);
+	else
+		set_in_out(data, data->p_fd[child * 2 - 2], data->p_fd[child * 2 + 1]);
+	close_fds(data);
+	if (!data->cmd_path)
+		return (clean_data(data), exit(127));
+	if (execve(data->cmd_path, data->cmd_arg, data->env) == -1)
+		ft_perror(127, clean_data(data), "An error occured during the execution of \
+the command.");
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_data	data;
+	int		child;
 
 	if (ac < 5 + (ft_strncmp("here_doc", av[1 * (ac > 5)], 9) == 0))
 		return (ft_perror(1, 0, "Not enough arguments."), 0);
-	i = 1 + (ft_strncmp("here_doc", av[1], 9) == 0);
-	if (i == 1)
+	init_data(&data, ac, av, env);
+	child = -1;
+	while (++child < data.nb_cmd)
 	{
-		fd = open(av[i], O_RDONLY, 0777);
-		if (fd == -1)
-			ft_perror(-1, 0, "First file does not exist.");
-		fd = ft_tern_int(fd == -1, 1, fd);
-		dup2(fd, 0);
+		data.cmd_arg = ft_split(data.av[child + 2 + data.here_doc], ' ');
+		data.cmd_path = get_path(&data);
+		data.f_id[child] = fork();
+		if (data.f_id[child] == -1)
+			ft_perror(1, 0, "A subprocess was not started.");
+		if (data.f_id[child] == 0)
+			exec_child(&data, child);
+		clean_func(&data);
 	}
-	else
-		here_doc(av[2]);
-	while (++i < ac - 2)
-		do_func(av[i], env);
-	if (ft_strncmp("here_doc", av[1], 9) != 0)
-		close(fd);
-	fd = open(av[ac - 1], O_CREAT | ft_tern_int(ft_strncmp("here_doc", av[1], 9)
-				== 0, O_APPEND, O_TRUNC) | O_WRONLY, 0777);
-	if (fd == -1)
-		ft_perror(1, 0, "Second file does not exist.");
-	return (dup2(fd, 1), exec_func(av[i], env), 0);
+	return (parent(&data));
 }
