@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:06:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/22 14:52:54 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:01:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	here_doc(t_data *data)
 		{
 			temp = get_next_line(0);
 			if (ft_strncmp(temp, data->av[2], ft_strlen(data->av[2])) == 0
-				&& temp[ft_strlen(data->av[2])] == '\n')
+				&& temp[ft_strlen(data->av[2])] == 0)
 				return (ft_del(temp), exit(0));
 			ft_putstr_fd(temp, p_fd[1]);
 			ft_del(temp);
