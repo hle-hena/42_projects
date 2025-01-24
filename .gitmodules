@@ -1,0 +1,18 @@
+[submodule "fdf"]
+	path = fdf
+	url = git@github.com:hle-hena/fdf.git
+[submodule "ft_printf"]
+	path = ft_printf
+	url = git@github.com:hle-hena/ft_printf.git
+[submodule "gnl"]
+	path = gnl
+	url = git@github.com:hle-hena/gnl.git
+[submodule "libft"]
+	path = libft
+	url = git@github.com:hle-hena/libft.git
+[submodule "pipex"]
+	path = pipex
+	url = git@github.com:hle-hena/pipex.git
+[submodule "push_swap"]
+	path = push_swap
+	url = git@github.com:hle-hena/push_swap.git
