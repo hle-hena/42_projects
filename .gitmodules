@@ -16,3 +16,9 @@
 [submodule "push_swap"]
 	path = push_swap
 	url = git@github.com:hle-hena/push_swap.git
+[submodule "Minishell"]
+	path = Minishell
+	url = git@github.com:Jordan05072005/Minishell.git
+[submodule "get_next_line"]
+	path = get_next_line
+	url = git@github.com:hle-hena/get_next_line.git
