@@ -22,3 +22,6 @@
 [submodule "get_next_line"]
 	path = get_next_line
 	url = git@github.com:hle-hena/get_next_line.git
+[submodule "CPP"]
+	path = CPP
+	url = git@github.com:hle-hena/CPP.git
