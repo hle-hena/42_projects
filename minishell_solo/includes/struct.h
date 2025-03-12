@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 14:25:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:10:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ typedef struct s_info_cmd
 
 typedef struct s_cmd
 {
-	char	*in;
-	char	*out;
-	char	**args;
-	char	*here_doc;
-	int		append;
-	char	**split;
+	char			*in;
+	char			*out;
+	char			**args;
+	char			*here_doc;
+	int				append;
+	char			**split;
+	// struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_bt

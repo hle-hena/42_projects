@@ -77,6 +77,13 @@ char	**ft_split2(char *s, char *c);
 t_bt	*create_bt_node(void *content);
 t_bt	*ft_btnew(void *content);
 void	set_parent(t_bt *parent, t_bt *child, int right);
+t_list	*get_cmd(char *line);
+char	*ft_lstjoin(t_list *lst);
+t_list	*get_quote(char *line, int quote_type, int *forward);
+t_list	*get_var_new(char *line, int *forward);
+t_list	*get_parenthesis(char *line, int *forward, int *err);
+t_cmd	*get_next_cmd(char *line, int *forward, char **sep);
+char	*get_next_block(char *line, int *forward, int *err);
 
 
 

@@ -67,6 +67,29 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 		add_link(&(data()->env), ft_strdup("_=/usr/bin/env"));
 }
 
+void	print_cmd(t_cmd *cmd)
+{
+	int		i;
+
+	i = -1;
+	if (!cmd->args)
+		printf("This command has no args.\n");
+	else
+	{
+		printf("The args are : ");
+		while (cmd->args[++i])
+			printf("[%s] - ", cmd->args[i]);
+		printf("[%s]\n", cmd->args[i]);
+	}
+	printf("The in is [%s]\t\tand the out is [%s]\n", cmd->in, cmd->out);
+	if (cmd->here_doc)
+		printf("\tThe heredoc is [%s]\n", cmd->here_doc);
+	if (cmd->append)
+		printf("\tThe command should append.\n");
+	else
+		printf("\tThe command should not append.\n");
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_data	*d;
@@ -83,11 +106,46 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		free(before);
 		before = ft_strdup(line);
-		parseur(line, &d);
+		// parseur(line, &d);
 		// if (!parseur(line, &d))
 		// {
 		// 	d->cmd->before = before; //Hugo free;
-		// 	exec(d->cmd->pipe, d->cmd->exe);
+			// exec(d->cmd->pipe, d->cmd->exe);
+		t_cmd	*temp;
+		char	*sep;
+		int		i = 0;
+		while (1)
+		{
+			temp = get_next_cmd(&line[i], &i, &sep);
+			if ((sep && !line[i]) || !temp)
+			{
+				if (!sep)
+					sep = ft_strdup("newline");
+				printf("mini: syntax error near unexpected token `%s'\n", sep);
+				if (temp)
+				{
+					int	j = -1;
+					while (temp->args[++j])
+						ft_del(temp->args[j]);
+				}
+				ft_del(temp);
+				ft_del(sep);
+				break;
+			}
+			print_cmd(temp);
+			printf("Sep is [%s]\n", sep);
+			if (temp)
+			{
+				int	j = -1;
+				while (temp->args[++j])
+					ft_del(temp->args[j]);
+			}
+			ft_del(temp);
+			ft_del(sep);
+			if (!line[i])
+				break ;
+		}
+		printf("\n");
 		// 	clean_pars(0);
 		// }
 		line = ft_readline();

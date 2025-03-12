@@ -12,9 +12,14 @@
 
 #include "mini.h"
 
-t_list *get_leftmost(t_list *blocks, char *sep)
+int	is_next_sep(t_list *blocks, char *sep)
 {
-
+	blocks = blocks->next->next;
+	if (!blocks)
+		return (1);
+	if (ft_strncmp(blocks->content, sep, 3) == 0)
+		return (1);
+	return (0);
 }
 
 t_bt	*build_subtree(t_list *blocks, int *move)
@@ -26,16 +31,20 @@ t_bt	*build_subtree(t_list *blocks, int *move)
 	subtree = create_bt_node(blocks->content);
 	(*move)++;
 	blocks = blocks->next;
+	if (!blocks)
+		return (subtree);
 	sep = blocks->content;
 	while (blocks)
 	{
 		set_parent(create_bt_node(blocks->content), subtree, 1);
 		(*move)++;
-		if (ft_strncmp(blocks->content, sep, 3))
-			break ;
 		subtree = subtree->parent;
-		set_parent(create_bt_node(blocks->content), subtree, 0);
+		if (!is_next_sep(blocks, sep))
+			break ;
+		blocks = blocks->next;
+		set_parent(subtree, create_bt_node(blocks->content), 0);
 		(*move)++;
+		blocks = blocks->next;
 	}
 	return (subtree);
 }
@@ -51,7 +60,7 @@ t_bt	*build_tree(t_list *blocks)
 		blocks = blocks->next;
 	while (blocks)
 	{
-		subtree = build_subtree(blocks->content, &move);
+		subtree = build_subtree(blocks, &move);
 		while (--move)
 			blocks = blocks->next;
 		set_parent(tree, subtree, 0);

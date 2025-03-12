@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/05 11:01:01 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:02:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	exec_builtin(t_icmd *cmds, int nb_cmds, int child);
 void	exec_define(t_icmd *cmds, int nb_cmds, int child);
 void	define2child(t_icmd *cmds, int nb_cmds, int child, int start);
 int		is_define(char *str);
-void	set_exit_val(int ret_val)
+void	set_exit_val(int ret_val);
 
 #endif

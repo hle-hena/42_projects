@@ -121,27 +121,27 @@ void	pars_line(char *line, t_pars *exe)
 	fill_exe(&exe, i, -1);
 }
 
-// int	parseur(char *line, t_data **d)
-// {
-// 	char	**exe;
-// 	size_t	i;
-// 	char	*mess;
+int	parseur(char *line, t_data **d)
+{
+	char	**exe;
+	size_t	i;
+	char	*mess;
 
-// 	i = -1;
-// 	if (!line || line[0] == '\0')
-// 		return (1);
-// 	mess = syntax_error(line, -1, -1);
-// 	if (mess)
-// 		return (ft_perror(-1, mess, 0), 1);
-// 	exe = ft_split2(line, "&");
-// 	if (!exe)
-// 		return (ft_perror(1, NULL, 1), 1);
-// 	(*d)->cmd = init_struct_pars(exe, ft_strslen(exe));
-// 	if (!(*d)->cmd)
-// 		return (1);
-// 	(*d)->cmd->line = line;
-// 	while (++i < ft_strslen(exe))
-// 		pars_line(exe[i], &(*d)->cmd[i]);
-// 	// reader((*d)->cmd, ft_strslen(exe));
-// 	return (0);
-// }
+	i = -1;
+	if (!line || line[0] == '\0')
+		return (1);
+	mess = syntax_error(line, -1, -1);
+	if (mess)
+		return (ft_perror(-1, mess, 0), 1);
+	exe = ft_split2(line, "&");
+	if (!exe)
+		return (ft_perror(1, NULL, 1), 1);
+	(*d)->cmd = init_struct_pars(exe, ft_strslen(exe));
+	if (!(*d)->cmd)
+		return (1);
+	(*d)->cmd->line = line;
+	while (++i < ft_strslen(exe))
+		pars_line(exe[i], &(*d)->cmd[i]);
+	// reader((*d)->cmd, ft_strslen(exe));
+	return (0);
+}
