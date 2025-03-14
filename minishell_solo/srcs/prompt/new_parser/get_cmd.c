@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 10:28:35 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/11 20:11:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:26:04 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	get_change(char *line, int *forward, t_list **head)
 	}
 	else if (line[0] == '$')
 		temp = get_var_new(&line[0], forward);
+	else if (line[0] == '~' && (!line[1] || line[1] == '/'))
+		temp = get_tilde(forward);
 	if (rv)
 		return (ft_lstclear(&temp, ft_del), rv);
 	if (!rv && !temp)
@@ -91,7 +93,6 @@ char	*get_next_block(char *line, int *forward, int *err)
 t_cmd	*get_subblock(char *line, int *forward, char **sep)
 {
 	t_cmd	*cmd;
-	char	**args;
 	char	*block;
 	int		err;
 	int		i;
@@ -99,18 +100,23 @@ t_cmd	*get_subblock(char *line, int *forward, char **sep)
 	block = get_next_block(line, &i, &err);
 	*forward += i;
 	if (err)
-		return (NULL);
-	args = malloc(2 * sizeof(char *));
-	args[0] = block;
-	args[1] = NULL;
+		return (*sep = NULL, NULL);
+	cmd = malloc(1 * sizeof(t_cmd));
+	if (!cmd)
+		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
+	*cmd = (t_cmd){NULL, NULL, NULL, NULL, 0, NULL};
+	cmd->args = malloc(2 * sizeof(char *));
+	if (!cmd->args)
+		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
+	cmd->args[0] = block;
+	cmd->args[1] = NULL;
+	if (!line[i])
+		return (*sep = NULL, cmd);
 	block = get_next_block(&line[i], &i, &err);
 	*forward += i;
 	if (err)
-		return (ft_del(args[0]), ft_del(args), NULL);
-	*sep = block;
-	cmd = malloc(1 * sizeof(t_cmd));
-	cmd[0] = (t_cmd){NULL, NULL, args, NULL, 0, NULL};
-	return (cmd);
+		return (clear_cmd(cmd, NULL, NULL), *sep = NULL, NULL);
+	return (*sep = block, cmd);
 }
 
 //If I want to have the real way this works, I shouldnt do it like that for the opening of the files.
@@ -123,7 +129,7 @@ int	get_redirect(char *line, int *forward, t_cmd *cmd, char **redirect)
 	file_name = get_next_block(line, forward, &err);
 	if (file_name || err || !line[0])
 	{
-		if (!line[0] || ft_strchr("><|&()", file_name[0]) || err)
+		if (!line[0] || ft_strchr("><|&()", line[0]) || err)
 		{
 			ft_del(*redirect);
 			*redirect = file_name;
@@ -151,10 +157,24 @@ int	get_redirect(char *line, int *forward, t_cmd *cmd, char **redirect)
 
 void	clear_cmd(t_cmd *cmd, t_list *args, char *current)
 {
-	ft_del(cmd->here_doc);
-	ft_del(cmd->in);
-	ft_del(cmd->out);
-	ft_lstclear(&args, ft_del);
+	int	i;
+
+	if (cmd)
+	{
+		ft_del(cmd->here_doc);
+		ft_del(cmd->in);
+		ft_del(cmd->out);
+		if (cmd->args)
+		{
+			i = 0;
+			while (cmd->args[i])
+				ft_del(cmd->args[i++]);
+			ft_del(cmd->args);
+		}
+		ft_del(cmd);
+	}
+	if (args)
+		ft_lstclear(&args, ft_del);
 	ft_del(current);
 }
 
@@ -192,6 +212,8 @@ t_cmd	*get_next_cmd(char *line, int *forward, char **sep)
 	cmd = malloc(sizeof(t_cmd) * 1);
 	*cmd = (t_cmd){NULL, NULL, NULL, NULL, 0, NULL};
 	args = NULL;
+	if (!line[0])
+		return (*sep = NULL, build_cmd(cmd, NULL));
 	if (ft_strchr("()", line[0]))
 		return (get_subblock(line, forward, sep));
 	while (line[i])
@@ -203,11 +225,12 @@ t_cmd	*get_next_cmd(char *line, int *forward, char **sep)
 		{
 			if ((ft_strncmp(current, "||", 3) == 0)
 				|| ((ft_strncmp(current, "&&", 3) == 0))
-				|| (ft_strncmp(current, "|", 2) == 0))
+				|| (ft_strncmp(current, "|", 2) == 0)
+				|| (ft_strncmp(current, "&", 2) == 0))
 				return (*forward += i, *sep = current, build_cmd(cmd, args));
-			else if (ft_strchr("()", current[0]))
-				return (*forward += i, *sep = current, clear_cmd(cmd, args, current), NULL);
-			else if (ft_strchr("><", current[0]))
+			else if (current[0] == '(' || current[0] == ')')
+				return (*forward += i, *sep = current, clear_cmd(cmd, args, NULL), NULL);
+			else if (current[0] == '<' || current[0] == '>')
 			{
 				if (!get_redirect(&line[i], &i, cmd, &current))
 					return (*forward += i, *sep = current, clear_cmd(cmd, args, NULL), NULL);
@@ -219,39 +242,103 @@ t_cmd	*get_next_cmd(char *line, int *forward, char **sep)
 	return (*forward += i, *sep = NULL, build_cmd(cmd, args));
 }
 
-// t_cmd	*create_pipeline(t_list *cmd)
-// {
-	
-// }
+void	clear_pipeline(t_list *cmd)
+{
+	int		i;
+	t_list	*next;
 
-// t_cmd	*get_next_pipeline(char *line, int *forward, char *sep)
-// {
-// 	t_list	*cmd;
-// 	t_cmd	*temp;
-// 	int		i;
-// 	char	*sep;
+	while (cmd)
+	{
+		ft_del(((t_cmd *)cmd->content)->here_doc);
+		ft_del(((t_cmd *)cmd->content)->in);
+		ft_del(((t_cmd *)cmd->content)->out);
+		if (((t_cmd *)cmd->content)->args)
+		{
+			i = 0;
+			while (((t_cmd *)cmd->content)->args[i])
+				ft_del(((t_cmd *)cmd->content)->args[i++]);
+			ft_del((((t_cmd *)cmd->content)->args));
+		}
+		ft_del(cmd->content);
+		next = cmd->next;
+		ft_del(cmd);
+		cmd = next;
+	}
+}
 
-// 	i = 0;
-// 	cmd = NULL;
-// 	while (line[i])
-// 	{
-// 		temp = get_next_cmd(&line[i], &i, &sep);
-// 		if (!temp)
-// 			return (NULL);
-// 		add_link(&cmd, temp);
-// 		if ((ft_strncmp(sep, "||", 3) == 0)
-// 			|| ((ft_strncmp(sep, "&&", 3) == 0)))
-// 			return (create_pipeline(cmd));
-// 		// if (ft_strncmp(sep, "&", 2) == 0)
-// 		// 	;//Print smthing like invalid sep.
-// 	}
-// 	return (sep = NULL, cmd);
-// }
+t_list	*get_next_pipeline(char *line, int *forward, char **sep)
+{
+	t_list	*cmd;
+	t_cmd	*temp;
+	int		i;
+	char	*sep_local;
 
-// t_list	*get_cmds(char *line)
-// {
-// 	t_list	*blocks;
-// 	int		start;
+	i = 0;
+	cmd = NULL;
+	if (!line[i])
+	{
+		temp = malloc(sizeof(t_cmd) * 1);
+		*temp = (t_cmd){NULL, NULL, NULL, NULL, 0, NULL};
+		add_link(&cmd, temp);
+		return (*sep = NULL, cmd);
+	}
+	while (line[i])
+	{
+		temp = get_next_cmd(&line[i], &i, &sep_local);
+		if (!temp)
+			return (*sep = sep_local, *forward += i, clear_pipeline(cmd), NULL);
+		add_link(&cmd, temp);
+		if (sep_local && !line[i])
+			return (*sep = sep_local, *forward += i, clear_pipeline(cmd), NULL);
+		if ((ft_strncmp(sep_local, "||", 3) == 0)
+			|| ((ft_strncmp(sep_local, "&&", 3) == 0)))
+			return (*sep = sep_local, *forward += i, cmd);
+		if (ft_strncmp(sep_local, "&", 2) == 0)
+			return (*sep = sep_local, *forward += i, clear_pipeline(cmd), NULL);
+		ft_del(sep_local);
+	}
+	return (*sep = NULL, *forward += i, cmd);
+}
 
-// 	start = 0;
-// }
+void	clear_blocks(t_list *cmds)
+{
+	t_list	*next;
+
+	while (cmds)
+	{
+		clear_pipeline((t_list *)cmds->content);
+		next = cmds->next;
+		ft_del(cmds);
+		cmds = next;
+		if (cmds)
+		{
+			ft_del(cmds->content);
+			next = cmds->next;
+			ft_del(cmds);
+			cmds = next;
+		}
+	}
+}
+
+t_list	*get_cmds(char *line, char **err_token)
+{
+	t_list	*blocks;
+	t_list	*temp;
+	char	*sep;
+	int		i;
+
+	i = 0;
+	blocks = NULL;
+	while (line[i])
+	{
+		temp = get_next_pipeline(&line[i], &i, &sep);
+		if (!temp || (sep && !line[i]))
+			return (*err_token = sep, clear_pipeline(temp),
+				clear_blocks(blocks), NULL);
+		add_link(&blocks, temp);
+		if (!sep)
+			return (*err_token = NULL, blocks);
+		add_link(&blocks, sep);
+	}
+	return (*err_token = NULL, blocks);
+}

@@ -73,21 +73,53 @@ void	print_cmd(t_cmd *cmd)
 
 	i = -1;
 	if (!cmd->args)
-		printf("This command has no args.\n");
+		printf("\t\tThis command has no args.\n");
 	else
 	{
-		printf("The args are : ");
+		printf("\t\tThe args are : ");
 		while (cmd->args[++i])
 			printf("[%s] - ", cmd->args[i]);
 		printf("[%s]\n", cmd->args[i]);
 	}
-	printf("The in is [%s]\t\tand the out is [%s]\n", cmd->in, cmd->out);
+	printf("\t\tThe in is [%s]\t\tand the out is [%s]\n", cmd->in, cmd->out);
 	if (cmd->here_doc)
-		printf("\tThe heredoc is [%s]\n", cmd->here_doc);
+		printf("\t\t\tThe heredoc is [%s]\n", cmd->here_doc);
 	if (cmd->append)
-		printf("\tThe command should append.\n");
+		printf("\t\t\tThe command should append.\n");
 	else
-		printf("\tThe command should not append.\n");
+		printf("\t\t\tThe command should not append.\n");
+}
+
+void	print_pipeline(t_list *pipeline)
+{
+	int	i;
+
+	i = -1;
+	while (pipeline)
+	{
+		printf("\tThis is command %i\n", ++i);
+		print_cmd((t_cmd *)pipeline->content);
+		pipeline = pipeline->next;
+	}
+}
+
+void	print_blocks(t_list *blocks)
+{
+	int	i;
+
+	i = -1;
+	while (blocks)
+	{
+		printf("\001\e[1m\002This is the block %i\001\e[0m\002\n", ++i);
+		print_pipeline((t_list *)blocks->content);
+		blocks = blocks->next;
+		if (blocks)
+		{
+			printf("\001\e[1m\002The separator between the two \
+blocks is %s\001\e[1m\002\n", (char *)blocks->content);
+			blocks = blocks->next;
+		}
+	}
 }
 
 int	main(int ac, char **av, char **env)
@@ -96,6 +128,7 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	char	*before;
 
+	line = NULL;
 	before = NULL;
 	d = data();
 	init_mini(d, ac, av, env);
@@ -111,41 +144,25 @@ int	main(int ac, char **av, char **env)
 		// {
 		// 	d->cmd->before = before; //Hugo free;
 			// exec(d->cmd->pipe, d->cmd->exe);
-		t_cmd	*temp;
-		char	*sep;
-		int		i = 0;
-		while (1)
+		t_list	*temp;
+		char	*err;
+		temp = get_cmds(line, &err);
+		if (!temp)
 		{
-			temp = get_next_cmd(&line[i], &i, &sep);
-			if ((sep && !line[i]) || !temp)
-			{
-				if (!sep)
-					sep = ft_strdup("newline");
-				printf("mini: syntax error near unexpected token `%s'\n", sep);
-				if (temp)
-				{
-					int	j = -1;
-					while (temp->args[++j])
-						ft_del(temp->args[j]);
-				}
-				ft_del(temp);
-				ft_del(sep);
-				break;
-			}
-			print_cmd(temp);
-			printf("Sep is [%s]\n", sep);
+			if (!err)
+				err = ft_strdup("newline");
+			printf("mini: syntax error near unexpected token `%s'\n", err);
 			if (temp)
-			{
-				int	j = -1;
-				while (temp->args[++j])
-					ft_del(temp->args[j]);
-			}
-			ft_del(temp);
-			ft_del(sep);
-			if (!line[i])
-				break ;
+				clear_blocks(temp);
+			ft_del(err);
 		}
-		printf("\n");
+		else
+		{
+			print_blocks(temp);
+			clear_blocks(temp);
+			ft_del(err);
+		}
+
 		// 	clean_pars(0);
 		// }
 		line = ft_readline();

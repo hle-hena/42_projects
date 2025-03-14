@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/05 10:58:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:36:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	add_link(t_list **list, char *content)
+void	add_link(t_list **list, void *content)
 {
 	t_list	*link;
 

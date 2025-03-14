@@ -84,6 +84,14 @@ t_list	*get_var_new(char *line, int *forward);
 t_list	*get_parenthesis(char *line, int *forward, int *err);
 t_cmd	*get_next_cmd(char *line, int *forward, char **sep);
 char	*get_next_block(char *line, int *forward, int *err);
+t_list	*get_next_pipeline(char *line, int *forward, char **sep);
+void	clear_pipeline(t_list *cmd);
+t_list	*get_tilde(int *forward);
+void	clear_blocks(t_list *cmds);
+t_list	*get_cmds(char *line, char **err_token);
+void	clear_cmd(t_cmd *cmd, t_list *args, char *current);
+
+void	print_cmd(t_cmd *cmd);
 
 
 

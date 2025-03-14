@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:56:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/11 19:39:59 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:20:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ char	*ft_lstcpy_one(t_list *lst, int size)
 		while (((char *)lst->content)[0] == 0 && lst->next)
 		{
 			next = lst->next;
-			ft_del(lst);
+			ft_lstdelone(lst, ft_del);
 			lst = next;
 		}
-			// lst = lst->next;
 		dest[i] = ((char *)lst->content)[0];
 		next = lst->next;
-		ft_del(lst);
+		ft_lstdelone(lst, ft_del);
 		lst = next;
 	}
 	dest[size] = 0;
@@ -85,6 +84,7 @@ t_list	*get_var_new(char *line, int *forward)
 	value = ft_getenv(var_name);
 	if (!value)
 		value = ft_getloc(var_name);
+	ft_del(var_name);
 	if (!value)
 		return (*forward += i, NULL);
 	while (*value)
@@ -137,8 +137,26 @@ t_list	*get_parenthesis(char *line, int *forward, int *err)
 		add_link(&parenthesis, ft_strdup(&line[i]));
 		i++;
 	}
+	while (ft_isspace(line[i]))
+		i++;
 	*forward += i;
 	if (depth != 0)
 		return (*err = 1, ft_lstclear(&parenthesis, ft_del), NULL);
 	return (*err = 0, parenthesis);
+}
+
+t_list	*get_tilde(int *forward)
+{
+	char	*value;
+	t_list	*head;
+
+	head = NULL;
+	value = ft_getloc("HOME");
+	if (!value)
+		value = ft_getenv("HOME");
+	if (!value)
+		value = ft_getimp("HOME");
+	while (*value)
+		add_link(&head, ft_strdup(&(*value++)));
+	return (*forward += 1, head);
 }
