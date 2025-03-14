@@ -6,7 +6,7 @@
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:10:32 by jguaglio          #+#    #+#             */
-/*   Updated: 2025/01/28 18:10:32 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:12:20 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	new_prompt(int signum)
 {
 	if (signum == SIGINT)
 	{
+		set_exit_val(130);
 		ft_printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

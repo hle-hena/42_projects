@@ -6,7 +6,7 @@
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:28:05 by jguaglio          #+#    #+#             */
-/*   Updated: 2025/02/04 13:28:05 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:07:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_getloc_struct(const char *str, t_list **placeholder)
 	while (loc)
 	{
 		line = ft_strnstr(loc->content, str, size);
-		if (line && line[size] == '=')
+		if (line && (line[size] == '=' || !line[size]))
 		{
 			if (loc == data()->loc)
 				*placeholder = NULL;

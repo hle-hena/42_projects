@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:47:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 17:31:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:07:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_getenv_struct(const char *str, t_list **placeholder)
 	while (env)
 	{
 		line = ft_strnstr(env->content, str, size);
-		if (line && line[size] == '=')
+		if (line && (line[size] == '=' || !line[size]))
 		{
 			if (env == data()->env)
 				*placeholder = NULL;

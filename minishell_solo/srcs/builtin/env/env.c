@@ -6,7 +6,7 @@
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:12:19 by jguaglio          #+#    #+#             */
-/*   Updated: 2025/02/04 14:12:19 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:55:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_env(char **arg)
 	while (env->next)
 	{
 		env = env->next;
+		if (!ft_strchr(env->content, '='))
+			continue ;
 		ft_printf("%s\n", env->content);
 	}
 	return (0);

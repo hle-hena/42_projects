@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:17:00 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 18:20:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:09:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_env(void *str, void *to_find)
 
 	size = ft_strlen(to_find);
 	line = ft_strnstr(str, to_find, size);
-	if (line && line[size] == '=')
+	if (line && (line[size] == '=' || !line[size]))
 		return (1);
 	return (0);
 }

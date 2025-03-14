@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:33:34 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 14:52:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:06:20 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	*get_var_body(char *str)
 	while (str[i] != '=' && str[i])
 		i++;
 	len = ft_strlen(&str[++i]);
+	if (len == 0)
+		return (ft_strdup(""));
 	dest = ft_calloc(len + 1, sizeof(char));
 	if (!dest)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),

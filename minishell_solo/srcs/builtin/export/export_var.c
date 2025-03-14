@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/27 10:19:10 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:05:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	export_non_existant(char *str)
 	t_list	*var;
 
 	if (!ft_strchr(str, '='))
-		return (0);
+		return (add_link(&(data()->env),
+			ft_strdup(ft_strtrim(str, " \t\r\n\f\v"))), 0);
 	temp = create_var(str);
 	if (!temp)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
