@@ -52,7 +52,7 @@ char	*create_path(char *first_component, char *second_component)
 	else
 		path = ft_strdup(first_component);
 	dir_path = ft_strjoin(path, second_component);
-	ft_del(path);
+	ft_del((void **)&path);
 	return (dir_path);
 }
 
@@ -70,7 +70,7 @@ char	*test_cdpath(char **cdpath, char *arg)
 		dir_path = create_path(cdpath[i], arg);
 		if (stat(dir_path, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
 			return (dir_path);
-		ft_del(dir_path);
+		ft_del((void **)&dir_path);
 	}
 	return (NULL);
 }

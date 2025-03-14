@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-void	ft_lstdelink(t_list **prev, t_list **link, void (*del)(void *))
+void	ft_lstdelink(t_list **prev, t_list **link, void (*del)(void **))
 {
 	if (!*link)
 		return ;

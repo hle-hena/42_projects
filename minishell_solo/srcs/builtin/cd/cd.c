@@ -22,7 +22,7 @@ char	*cd_previous(char *arg, char *unused, int *print, int option)
 		return (unused);
 	if (arg[1] && option)
 		return (unused);
-	ft_del(unused);
+	ft_del((void **)&unused);
 	if (!arg[1])
 	{
 		path = ft_getenv("OLDPWD");
@@ -94,5 +94,5 @@ int	ft_cd(char **av)
 	if (print)
 		ft_putendl_fd(curpath, 1);
 	chdir(curpath);
-	return (ft_del(curpath), 0);
+	return (ft_del((void **)&curpath), 0);
 }

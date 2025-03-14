@@ -18,7 +18,7 @@ void	update_pwd(t_list *pwd, t_list *oldpwd, int *present, char *curpath)
 	{
 		if (oldpwd)
 		{
-			ft_del(oldpwd->content);
+			ft_del((void **)&oldpwd->content);
 			oldpwd->content = ft_strjoin("OLDPWD=", pwd->content + 4);
 		}
 		else if (!oldpwd && *present)
@@ -30,7 +30,7 @@ void	update_pwd(t_list *pwd, t_list *oldpwd, int *present, char *curpath)
 		else
 			ft_lstadd_back(&data()->loc,
 				ft_lstnew(ft_strjoin("OLDPWD=", pwd->content + 4)));
-		ft_del(pwd->content);
+		ft_del((void **)&pwd->content);
 		pwd->content = ft_strjoin("PWD=", curpath);
 	}
 	else
@@ -49,7 +49,7 @@ void	update_env(char *curpath)
 	t_list		*pwd;
 
 	pwd = ft_getimp_struct("PWD", &temp);
-	ft_del(pwd->content);
+	ft_del((void **)&pwd->content);
 	pwd->content = ft_strjoin("PWD=", curpath);
 	pwd = ft_getenv_struct("PWD", &temp);
 	if (!pwd)

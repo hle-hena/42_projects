@@ -24,7 +24,7 @@ void	update_shlvl(void)
 		return (ft_lstadd_back(&(data()->env), ft_lstnew(ft_strdup("SHLVL=1\
 "))));
 	value = ft_atoi(shlvl->content + 6) + 1;
-	ft_del(shlvl->content);
+	ft_del((void **)&shlvl->content);
 	if (value < 0)
 		value = 0;
 	temp = ft_itoa(value);
@@ -33,9 +33,9 @@ void	update_shlvl(void)
 		ft_perror(-1, ft_strsjoin((const char *[]){"mini: warning: shell le\
 vel (", temp, ") too high, resetting to 1.", NULL}), 0);
 		shlvl->content = ft_strdup("SHLVL=1");
-		ft_del(temp);
+		ft_del((void **)&temp);
 		return ;
 	}
 	shlvl->content = ft_strsjoin((const char *[]){"SHLVL=", temp, NULL});
-	ft_del(temp);
+	ft_del((void **)&temp);
 }

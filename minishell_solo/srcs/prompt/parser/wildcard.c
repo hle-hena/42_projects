@@ -78,7 +78,7 @@ char	**insert_file(char **str, int j, int i, char **file)
 		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1))
 			str = insert_strs(str, file[f], j++, 0 == w++);
 	}
-	return (ft_del(before), ft_del(after),
+	return (ft_del((void **)&before), ft_del((void **)&after),
 		ft_free_tab((void *)file, ft_strslen(file)), str);
 }
 

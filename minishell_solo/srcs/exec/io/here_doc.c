@@ -31,9 +31,9 @@ void	here_doc(t_icmd cmd)
 			temp = get_next_line(0);
 			if (ft_strncmp(temp, cmd.here_doc, ft_strlen(cmd.here_doc)) == 0
 				&& temp[ft_strlen(cmd.here_doc)] == 0)
-				return (ft_del(temp), exit(0));
+				return (ft_del((void **)&temp), exit(0));
 			ft_putstr_fd(temp, p_fd[1]);
-			ft_del(temp);
+			ft_del((void **)&temp);
 		}
 	}
 	close(p_fd[1]);

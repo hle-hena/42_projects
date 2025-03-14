@@ -78,7 +78,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 			var = get_var((*pars)->exe[i].args[j]);
 		if (var && var[0]) // is vcvar$
 		{
-			ft_del((*pars)->exe[i].args[j]);
+			ft_del((void **)&(*pars)->exe[i].args[j]);
 			(*pars)->exe[i].args[j] = var;
 		}
 		else if (var)

@@ -55,10 +55,10 @@ int	ft_echo(t_icmd *cmd)
 		if (!etat && !(!ft_strncmp(cmd->args[i], "-n", 2) && !ft_strncmp(trunc, "-", 2)))
 			etat = 1;
 		write_str(cmd->args[i], cmd, etat, i);
-		ft_del(trunc);
+		ft_del((void **)&trunc);
 	}
 	trunc = ft_strtrim(cmd->args[1], "n");
 	if (!cmd->args[1] || !(!ft_strncmp(cmd->args[1], "-n", 2) && !ft_strncmp(trunc, "-", 2)))
 		write(cmd->fd_out, "\n", 1);
-	return (ft_del(trunc), 0);
+	return (ft_del((void **)&trunc), 0);
 }

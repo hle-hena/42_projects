@@ -1,2 +1,0 @@
-eco a || (echo b && eco c || echo d || echo e) || echo f || echo g && echo h
-cmd1 > test | cmd2 | cmd3 < test.txt

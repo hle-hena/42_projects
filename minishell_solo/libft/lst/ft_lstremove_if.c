@@ -12,17 +12,17 @@
 
 #include "../libft.h"
 
-static void	remove_node(t_list **node, void (*del)(void *)) {
+static void	remove_node(t_list **node, void (*del)(void **)) {
 	t_list	*temp;
 
 	temp = *node;
 	*node = (*node)->next;
-	del(temp->content);
-	del(temp);
+	del((void **)&temp->content);
+	del((void **)&temp);
 }
 
 void	ft_lstremove_if(t_list **head, int (*cnd)(void *, void *),
-	void (*del)(void *), char *to_find)
+	void (*del)(void **), char *to_find)
 {
 	t_list *current;
 	t_list *prev;

@@ -33,9 +33,9 @@ t_bt	*create_bt_node(void *content)
 	if (!content)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
 	node = ft_btnew(content);
-	if (!link)
+	if (!node)
 	{
-		ft_del(content);
+		ft_del((void **)&content);
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
 	}
 	return (node);

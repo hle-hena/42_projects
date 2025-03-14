@@ -51,16 +51,16 @@ char	*ft_toupper(char *str);
 /********************************/
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void **));
 int		ft_lstcountf(t_list *lst, int (*f)(t_list *));
-void	ft_lstdelink(t_list **prev, t_list **link, void (*del)(void *));
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstdelink(t_list **prev, t_list **link, void (*del)(void **));
+void	ft_lstdelone(t_list *lst, void (*del)(void **));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void **));
 t_list	*ft_lstnew(void *content);
 void	 ft_lstremove_if(t_list **head, int (*cnd)(void *, void *),
-	void (*del)(void *), char *to_find);
+	void (*del)(void **), char *to_find);
 int		ft_lstsize(t_list *lst);
 int		ft_lstsorted(t_list *lst, int (*f)(t_list *));
 t_list	*ft_lstrev(t_list *head);
@@ -79,7 +79,7 @@ t_li	ft_pow(long int nb, int pow);
 /********************************/
 void	ft_bzero(void *add, size_t n);
 void	*ft_calloc(size_t n, size_t size);
-void	ft_del(void *add);
+void	ft_del(void **add);
 void	ft_free_tab(void **tab, size_t size);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void	*ft_memchr(const void *add, int c, size_t n);

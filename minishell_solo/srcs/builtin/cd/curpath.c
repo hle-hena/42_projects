@@ -20,9 +20,9 @@ char	**get_stack(char *curpath, int *depth)
 
 	path = ft_split(curpath, '/');
 	stack = ft_calloc(ft_strslen(path) + 1, sizeof(char *));
-	ft_del(curpath);
+	ft_del((void **)&curpath);
 	if (!path || !stack)
-		return (ft_free_tab((void **)path, ft_strslen(path)), ft_del(stack),
+		return (ft_free_tab((void **)path, ft_strslen(path)), ft_del((void **)&stack),
 			ft_perror(1, ft_strdup("mini: Internal error: malloc"), 0), NULL);//Does not free like it should
 	*depth = 0;
 	i = -1;
@@ -34,7 +34,7 @@ char	**get_stack(char *curpath, int *depth)
 			continue ;
 		else if (ft_strncmp(path[i], ".", 2) != 0)
 		{
-			ft_del(stack[*depth]);
+			ft_del((void **)&stack[*depth]);
 			stack[(*depth)++] = ft_strdup(path[i]);
 		}
 	}
@@ -79,7 +79,7 @@ char *regen_curpath(char *curpath)
 	char	*dest;
 
 	dest = create_path(ft_getimp("PWD"), curpath);
-	ft_del(curpath);
+	ft_del((void **)&curpath);
 	return (dest);
 }
 
@@ -91,10 +91,10 @@ char	*cd_nopwd(char *curpath, char *arg)
 	temp = ft_strdup(curpath);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) == 0)
-		return (ft_del(temp), curpath);
+		return (ft_del((void **)&temp), curpath);
 	if (is_dot(arg))//I dont like this, there is probably a better idea.
 		update_env(temp);
-	return (ft_del(curpath), ft_del(temp), ft_perror(-1, ft_strdup("cd: error retrieving \
+	return (ft_del((void **)&curpath), ft_del((void **)&temp), ft_perror(-1, ft_strdup("cd: error retrieving \
 current directory: getcwd: cannot access parent directories: No such file or di\
 rectory"), 0), NULL);
 }
@@ -114,10 +114,10 @@ char	*check_curpath(char *curpath, char *arg)
 		return (NULL);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) != 0)
-		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
+		return (ft_del((void **)&curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
 ni: cd: ", arg, ": No such file or directory.", NULL}), 0), NULL);
 	if (!S_ISDIR(path_stat.st_mode))
-		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
+		return (ft_del((void **)&curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
 ni: cd: ", arg, ": Not a directory.", NULL}), 0), NULL);
 	update_env(curpath);
 	return (curpath);

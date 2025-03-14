@@ -77,12 +77,11 @@ char	**ft_split2(char *s, char *c);
 t_bt	*create_bt_node(void *content);
 t_bt	*ft_btnew(void *content);
 void	set_parent(t_bt *parent, t_bt *child, int right);
-t_list	*get_cmd(char *line);
 char	*ft_lstjoin(t_list *lst);
 t_list	*get_quote(char *line, int quote_type, int *forward);
 t_list	*get_var_new(char *line, int *forward);
 t_list	*get_parenthesis(char *line, int *forward, int *err);
-t_cmd	*get_next_cmd(char *line, int *forward, char **sep);
+t_cmd	*get_next_cmd(char *line, int *forward, char **sep, int err);
 char	*get_next_block(char *line, int *forward, int *err);
 t_list	*get_next_pipeline(char *line, int *forward, char **sep);
 void	clear_pipeline(t_list *cmd);
@@ -90,8 +89,9 @@ t_list	*get_tilde(int *forward);
 void	clear_blocks(t_list *cmds);
 t_list	*get_cmds(char *line, char **err_token);
 void	clear_cmd(t_cmd *cmd, t_list *args, char *current);
-
-void	print_cmd(t_cmd *cmd);
+t_bt	*get_ast(char *line);
+void	clear_tree(t_bt *tree);
+int	run_ast(t_bt *ast);
 
 
 

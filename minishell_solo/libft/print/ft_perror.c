@@ -30,7 +30,7 @@ void	ft_perror(int error_code, char *custom_mess, int clean)
 		ft_putendl_fd("What even happened there ???", 2);
 	else
 		ft_putendl_fd(custom_mess, 2);
-	ft_del(custom_mess);
+	ft_del((void **)&custom_mess);
 	if (error_code >= 0)
 		exit(error_code);
 }

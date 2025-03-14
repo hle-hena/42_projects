@@ -58,8 +58,8 @@ char	*create_var(char *str)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
 	content = ft_strsjoin((const char *[]){name, "=", body, NULL});
-	ft_del(name);
-	ft_del(body);
+	ft_del((void **)&name);
+	ft_del((void **)&body);
 	if (!content)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);

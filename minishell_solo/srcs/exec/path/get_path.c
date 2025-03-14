@@ -33,7 +33,7 @@ char	*get_cmd_path(t_cmd input)
 		path = create_path(tries[i], input.args[0]);
 		if (access(path, F_OK | X_OK) == 0)
 			return (ft_free_tab((void **)tries, count_words(paths, ':')), path);
-		ft_del(path);
+		ft_del((void **)&path);
 	}
 	return (ft_free_tab((void **)tries, count_words(paths, ':')), NULL);
 }

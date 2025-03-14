@@ -70,12 +70,14 @@ t_list	*get_var_new(char *line, int *forward)
 	head = NULL;
 	var = NULL;
 	if (ft_isdigit(line[i]))
+		return (*forward += 2, head);
+	if (line[i] == '?')
 	{
-		add_link(&head, ft_strdup(&line[0]));
-		add_link(&head, ft_strdup(&line[1]));
+		value = ft_getimp("?");
+		while (*value)
+			add_link(&head, ft_strdup(&(*value++)));
 		return (*forward += 2, head);
 	}
-	// add_link(&var, ft_strdup(&line[i++]));
 	while (ft_isalnum(line[i]) || line[i] == '_')
 		add_link(&var, ft_strdup(&line[i++]));
 	var_name = ft_lstjoin(var);
@@ -84,7 +86,7 @@ t_list	*get_var_new(char *line, int *forward)
 	value = ft_getenv(var_name);
 	if (!value)
 		value = ft_getloc(var_name);
-	ft_del(var_name);
+	ft_del((void **)&var_name);
 	if (!value)
 		return (*forward += i, NULL);
 	while (*value)
@@ -123,18 +125,18 @@ t_list	*get_parenthesis(char *line, int *forward, int *err)
 	int		i;
 
 	parenthesis = NULL;
+	i = 1;
 	depth = ft_tern_int(line[0] == '(', 1, -1);
 	if (depth < 0)
 		return (*err = 1, NULL);
-	add_link(&parenthesis, ft_strdup(&line[0]));
-	i = 1;
 	while (depth > 0 && line[i])
 	{
 		if (line[i] == '(')
 			depth ++;
 		if (line[i] == ')')
 			depth --;
-		add_link(&parenthesis, ft_strdup(&line[i]));
+		if (depth != 0)
+			add_link(&parenthesis, ft_strdup(&line[i]));
 		i++;
 	}
 	while (ft_isspace(line[i]))

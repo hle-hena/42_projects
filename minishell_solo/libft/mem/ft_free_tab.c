@@ -20,6 +20,6 @@ void	ft_free_tab(void **tab, size_t size)
 	i = -1;
 	temp = tab;
 	while (++i < size)
-		ft_del(*tab++);
-	ft_del(temp);
+		ft_del(tab++);
+	ft_del((void **)&temp);
 }

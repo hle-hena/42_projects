@@ -12,11 +12,14 @@
 
 #include "../libft.h"
 
-void	ft_del(void *add)
+void	ft_del(void **add)
 {
-	if (add)
+	if (!add)
+		return ;
+	if (*add)
 	{
-		free(add);
-		add = NULL;
+		*add = NULL;
+		free(*add);
+		*add = NULL;
 	}
 }

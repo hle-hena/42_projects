@@ -39,7 +39,7 @@ void	define_imp(t_icmd *cmds, int child, int i, char *var_name)
 		return ;
 	if (var)
 	{
-		ft_del(var->content);
+		ft_del((void **)&var->content);
 		var->content = ft_strdup(cmds[child].args[i]);
 	}
 }
@@ -59,15 +59,15 @@ void	define_vars(t_icmd *cmds, int child)
 			var = ft_getloc_struct(var_name, &(t_list *){0});
 		if (var)
 		{
-			ft_del(var->content);
+			ft_del((void **)&var->content);
 			var->content = create_var(cmds[child].args[i]);
 			continue ;
 		}
-		ft_del(var_name);
+		ft_del((void **)&var_name);
 		var_name = create_var(cmds[child].args[i]);
 		var = ft_lstnew(var_name);
 		if (!var)
-			return (ft_del(var_name), ft_perror(1, ft_strdup("mini: Internal er\
+			return (ft_del((void **)&var_name), ft_perror(1, ft_strdup("mini: Internal er\
 ror: malloc."), clean_data() + clean_icmds()));
 		ft_lstadd_back(&data()->loc, var);
 	}

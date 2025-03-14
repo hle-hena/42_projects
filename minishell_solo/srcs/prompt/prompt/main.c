@@ -26,7 +26,7 @@ char	*ft_readline(void)
 	else
 		prompt = get_prompt();
 	line = readline(prompt);
-	ft_del(prompt);
+	ft_del((void **)&prompt);
 	signal(SIGINT, any);
 	return (line);
 }
@@ -67,59 +67,73 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 		add_link(&(data()->env), ft_strdup("_=/usr/bin/env"));
 }
 
-void	print_cmd(t_cmd *cmd)
+void	print_cmd(t_cmd *cmd, int depth)
 {
 	int		i;
 
 	i = -1;
+	if (cmd->subshell)
+		printf("%*sThis is a subshell\n", depth * 4 + 4, "");
 	if (!cmd->args)
-		printf("\t\tThis command has no args.\n");
+		printf("%*sThis command has no args.\n", depth * 4 + 4, "");
 	else
 	{
-		printf("\t\tThe args are : ");
+		printf("%*s", depth * 4 + 4, "");
 		while (cmd->args[++i])
 			printf("[%s] - ", cmd->args[i]);
 		printf("[%s]\n", cmd->args[i]);
 	}
-	printf("\t\tThe in is [%s]\t\tand the out is [%s]\n", cmd->in, cmd->out);
 	if (cmd->here_doc)
-		printf("\t\t\tThe heredoc is [%s]\n", cmd->here_doc);
-	if (cmd->append)
-		printf("\t\t\tThe command should append.\n");
+		printf("%*sheredoc: %s\t\t", depth * 4 + 4, "", cmd->here_doc);
 	else
-		printf("\t\t\tThe command should not append.\n");
+		printf("%*sin: %s\t\t", depth * 4 + 4, "", cmd->in);
+	if (cmd->append)
+		printf("append: %s\n", cmd->out);
+	else
+		printf("out: %s\n", cmd->out);
 }
 
-void	print_pipeline(t_list *pipeline)
+void	print_pipeline(t_list *pipeline, int depth)
 {
 	int	i;
 
 	i = -1;
 	while (pipeline)
 	{
-		printf("\tThis is command %i\n", ++i);
-		print_cmd((t_cmd *)pipeline->content);
+		printf("%*sThis is command %i\n%*s{\n", depth * 4, "", ++i, depth * 4, "");
+		print_cmd((t_cmd *)pipeline->content, depth);
 		pipeline = pipeline->next;
+		printf("%*s}\n", depth * 4, "");
 	}
 }
 
-void	print_blocks(t_list *blocks)
+void	print_ast_recursive(t_bt *node, int depth)
 {
-	int	i;
+	if (!node)
+		return;
+	if (!node->left && !node->right)
+		print_pipeline((t_list *)node->content, depth);
+	else
+		printf("%*s%s\n", depth * 4, "", (char *)node->content);
+	if (node->left || node->right)
+		printf("%*s{\n", depth * 4, "");
+	if (node->left)
+		print_ast_recursive(node->left, depth + 1);
+	if (node->right)
+		print_ast_recursive(node->right, depth + 1);
+	if (node->left || node->right)
+		printf("%*s}\n", depth * 4, "");
+}
 
-	i = -1;
-	while (blocks)
+void	print_ast(t_bt *root)
+{
+	if (!root)
 	{
-		printf("\001\e[1m\002This is the block %i\001\e[0m\002\n", ++i);
-		print_pipeline((t_list *)blocks->content);
-		blocks = blocks->next;
-		if (blocks)
-		{
-			printf("\001\e[1m\002The separator between the two \
-blocks is %s\001\e[1m\002\n", (char *)blocks->content);
-			blocks = blocks->next;
-		}
+		printf("AST is empty.\n");
+		return;
 	}
+	printf("Abstract Syntax Tree:\n");
+	print_ast_recursive(root, 1);
 }
 
 int	main(int ac, char **av, char **env)
@@ -139,34 +153,15 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		free(before);
 		before = ft_strdup(line);
-		// parseur(line, &d);
-		// if (!parseur(line, &d))
-		// {
-		// 	d->cmd->before = before; //Hugo free;
-			// exec(d->cmd->pipe, d->cmd->exe);
-		t_list	*temp;
-		char	*err;
-		temp = get_cmds(line, &err);
-		if (!temp)
+		t_bt	*temp;
+		temp = get_ast(line);
+		if (temp)
 		{
-			if (!err)
-				err = ft_strdup("newline");
-			printf("mini: syntax error near unexpected token `%s'\n", err);
-			if (temp)
-				clear_blocks(temp);
-			ft_del(err);
+			run_ast(temp);
 		}
-		else
-		{
-			print_blocks(temp);
-			clear_blocks(temp);
-			ft_del(err);
-		}
-
-		// 	clean_pars(0);
-		// }
+		clear_tree(temp);
 		line = ft_readline();
 	}
-	ft_del(before);
+	ft_del((void **)&before);
 	return (ft_putendl_fd("exit\n", 1), clean_data(), 0);
 }

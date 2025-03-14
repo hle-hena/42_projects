@@ -48,7 +48,7 @@ char	*syntax_error2(char **arg, char *mess, int is_str)
 
 	temp = ft_strsjoin((const char *[]){">>.", ">.", "<<.", "<", NULL});
 	err = ft_split(temp, '.');
-	ft_del(temp);
+	ft_del((void **)&temp);
 	temp = NULL;
 	i = -1;
 	while (is_str % 2 == 0 && !mess && ++i < 4)
@@ -63,7 +63,7 @@ char	*syntax_error2(char **arg, char *mess, int is_str)
 				mess = ft_strsjoin((const char *[]){S_ERR, temp, "'.", NULL});
 		}
 	}
-	return (ft_del(temp), ft_free_tab((void *)err, ft_strslen(err)),
+	return (ft_del((void **)&temp), ft_free_tab((void *)err, ft_strslen(err)),
 		ft_free_tab((void *)arg, ft_strslen(arg)), mess);
 }
 
@@ -75,7 +75,7 @@ char	*syntax_error(char *line, int i, int j)
 
 	temp = ft_strsjoin((const char *[]){"||.", "|.", "&&.", "&.", NULL});
 	err = ft_split(temp, '.');
-	ft_del(temp);
+	ft_del((void **)&temp);
 	temp = NULL;
 	is_str = 0;
 	while (err[++i])

@@ -18,7 +18,7 @@ char	*get_sep(char *line, int *forward)
 	int		i;
 
 	i = 1;
-	if ((line[0] == line[1]) || (line[0] == '<' && line[0] == '>'))
+	if ((line[0] == line[1]) || (line[0] == '<' && line[1] == '>'))
 	{
 		res = ft_substr(line, 0, 2);
 		i = 2;
@@ -63,7 +63,7 @@ char	*get_next_block(char *line, int *forward, int *err)
 
 	i = 0;
 	head = NULL;
-	while (ft_isspace(line[i]))
+	while (ft_isspace(line[i]) && line[i])
 		i++;
 	if (!line[i])
 		return (*forward += i, *err = 0, NULL);
@@ -84,7 +84,7 @@ char	*get_next_block(char *line, int *forward, int *err)
 		add_link(&head, ft_strdup(&line[i]));
 		i++;
 	}
-	while (ft_isspace(line[i]))
+	while (ft_isspace(line[i]) && line[i])
 		i++;
 	*forward += i;
 	return (*err = 0, ft_lstjoin(head));
@@ -97,21 +97,21 @@ t_cmd	*get_subblock(char *line, int *forward, char **sep)
 	int		err;
 	int		i;
 
+	i = 0;
 	block = get_next_block(line, &i, &err);
-	*forward += i;
 	if (err)
-		return (*sep = NULL, NULL);
+		return (*forward += i, *sep = NULL, NULL);
 	cmd = malloc(1 * sizeof(t_cmd));
 	if (!cmd)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
-	*cmd = (t_cmd){NULL, NULL, NULL, NULL, 0, NULL};
+	*cmd = (t_cmd){NULL, NULL, NULL, NULL, 0, 1};
 	cmd->args = malloc(2 * sizeof(char *));
 	if (!cmd->args)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
 	cmd->args[0] = block;
 	cmd->args[1] = NULL;
 	if (!line[i])
-		return (*sep = NULL, cmd);
+		return (*forward += i, *sep = NULL, cmd);
 	block = get_next_block(&line[i], &i, &err);
 	*forward += i;
 	if (err)
@@ -131,28 +131,39 @@ int	get_redirect(char *line, int *forward, t_cmd *cmd, char **redirect)
 	{
 		if (!line[0] || ft_strchr("><|&()", line[0]) || err)
 		{
-			ft_del(*redirect);
+			ft_del((void **)redirect);
 			*redirect = file_name;
 			return (0);
 		}
 	}
+	if ((*redirect)[0] == '<' && (*redirect)[1] == '>')
+	{
+		if (file_name)
+			close(open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0644));
+		ft_del((void **)&cmd->out);
+		ft_del((void **)&cmd->in);
+		ft_del((void **)redirect);
+		cmd->out = file_name;
+		cmd->in = file_name;
+		return (1);
+	}
 	if ((*redirect)[0] == '>')
 	{
-		ft_del(cmd->out);
+		ft_del((void **)&cmd->out);
 		cmd->out = file_name;
 		cmd->append = ((*redirect)[1] == '>');
-		ft_del(*redirect);
+		ft_del((void **)redirect);
 		if (!file_name)
 			return (1);
 		return (close(open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644)), 1);
 	}
 	if ((*redirect)[1])
 	{
-		ft_del(cmd->here_doc);
-		return (ft_del(*redirect), cmd->here_doc = file_name, 1);
+		ft_del((void **)&cmd->here_doc);
+		return (ft_del((void **)redirect), cmd->here_doc = file_name, 1);
 	}
-	ft_del(cmd->in);
-	return (ft_del(*redirect), cmd->in = file_name, 1);
+	ft_del((void **)&cmd->in);
+	return (ft_del((void **)redirect), cmd->in = file_name, 1);
 }
 
 void	clear_cmd(t_cmd *cmd, t_list *args, char *current)
@@ -161,21 +172,21 @@ void	clear_cmd(t_cmd *cmd, t_list *args, char *current)
 
 	if (cmd)
 	{
-		ft_del(cmd->here_doc);
-		ft_del(cmd->in);
-		ft_del(cmd->out);
+		ft_del((void **)&cmd->here_doc);
+		ft_del((void **)&cmd->in);
+		ft_del((void **)&cmd->out);
 		if (cmd->args)
 		{
 			i = 0;
 			while (cmd->args[i])
-				ft_del(cmd->args[i++]);
-			ft_del(cmd->args);
+				ft_del((void **)&cmd->args[i++]);
+			ft_del((void **)&cmd->args);
 		}
-		ft_del(cmd);
+		ft_del((void **)&cmd);
 	}
 	if (args)
 		ft_lstclear(&args, ft_del);
-	ft_del(current);
+	ft_del((void **)&current);
 }
 
 t_cmd	*build_cmd(t_cmd *cmd, t_list *args)
@@ -185,14 +196,14 @@ t_cmd	*build_cmd(t_cmd *cmd, t_list *args)
 	int		i;
 
 	if (!args && !cmd->here_doc && !cmd->in && !cmd->out)
-		return (ft_del(cmd), NULL);
+		return (ft_del((void **)&cmd), NULL);
 	av = malloc((ft_lstsize(args) + 1) * sizeof(char *));
 	i = 0;
 	while (args)
 	{
 		av[i++] = args->content;
 		next = args->next;
-		ft_del(args);
+		ft_del((void **)&args);
 		args = next;
 	}
 	av[i] = NULL;
@@ -200,24 +211,25 @@ t_cmd	*build_cmd(t_cmd *cmd, t_list *args)
 	return (cmd);
 }
 
-t_cmd	*get_next_cmd(char *line, int *forward, char **sep)
+t_cmd	*get_next_cmd(char *line, int *forward, char **sep, int err)
 {
 	t_cmd	*cmd;
 	t_list	*args;
 	int		i;
-	int		err;
+	int		redirect;
 	char	*current;
 
 	i = 0;
 	cmd = malloc(sizeof(t_cmd) * 1);
-	*cmd = (t_cmd){NULL, NULL, NULL, NULL, 0, NULL};
+	*cmd = (t_cmd){NULL, NULL, NULL, NULL, 0, 0};
 	args = NULL;
 	if (!line[0])
 		return (*sep = NULL, build_cmd(cmd, NULL));
 	if (ft_strchr("()", line[0]))
-		return (get_subblock(line, forward, sep));
+		return (ft_del((void **)&cmd), get_subblock(line, forward, sep));
 	while (line[i])
 	{
+		redirect = (line[i] == '>' || line[i] == '<');
 		current = get_next_block(&line[i], &i, &err);
 		if (err)
 			return (*forward += i, clear_cmd(cmd, args, current), *sep = current, NULL);
@@ -230,7 +242,7 @@ t_cmd	*get_next_cmd(char *line, int *forward, char **sep)
 				return (*forward += i, *sep = current, build_cmd(cmd, args));
 			else if (current[0] == '(' || current[0] == ')')
 				return (*forward += i, *sep = current, clear_cmd(cmd, args, NULL), NULL);
-			else if (current[0] == '<' || current[0] == '>')
+			else if ((current[0] == '<' || current[0] == '>') && redirect)
 			{
 				if (!get_redirect(&line[i], &i, cmd, &current))
 					return (*forward += i, *sep = current, clear_cmd(cmd, args, NULL), NULL);
@@ -249,19 +261,19 @@ void	clear_pipeline(t_list *cmd)
 
 	while (cmd)
 	{
-		ft_del(((t_cmd *)cmd->content)->here_doc);
-		ft_del(((t_cmd *)cmd->content)->in);
-		ft_del(((t_cmd *)cmd->content)->out);
+		ft_del((void **)&((t_cmd *)cmd->content)->here_doc);
+		ft_del((void **)&((t_cmd *)cmd->content)->in);
+		ft_del((void **)&((t_cmd *)cmd->content)->out);
 		if (((t_cmd *)cmd->content)->args)
 		{
 			i = 0;
 			while (((t_cmd *)cmd->content)->args[i])
-				ft_del(((t_cmd *)cmd->content)->args[i++]);
-			ft_del((((t_cmd *)cmd->content)->args));
+				ft_del((void **)&((t_cmd *)cmd->content)->args[i++]);
+			ft_del((void **)&(((t_cmd *)cmd->content)->args));
 		}
-		ft_del(cmd->content);
+		ft_del((void **)&cmd->content);
 		next = cmd->next;
-		ft_del(cmd);
+		ft_del((void **)&cmd);
 		cmd = next;
 	}
 }
@@ -278,13 +290,13 @@ t_list	*get_next_pipeline(char *line, int *forward, char **sep)
 	if (!line[i])
 	{
 		temp = malloc(sizeof(t_cmd) * 1);
-		*temp = (t_cmd){NULL, NULL, NULL, NULL, 0, NULL};
+		*temp = (t_cmd){NULL, NULL, NULL, NULL, 0, 0};
 		add_link(&cmd, temp);
 		return (*sep = NULL, cmd);
 	}
 	while (line[i])
 	{
-		temp = get_next_cmd(&line[i], &i, &sep_local);
+		temp = get_next_cmd(&line[i], &i, &sep_local, 0);
 		if (!temp)
 			return (*sep = sep_local, *forward += i, clear_pipeline(cmd), NULL);
 		add_link(&cmd, temp);
@@ -295,7 +307,7 @@ t_list	*get_next_pipeline(char *line, int *forward, char **sep)
 			return (*sep = sep_local, *forward += i, cmd);
 		if (ft_strncmp(sep_local, "&", 2) == 0)
 			return (*sep = sep_local, *forward += i, clear_pipeline(cmd), NULL);
-		ft_del(sep_local);
+		ft_del((void **)&sep_local);
 	}
 	return (*sep = NULL, *forward += i, cmd);
 }
@@ -308,13 +320,13 @@ void	clear_blocks(t_list *cmds)
 	{
 		clear_pipeline((t_list *)cmds->content);
 		next = cmds->next;
-		ft_del(cmds);
+		ft_del((void **)&cmds);
 		cmds = next;
 		if (cmds)
 		{
-			ft_del(cmds->content);
+			ft_del((void **)&cmds->content);
 			next = cmds->next;
-			ft_del(cmds);
+			ft_del((void **)&cmds);
 			cmds = next;
 		}
 	}

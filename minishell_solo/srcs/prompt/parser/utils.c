@@ -71,14 +71,14 @@ char	*ft_strdelchar(char *str, char del)
 			str_f[len++] = str[i];
 	}
 	str_f[len] = 0;
-	return (ft_del(str), str_f);
+	return (ft_del((void **)&str), str_f);
 }
 
 void	free_tpars(t_pars **pars)
 {
 	(*pars)->in = NULL;
 	(*pars)->out = NULL;
-	ft_del((*pars)->cmd);
+	ft_del((void **)&(*pars)->cmd);
 	(*pars)->cmd = NULL;
 	(*pars)->limiter = NULL;
 	(*pars)->append = NULL;

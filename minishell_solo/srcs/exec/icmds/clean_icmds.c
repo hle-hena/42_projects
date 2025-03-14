@@ -23,10 +23,10 @@ int	clean_icmds(void)
 	child = -1;
 	while (++child < nb_cmds)
 	{
-		ft_del(cmds[child].path);
+		ft_del((void **)&cmds[child].path);
 		if (cmds->define == 2)
-			ft_del(cmds[child].args);
+			ft_del((void **)&cmds[child].args);
 	}
-	ft_del(cmds);
+	ft_del((void **)&cmds);
 	return (0);
 }

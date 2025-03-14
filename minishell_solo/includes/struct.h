@@ -40,13 +40,12 @@ typedef struct s_info_cmd
 
 typedef struct s_cmd
 {
-	char			*in;
-	char			*out;
-	char			**args;
-	char			*here_doc;
-	int				append;
-	char			**split;
-	// struct s_cmd	*next;
+	char	*in;
+	char	*out;
+	char	**args;
+	char	*here_doc;
+	int		append;
+	int		subshell;
 }	t_cmd;
 
 typedef struct s_bt

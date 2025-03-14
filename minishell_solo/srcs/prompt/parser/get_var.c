@@ -55,7 +55,7 @@ char	*get_var(char *str)
 		temp = ft_substr(&str[i], 0, ft_strchri(&str[i], "$"));
 		i += ft_strlen(temp);
 		var = ft_strjoin_free(var, temp);
-		ft_del(temp);
+		ft_del((void **)&temp);
 		if (str[i] == '$' && str[i + 1] && ft_isdigit(str[i + 1]))
 			i++;
 		else if (str[i] == '$' && str[i + 1] == '?')
@@ -68,7 +68,7 @@ char	*get_var(char *str)
 			temp = ft_substr(str, i, end_var(&str[i]));
 			i += (ft_strlen(temp) - 1);
 			var = ft_strjoin_free(var, find_var(&temp[1]));
-			ft_del(temp);
+			ft_del((void **)&temp);
 		}
 		else if (str[i] == '$')
 			var = ft_strjoin_free(var, "$");

@@ -20,38 +20,38 @@ int	clean_env(void)
 	return (0);
 }
 
-int	clean_pars(int full)
-{
-	t_pars	*cmd;
+// int	clean_pars(int full)
+// {
+// 	t_pars	*cmd;
 	
-	cmd = data()->cmd;
-	if (cmd == NULL)
-		return (0);
-	if (full)
-		ft_del(cmd->before);
-	if (cmd->exe)
-	{
-		while (--cmd->pipe >= 0)
-		{
-			ft_free_tab((void **)cmd->exe[cmd->pipe].args,
-				ft_strslen(cmd->exe[cmd->pipe].args));
+// 	cmd = data()->cmd;
+// 	if (cmd == NULL)
+// 		return (0);
+// 	if (full)
+// 		ft_del((void **)&cmd->before);
+// 	if (cmd->exe)
+// 	{
+// 		while (--cmd->pipe >= 0)
+// 		{
+// 			ft_free_tab((void **)cmd->exe[cmd->pipe].args,
+// 				ft_strslen(cmd->exe[cmd->pipe].args));
 				
-		}
-		ft_free_tab((void *)(cmd->exe[0].split),
-			ft_strslen(cmd->exe[0].split));
-		ft_del(cmd->exe);
-	}
-	ft_free_tab((void *)cmd->split, ft_strslen(cmd->split));
-	ft_del(cmd->line);
-	ft_del(cmd->cmd);
-	ft_del(cmd);
-	data()->cmd = NULL;
-	return (0);
-}
+// 		}
+// 		// ft_free_tab((void *)(cmd->exe[0].split),
+// 		// 	ft_strslen(cmd->exe[0].split));
+// 		ft_del((void **)&cmd->exe);
+// 	}
+// 	ft_free_tab((void *)cmd->split, ft_strslen(cmd->split));
+// 	ft_del((void **)&cmd->line);
+// 	ft_del((void **)&cmd->cmd);
+// 	ft_del((void **)&cmd);
+// 	data()->cmd = NULL;
+// 	return (0);
+// }
 
 int	clean_data(void)
 {
 	clean_env();
-	clean_pars(1);
+	// clean_pars(1);
 	return (0);
 }

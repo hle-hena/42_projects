@@ -25,7 +25,7 @@ int	export_non_existant(char *str)
 			clean_data() + clean_icmds()), 0);
 	var = ft_lstnew(temp);
 	if (!var)
-		return (ft_del(temp), ft_perror(1, ft_strdup("mini: Internal error: mal\
+		return (ft_del((void **)&temp), ft_perror(1, ft_strdup("mini: Internal error: mal\
 loc."), clean_data() + clean_icmds()), 0);
 	return (ft_lstadd_back(&(data()->env), var), 0);
 }
@@ -45,13 +45,13 @@ int	export_existant(t_list *loc, char *str, char *name)
 		temp = ft_strdup(loc->content);
 		ft_lstremove_if(&(data()->loc), is_env, ft_del, name);
 	}
-	ft_del(name);
+	ft_del((void **)&name);
 	if (!temp)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), 1);
 	var = ft_lstnew(temp);
 	if (!var)
-		return (ft_del(temp), ft_perror(1, ft_strdup("mini: Internal error: mal\
+		return (ft_del((void **)&temp), ft_perror(1, ft_strdup("mini: Internal error: mal\
 loc."), clean_data() + clean_icmds()), 1);
 	ft_lstadd_back(&(data()->env), var);
 	return (0);
@@ -59,7 +59,7 @@ loc."), clean_data() + clean_icmds()), 1);
 
 int	export_update(t_list *env, char *str)
 {
-	ft_del(env->content);
+	ft_del((void **)&env->content);
 	env->content = create_var(str);
 	if (!env->content)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
@@ -79,13 +79,13 @@ int	export_var(char *str)
 	{
 		temp = ft_strsjoin((const char *[]){"bash: export: `", str, "': not a \
 valid identifier.", NULL});
-		return (ft_del(name), ft_perror(-1, temp, 0), 1);
+		return (ft_del((void **)&name), ft_perror(-1, temp, 0), 1);
 	}
 	var = ft_getenv_struct(name, &bin);
 	if (var)
-		return (ft_del(name), export_update(var, str));
+		return (ft_del((void **)&name), export_update(var, str));
 	var = ft_getloc_struct(name, &bin);
 	if (!var)
-		return (ft_del(name), export_non_existant(str));
+		return (ft_del((void **)&name), export_non_existant(str));
 	return (export_existant(var, str, name));
 }

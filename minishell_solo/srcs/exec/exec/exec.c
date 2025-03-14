@@ -45,9 +45,9 @@ void	set_exit_val(int ret_val)
 	if (!temp)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds());
-	ft_del(pipe->content);
+	ft_del((void **)&pipe->content);
 	pipe->content = ft_strsjoin((const char *[]){"?=", temp, NULL});
-	ft_del(temp);
+	ft_del((void **)&temp);
 	if (!pipe->content)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds());

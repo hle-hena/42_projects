@@ -21,7 +21,7 @@ void	add_link(t_list **list, void *content)
 	link = ft_lstnew(content);
 	if (!link)
 	{
-		ft_del(content);
+		ft_del((void **)&content);
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
 	}
 	ft_lstadd_back(list, link);
