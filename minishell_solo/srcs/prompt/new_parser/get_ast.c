@@ -64,7 +64,10 @@ t_bt	*build_tree(t_list *blocks)
 		while (move--)
 			blocks = blocks->next;
 		set_parent(tree, subtree, 0);
+		tree = subtree;
 	}
+	while (tree->parent)
+		tree = tree->parent;
 	return (tree);
 }
 

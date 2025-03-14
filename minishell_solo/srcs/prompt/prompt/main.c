@@ -158,10 +158,11 @@ int	main(int ac, char **av, char **env)
 		if (temp)
 		{
 			run_ast(temp);
+			print_ast(temp);
 		}
 		clear_tree(temp);
 		line = ft_readline();
 	}
 	ft_del((void **)&before);
-	return (ft_putendl_fd("exit\n", 1), clean_data(), 0);
+	return (ft_putendl_fd("exit", 1), clean_data(), 0);
 }
