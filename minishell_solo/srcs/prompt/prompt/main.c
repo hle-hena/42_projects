@@ -98,13 +98,15 @@ void	print_pipeline(t_list *pipeline, int depth)
 	int	i;
 
 	i = -1;
+	printf("%*s{\n", depth * 4, "");
 	while (pipeline)
 	{
-		printf("%*sThis is command %i\n%*s{\n", depth * 4, "", ++i, depth * 4, "");
-		print_cmd((t_cmd *)pipeline->content, depth);
+		printf("%*sThis is command %i\n%*s{\n", depth * 4 + 4, "", ++i, depth * 4 + 4, "");
+		print_cmd((t_cmd *)pipeline->content, depth + 1);
 		pipeline = pipeline->next;
-		printf("%*s}\n", depth * 4, "");
+		printf("%*s}\n", depth * 4 + 4, "");
 	}
+	printf("%*s}\n", depth * 4, "");
 }
 
 void	print_ast_recursive(t_bt *node, int depth)
@@ -153,6 +155,7 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		free(before);
 		before = ft_strdup(line);
+		
 		t_bt	*temp;
 		temp = get_ast(line);
 		if (temp)
