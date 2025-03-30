@@ -25,3 +25,6 @@
 [submodule "CPP"]
 	path = CPP
 	url = git@github.com:hle-hena/CPP.git
+[submodule "philosophers"]
+	path = philosophers
+	url = git@github.com:hle-hena/philosophers.git
