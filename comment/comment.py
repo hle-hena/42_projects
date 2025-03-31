@@ -22,14 +22,14 @@ def transform_to_ascii_tree(input_text):
             filename = line.replace("//", "").strip()
             box_width = len(filename)
             padding = 62 - box_width
-            output.append(f"/*          /{'-' * (len(filename) + 2)}\\{' ' * padding}*/")
             output.append(f"/*         |  {filename}  |{' ' * (padding - 1)}*/")
             output.append(f"/*          \\{'-' * (len(filename) + 2)}/{' ' * padding}*/")
             output.append(f"/*{' ' * (math.ceil(len(filename) / 2) + 11)}|{' ' * (64 - math.ceil(len(filename) / 2))}*/")
         elif line:
-            output.append(line)
+            temp = line.expandtabs(4)
+            output.append(f"{line}/*{' ' * (76 - len(temp))}*/")
             if i + 1 < len(lines) and lines[i + 1].strip():
-                output.append(f"/*{' ' * (math.ceil(len(filename) / 2) + 11)}|{' ' * (64 - math.ceil(len(filename) / 2))}*/")
+                pass
             else:
                 output.append(f"/*{' ' * (math.ceil(len(filename) / 2) + 10)}\\_/{' ' * (63 - math.ceil(len(filename) / 2))}*/")
                 output.append("/*                                                                            */")
