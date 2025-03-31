@@ -25,7 +25,10 @@ char	*ft_readline(void)
 		prompt = NULL;
 	else
 		prompt = get_prompt();
-	line = readline(prompt);
+	if (isatty(0))
+		line = readline(prompt);
+	else
+		line = get_next_line(0);
 	ft_del((void **)&prompt);
 	signal(SIGINT, any);
 	return (line);
@@ -53,8 +56,8 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 
 	if (av[1])
 		ft_color(av);
-	if (isatty(1))
-		print_welcome();
+	// if (isatty(1))
+	// 	print_welcome();
 	create_env(&d, env, av, ac);
 	init_io(d);
 	printf("\e[?2004l");
@@ -161,7 +164,7 @@ int	main(int ac, char **av, char **env)
 		if (temp)
 		{
 			run_ast(temp);
-			print_ast(temp);
+			// print_ast(temp);
 		}
 		clear_tree(temp);
 		line = ft_readline();

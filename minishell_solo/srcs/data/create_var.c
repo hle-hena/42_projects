@@ -32,6 +32,7 @@ char	*get_var_body(char *str)
 {
 	int		i;
 	int		len;
+	char	*temp;
 	char	*dest;
 
 	i = 0;
@@ -40,12 +41,14 @@ char	*get_var_body(char *str)
 	len = ft_strlen(&str[++i]);
 	if (len == 0)
 		return (ft_strdup(""));
-	dest = ft_calloc(len + 1, sizeof(char));
-	if (!dest)
+	temp = ft_calloc(len + 1, sizeof(char));
+	if (!temp)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
-	ft_strlcpy(dest, str + i, len + 1);
-	return (ft_strtrim(dest, " \t\r\n\f\v"));
+	ft_strlcpy(temp, str + i, len + 1);
+	dest = remove_quote(temp);
+	ft_del((void **)&temp);
+	return (dest);
 }
 
 char	*create_var(char *str)

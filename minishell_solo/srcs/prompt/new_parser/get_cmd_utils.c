@@ -58,7 +58,7 @@ char	*ft_lstjoin(t_list *lst)
 	return (ft_lstcpy_one(lst, size));
 }
 
-t_list	*get_var_new(char *line, int *forward)
+t_list	*get_var(char *line, int *forward)
 {
 	t_list	*head;
 	t_list	*var;
@@ -90,8 +90,19 @@ t_list	*get_var_new(char *line, int *forward)
 	if (!value)
 		return (*forward += i, NULL);
 	while (*value)
+	{
+		if (*value == 34 || *value == 39)
+			add_link(&head, ft_strdup("\\")); 
 		add_link(&head, ft_strdup(&(*value++)));
+	}
 	return (*forward += i, head);
+}
+
+char	*remove_quote(char *str)
+{
+	if (str[0] == '\'' || str[0] == '"')
+		return (ft_substr(str, 1, ft_strlen(str) - 2));
+	return (ft_strdup(str));
 }
 
 t_list	*get_quote(char *line, int quote_type, int *forward)
@@ -101,18 +112,27 @@ t_list	*get_quote(char *line, int quote_type, int *forward)
 
 	i = 0;
 	head = NULL;
+	add_link(&head, ft_strdup(&line[i++]));
 	while (line[i] != quote_type && line[i])
 	{
+		if (line[i] == 92 && !line[i + 1])
+			return (ft_lstclear(&head, ft_del), NULL);
+		if (line[i] == 92)
+		{
+			add_link(&head, ft_strdup(&line[++i]));
+			i++;
+			continue ;
+		}
 		if (quote_type == 39)
 			add_link(&head, ft_strdup(&line[i++]));
 		else if (line[i] == '$')
-				ft_lstadd_back(&head, get_var_new(&line[i], &i));
+			ft_lstadd_back(&head, get_var(&line[i], &i));
 		else
 			add_link(&head, ft_strdup(&line[i++]));
 	}
+	add_link(&head, ft_strdup(&line[i]));
 	add_link(&head, ft_strdup(""));
-	*forward += i + 1 + (line[i] != 0);
-	// printf("In quote, next char is [%c]\n", line[i + 1]);
+	*forward += i;
 	if (line[i] != quote_type)
 		return (ft_lstclear(&head, ft_del), NULL);//This is an error to print.
 	return (head);

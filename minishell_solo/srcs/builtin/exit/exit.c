@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:14:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/27 17:22:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:05:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_exit(char **av)
 	else
 	{
 		exit_val = 2;
-		if (!str_isnum(av[1]))
+		if (!str_isnum(av[1]) )
 			ft_perror(-1, ft_strsjoin((const char *[]){"mini: exit: ", av[1], "\
 : numeric argument required.", NULL}), 0);
 		else if (ft_strslen(av) > 2)

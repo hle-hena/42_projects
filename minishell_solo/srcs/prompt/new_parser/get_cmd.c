@@ -31,23 +31,31 @@ char	*get_sep(char *line, int *forward)
 	return (res);
 }
 
-int	get_change(char *line, int *forward, t_list **head)
+int	get_change(char *line, int *forward, t_list **head, int *ret)
 {
 	t_list	*temp;
 	int		rv;
 
 	rv = 0;
 	temp = NULL;
+	*ret = 0;
 	if (line[0] == 39 || line[0] == 34)
 	{
-		temp = get_quote(&line[1], line[0], forward);
+		*ret = 1;
+		temp = get_quote(&line[0], line[0], forward);
 		if (!temp)
 			rv = 1;
 	}
 	else if (line[0] == '$')
-		temp = get_var_new(&line[0], forward);
+	{
+		*ret = 1;
+		temp = get_var(&line[0], forward);
+	}
 	else if (line[0] == '~' && (!line[1] || line[1] == '/'))
+	{
+		*ret = 1;
 		temp = get_tilde(forward);
+	}
 	if (rv)
 		return (ft_lstclear(&temp, ft_del), rv);
 	if (!rv && !temp)
@@ -59,7 +67,10 @@ int	get_change(char *line, int *forward, t_list **head)
 char	*get_next_block(char *line, int *forward, int *err)
 {
 	t_list	*head;
+	char	*dest;
+	char	*temp;
 	int		i;
+	int		ret;
 
 	i = 0;
 	head = NULL;
@@ -68,26 +79,44 @@ char	*get_next_block(char *line, int *forward, int *err)
 	if (!line[i])
 		return (*forward += i, *err = 0, NULL);
 	if (ft_strchr("()", line[i]))
-	{
-		head = get_parenthesis(&line[i], &i, err);
-		*forward += i;
-		return (ft_lstjoin(head));
-	}
+		return (*forward += i, ft_lstjoin(get_parenthesis(&line[i], &i, err)));
 	if (ft_strchr("><|&", line[i]))
 		return (*err = 0, get_sep(line, forward));
 	while (line[i] && !ft_isspace(line[i]))
 	{
-		if (get_change(&line[i], &i, &head))
+		if (line[i] == 92 && !line[i + 1])
 			return (*forward += i, *err = 1, ft_lstclear(&head, ft_del), NULL);
-		if ((ft_strchr("><|&() ", line[i])))
+		else if (line[i] == 92)
+		{
+			add_link(&head, ft_strdup(&line[++i]));
+			i++;
+			continue ;
+		}
+		else if (get_change(&line[i], &i, &head, &ret))
+			return (*forward += i, *err = 1, ft_lstclear(&head, ft_del), NULL);
+		else if ((ft_strchr("><|&() ", line[i])))
 			break ;
-		add_link(&head, ft_strdup(&line[i]));
+		else if (ret)
+			;
+		else
+			add_link(&head, ft_strdup(&line[i]));
 		i++;
 	}
 	while (ft_isspace(line[i]) && line[i])
 		i++;
 	*forward += i;
-	return (*err = 0, ft_lstjoin(head));
+	temp = ft_lstjoin(head);
+	if ((ft_strncmp(temp, "||", 3) == 0)
+		|| ((ft_strncmp(temp, "&&", 3) == 0))
+		|| (ft_strncmp(temp, "|", 2) == 0)
+		|| (ft_strncmp(temp, "&", 2) == 0))
+	{
+		dest = ft_strsjoin((const char *[]){"'", temp, "'", NULL});
+		ft_del((void **)&temp);
+	}
+	else
+		dest = temp;
+	return (*err = 0, dest);
 }
 
 t_cmd	*get_subblock(char *line, int *forward, char **sep)
@@ -201,9 +230,11 @@ t_cmd	*build_cmd(t_cmd *cmd, t_list *args)
 	i = 0;
 	while (args)
 	{
-		av[i++] = args->content;
+		av[i++] = remove_quote(args->content);
+		// av[i++] = args->content;
 		next = args->next;
 		ft_del((void **)&args);
+		ft_del((void **)&args->content);
 		args = next;
 	}
 	av[i] = NULL;

@@ -112,6 +112,10 @@ t_bt	*get_ast(char *line)
 		i++;
 	if (i == ft_strlen(line))
 		return (NULL);
+	line = expand(line);
+	if (!line)
+		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
+			clean_data()), NULL);
 	blocks = get_cmds(line, &err);
 	if (!blocks)
 	{
