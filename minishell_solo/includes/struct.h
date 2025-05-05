@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/10 19:10:18 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:10:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,36 @@ typedef struct s_info_cmd
 	int		exit;
 }	t_icmd;
 
+/* 
+	Modes :
+		0 - out, truncate
+		1 - out, append
+		2 - in, normal
+		3 - in, heredoc
+		4 - in out, both in that order
+*/
+typedef struct s_open
+{
+	int		mode;
+	char	*str;
+}	t_op;
+
 typedef struct s_cmd
 {
-	char	*in;
-	char	*out;
+	t_list	*open;
 	char	**args;
-	char	*here_doc;
-	int		append;
 	int		subshell;
 }	t_cmd;
+
+// typedef struct s_cmd
+// {
+// 	char	*in;
+// 	char	*out;
+// 	char	**args;
+// 	char	*here_doc;
+// 	int		append;
+// 	int		subshell;
+// }	t_cmd;
 
 typedef struct s_bt
 {

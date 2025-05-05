@@ -19,7 +19,7 @@ char	*ft_readline(void)
 	char	*prompt;
 	char	*line;
 
-	signal(SIGINT, new_prompt);
+	// signal(SIGINT, new_prompt);
 	signal(SIGQUIT, SIG_IGN);
 	if (!isatty(0))
 		prompt = NULL;
@@ -86,14 +86,8 @@ void	print_cmd(t_cmd *cmd, int depth)
 			printf("[%s] - ", cmd->args[i]);
 		printf("[%s]\n", cmd->args[i]);
 	}
-	if (cmd->here_doc)
-		printf("%*sheredoc: %s\t\t", depth * 4 + 4, "", cmd->here_doc);
-	else
-		printf("%*sin: %s\t\t", depth * 4 + 4, "", cmd->in);
-	if (cmd->append)
-		printf("append: %s\n", cmd->out);
-	else
-		printf("out: %s\n", cmd->out);
+	if (cmd->open)
+		printf("%*sopen %d: %s\t\t", depth * 4 + 4, "", ((t_op *)cmd->open)->mode, ((t_op *)cmd->open)->str);
 }
 
 void	print_pipeline(t_list *pipeline, int depth)
@@ -141,6 +135,8 @@ void	print_ast(t_bt *root)
 	print_ast_recursive(root, 1);
 }
 
+
+
 int	main(int ac, char **av, char **env)
 {
 	t_data	*d;
@@ -164,9 +160,9 @@ int	main(int ac, char **av, char **env)
 		if (temp)
 		{
 			run_ast(temp);
-			// print_ast(temp);
+			print_ast(temp);
+			clear_tree(temp);
 		}
-		clear_tree(temp);
 		line = ft_readline();
 	}
 	ft_del((void **)&before);

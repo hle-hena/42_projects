@@ -8,36 +8,17 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-BUILTIN_SRC = \
-    $(addprefix cd/, cd_env.c cd.c utils.c curpath.c) \
-    $(addprefix pwd/, pwd.c) \
-    $(addprefix env/, env.c) \
-    $(addprefix unset/, unset.c) \
-    $(addprefix exit/, exit.c) \
-    $(addprefix echo/, echo.c) \
-    $(addprefix export/, export.c export_var.c) \
-    $(addprefix color/, color.c)
-
 DATA_SRC = \
     clean_data.c create_var.c data.c env2env.c \
     ft_getenv_struct.c ft_getenv.c ft_getimp_struct.c ft_getimp.c \
     ft_getloc_struct.c ft_getloc.c init_imp.c is_env.c update_shlvl.c
 
-EXEC_SRC = \
-    $(addprefix exec/, exec_child.c exec_parent.c exec_builtin.c exec.c exec_define.c) \
-    $(addprefix icmds/, clean_icmds.c define2child.c init_icmd.c init_icmds.c zero_icmds.c) \
-    $(addprefix io/, close_fd.c here_doc.c set_io.c) \
-    $(addprefix path/, get_path.c is_builtin.c)
-
 PROMPT_SRC = \
-    $(addprefix prompt/, color.c prompt.c main.c welcome.c) \
-	$(addprefix new_parser/, get_cmd.c get_cmd_utils.c bt_utils.c get_ast.c expand.c)
-
+    $(addprefix prompt/, color.c prompt.c main.c welcome.c random.c) \
+	$(addprefix parser/, bt_utils.c build_tree.c expand.c get_ast.c get_cmd_utils.c get_cmd.c get_subshell.c token.c)
 
 MINI_SRC = \
-    $(addprefix srcs/builtin/, $(BUILTIN_SRC)) \
     $(addprefix srcs/data/, $(DATA_SRC)) \
-    $(addprefix srcs/exec/, $(EXEC_SRC)) \
     $(addprefix srcs/prompt/, $(PROMPT_SRC))
 
 OBJ = $(MINI_SRC:.c=.o)

@@ -24,7 +24,7 @@ char	*expand(char *str)
 	while (str[i])
 	{
 		if (str[i] == '$' && !in_quote && ft_strchr("\'\"", str[i + 1]))
-			i ++;
+			i++;
 		else if (str[i] == '$' && (!in_quote || in_quote == 34))
 			ft_lstadd_back(&line, get_var(&str[i], &i));
 		else

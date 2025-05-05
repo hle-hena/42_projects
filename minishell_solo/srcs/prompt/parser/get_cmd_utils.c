@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:56:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/13 18:20:54 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/05 12:51:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ t_list	*get_parenthesis(char *line, int *forward, int *err)
 	return (*err = 0, parenthesis);
 }
 
-t_list	*get_tilde(int *forward)
+t_list	*get_tilde(void)
 {
 	char	*value;
 	t_list	*head;
@@ -180,5 +180,5 @@ t_list	*get_tilde(int *forward)
 		value = ft_getimp("HOME");
 	while (*value)
 		add_link(&head, ft_strdup(&(*value++)));
-	return (*forward += 1, head);
+	return (head);
 }

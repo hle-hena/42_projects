@@ -1,22 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 12:16:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/26 11:58:54 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/05/05 15:58:27 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/05/05 15:59:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-// {NULL, "c0d684", "cbeaa6", "f3f9d2", "ffffff"},
-// {NULL, "593f62", "7b6d8d", "6a5678", "ffffff"},
-// {NULL, "775144", "c09891", "9c756b", "ffffff"},
-// {NULL, "7e8d85", "a2e3c4", "abd1be", "ffffff"},
-// {NULL, "1e1e1e", "1e1e1e", "1e1e1e", "1e1e1e"}
 
 char	**get_config(int config)
 {
@@ -101,4 +96,46 @@ lid hex ('", av[i], "').", NULL}), 0), 1);
 		return (ft_perror(-1, ft_strdup("color: Wrong number of arguments."),
 				0), 1);
 	return (set_colors(av[1], av[2], av[3], av[4]));
+}
+
+
+
+
+
+int	clean_icmds(void)
+{
+	t_icmd	*cmds;
+	int		nb_cmds;
+	int		child;
+
+	cmds = data()->cmds;
+	nb_cmds = data()->nb_cmds;
+	child = -1;
+	while (++child < nb_cmds)
+	{
+		ft_del((void **)&cmds[child].path);
+		if (cmds->define == 2)
+			ft_del((void **)&cmds[child].args);
+	}
+	ft_del((void **)&cmds);
+	return (0);
+}
+
+void	set_exit_val(int ret_val)
+{
+	t_list	*pipe;
+	t_list	*bin;
+	char	*temp;
+
+	pipe = ft_getimp_struct("?", &bin);
+	temp = ft_itoa(ret_val);
+	if (!temp)
+		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
+			clean_data() + clean_icmds());
+	ft_del((void **)&pipe->content);
+	pipe->content = ft_strsjoin((const char *[]){"?=", temp, NULL});
+	ft_del((void **)&temp);
+	if (!pipe->content)
+		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
+			clean_data() + clean_icmds());
 }
