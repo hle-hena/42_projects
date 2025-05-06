@@ -6,26 +6,28 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:26:34 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/05/05 16:29:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:47:17 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	*token_sep(char *line, int *forward, int *err, int temp)
+char	*token_sep(char *line, int *forward, int *err, int *sep)
 {
 	char	*res;
 	int		i;
 
 	i = 1;
-	if ((line[i] == line[i + 1]) || (line[i] == '<' && line[i + 1] == '>'))
+	if ((line[0] == line[1]) || (line[0] == '<' && line[1] == '>'))
 	{
 		res = ft_substr(line, 0, 2);
 		i = 2;
 	}
 	else
 		res = ft_substr(line, 0, 1);
-	*forward += i + temp;
+	*forward += i;
+	if (res[0] == '&' || res[0] == '|')
+		*sep = 1;
 	if (ft_strchr("()", line[0]))
 		*err = 1;
 	if (ft_strncmp(res, "&", 2) == 0)
@@ -45,7 +47,7 @@ char	*tokenize(char *line, int *forward, int *err, int *sep)
 	while (ft_isspace(line[i]))
 		i++;
 	if (ft_strchr("><|&()", line[i]))
-		return (*sep = 1, token_sep(&line[i], forward, err, i));
+		return (*forward += i, token_sep(&line[i], forward, err, sep));
 	while (line[i])
 	{
 		if (line[i] == quote && quote)

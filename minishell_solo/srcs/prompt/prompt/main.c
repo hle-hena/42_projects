@@ -73,11 +73,15 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 void	print_cmd(t_cmd *cmd, int depth)
 {
 	int		i;
+	t_list	*temp;
 
 	i = -1;
-	if (cmd->subshell)
+	if (cmd->ast)
+	{
 		printf("%*sThis is a subshell\n", depth * 4 + 4, "");
-	if (!cmd->args)
+		print_ast_recursive(cmd->ast, depth + 1);
+	}
+	else if (!cmd->args)
 		printf("%*sThis command has no args.\n", depth * 4 + 4, "");
 	else
 	{
@@ -86,8 +90,12 @@ void	print_cmd(t_cmd *cmd, int depth)
 			printf("[%s] - ", cmd->args[i]);
 		printf("[%s]\n", cmd->args[i]);
 	}
-	if (cmd->open)
-		printf("%*sopen %d: %s\t\t", depth * 4 + 4, "", ((t_op *)cmd->open)->mode, ((t_op *)cmd->open)->str);
+	temp = cmd->open;
+	while (temp)
+	{
+		printf("%*sopen %d: %s\n", depth * 4 + 4, "", ((t_op *)temp->content)->mode, ((t_op *)temp->content)->str);
+		temp = temp->next;
+	}
 }
 
 void	print_pipeline(t_list *pipeline, int depth)
@@ -142,6 +150,7 @@ int	main(int ac, char **av, char **env)
 	t_data	*d;
 	char	*line;
 	char	*before;
+	char	*err;
 
 	line = NULL;
 	before = NULL;
@@ -156,12 +165,20 @@ int	main(int ac, char **av, char **env)
 		before = ft_strdup(line);
 		
 		t_bt	*temp;
-		temp = get_ast(line);
+		temp = get_ast(line, &err);
 		if (temp)
 		{
 			run_ast(temp);
 			print_ast(temp);
 			clear_tree(temp);
+		}
+		else
+		{
+			if (!err)
+				err = ft_strdup("newline");
+			printf("mini: syntax error near unexpected token `%s'\n", err);
+			set_exit_val(2);
+			ft_del((void **)&err);
 		}
 		line = ft_readline();
 	}

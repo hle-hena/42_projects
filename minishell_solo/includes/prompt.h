@@ -40,7 +40,7 @@ void	set_parent(t_bt *parent, t_bt *child, int right);
 char	*ft_lstjoin(t_list *lst);
 t_list	*get_quote(char *line, int quote_type, int *forward);
 t_list	*get_var(char *line, int *forward);
-t_list	*get_parenthesis(char *line, int *forward, int *err);
+char	*get_parenthesis(char *line, int *forward, int *err);
 t_cmd	*get_next_cmd(char *line, int *forward, char **sep, int err);
 char	*get_next_block(char *line, int *forward, int *err);
 t_list	*get_next_pipeline(char *line, int *forward, char **sep);
@@ -49,7 +49,7 @@ t_list	*get_tilde();
 void	clear_blocks(t_list *cmds);
 t_list	*get_cmds(char *line, char **err_token);
 void	clear_cmd(t_cmd *cmd, t_list *args, char *current);
-t_bt	*get_ast(char *line);
+t_bt	*get_ast(char *line, char **err);
 void	clear_tree(t_bt *tree);
 int		run_ast(t_bt *ast);
 char	*expand(char *str);
@@ -57,6 +57,8 @@ char	*remove_quote(char *str);
 t_bt	*build_tree(t_list *blocks);
 char	*tokenize(char *line, int *forward, int *err, int *sep);
 t_cmd	*get_subshell(char *line, int *forward, char **sep);
+char	*get_redirect(char *line, int *forward, t_cmd *cmd, char **temp);
+void	print_ast_recursive(t_bt *node, int depth);
 
 
 int		clean_icmds(void);

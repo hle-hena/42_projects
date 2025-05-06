@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/05/05 15:10:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:35:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ typedef struct s_info_cmd
 	int		exit;
 }	t_icmd;
 
+typedef struct s_bt
+{
+	void		*content;
+	int			value;
+	struct s_bt	*parent;
+	struct s_bt	*left;
+	struct s_bt	*right;
+}	t_bt;
+
 /* 
 	Modes :
 		0 - out, truncate
@@ -55,28 +64,9 @@ typedef struct s_open
 typedef struct s_cmd
 {
 	t_list	*open;
+	t_bt	*ast;
 	char	**args;
-	int		subshell;
 }	t_cmd;
-
-// typedef struct s_cmd
-// {
-// 	char	*in;
-// 	char	*out;
-// 	char	**args;
-// 	char	*here_doc;
-// 	int		append;
-// 	int		subshell;
-// }	t_cmd;
-
-typedef struct s_bt
-{
-	void		*content;
-	int			value;
-	struct s_bt	*parent;
-	struct s_bt	*left;
-	struct s_bt	*right;
-}	t_bt;
 
 /* -------------------------------------------------------------------------- */
 /*                  prompt.h                                                  */

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:56:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/05/05 12:51:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:08:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ t_list	*get_quote(char *line, int quote_type, int *forward)
 	return (head);
 }
 
-t_list	*get_parenthesis(char *line, int *forward, int *err)
+char	*get_parenthesis(char *line, int *forward, int *err)
 {
 	t_list	*parenthesis;
 	int		depth;
@@ -148,7 +148,7 @@ t_list	*get_parenthesis(char *line, int *forward, int *err)
 	i = 1;
 	depth = ft_tern_int(line[0] == '(', 1, -1);
 	if (depth < 0)
-		return (*err = 1, NULL);
+		return (*err = 1, ft_strdup(")"));
 	while (depth > 0 && line[i])
 	{
 		if (line[i] == '(')
@@ -164,7 +164,7 @@ t_list	*get_parenthesis(char *line, int *forward, int *err)
 	*forward += i;
 	if (depth != 0)
 		return (*err = 1, ft_lstclear(&parenthesis, ft_del), NULL);
-	return (*err = 0, parenthesis);
+	return (*err = 0, ft_lstjoin(parenthesis));
 }
 
 t_list	*get_tilde(void)

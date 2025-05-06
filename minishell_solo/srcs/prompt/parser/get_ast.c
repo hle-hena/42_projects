@@ -39,11 +39,10 @@ void	del_unusedlst(t_list *lst)
 	}
 }
 
-t_bt	*get_ast(char *line)
+t_bt	*get_ast(char *line, char **err)
 {
 	t_bt	*tree;
 	t_list	*blocks;
-	char	*err;
 	size_t	i;
 
 	if (!line)
@@ -57,18 +56,9 @@ t_bt	*get_ast(char *line)
 	if (!line)
 		return (NULL);
 	printf("Line is [%s]\n", line);
-	blocks = get_cmds(line, &err);
+	blocks = get_cmds(line, err);
 	if (!blocks)
-	{
-		if (!err)
-			err = ft_strdup("newline");
-		printf("mini: syntax error near unexpected token `%s'\n", err);
-		set_exit_val(2);
-		if (blocks)
-			clear_blocks(blocks);
-		ft_del((void **)&err);
 		return (NULL);
-	}
 	blocks = ft_lstrev(blocks);
 	if (ft_lstsize(blocks) == 1)
 		tree = create_bt_node(blocks->content);

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:36:34 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/05/05 16:34:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:59:00 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ char	*get_redirect(char *line, int *forward, t_cmd *cmd, char **temp)
 		ft_del((void **)temp);
 		return (*temp = str);
 	}
-	if (ft_strncmp(">", *temp, 2))
+	if (!ft_strncmp(">", *temp, 2))
 		open->mode = 0;
-	else if (ft_strncmp(">>", *temp, 3))
+	else if (!ft_strncmp(">>", *temp, 3))
 		open->mode = 1;
-	else if (ft_strncmp("<", *temp, 2))
+	else if (!ft_strncmp("<", *temp, 2))
 		open->mode = 2;
-	else if (ft_strncmp("<<", *temp, 3))
+	else if (!ft_strncmp("<<", *temp, 3))
 		open->mode = 3;
-	else if (ft_strncmp("<>", *temp, 3))
+	else if (!ft_strncmp("<>", *temp, 3))
 		open->mode = 4;
 	open->str = str;
 	return (add_link(&cmd->open, open), NULL);
@@ -121,11 +121,11 @@ t_cmd	*get_next_cmd(char *line, int *forward, char **sep, int err)
 	{
 		current = tokenize(&line[i], &i, &err, &separator);
 		if (err)
-			return (*forward += i, clear_cmd(cmd, args, current), *sep = NULL, NULL);
+			return (*forward += i, clear_cmd(cmd, args, NULL), *sep = current, NULL);
 		if (!current)
 			continue ;
 		if (separator)
-			return (*forward += i, *sep = current,  (cmd, args));
+			return (*forward += i, *sep = current, build_cmd(cmd, args));
 		else if (current[0] == '>' || current[0] == '<')
 		{
 			if (get_redirect(&line[i], &i, cmd, &current))
