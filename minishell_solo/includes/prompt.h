@@ -14,7 +14,7 @@
 # define PROMPT_H
 
 # include <signal.h>
-#include <dirent.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 

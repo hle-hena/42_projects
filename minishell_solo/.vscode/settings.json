@@ -9,6 +9,7 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"utility": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"types.h": "c"
 	}
 }
