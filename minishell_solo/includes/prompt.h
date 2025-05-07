@@ -59,6 +59,7 @@ char	*tokenize(char *line, int *forward, int *err, int *sep);
 t_cmd	*get_subshell(char *line, int *forward, char **sep);
 char	*get_redirect(char *line, int *forward, t_cmd *cmd, char **temp);
 void	print_ast_recursive(t_bt *node, int depth);
+char	*expand_wildcards(char *line);
 
 
 int		clean_icmds(void);

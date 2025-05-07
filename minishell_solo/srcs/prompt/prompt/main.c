@@ -157,6 +157,7 @@ int	main(int ac, char **av, char **env)
 	d = data();
 	init_mini(d, ac, av, env);
 	line = ft_readline();
+	err = NULL;
 	while (line)
 	{
 		if (!before || ft_strncmp(before, line, ft_strlen(before) + 1) != 0)

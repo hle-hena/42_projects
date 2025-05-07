@@ -15,7 +15,7 @@ DATA_SRC = \
 
 PROMPT_SRC = \
     $(addprefix prompt/, color.c prompt.c main.c welcome.c random.c) \
-	$(addprefix parser/, bt_utils.c build_tree.c expand.c get_ast.c get_cmd_utils.c get_cmd.c get_subshell.c token.c)
+	$(addprefix parser/, bt_utils.c build_tree.c expand.c get_ast.c get_cmd_utils.c get_cmd.c get_subshell.c token.c wildcards.c)
 
 MINI_SRC = \
     $(addprefix srcs/data/, $(DATA_SRC)) \

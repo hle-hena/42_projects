@@ -52,9 +52,9 @@ t_bt	*get_ast(char *line, char **err)
 		i++;
 	if (i == ft_strlen(line))
 		return (NULL);
-	line = expand(line);
 	if (!line)
 		return (NULL);
+	line = expand(line);
 	printf("Line is [%s]\n", line);
 	blocks = get_cmds(line, err);
 	if (!blocks)
