@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:40:27 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/19 13:57:36 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:42:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	update_shlvl(void)
 	temp = ft_itoa(value);
 	if (value > 999)
 	{
-		ft_perror(-1, ft_strsjoin((const char *[]){"mini: warning: shell le\
+		ft_perror(-1, ft_strsjoin((char *[]){"mini: warning: shell le\
 vel (", temp, ") too high, resetting to 1.", NULL}), 0);
 		shlvl->content = ft_strdup("SHLVL=1");
 		ft_del((void **)&temp);
 		return ;
 	}
-	shlvl->content = ft_strsjoin((const char *[]){"SHLVL=", temp, NULL});
+	shlvl->content = ft_strsjoin((char *[]){"SHLVL=", temp, NULL});
 	ft_del((void **)&temp);
 }

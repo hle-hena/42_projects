@@ -12,7 +12,15 @@
 
 #include "mini.h"
 
-#include <dirent.h>
+void	print_lst(t_list *lst)
+{
+	while (lst)
+	{
+		if (lst->content)
+			printf("%s\n", (char *)lst->content);
+		lst = lst->next;
+	}
+}
 
 int	match_pattern(const char *str, const char *pattern)
 {
@@ -34,38 +42,157 @@ int	match_pattern(const char *str, const char *pattern)
 		return (0);
 }
 
-
-char	*wildcards(char *line)
+t_list	*wildcards(char *line, char	*path_to_open)
 {
 	DIR				*dir;
 	struct dirent	*entry;
-	char			*result;
-	int				first;
+	t_list			*result;
 
-	first = 1;
-	if (!ft_strchr(line, '*'))
-		return (line);
-	dir = opendir(".");
+	result = NULL;
+	if (!path_to_open[0])
+		dir = opendir(".");
+	else
+		dir = opendir(path_to_open);
 	if (!dir)
-		return (line);
-	result = ft_strdup("");
-	while ((entry = readdir(dir)))
+	{
+		add_link(&result, ft_strdup(line));
+		return (result);
+	}
+	entry = readdir(dir);
+	while (entry)
 	{
 		if (entry->d_name[0] == '.')
-			continue;
-		if (ft_strncmp(line, "*", 2) == 0 || match_pattern(entry->d_name, line))
 		{
-			if (!first)
-				result = ft_strjoin_free(result, " ");
-			result = ft_strjoin_free(result, entry->d_name);
-			first = 0;
+			entry = readdir(dir);
+			continue;
 		}
+		if (match_pattern(entry->d_name, line))
+			add_link(&result, ft_strdup(entry->d_name));
 		entry = readdir(dir);
 	}
 	closedir(dir);
-	if (!result)
-		return (line);
 	return (result);
+}
+
+t_list	*add_wildcard(char *line, int *forward)
+{
+	int			i;
+	char		*to_replace;
+	char		**path;
+	t_list		*dir_path;
+	t_list		*tmp;
+	t_list		*matches;
+	t_list		*match_temp;
+	struct stat	path_stat;
+
+	i = 0;
+	while (!ft_isspace(line[i]) && line[i])
+		i++;
+	to_replace = ft_substr(line, 0, i);
+	if (!to_replace)
+		return (NULL);
+	path = ft_split(to_replace, '/');
+	free(to_replace);
+	if (!path)
+		return (NULL);
+	dir_path = NULL;
+	add_link(&dir_path, ft_strdup(""));
+	i = -1;
+	while (path[++i])
+	{
+		tmp = NULL;
+		while (dir_path)
+		{
+			if (!*(char *)dir_path->content)
+				stat(".", &path_stat);
+			else
+				stat(dir_path->content, &path_stat);
+			if (!S_ISDIR(path_stat.st_mode))
+			{
+				dir_path = dir_path->next;
+				continue ;
+			}
+			if (ft_strchr(path[i], '*'))
+			{
+				matches = wildcards(path[i], dir_path->content);
+				match_temp = matches;
+				while (matches)
+				{
+					if (!*(char *)dir_path->content)
+						add_link(&tmp, ft_strdup(matches->content));
+					else
+						add_link(&tmp, ft_strsjoin((char *[]){dir_path->content,
+								"/", matches->content, NULL}));
+					matches = matches->next;
+				}
+				ft_lstclear(&match_temp, ft_del);
+			}
+			else
+			{
+				if (!*(char *)dir_path->content)
+					add_link(&tmp, ft_strdup(path[i]));
+				else
+					add_link(&tmp, ft_strsjoin((char *[]){dir_path->content,
+							"/", path[i], NULL}));
+			}
+			dir_path = dir_path->next;
+		}
+		ft_lstclear(&dir_path, ft_del);
+		dir_path = tmp;
+	}
+	ft_free_tab((void **)path, i);
+	*forward += i;
+	print_lst(dir_path);
+	return (dir_path);
+}
+
+char	*join_wildcard(t_list *wildcard_expanded)
+{
+	t_list		*temp;
+	char		*result;
+	char		*result_temp;
+
+	temp = wildcard_expanded;
+	result = ft_strdup("");
+	while (temp)
+	{
+		if (result[0])
+			result_temp = ft_strsjoin((char *[]){result, " ", temp->content, NULL});
+		else
+			result_temp = ft_strdup(temp->content);
+		wildcard_expanded = temp->next;
+		ft_del((void **)temp);
+		temp = wildcard_expanded;
+		ft_del((void **)&result);
+		result = result_temp;
+	}
+	return (result);
+}
+
+char	*expand_wildcards(char *line)
+{
+	int		i;
+	int		last_space;
+	t_list	*result;
+
+	if (!line)
+		return (NULL);
+	i = -1;
+	last_space = -1;
+	result = NULL;
+	while (line[++i])
+	{
+		if (ft_isspace(line[i]))
+			last_space = i;
+		if (line[i] == '*')
+		{
+			ft_lstadd_back(&result, add_wildcard(&line[last_space + 1], &last_space));
+			i = last_space;
+		}
+		else
+			add_link(&result, ft_strdup(&line[i]));
+	}
+	return (join_wildcard(result));
 }
 
 char	*expand(char *str)
@@ -95,5 +222,5 @@ char	*expand(char *str)
 			i++;
 		}
 	}
-	return (ft_del((void **)&str), wildcards(ft_lstjoin(line)));
+	return (ft_del((void **)&str), expand_wildcards(ft_lstjoin(line)));
 }

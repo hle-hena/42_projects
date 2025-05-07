@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:58:27 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/05/05 15:59:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:42:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int ft_color(char **av)
 		{
 			ft_tolower(av[i]);
 			if (ft_strncmp(av[i], "0x", 2))
-				return (ft_perror(-1, ft_strsjoin((const char *[]){"color: Inva\
+				return (ft_perror(-1, ft_strsjoin((char *[]){"color: Inva\
 lid hex ('", av[i], "').", NULL}), 0), 1);
 		}
 	}
@@ -133,7 +133,7 @@ void	set_exit_val(int ret_val)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds());
 	ft_del((void **)&pipe->content);
-	pipe->content = ft_strsjoin((const char *[]){"?=", temp, NULL});
+	pipe->content = ft_strsjoin((char *[]){"?=", temp, NULL});
 	ft_del((void **)&temp);
 	if (!pipe->content)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),

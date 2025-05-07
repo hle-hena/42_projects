@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:33:34 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/14 17:06:20 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:43:37 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*create_var(char *str)
 	if (!body)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
-	content = ft_strsjoin((const char *[]){name, "=", body, NULL});
+	content = ft_strsjoin((char *[]){name, "=", body, NULL});
 	ft_del((void **)&name);
 	ft_del((void **)&body);
 	if (!content)
