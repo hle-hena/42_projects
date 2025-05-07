@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/07 10:41:53 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:58:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int		ft_printf(const char *str, ...);
 /********************************/
 int		count_words(const char *str, char c);
 char	**ft_split(const char *str, char c);
+char	**ft_split_set(const char *str, const char *set);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *src);
 void	ft_striteri(char *str, void (*f)(unsigned int, char *));

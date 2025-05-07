@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:49:27 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/12/11 12:21:51 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/05/07 12:02:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,57 @@ char	**ft_split(const char *str, char c)
 			e++;
 		s = e;
 		while (str[e] && str[e] != c)
+			e++;
+		if (s < e)
+		{
+			splited[i++] = ft_substr(str, s, e - s);
+			if (!splited[i - 1])
+				return (freeing_splited(splited, i - 1), NULL);
+		}
+	}
+	return (splited);
+}
+
+int	count_words_set(const char *str, const char *set)
+{
+	int		s;
+	int		e;
+	int		i;
+
+	i = 0;
+	s = 0;
+	e = 0;
+	while (str[e])
+	{
+		while (str[e] && ft_strchr(set, str[e]))
+			e ++;
+		s = e;
+		while (str[e] && !ft_strchr(set, str[e]))
+			e ++;
+		if (s < e)
+			i ++;
+	}
+	return (i);
+}
+
+char	**ft_split_set(const char *str, const char *set)
+{
+		char	**splited;
+	int		s;
+	int		e;
+	int		i;
+
+	i = 0;
+	e = 0;
+	splited = ft_calloc(count_words_set(str, set) + 1, sizeof(char *));
+	if (!splited)
+		return (NULL);
+	while (str[e])
+	{
+		while (str[e] && ft_strchr(set, str[e]))
+			e++;
+		s = e;
+		while (str[e] && !ft_strchr(set, str[e]))
 			e++;
 		if (s < e)
 		{

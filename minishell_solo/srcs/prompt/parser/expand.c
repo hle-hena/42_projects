@@ -74,10 +74,9 @@ t_list	*wildcards(char *line, char	*path_to_open)
 	return (result);
 }
 
-t_list	*add_wildcard(char *line, int *forward)
+t_list	*add_wildcard(char *line)
 {
 	int			i;
-	char		*to_replace;
 	char		**path;
 	t_list		*dir_path;
 	t_list		*tmp;
@@ -85,14 +84,7 @@ t_list	*add_wildcard(char *line, int *forward)
 	t_list		*match_temp;
 	struct stat	path_stat;
 
-	i = 0;
-	while (!ft_isspace(line[i]) && line[i])
-		i++;
-	to_replace = ft_substr(line, 0, i);
-	if (!to_replace)
-		return (NULL);
-	path = ft_split(to_replace, '/');
-	free(to_replace);
+	path = ft_split(line, '/');
 	if (!path)
 		return (NULL);
 	dir_path = NULL;
@@ -141,30 +133,27 @@ t_list	*add_wildcard(char *line, int *forward)
 		dir_path = tmp;
 	}
 	ft_free_tab((void **)path, i);
-	*forward += i;
-	print_lst(dir_path);
 	return (dir_path);
 }
 
-char	*join_wildcard(t_list *wildcard_expanded)
+t_list	*join_wildcard(t_list *wildcard_expanded)
 {
 	t_list		*temp;
-	char		*result;
-	char		*result_temp;
+	t_list		*result;
+	int			i;
 
 	temp = wildcard_expanded;
-	result = ft_strdup("");
+	result = NULL;
 	while (temp)
 	{
-		if (result[0])
-			result_temp = ft_strsjoin((char *[]){result, " ", temp->content, NULL});
-		else
-			result_temp = ft_strdup(temp->content);
+		i = -1;
+		while (((char *)temp->content)[++i])
+			add_link(&result, ft_strdup(&((char *)temp->content)[i]));
+		if (temp->next)
+			add_link(&result, ft_strdup(" "));
 		wildcard_expanded = temp->next;
-		ft_del((void **)temp);
+		ft_lstdelone(temp, ft_del);
 		temp = wildcard_expanded;
-		ft_del((void **)&result);
-		result = result_temp;
 	}
 	return (result);
 }
@@ -172,27 +161,30 @@ char	*join_wildcard(t_list *wildcard_expanded)
 char	*expand_wildcards(char *line)
 {
 	int		i;
-	int		last_space;
+	int		j;
+	char	**splited;
 	t_list	*result;
 
 	if (!line)
 		return (NULL);
 	i = -1;
-	last_space = -1;
 	result = NULL;
-	while (line[++i])
+	splited = ft_split_set(line, " \t");
+	if (!splited)
+		return (NULL);
+	while (splited[++i])
 	{
-		if (ft_isspace(line[i]))
-			last_space = i;
-		if (line[i] == '*')
-		{
-			ft_lstadd_back(&result, add_wildcard(&line[last_space + 1], &last_space));
-			i = last_space;
-		}
+		if (ft_strchr(splited[i], '*'))
+			ft_lstadd_back(&result, join_wildcard(add_wildcard(splited[i])));
 		else
-			add_link(&result, ft_strdup(&line[i]));
+		{
+			j = -1;
+			while (splited[i][++j])
+				add_link(&result, ft_strdup(&splited[i][j]));
+		}
 	}
-	return (join_wildcard(result));
+	ft_free_tab((void **)splited, i);
+	return (ft_lstjoin(result));
 }
 
 char	*expand(char *str)
