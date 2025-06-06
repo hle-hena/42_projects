@@ -21,7 +21,6 @@ int			ft_isspace(int c);/*                                              */
 /*               |                                                            */
 size_t		ft_numlen(long int num);/*                                        */
 size_t		ft_strlen(const char *str);/*                                     */
-/*              \_/                                                           */
 /*                                                                            */
 /*         |  ft_mem.c  |                                                     */
 /*          \----------/                                                      */

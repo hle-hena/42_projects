@@ -31,3 +31,6 @@
 [submodule "cub3d"]
 	path = cub3d
 	url = https://github.com/hle-hena/cub3d.git
+[submodule "minishell_z"]
+	path = minishell_z
+	url = git@github.com:Rouxsmooth/Minishell.git
